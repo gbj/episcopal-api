@@ -1,0 +1,6 @@
+[workspace]
+members = [
+  "crates/calendar",
+  "examples/api",
+  "examples/web"
+]
