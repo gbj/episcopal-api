@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{sunday_before, Date};
+use crate::Date;
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, PartialOrd, Ord, Serialize, Deserialize)]
 pub enum Proper {
@@ -89,7 +89,7 @@ const PROPERS: [(u8, u8, Option<Proper>); 31] = [
 /// ```
 pub fn calculate_proper(date: Date) -> Option<Proper> {
     let year = date.year();
-    let last_sunday = sunday_before(date);
+    let last_sunday = date.sunday_before();
     PROPERS
         .iter()
         // find the first proper that's 3 or fewer days from the Sunday

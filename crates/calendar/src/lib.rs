@@ -68,30 +68,3 @@ pub fn easter_in_year(year: u32) -> Date {
     let naive_date = NaiveDate::from_ymd(year.try_into().unwrap(), month, day);
     naive_date.into()
 }
-
-/// Calculates the [Date](Date) of the Sunday before the given date.
-/// ```
-/// # use calendar::sunday_before;
-/// use chrono::{NaiveDate, Datelike};
-/// let test_1 = sunday_before(NaiveDate::from_ymd(2020, 5, 21));
-/// assert_eq!(test_1.month(), 5);
-/// assert_eq!(test_1.day(), 17);
-/// // Wraps to previous month
-/// let test_2 = sunday_before(NaiveDate::from_ymd(2020, 4, 1));
-/// assert_eq!(test_2.month(), 3);
-/// assert_eq!(test_2.day(), 29);
-/// // Wraps to previous year
-/// let test_3 = sunday_before(NaiveDate::from_ymd(2020, 1, 4));
-/// assert_eq!(test_3.month(), 12);
-/// assert_eq!(test_3.day(), 29);
-/// // On Sundays, returns the same day
-/// let test_4 = sunday_before(NaiveDate::from_ymd(2021, 10, 3));
-/// assert_eq!(test_4.month(), 10);
-/// assert_eq!(test_4.day(), 3);
-/// ```
-pub fn sunday_before(date: Date) -> Date {
-    let date = date.naive_date;
-    let nth_weekday_from_sunday = date.weekday().num_days_from_sunday();
-    let naive_date = date - chrono::Duration::days(nth_weekday_from_sunday.into());
-    naive_date.into()
-}

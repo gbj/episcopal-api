@@ -28,6 +28,7 @@ impl<'de> Deserialize<'de> for Date {
 }
 
 impl Date {
+    /// Creates Date from a year, month, and day.
     pub fn from_ymd(year: u16, month: u8, day: u8) -> Date {
         let naive_date = chrono::NaiveDate::from_ymd(year.into(), month.into(), day.into());
         Self { naive_date }
@@ -70,6 +71,33 @@ impl Date {
     pub fn subtract_days(&self, weeks: impl Into<i64>) -> Self {
         let naive_date = self.naive_date - chrono::Duration::days(weeks.into());
         Self { naive_date }
+    }
+
+    /// Calculates the [Date](Date) of the Sunday before the given date.
+    /// ```
+    /// # use calendar::sunday_before;
+    /// use chrono::{NaiveDate, Datelike};
+    /// let test_1 = sunday_before(NaiveDate::from_ymd(2020, 5, 21));
+    /// assert_eq!(test_1.month(), 5);
+    /// assert_eq!(test_1.day(), 17);
+    /// // Wraps to previous month
+    /// let test_2 = sunday_before(NaiveDate::from_ymd(2020, 4, 1));
+    /// assert_eq!(test_2.month(), 3);
+    /// assert_eq!(test_2.day(), 29);
+    /// // Wraps to previous year
+    /// let test_3 = sunday_before(NaiveDate::from_ymd(2020, 1, 4));
+    /// assert_eq!(test_3.month(), 12);
+    /// assert_eq!(test_3.day(), 29);
+    /// // On Sundays, returns the same day
+    /// let test_4 = sunday_before(NaiveDate::from_ymd(2021, 10, 3));
+    /// assert_eq!(test_4.month(), 10);
+    /// assert_eq!(test_4.day(), 3);
+    /// ```
+    pub fn sunday_before(&self) -> Date {
+        let date = self.naive_date;
+        let nth_weekday_from_sunday = date.weekday().num_days_from_sunday();
+        let naive_date = date - chrono::Duration::days(nth_weekday_from_sunday.into());
+        naive_date.into()
     }
 }
 

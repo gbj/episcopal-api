@@ -1,9 +1,9 @@
-use std::convert::TryInto;
+use std::{cmp::Reverse, convert::TryInto};
 
 use crate::{
     easter_in_year, feasts::KalendarEntry, holy_day::HolyDayId, liturgical_day::LiturgicalDayId,
-    liturgical_week::Cycle, propers::calculate_proper, sunday_before, DailyOfficeYear, Date, Feast,
-    LiturgicalDay, LiturgicalWeek, Proper, RCLYear, Rank, Weekday,
+    liturgical_week::Cycle, propers::calculate_proper, DailyOfficeYear, Date, Feast, LiturgicalDay,
+    LiturgicalWeek, Proper, RCLYear, Rank, Weekday,
 };
 
 /// The settings for a particular calendar. Different calendars vary slightly
@@ -127,16 +127,26 @@ impl Calendar {
         week: LiturgicalWeek,
         proper: Option<Proper>,
         weekday: Weekday,
-        holy_days: &Vec<Feast>,
+        holy_days: &[Feast],
     ) -> LiturgicalDayId {
         if holy_days.is_empty() {
             self.observed_day_from_week_or_proper(week, proper, weekday)
         } else {
+            // include all eligible feasts
             let mut observable_feasts = holy_days
                 .iter()
-                .filter(|feast| self.feast_day_rank(feast) >= Rank::HolyDay)
+                .filter(|feast| {
+                    let rank = self.feast_day_rank(feast);
+                    // only include if rank is higher than a black-letter day
+                    rank > Rank::OptionalObservance
+                    // if, if today is a Sunday, if rank is above a Sunday
+                    // Sundays trump e.g., red-letter saints’ days
+                        && (weekday != Weekday::Sun || rank >= Rank::Sunday)
+                })
                 .collect::<Vec<_>>();
-            observable_feasts.sort_by_key(|feast| self.feast_day_rank(feast));
+
+            // sort in reverse order, i.e., from highest-ranking feast to lowest
+            observable_feasts.sort_by_cached_key(|feast| Reverse(self.feast_day_rank(feast)));
             if observable_feasts.is_empty() {
                 self.observed_day_from_week_or_proper(week, proper, weekday)
             } else {
@@ -163,10 +173,13 @@ impl Calendar {
         let year = date.year();
         let easter = easter_in_year(year.into());
         let christmas_eve = Date::from_ymd(year, 12, 24);
-        let last_epiphany = sunday_before(easter.subtract_weeks(self.easter_cycle_begins));
-        let fourth_advent = sunday_before(christmas_eve);
-        let last_pentecost =
-            sunday_before(fourth_advent.subtract_weeks(self.christmas_cycle_begins));
+        let last_epiphany = easter
+            .sunday_before()
+            .subtract_weeks(self.easter_cycle_begins);
+        let fourth_advent = christmas_eve.sunday_before();
+        let last_pentecost = fourth_advent
+            .sunday_before()
+            .subtract_weeks(self.christmas_cycle_begins);
         if date >= last_pentecost || date < last_epiphany {
             self.christmas_cycle_week(date)
         } else {
@@ -189,31 +202,28 @@ impl Calendar {
 
         // If in Advent...
         if date <= christmas_eve {
-            let advent_4 = sunday_before(christmas_eve);
-            let weeks_from_advent_4 = sunday_before(date) - advent_4;
+            let advent_4 = christmas_eve.sunday_before();
+            let weeks_from_advent_4 = date.sunday_before() - advent_4;
             let week = weeks_from_advent_4.num_weeks() + 4;
             LiturgicalWeekIndex {
                 cycle: Cycle::Advent,
                 week: week.try_into().unwrap(),
-                proper: None,
             }
         }
         // Christmas
         else if date < epiphany {
-            let week = date - sunday_before(christmas);
+            let week = date - christmas.sunday_before();
             LiturgicalWeekIndex {
                 cycle: Cycle::Christmas,
                 week: week.num_weeks().try_into().unwrap(),
-                proper: None,
             }
         }
         // Epiphany
         else {
-            let week = date - sunday_before(epiphany);
+            let week = date - epiphany.sunday_before();
             LiturgicalWeekIndex {
                 cycle: Cycle::Epiphany,
                 week: week.num_weeks().try_into().unwrap(),
-                proper: None,
             }
         }
     }
@@ -221,20 +231,37 @@ impl Calendar {
     fn easter_cycle_week(&self, date: Date, easter: Date) -> LiturgicalWeekIndex {
         let weeks_from_easter: u8 = (date - easter).num_weeks().try_into().unwrap();
         let week = weeks_from_easter + self.easter_cycle_begins;
-        let proper = if week >= 14 && self.has_propers {
-            calculate_proper(date)
-        } else {
-            None
-        };
         LiturgicalWeekIndex {
             cycle: Cycle::Easter,
             week,
-            proper,
         }
     }
 }
 struct LiturgicalWeekIndex {
     cycle: Cycle,
     week: u8,
-    proper: Option<Proper>,
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::BCP1979_CALENDAR;
+
+    use super::*;
+
+    #[test]
+    fn should_not_override_principal_feasts() {
+        let date = Date::from_ymd(2020, 5, 31);
+        let day = BCP1979_CALENDAR.liturgical_day(date, false);
+        assert_eq!(day.observed, LiturgicalDayId::Feast(Feast::Pentecost));
+    }
+
+    #[test]
+    fn should_not_override_sundays() {
+        let date = Date::from_ymd(2020, 10, 18);
+        let day = BCP1979_CALENDAR.liturgical_day(date, false);
+        assert_eq!(
+            day.observed,
+            LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sun)
+        );
+    }
 }
