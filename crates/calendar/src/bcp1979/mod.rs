@@ -170,7 +170,26 @@ const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 79] = [
 // TODO sort this by date for presentation
 // TODO add special days
 // TODO add Thanksgiving and Labor Day
-pub const BCP1979_FEASTS: [KalendarEntry; 193] = [
+pub const BCP1979_FEASTS: [KalendarEntry; 195] = [
+    // Thanksgiving and Labor Day
+    (
+        HolyDayId::DayOfMonth {
+            month: 9,
+            week: 1,
+            day: Weekday::Mon,
+        },
+        Feast::ThanksgivingDay,
+        false,
+    ),
+    (
+        HolyDayId::DayOfMonth {
+            month: 11,
+            week: 4,
+            day: Weekday::Thu,
+        },
+        Feast::ThanksgivingDay,
+        false,
+    ),
     // Special days
     // TODO sort
     (
@@ -483,3 +502,24 @@ pub const BCP1979_FEASTS: [KalendarEntry; 193] = [
     (HolyDayId::Date(11, 7), Feast::Willibrord, false),
     (HolyDayId::Date(6, 19), Feast::WulfstanOfWorcester, false),
 ];
+
+#[cfg(test)]
+mod tests {
+    use crate::LiturgicalDayId;
+
+    use super::super::*;
+
+    #[test]
+    fn thanksgiving_day() {
+        let tday = BCP1979_CALENDAR.liturgical_day(Date::from_ymd(2021, 11, 25), false);
+        assert_eq!(
+            tday.observed,
+            LiturgicalDayId::Feast(Feast::ThanksgivingDay)
+        );
+        let tday = BCP1979_CALENDAR.liturgical_day(Date::from_ymd(2017, 11, 23), false);
+        assert_eq!(
+            tday.observed,
+            LiturgicalDayId::Feast(Feast::ThanksgivingDay)
+        );
+    }
+}

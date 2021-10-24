@@ -97,28 +97,41 @@ impl Calendar {
         week: LiturgicalWeek,
         evening: bool,
     ) -> impl Iterator<Item = Feast> {
-        let month = date.month();
-        let day = date.day();
-        let weekday = date.weekday();
+        let today_month = date.month();
+        let today_day = date.day();
+        let today_weekday = date.weekday();
         self.holy_days
             .iter()
             .filter_map(move |(id, feast, f_evening)| match id {
                 HolyDayId::Date(f_month, f_day) => {
-                    if *f_month == month && *f_day == day && (!evening || *f_evening == evening) {
+                    if *f_month == today_month
+                        && *f_day == today_day
+                        && (!evening || *f_evening == evening)
+                    {
                         Some(*feast)
                     } else {
                         None
                     }
                 }
                 HolyDayId::SpecialDay(f_week, f_weekday) => {
-                    if *f_week == week && *f_weekday == weekday {
+                    if *f_week == week && *f_weekday == today_weekday {
                         Some(*feast)
                     } else {
                         None
                     }
                 }
-                // TODO
-                HolyDayId::DayOfMonth { month, week, day } => todo!(),
+                HolyDayId::DayOfMonth { month, week, day } => {
+                    // divide date by 7 and round up => nth instance of a day of week
+                    let nth_instance_of_weekday = (today_day + 7 - 1) / 7;
+                    if *month == today_month
+                        && *day == today_weekday
+                        && nth_instance_of_weekday == *week
+                    {
+                        Some(*feast)
+                    } else {
+                        None
+                    }
+                }
             })
     }
 
