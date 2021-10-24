@@ -1,4 +1,3 @@
-use chrono::{Datelike, NaiveDate};
 use std::convert::TryInto;
 
 mod bcp1979;
@@ -65,6 +64,9 @@ pub fn easter_in_year(year: u32) -> Date {
     let m = (a + 11 * h + 22 * l) / 451;
     let month = (h + l - 7 * m + 114) / 31;
     let day = ((h + l - 7 * m + 114) % 31) + 1;
-    let naive_date = NaiveDate::from_ymd(year.try_into().unwrap(), month, day);
-    naive_date.into()
+    Date::from_ymd(
+        year.try_into().unwrap(),
+        month.try_into().unwrap(),
+        day.try_into().unwrap(),
+    )
 }
