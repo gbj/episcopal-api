@@ -5,13 +5,6 @@ use crate::{
 
 /// [Calendar](Calendar) that calculates dates from the liturgical and sanctoral calendar
 /// of the 1979 Book of Common Prayer of The Episcopal Church.
-/// ```
-/// # use crate::calendar::{Date, LiturgicalWeek, BCP1979_CALENDAR};
-/// let christmas_eve = Date::from_ymd(HolyDayId::Date(2020, 12), 24);
-/// assert_eq!(BCP1979_CALENDAR.liturgical_week(christmas_eve), Some(LiturgicalWeek::Advent4));
-/// let sat_easter_6 = Date::from_ymd(HolyDayId::Date(2020, 5), 23);
-/// assert_eq!(BCP1979_CALENDAR.liturgical_week(christmas_eve), Some(LiturgicalWeek::Easter6));
-/// ```
 pub const BCP1979_CALENDAR: Calendar = Calendar {
     easter_cycle_begins: 7,
     christmas_cycle_begins: 4,
