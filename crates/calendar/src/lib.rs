@@ -15,6 +15,7 @@ mod rank;
 mod sanctoral;
 mod season;
 mod year;
+mod transferred_feast;
 pub use self::calendar::Calendar;
 pub use bcp1979::BCP1979_CALENDAR;
 pub use date::{Date, Weekday};

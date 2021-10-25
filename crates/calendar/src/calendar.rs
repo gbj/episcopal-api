@@ -29,7 +29,7 @@ pub struct Calendar {
 
 impl Calendar {
     /// The [LiturgicalDay](LiturgicalDay) that is observed on a given date,
-    /// including any feasts or special observances.
+    /// including any feasts or special observances and any transferred feasts.
     /// ```
     /// # use crate::calendar::{BCP1979_CALENDAR, Date, Weekday, LiturgicalWeek, DailyOfficeYear, RCLYear, Feast, LiturgicalDayId};
     /// let date = Date::from_ymd(2020, 5, 21);
@@ -43,10 +43,42 @@ impl Calendar {
     /// assert_eq!(thursday_easter_6.observed, LiturgicalDayId::Feast(Feast::AscensionDay));
     /// ```
     pub fn liturgical_day(&self, date: Date, evening: bool) -> LiturgicalDay {
+        let mut original = self.liturgical_day_without_transferred_feasts(date, evening);
+        /*         let transferred = self.transferred_feast(&original);
+        if let Some(transferred) = transferred {
+            original.observed = LiturgicalDayId::TransferredFeast {
+                transferred,
+                original: Box::new(original.observed),
+            }
+        } */
+        original
+    }
+
+    /// The [LiturgicalDay](LiturgicalDay) that is observed on a given date,
+    /// without transferring any feasts.
+    /// ```
+    /// # use crate::calendar::{BCP1979_CALENDAR, Date, Weekday, LiturgicalWeek, DailyOfficeYear, RCLYear, Feast, LiturgicalDayId};
+    /// let date = Date::from_ymd(2020, 5, 21);
+    /// let thursday_easter_6 = BCP1979_CALENDAR.liturgical_day(date, false);
+    /// assert_eq!(thursday_easter_6.week, LiturgicalWeek::Easter6);
+    /// assert_eq!(thursday_easter_6.weekday, Weekday::Thu);
+    /// assert_eq!(thursday_easter_6.daily_office_year, DailyOfficeYear::Two);
+    /// assert_eq!(thursday_easter_6.rcl_year, RCLYear::A);
+    /// assert_eq!(thursday_easter_6.holy_days, vec![Feast::AscensionDay]);
+    /// assert_eq!(thursday_easter_6.proper, None);
+    /// assert_eq!(thursday_easter_6.observed, LiturgicalDayId::Feast(Feast::AscensionDay));
+    /// ```
+    pub fn liturgical_day_without_transferred_feasts(
+        &self,
+        date: Date,
+        evening: bool,
+    ) -> LiturgicalDay {
         let weekday = date.weekday();
         let week = self.liturgical_week(date);
         let proper = self.proper(date, week);
-        let holy_days = self.holy_days(date, week, evening).collect::<Vec<_>>();
+        let holy_days = self
+            .holy_days(date, week, evening, false)
+            .collect::<Vec<_>>();
         let observed = self.observed_day(week, proper, weekday, &holy_days);
         LiturgicalDay {
             date,
@@ -83,7 +115,7 @@ impl Calendar {
     }
 
     /// The rank of the given feast day in this calendar
-    fn feast_day_rank(&self, feast: &Feast) -> Rank {
+    pub(crate) fn feast_day_rank(&self, feast: &Feast) -> Rank {
         self.holy_day_ranks
             .iter()
             .find(|(search_feast, _)| search_feast == feast)
@@ -91,11 +123,21 @@ impl Calendar {
             .unwrap_or(Rank::OptionalObservance)
     }
 
-    fn holy_days(
+    /// Whether the given feast is the "Eve of ___"
+    pub(crate) fn feast_is_eve(&self, feast: &Feast) -> bool {
+        self.holy_days
+            .iter()
+            .find(|(_, search_feast, _)| search_feast == feast)
+            .map(|(_, _, evening)| *evening)
+            .unwrap_or(false)
+    }
+
+    pub(crate) fn holy_days(
         &self,
         date: Date,
         week: LiturgicalWeek,
         evening: bool,
+        ignore_evening: bool,
     ) -> impl Iterator<Item = Feast> {
         let today_month = date.month();
         let today_day = date.day();
@@ -106,7 +148,7 @@ impl Calendar {
                 HolyDayId::Date(f_month, f_day) => {
                     if *f_month == today_month
                         && *f_day == today_day
-                        && (!evening || *f_evening == evening)
+                        && (!evening || (!ignore_evening && *f_evening == evening))
                     {
                         Some(*feast)
                     } else {
@@ -114,7 +156,10 @@ impl Calendar {
                     }
                 }
                 HolyDayId::SpecialDay(f_week, f_weekday) => {
-                    if *f_week == week && *f_weekday == today_weekday {
+                    if *f_week == week
+                        && *f_weekday == today_weekday
+                        && (!evening || (!ignore_evening && *f_evening == evening))
+                    {
                         Some(*feast)
                     } else {
                         None
@@ -186,9 +231,7 @@ impl Calendar {
         let year = date.year();
         let easter = easter_in_year(year.into());
         let christmas_eve = Date::from_ymd(year, 12, 24);
-        let last_epiphany = easter
-            .sunday_before()
-            .subtract_weeks(self.easter_cycle_begins);
+        let last_epiphany = easter.subtract_weeks(self.easter_cycle_begins);
         let fourth_advent = christmas_eve.sunday_before();
         let last_pentecost = fourth_advent
             .sunday_before()
@@ -242,8 +285,11 @@ impl Calendar {
     }
 
     fn easter_cycle_week(&self, date: Date, easter: Date) -> LiturgicalWeekIndex {
-        let weeks_from_easter: u8 = (date - easter).num_weeks().try_into().unwrap();
-        let week = weeks_from_easter + self.easter_cycle_begins;
+        let weeks_from_easter: i64 = (date - easter).num_weeks();
+        println!("easter_cycle_week {:#?}", weeks_from_easter);
+        let week: u8 = (weeks_from_easter + self.easter_cycle_begins as i64)
+            .try_into()
+            .unwrap();
         LiturgicalWeekIndex {
             cycle: Cycle::Easter,
             week,
@@ -277,4 +323,7 @@ mod tests {
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sun)
         );
     }
+
+    #[test]
+    fn should_transfer_feasts() {}
 }

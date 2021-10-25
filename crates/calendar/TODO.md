@@ -1,3 +1,4 @@
+- [ ] Tests for transferring feasts
 - [ ] Transfer feasts
 - [ ] Full set of tests
 - [ ] Clear other TODOs

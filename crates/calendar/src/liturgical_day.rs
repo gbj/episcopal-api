@@ -17,9 +17,13 @@ pub struct LiturgicalDay {
     pub observed: LiturgicalDayId,
 }
 
-#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
 pub enum LiturgicalDayId {
     Feast(Feast),
     WeekAndDay(LiturgicalWeek, Weekday),
     ProperAndDay(Proper, Weekday),
+    TransferredFeast {
+        transferred: Feast,
+        original: Box<LiturgicalDayId>,
+    },
 }
