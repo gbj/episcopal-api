@@ -1,4 +1,9 @@
-use crate::{holy_day::HolyDayId, Calendar, Feast, LiturgicalDay, LiturgicalDayId, Rank, Weekday};
+use std::cmp::Reverse;
+
+use crate::{
+    holy_day::HolyDayId, Calendar, Date, Feast, LiturgicalDay, LiturgicalDayId, LiturgicalWeek,
+    Rank, Weekday,
+};
 
 impl Calendar {
     /// Checks whether any feasts that would have occurred on a Sunday, during Holy Week,
@@ -18,159 +23,110 @@ impl Calendar {
     ///
     /// ```
     pub fn transferred_feast(&self, day: &LiturgicalDay) -> Option<Feast> {
-        self.transferred_feast_with_open_days(day, day, &mut Vec::new(), &mut Vec::new())
-    }
-
-    fn transferred_feast_with_open_days(
-        &self,
-        day: &LiturgicalDay,
-        original_day: &LiturgicalDay,
-        acc: &mut Vec<Feast>,
-        open_days: &mut Vec<LiturgicalDay>,
-    ) -> Option<Feast> {
-        // TODO: this is a port of the old, mostly-working JS version
-        // it needs more test cases (see below) to capture more-obscure patterns of transfer
-        // I imagine it can also be cleaned up or rustified significantly
-
-        // today
         let date = day.date;
-        let evening = day.evening;
-        let yesterday =
-            self.liturgical_day_without_transferred_feasts(date.subtract_days(1), evening);
-        let day_before_yesterday =
-            self.liturgical_day_without_transferred_feasts(date.subtract_days(2), evening);
+        let yesterday = self.liturgical_day(date.subtract_days(1), false);
 
-        let for_rank = acc
-            .get(0)
-            .map(|feast| self.feast_day_rank(feast))
-            .unwrap_or(Rank::HolyDay);
-        let today_is_empty = self.is_empty_for_rank(day, for_rank);
-        let yesterday_is_empty = self.is_empty_for_rank(&yesterday, for_rank);
+        // Christmastide — transfer St. Stephen, St. John, Holy Innocents as necessary
+        if date.month() == 12 && date.day() > 25 && date.day() < 30 {
+            let christmas = Date::from_ymd(date.year(), 12, 25);
+            // if Christmas is (weekday), and today's date is ___
+            match (christmas.weekday(), date.day()) {
+                // if Christmas is a Thursday, St. Stephen's Day is Friday,
+                // St. John's is Saturday, but Holy Innocents is bumped by the First Sunday
+                // after Christmas, so it falls on Monday 12/29
+                (Weekday::Thu, 29) => Some(Feast::HolyInnocents),
+                // if Christmas is a Friday, St. Stephen's Day is on the Saturday
+                // but St. John's is bumped from 12/27 (a Sunday) to Monday
+                // and Holy Innocents from 12/28 (the Monday) to Tuesday
+                (Weekday::Fri, 28) => Some(Feast::John),
+                (Weekday::Fri, 29) => Some(Feast::HolyInnocents),
+                // if Christmas is a Saturday, each feast is displaced by a day
+                // 12/26 is Sunday after Christmas, so St. Stephen's => 12/27
+                // etc.
+                (Weekday::Sat, 27) => Some(Feast::Stephen),
+                (Weekday::Sat, 28) => Some(Feast::John),
+                (Weekday::Sat, 29) => Some(Feast::HolyInnocents),
+                // otherwise, there are no transferred feasts this week
+                _ => None,
+            }
+        }
+        // no holy days are observed during Holy Week or Easter Week
+        // this means that during the week after the Second Sunday of Easter, we should check for any holy dates
+        // that fell during the previous two weeks, and transfer them
+        // there can be between 0 and 2 of these, so only apply on Monday and Tuesday
+        else if day.week == LiturgicalWeek::Easter2
+            && (date.weekday() == Weekday::Mon || date.weekday() == Weekday::Tue)
+        {
+            let mut dates = (1..=14)
+                .flat_map(|delta| {
+                    let subtracted_date = date.subtract_days(delta);
+                    let month = subtracted_date.month();
+                    let day = subtracted_date.day();
+                    self.holy_days
+                        .iter()
+                        .filter_map(move |(id, feast, evening)| {
+                            if let HolyDayId::Date(s_month, s_day) = id {
+                                if !evening
+                                    && month == *s_month
+                                    && day == *s_day
+                                    && self.feast_day_rank(feast) == Rank::HolyDay
+                                {
+                                    Some((Date::from_ymd(date.year(), month, day), *feast))
+                                } else {
+                                    None
+                                }
+                            } else {
+                                None
+                            }
+                        })
+                })
+                .collect::<Vec<_>>();
+            dates.sort_by_key(|d| {
+                let date: Date = d.0;
+                date
+            });
 
-        // which feast, if any, would be observed today
-        let today_feast = if let LiturgicalDayId::Feast(observed) = day.observed {
-            day.holy_days.iter().find(|feast| {
-                observed != **feast
-                    && self.feast_day_rank(feast) >= Rank::HolyDay
-                    && !self.feast_is_eve(feast)
-            })
-        } else if let LiturgicalDayId::WeekAndDay(_, _) = day.observed {
-            day.holy_days.iter().find(|feast| {
-                self.feast_day_rank(feast) >= Rank::HolyDay && !self.feast_is_eve(feast)
-            })
-        } else if let LiturgicalDayId::ProperAndDay(_, _) = day.observed {
-            day.holy_days.iter().find(|feast| {
-                self.feast_day_rank(feast) >= Rank::HolyDay && !self.feast_is_eve(feast)
-            })
-        } else {
-            None
-        };
-
-        println!("\n\n[NEW ITERATION] {}\n\n", date.naive_date);
-
-        if today_is_empty && yesterday_is_empty {
-            println!("today is empty and yesterday is empty");
-            // check ONE more day -- we will rarely need to transfer more than two days, but it does happen around Easter Week sometimes
-            if self.is_empty_for_rank(&day_before_yesterday, for_rank) {
-                println!("and day before is empty");
-                println!("accumulated feasts = \t {:#?}", acc);
-                println!("open days = \t{:#?}", open_days);
-                // find index of original day
-                open_days.reverse();
-                let original_day_index = open_days
-                    .iter()
-                    .enumerate()
-                    .find(|(_, day)| *day == original_day)
-                    .map(|(idx, _)| idx)
-                    .unwrap_or(0);
-                // reverse because accumulate open days moving backwards
-                acc.reverse();
-                acc.get(original_day_index).copied()
+            if date.weekday() == Weekday::Mon {
+                dates.get(0).map(|(_, feast)| *feast)
+            } else if date.weekday() == Weekday::Tue {
+                dates.get(1).map(|(_, feast)| *feast)
             } else {
-                println!("and day before is not empty.");
-                open_days.push(day.clone());
-                self.transferred_feast_with_open_days(&yesterday, original_day, acc, open_days)
+                None
             }
         }
-        // if today is empty and yesterday is not empty, recurse back one more day
-        else if today_is_empty && !yesterday_is_empty {
-            println!("today is empty, yesterday is not empty {:#?}", yesterday);
-            // add today to the open days
-            open_days.push(day.clone());
-
-            println!("open_days = {:#?}", open_days);
-
-            self.transferred_feast_with_open_days(&yesterday, original_day, acc, open_days)
+        // transfer feasts to a Monday, if they fall on the day before (i.e., Sunday)
+        else if date.weekday() == Weekday::Mon {
+            let mut yesterday_feasts = self
+                .holy_days(yesterday.date, yesterday.week, false, true)
+                .filter(|feast| {
+                    let rank = self.feast_day_rank(feast);
+                    rank < Rank::Sunday && rank >= Rank::HolyDay
+                })
+                .collect::<Vec<_>>();
+            yesterday_feasts.sort_by_cached_key(|feast| Reverse(self.feast_day_rank(feast)));
+            yesterday_feasts.get(0).copied()
         }
-        // if today is not empty and today's feast is not observed...
-        else if yesterday_is_empty {
-            println!("yesterday is empty ( today is not)\n\ntoday is {:#?}", day);
-
-            let feast_is_observed_today = match (today_feast, &day.observed) {
-                (Some(today_feast), LiturgicalDayId::Feast(observed_feast)) => {
-                    *today_feast == *observed_feast
-                }
-                _ => false,
-            };
-
-            println!("feast_is_observed_today = {:#?}", feast_is_observed_today);
-            println!("today_feast = {:#?}", today_feast);
-
-            //if !feast_is_observed_today {
-            if let Some(feast) = today_feast {
-                acc.push(*feast);
+        // transfer feasts to the next day, if the day before was a major feast
+        else if let LiturgicalDayId::Feast(higher_feast) = yesterday.observed {
+            if self.feast_day_rank(&higher_feast) > Rank::HolyDay {
+                self.holy_days(yesterday.date, yesterday.week, false, true)
+                    .find(|feast| self.feast_day_rank(feast) == Rank::HolyDay)
+            } else {
+                None
             }
-            //}
-
-            println!("acc now = {:#?}", acc);
-
-            self.transferred_feast_with_open_days(&yesterday, original_day, acc, open_days)
-        } else {
-            println!("neither yesterday nor today is empty");
-            if let Some(feast) = today_feast {
-                acc.push(*feast);
-            }
-            println!("acc = {:#?}", acc);
-            self.transferred_feast_with_open_days(&yesterday, original_day, acc, open_days)
         }
-    }
-
-    pub fn is_empty_for_rank(&self, day: &LiturgicalDay, rank: Rank) -> bool {
-        day.weekday != Weekday::Sun
-            && !day
-                .holy_days
-                .iter()
-                .any(|feast| self.feast_day_rank(feast) > rank && !self.feast_is_eve(feast))
+        // otherwise, no scenario in which it would be transferred
+        else {
+            None
+        }
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::{LiturgicalWeek, Rank};
+    use crate::LiturgicalWeek;
 
     use super::super::{Date, Feast, LiturgicalDayId, Proper, Weekday, BCP1979_CALENDAR};
-
-    #[test]
-    fn is_empty_works() {
-        // 6/1 has no feast before transfers
-        let date = Date::from_ymd(2020, 6, 1);
-        let day = BCP1979_CALENDAR.liturgical_day_without_transferred_feasts(date, false);
-        assert!(BCP1979_CALENDAR.is_empty_for_rank(&day, Rank::HolyDay));
-        // 5/31 has an observed feast (Pentecost)
-        let date = Date::from_ymd(2020, 5, 31);
-        let day = BCP1979_CALENDAR.liturgical_day_without_transferred_feasts(date, false);
-        assert!(!BCP1979_CALENDAR.is_empty_for_rank(&day, Rank::HolyDay));
-
-        // 5/30 has "Eve of the Visitation" but we ignore eves when transferring
-        let date = Date::from_ymd(2020, 5, 30);
-        let day = BCP1979_CALENDAR.liturgical_day_without_transferred_feasts(date, false);
-        assert!(BCP1979_CALENDAR.is_empty_for_rank(&day, Rank::HolyDay));
-
-        // ignore black-letter days
-        let date = Date::from_ymd(2008, 2, 18);
-        let day = BCP1979_CALENDAR.liturgical_day_without_transferred_feasts(date, false);
-        assert!(BCP1979_CALENDAR.is_empty_for_rank(&day, Rank::HolyDay));
-    }
 
     #[test]
     fn empty_if_no_feasts() {
@@ -240,6 +196,23 @@ mod tests {
     }
 
     #[test]
+    fn transfers_holy_day_forward_from_principal_feast() {
+        // Ascension Day was on 5/1/2008 (ordinarily the date for Ss Philip and James)
+        let date = Date::from_ymd(2008, 5, 1);
+        let original_day = BCP1979_CALENDAR.liturgical_day_without_transferred_feasts(date, false);
+        assert_eq!(
+            original_day.observed,
+            LiturgicalDayId::Feast(Feast::AscensionDay)
+        );
+
+        // So Ss Philip & James transfers to 5/2
+        let date = Date::from_ymd(2008, 5, 2);
+        let original_day = BCP1979_CALENDAR.liturgical_day_without_transferred_feasts(date, false);
+        let transfer = BCP1979_CALENDAR.transferred_feast(&original_day);
+        assert_eq!(transfer, Some(Feast::PhilipAndJames));
+    }
+
+    #[test]
     fn does_not_transfer_monday_feasts_observed_on_monday() {
         let date = Date::from_ymd(2020, 8, 24);
         let original_day = BCP1979_CALENDAR.liturgical_day_without_transferred_feasts(date, false);
@@ -273,8 +246,6 @@ mod tests {
         // in 2021, Christmas is Saturday, which means 12/26 is Christmas 1 (not St. Stephen)
         // this means the whole week of feasts is displaced by a day
         // let's try it out
-        let dec_25 = BCP1979_CALENDAR
-            .liturgical_day_without_transferred_feasts(Date::from_ymd(2021, 12, 25), false);
         let dec_26 = BCP1979_CALENDAR
             .liturgical_day_without_transferred_feasts(Date::from_ymd(2021, 12, 26), false);
         let dec_27 = BCP1979_CALENDAR
@@ -285,23 +256,23 @@ mod tests {
             .liturgical_day_without_transferred_feasts(Date::from_ymd(2021, 12, 29), false);
         let dec_30 = BCP1979_CALENDAR
             .liturgical_day_without_transferred_feasts(Date::from_ymd(2021, 12, 30), false);
-        //assert_eq!(BCP1979_CALENDAR.transferred_feast(&dec_30), None);
-        /* assert_eq!(
+        assert_eq!(BCP1979_CALENDAR.transferred_feast(&dec_30), None);
+        assert_eq!(
             BCP1979_CALENDAR.transferred_feast(&dec_29),
             Some(Feast::HolyInnocents)
-        ); */
+        );
         assert_eq!(
             BCP1979_CALENDAR.transferred_feast(&dec_28),
             Some(Feast::John)
         );
-        /* assert_eq!(
+        assert_eq!(
             BCP1979_CALENDAR.transferred_feast(&dec_27),
             Some(Feast::Stephen)
-        ); */
-        //assert_eq!(BCP1979_CALENDAR.transferred_feast(&dec_26), None);
-        /* assert_eq!(
+        );
+        assert_eq!(BCP1979_CALENDAR.transferred_feast(&dec_26), None);
+        assert_eq!(
             dec_26.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Christmas1, Weekday::Sun)
-        ); */
+        );
     }
 }

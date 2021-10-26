@@ -286,7 +286,6 @@ impl Calendar {
 
     fn easter_cycle_week(&self, date: Date, easter: Date) -> LiturgicalWeekIndex {
         let weeks_from_easter: i64 = (date - easter).num_weeks();
-        println!("easter_cycle_week {:#?}", weeks_from_easter);
         let week: u8 = (weeks_from_easter + self.easter_cycle_begins as i64)
             .try_into()
             .unwrap();
