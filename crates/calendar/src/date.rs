@@ -63,13 +63,13 @@ impl Date {
         Self { naive_date }
     }
 
-    pub fn add_days(&self, weeks: impl Into<i64>) -> Self {
-        let naive_date = self.naive_date + chrono::Duration::days(weeks.into());
+    pub fn add_days(&self, days: impl Into<i64>) -> Self {
+        let naive_date = self.naive_date + chrono::Duration::days(days.into());
         Self { naive_date }
     }
 
-    pub fn subtract_days(&self, weeks: impl Into<i64>) -> Self {
-        let naive_date = self.naive_date - chrono::Duration::days(weeks.into());
+    pub fn subtract_days(&self, days: impl Into<i64>) -> Self {
+        let naive_date = self.naive_date - chrono::Duration::days(days.into());
         Self { naive_date }
     }
 
