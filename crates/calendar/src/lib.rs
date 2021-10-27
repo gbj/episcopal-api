@@ -1,3 +1,5 @@
+#![feature(test)]
+
 use std::convert::TryInto;
 
 mod bcp1979;
@@ -68,4 +70,24 @@ pub fn easter_in_year(year: u32) -> Date {
         month.try_into().unwrap(),
         day.try_into().unwrap(),
     )
+}
+
+// Crate-wide benchmark
+extern crate test;
+#[cfg(test)]
+mod tests {
+    use test::{black_box, Bencher};
+
+    use crate::{Date, BCP1979_CALENDAR};
+
+    #[bench]
+    fn bench_liturgical_day(b: &mut Bencher) {
+        b.iter(|| {
+            for m in 1..=12 {
+                for d in 1..=28 {
+                    black_box(BCP1979_CALENDAR.liturgical_day(Date::from_ymd(2021, m, d), false));
+                }
+            }
+        });
+    }
 }
