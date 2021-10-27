@@ -15,6 +15,7 @@ pub struct LiturgicalDay {
     pub rcl_year: RCLYear,
     pub holy_days: Vec<Feast>,
     pub observed: LiturgicalDayId,
+    pub alternate: Option<LiturgicalDayId>,
 }
 
 #[derive(Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
@@ -22,8 +23,5 @@ pub enum LiturgicalDayId {
     Feast(Feast),
     WeekAndDay(LiturgicalWeek, Weekday),
     ProperAndDay(Proper, Weekday),
-    TransferredFeast {
-        transferred: Feast,
-        original: Box<LiturgicalDayId>,
-    },
+    TransferredFeast(Feast),
 }

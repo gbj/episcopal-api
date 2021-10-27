@@ -24,7 +24,8 @@ impl Calendar {
     /// ```
     pub fn transferred_feast(&self, day: &LiturgicalDay) -> Option<Feast> {
         let date = day.date;
-        let yesterday = self.liturgical_day(date.subtract_days(1), false);
+        let yesterday =
+            self.liturgical_day_without_transferred_feasts(date.subtract_days(1), false);
 
         // Christmastide — transfer St. Stephen, St. John, Holy Innocents as necessary
         if date.month() == 12 && date.day() > 25 && date.day() < 30 {

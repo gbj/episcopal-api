@@ -44,13 +44,14 @@ impl Calendar {
     /// ```
     pub fn liturgical_day(&self, date: Date, evening: bool) -> LiturgicalDay {
         let mut original = self.liturgical_day_without_transferred_feasts(date, evening);
-        /*         let transferred = self.transferred_feast(&original);
+        let transferred = self.transferred_feast(&original);
         if let Some(transferred) = transferred {
-            original.observed = LiturgicalDayId::TransferredFeast {
-                transferred,
-                original: Box::new(original.observed),
-            }
-        } */
+            let alternate = std::mem::replace(
+                &mut original.observed,
+                LiturgicalDayId::TransferredFeast(transferred),
+            );
+            original.alternate = Some(alternate);
+        }
         original
     }
 
@@ -79,7 +80,7 @@ impl Calendar {
         let holy_days = self
             .holy_days(date, week, evening, false)
             .collect::<Vec<_>>();
-        let observed = self.observed_day(week, proper, weekday, &holy_days);
+        let (observed, alternate) = self.observed_day(week, proper, weekday, &holy_days);
         LiturgicalDay {
             date,
             evening,
@@ -90,6 +91,7 @@ impl Calendar {
             holy_days,
             proper,
             observed,
+            alternate,
         }
     }
 
@@ -186,9 +188,12 @@ impl Calendar {
         proper: Option<Proper>,
         weekday: Weekday,
         holy_days: &[Feast],
-    ) -> LiturgicalDayId {
+    ) -> (LiturgicalDayId, Option<LiturgicalDayId>) {
         if holy_days.is_empty() {
-            self.observed_day_from_week_or_proper(week, proper, weekday)
+            (
+                self.observed_day_from_week_or_proper(week, proper, weekday),
+                None,
+            )
         } else {
             // include all eligible feasts
             let mut observable_feasts = holy_days
@@ -203,13 +208,35 @@ impl Calendar {
                 })
                 .collect::<Vec<_>>();
 
+            // Holy days that fall on a Sunday in ordinary time
+            // can be used as alternatives to the Sunday propers,
+            // but aren't by default
+            let alternate_feast = if weekday == Weekday::Sun
+                && ((week > LiturgicalWeek::TrinitySunday && week < LiturgicalWeek::LastPentecost)
+                    || (week > LiturgicalWeek::Epiphany1 && week < LiturgicalWeek::LastEpiphany))
+            {
+                holy_days
+                    .iter()
+                    .find(|feast| self.feast_day_rank(feast) > Rank::OptionalObservance)
+                    .copied()
+                    .map(LiturgicalDayId::Feast)
+            } else {
+                None
+            };
+
             // sort in reverse order, i.e., from highest-ranking feast to lowest
             observable_feasts.sort_by_cached_key(|feast| Reverse(self.feast_day_rank(feast)));
             if observable_feasts.is_empty() {
-                self.observed_day_from_week_or_proper(week, proper, weekday)
+                (
+                    self.observed_day_from_week_or_proper(week, proper, weekday),
+                    alternate_feast,
+                )
             } else {
                 let highest_ranking_feast = observable_feasts[0];
-                LiturgicalDayId::Feast(*highest_ranking_feast)
+                (
+                    LiturgicalDayId::Feast(*highest_ranking_feast),
+                    alternate_feast,
+                )
             }
         }
     }
