@@ -349,7 +349,4 @@ mod tests {
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sun)
         );
     }
-
-    #[test]
-    fn should_transfer_feasts() {}
 }
