@@ -83,12 +83,12 @@ const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 79] = [
     (Feast::ChristmasEve, Rank::PrincipalFeast),
     (Feast::Epiphany, Rank::PrincipalFeast),
     (Feast::HolyName, Rank::PrincipalFeast),
-    (Feast::EveofPentecost, Rank::PrincipalFeast),
+    (Feast::EveOfPentecost, Rank::PrincipalFeast),
     (Feast::PalmSunday, Rank::PrincipalFeast),
     (Feast::Pentecost, Rank::PrincipalFeast),
     (Feast::TrinitySunday, Rank::PrincipalFeast),
     (Feast::AscensionDay, Rank::PrincipalFeast),
-    (Feast::EveoftheAscension, Rank::PrincipalFeast),
+    (Feast::EveOfTheAscension, Rank::PrincipalFeast),
     (Feast::FridayinEasterWeek, Rank::PrecedenceOverHolyDay),
     (Feast::GoodFriday, Rank::PrecedenceOverHolyDay),
     (Feast::MondayinEasterWeek, Rank::PrecedenceOverHolyDay),
@@ -140,7 +140,7 @@ const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 79] = [
     (Feast::Michael, Rank::HolyDay),
     (Feast::Stephen, Rank::HolyDay),
     (Feast::Thomas, Rank::HolyDay),
-    (Feast::EveofTrinitySunday, Rank::HolyDay),
+    (Feast::EveOfTrinitySunday, Rank::HolyDay),
     (Feast::ThanksgivingDay, Rank::HolyDay),
     (Feast::ThePresentation, Rank::HolyDay),
     (Feast::TheTransfiguration, Rank::HolyDay),
@@ -163,7 +163,7 @@ const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 79] = [
 // TODO sort this by date for presentation
 // TODO add special days
 // TODO add Thanksgiving and Labor Day
-pub const BCP1979_FEASTS: [KalendarEntry; 195] = [
+pub const BCP1979_FEASTS: [KalendarEntry; 199] = [
     // Thanksgiving and Labor Day
     (
         HolyDayId::DayOfMonth {
@@ -222,7 +222,7 @@ pub const BCP1979_FEASTS: [KalendarEntry; 195] = [
     ),
     (
         HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Sat),
-        Feast::EveofPentecost,
+        Feast::EveOfPentecost,
         true,
     ),
     (
@@ -252,7 +252,7 @@ pub const BCP1979_FEASTS: [KalendarEntry; 195] = [
     ),
     (
         HolyDayId::SpecialDay(LiturgicalWeek::Pentecost, Weekday::Sat),
-        Feast::EveofTrinitySunday,
+        Feast::EveOfTrinitySunday,
         true,
     ),
     (
@@ -292,7 +292,7 @@ pub const BCP1979_FEASTS: [KalendarEntry; 195] = [
     ),
     (
         HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Wed),
-        Feast::EveoftheAscension,
+        Feast::EveOfTheAscension,
         true,
     ),
     (
@@ -309,7 +309,13 @@ pub const BCP1979_FEASTS: [KalendarEntry; 195] = [
         HolyDayId::SpecialDay(LiturgicalWeek::LastEpiphany, Weekday::Wed),
         Feast::AshWednesday,
         false,
-    ), // MM/DD feast days
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Epiphany, Weekday::Sat),
+        Feast::EveOfEpiphany1,
+        true,
+    ),
+    // MM/DD feast days
     (HolyDayId::Date(2, 13), Feast::AbsalomJones, false),
     (HolyDayId::Date(1, 21), Feast::AgnesAndCeciliaOfRome, false),
     (HolyDayId::Date(8, 31), Feast::AidanOfLindisfarne, false),
@@ -339,6 +345,7 @@ pub const BCP1979_FEASTS: [KalendarEntry; 195] = [
     (HolyDayId::Date(3, 27), Feast::CharlesHenryBrent, false),
     (HolyDayId::Date(11, 12), Feast::CharlesSimeon, false),
     (HolyDayId::Date(12, 25), Feast::ChristmasDay, false),
+    (HolyDayId::Date(12, 24), Feast::December24, false),
     (HolyDayId::Date(12, 24), Feast::ChristmasEve, true),
     (HolyDayId::Date(8, 11), Feast::ClareOfAssisi, false),
     (HolyDayId::Date(11, 23), Feast::ClementOfRome, false),
@@ -381,6 +388,7 @@ pub const BCP1979_FEASTS: [KalendarEntry; 195] = [
     (HolyDayId::Date(11, 18), Feast::HildaOfWhitby, false),
     (HolyDayId::Date(9, 14), Feast::HolyCross, false),
     (HolyDayId::Date(12, 28), Feast::HolyInnocents, false),
+    (HolyDayId::Date(12, 31), Feast::December31, false),
     (HolyDayId::Date(12, 31), Feast::EveOfHolyName, true),
     (HolyDayId::Date(1, 1), Feast::HolyName, false),
     (HolyDayId::Date(11, 17), Feast::HughOfLincoln, false),
@@ -403,6 +411,7 @@ pub const BCP1979_FEASTS: [KalendarEntry; 195] = [
     (HolyDayId::Date(1, 3), Feast::January3, false),
     (HolyDayId::Date(1, 4), Feast::January4, false),
     (HolyDayId::Date(1, 5), Feast::January5, false),
+    (HolyDayId::Date(1, 5), Feast::EveOfEpiphany, true),
     (HolyDayId::Date(1, 7), Feast::January7, false),
     (HolyDayId::Date(1, 8), Feast::January8, false),
     (HolyDayId::Date(1, 9), Feast::January9, false),

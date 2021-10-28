@@ -1,5 +1,6 @@
 [workspace]
 members = [
   "crates/calendar",
+  "crates/lectionary",
   "examples/api"
 ]

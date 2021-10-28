@@ -1,0 +1,11 @@
+- [ ] Lectionary content
+- [ ] Lectionary tests
+- [ ] Calendar tests
+  - [ ] Test days like 12/24 and 1/5 that have different things in the morning/evening
+  - [ ] Test Eve of Epiphany 1
+- [ ] Sort and prettify various constant arrays
+- [ ] Localization
+  - [ ] LiturgicalWeek => string
+  - [ ] LiturgicalWeek => season
+  - [ ] LiturgicalWeek => color
+
