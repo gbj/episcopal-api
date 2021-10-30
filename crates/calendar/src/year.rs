@@ -24,9 +24,9 @@ impl DailyOfficeYear {
         };
 
         if base_year % 2 == 0 {
-            DailyOfficeYear::One
-        } else {
             DailyOfficeYear::Two
+        } else {
+            DailyOfficeYear::One
         }
     }
 }
