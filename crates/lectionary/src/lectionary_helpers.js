@@ -1,3 +1,5 @@
+// Scratch code for converting from Venite 2 JSON files 
+
 function rType (reading_type) {
   switch(reading_type) {
     case "first_reading": 
