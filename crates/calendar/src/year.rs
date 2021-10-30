@@ -15,6 +15,8 @@ impl DailyOfficeYear {
     /// // see BCP p. 934
     /// let christmas_1976 = Date::from_ymd(1976, 12, 25);
     /// assert_eq!(DailyOfficeYear::new(christmas_1976, LiturgicalWeek::Christmas), DailyOfficeYear::One);
+    /// let october_2021 = Date::from_ymd(2021, 10, 29);
+    /// assert_eq!(DailyOfficeYear::new(october_2021, LiturgicalWeek::Pentecost23), DailyOfficeYear::One);
     /// ```
     pub fn new(date: Date, week: LiturgicalWeek) -> Self {
         let base_year = if is_advent(week) || date.month() == 12 {
@@ -24,9 +26,9 @@ impl DailyOfficeYear {
         };
 
         if base_year % 2 == 0 {
-            DailyOfficeYear::Two
-        } else {
             DailyOfficeYear::One
+        } else {
+            DailyOfficeYear::Two
         }
     }
 }
