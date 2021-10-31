@@ -1,4 +1,10 @@
 - [ ] Lectionary content
+  - [x] Daily office
+  - [ ] 30-day psalms
+    - [ ] Daily Office Psalms
+  - [ ] RCL (general)
+  - [ ] RCL Track 1
+  - [ ] RCL Track 2
 - [ ] Lectionary tests
 - [ ] Calendar tests
   - [ ] Test days like 12/24 and 1/5 that have different things in the morning/evening
