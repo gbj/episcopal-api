@@ -29,7 +29,7 @@ pub use propers::Proper;
 pub use rank::Rank;
 pub use sanctoral::Sanctoral;
 pub use season::Season;
-pub use year::{DailyOfficeYear, RCLYear};
+pub use year::{DailyOfficeYear, RCLYear, Year, YearType};
 
 /// Calculates the date of Easter as a [Date](Date) in any given year.
 /// ```

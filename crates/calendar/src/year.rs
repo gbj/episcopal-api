@@ -2,6 +2,25 @@ use serde::{Deserialize, Serialize};
 
 use crate::{Date, LiturgicalWeek};
 
+/// Specifies which type of year another item (such as a lectionary or a liturgy) takes, without
+/// providing a concrete year of any kind.
+#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
+pub enum YearType {
+    Rcl,
+    DailyOffice,
+    None,
+}
+
+/// Wraps any of the possible year types, while including a concrete year. Used especially for lectionaries.
+#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
+pub enum Year {
+    DailyOffice(DailyOfficeYear),
+    Rcl(RCLYear),
+    Any,
+}
+
+/// The year in the 1979 Book of Common Prayer Daily Office lectionary, following the calculation
+/// of [BCP p. 934](https://www.episcopalchurch.org/wp-content/uploads/sites/2/2019/11/bcp_compressed.pdf#page=934)
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Deserialize, Serialize)]
 pub enum DailyOfficeYear {
     One,
@@ -33,6 +52,8 @@ impl DailyOfficeYear {
     }
 }
 
+/// The year in the Revised Common Lectionary, following the calculation
+/// of [BCP p. 888](https://www.episcopalchurch.org/wp-content/uploads/sites/2/2019/11/bcp_compressed.pdf#page=888)
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Deserialize, Serialize)]
 pub enum RCLYear {
     A,

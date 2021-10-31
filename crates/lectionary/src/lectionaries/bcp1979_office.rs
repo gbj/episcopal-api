@@ -1,7 +1,7 @@
-use calendar::{Feast, LiturgicalDayId};
-
-use crate::{Lectionary, ReadingType, Year, YearType};
-use calendar::{DailyOfficeYear, LiturgicalWeek, Proper, Weekday};
+use crate::{Lectionary, ReadingType};
+use calendar::{
+    DailyOfficeYear, Feast, LiturgicalDayId, LiturgicalWeek, Proper, Weekday, Year, YearType,
+};
 
 // TODO sort readings
 pub const BCP1979_DAILY_OFFICE_LECTIONARY: Lectionary = Lectionary {

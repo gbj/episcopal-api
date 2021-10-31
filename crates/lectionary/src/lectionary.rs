@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use calendar::{DailyOfficeYear, LiturgicalDay, LiturgicalDayId, RCLYear};
+use calendar::{DailyOfficeYear, LiturgicalDay, LiturgicalDayId, RCLYear, Year, YearType};
 
 use crate::{Reading, ReadingType};
 
@@ -11,19 +11,6 @@ use crate::{Reading, ReadingType};
 pub struct Lectionary {
     pub year_type: YearType,
     pub readings: &'static [(LiturgicalDayId, Year, ReadingType, &'static str)],
-}
-
-#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
-pub enum YearType {
-    Rcl,
-    DailyOffice,
-}
-
-#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
-pub enum Year {
-    DailyOffice(DailyOfficeYear),
-    Rcl(RCLYear),
-    Any,
 }
 
 impl Lectionary {
