@@ -24,4 +24,5 @@ pub enum LiturgicalDayId {
     WeekAndDay(LiturgicalWeek, Weekday),
     ProperAndDay(Proper, Weekday),
     TransferredFeast(Feast),
+    DayOfMonth(u8),
 }

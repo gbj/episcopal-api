@@ -18,6 +18,7 @@ impl Lectionary {
         let year = match self.year_type {
             YearType::Rcl => Year::Rcl(day.rcl_year),
             YearType::DailyOffice => Year::DailyOffice(day.daily_office_year),
+            YearType::None => Year::Any,
         };
 
         let observed = if let LiturgicalDayId::TransferredFeast(feast) = day.observed {

@@ -1,7 +1,9 @@
+- [ ] Transferring feast to All Saints’ Sunday
 - [ ] Lectionary content
   - [x] Daily office
-  - [ ] 30-day psalms
-    - [ ] Daily Office Psalms
+  - [x] 30-day psalms
+    - [ ] Clean up citations
+  - [ ] Daily Office Psalms
   - [ ] RCL (general)
   - [ ] RCL Track 1
   - [ ] RCL Track 2

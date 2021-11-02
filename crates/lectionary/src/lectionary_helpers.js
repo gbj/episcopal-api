@@ -1,5 +1,14 @@
 // Scratch code for converting from Venite 2 JSON files 
 
+function sortPsalter(l) {
+        return  l.sort((a, b) => Number(a.when) === Number(b.when) ? 
+                a.type === "morning_psalms" && b.type === "evening_psalms"
+                        ? -1 
+                        : (parseInt(a.citation) - parseInt(b.citation))
+                : Number(a.when) - Number(b.when))
+}
+
+
 function rType (reading_type) {
   switch(reading_type) {
     case "first_reading": 
