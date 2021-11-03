@@ -133,7 +133,7 @@ impl Calendar {
 
 #[cfg(test)]
 mod tests {
-    use crate::{LiturgicalDay, LiturgicalWeek};
+    use crate::LiturgicalWeek;
 
     use super::super::{Date, Feast, LiturgicalDayId, Proper, Weekday, BCP1979_CALENDAR};
 
