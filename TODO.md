@@ -1,4 +1,4 @@
-- [ ] Transferring feast to All Saints’ Sunday
+- [x] Transferring feast to All Saints’ Sunday
 - [ ] Lectionary content
   - [x] Daily office
   - [x] 30-day psalms

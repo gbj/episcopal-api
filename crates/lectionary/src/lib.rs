@@ -18,17 +18,21 @@ pub struct Lectionary {
 }
 
 impl Lectionary {
-    pub fn readings_by_day(&'static self, day: &LiturgicalDay) -> impl Iterator<Item = Reading> {
+    pub fn readings_by_day(
+        &'static self,
+        observed: &LiturgicalDayId,
+        day: &LiturgicalDay,
+    ) -> impl Iterator<Item = Reading> {
         let year = match self.year_type {
             YearType::Rcl => Year::Rcl(day.rcl_year),
             YearType::DailyOffice => Year::DailyOffice(day.daily_office_year),
             YearType::None => Year::Any,
         };
 
-        let observed = if let LiturgicalDayId::TransferredFeast(feast) = day.observed {
-            LiturgicalDayId::Feast(feast)
+        let observed = if let LiturgicalDayId::TransferredFeast(feast) = observed {
+            LiturgicalDayId::Feast(*feast)
         } else {
-            day.observed
+            *observed
         };
 
         self.readings
@@ -41,10 +45,11 @@ impl Lectionary {
 
     pub fn reading_by_type(
         &'static self,
+        observed: &LiturgicalDayId,
         day: &LiturgicalDay,
         reading_type: ReadingType,
     ) -> impl Iterator<Item = Reading> {
-        self.readings_by_day(day)
+        self.readings_by_day(observed, day)
             .filter(move |reading| reading.reading_type == reading_type)
     }
 }
