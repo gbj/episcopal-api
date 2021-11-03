@@ -27,8 +27,16 @@ impl Calendar {
         let yesterday =
             self.liturgical_day_without_transferred_feasts(date.subtract_days(1), false);
 
+        // All Saints’ Sunday should be marked as a transferred All Saints’, not simply an observed All Saints’
+        if date.month() == 11
+            && date.weekday() == Weekday::Sun
+            && date.day() != 1
+            && date.nth_instance_in_month() == 1
+        {
+            Some(Feast::AllSaintsDay)
+        }
         // Christmastide — transfer St. Stephen, St. John, Holy Innocents as necessary
-        if date.month() == 12 && date.day() > 25 && date.day() < 30 {
+        else if date.month() == 12 && date.day() > 25 && date.day() < 30 {
             let christmas = Date::from_ymd(date.year(), 12, 25);
             // if Christmas is (weekday), and today's date is ___
             match (christmas.weekday(), date.day()) {
@@ -125,7 +133,7 @@ impl Calendar {
 
 #[cfg(test)]
 mod tests {
-    use crate::LiturgicalWeek;
+    use crate::{LiturgicalDay, LiturgicalWeek};
 
     use super::super::{Date, Feast, LiturgicalDayId, Proper, Weekday, BCP1979_CALENDAR};
 
@@ -274,6 +282,24 @@ mod tests {
         assert_eq!(
             dec_26.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Christmas1, Weekday::Sun)
+        );
+    }
+
+    #[test]
+    fn all_saints_sunday() {
+        // should transfer to following Sunday
+        let all_saints_sunday = BCP1979_CALENDAR.liturgical_day(Date::from_ymd(2021, 11, 7), false);
+        assert_eq!(
+            all_saints_sunday.observed,
+            LiturgicalDayId::TransferredFeast(Feast::AllSaintsDay)
+        );
+
+        // but not if Sunday is itself 11/1, All Saints’
+        let all_saints_on_sunday = BCP1979_CALENDAR
+            .liturgical_day_without_transferred_feasts(Date::from_ymd(2020, 11, 1), false);
+        assert_eq!(
+            all_saints_on_sunday.observed,
+            LiturgicalDayId::Feast(Feast::AllSaintsDay)
         );
     }
 }

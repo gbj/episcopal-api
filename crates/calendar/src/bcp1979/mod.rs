@@ -159,7 +159,7 @@ const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 79] = [
 ];
 
 /// Array of all observances in the BCP 1979 calendar
-pub const BCP1979_FEASTS: [KalendarEntry; 200] = [
+pub const BCP1979_FEASTS: [KalendarEntry; 199] = [
     // Thanksgiving, Labor Day, All Saints’ Sunday
     (
         HolyDayId::DayOfMonth {
@@ -168,15 +168,6 @@ pub const BCP1979_FEASTS: [KalendarEntry; 200] = [
             day: Weekday::Mon,
         },
         Feast::ThanksgivingDay,
-        false,
-    ),
-    (
-        HolyDayId::DayOfMonth {
-            month: 11,
-            week: 1,
-            day: Weekday::Sun,
-        },
-        Feast::AllSaintsDay,
         false,
     ),
     (
