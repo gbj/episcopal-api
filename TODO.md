@@ -4,11 +4,16 @@
   - [x] 30-day psalms
     - [x] Clean up citations
   - [x] Daily Office Psalms
-    - [ ] Deduplicate feast day psalms (using Year::Any)
+    - [x] Deduplicate feast day psalms (using Year::Any)
+    - [ ] Check sorting of these psalms
   - [ ] RCL (general)
   - [ ] RCL Track 1
   - [ ] RCL Track 2
-- [ ] Lectionary tests
+- [ ] Lectionary tests against JS versions
+  - [ ] Daily Office
+  - [ ] Daily Psalms
+  - [ ] 30-day psalter
+  - [ ] RCL
 - [ ] Calendar tests
   - [ ] Test days like 12/24 and 1/5 that have different things in the morning/evening
   - [ ] Test Eve of Epiphany 1
