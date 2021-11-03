@@ -10,8 +10,6 @@ use serde::{Deserialize, Serialize};
 
 use calendar::{DailyOfficeYear, LiturgicalDay, LiturgicalDayId, RCLYear, Year, YearType};
 
-use crate::{Reading, ReadingType};
-
 /// Represents a given lectionary cycle of readings, e.g., the Revised Common Lectionary
 /// or the 1979 Book of Common Prayer Daily Office Lectionary.
 /// Given a [LiturgicalDay](crate::calendar::LiturgicalDay), it can give either all of the readings,
