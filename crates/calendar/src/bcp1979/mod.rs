@@ -163,8 +163,8 @@ const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 79] = [
 // TODO sort this by date for presentation
 // TODO add special days
 // TODO add Thanksgiving and Labor Day
-pub const BCP1979_FEASTS: [KalendarEntry; 199] = [
-    // Thanksgiving and Labor Day
+pub const BCP1979_FEASTS: [KalendarEntry; 200] = [
+    // Thanksgiving, Labor Day, All Saints’ Sunday
     (
         HolyDayId::DayOfMonth {
             month: 9,
@@ -181,6 +181,15 @@ pub const BCP1979_FEASTS: [KalendarEntry; 199] = [
             day: Weekday::Thu,
         },
         Feast::ThanksgivingDay,
+        false,
+    ),
+    (
+        HolyDayId::DayOfMonth {
+            month: 11,
+            week: 1,
+            day: Weekday::Sun,
+        },
+        Feast::AllSaintsDay,
         false,
     ),
     // Special days
