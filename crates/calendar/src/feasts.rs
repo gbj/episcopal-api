@@ -50,6 +50,13 @@ pub enum Feast {
     WednesdayinHolyWeek,
     AshWednesday,
     EasterSunday,
+    // Additional RCL selections for special services on select feast days
+    ChristmasDayII,
+    ChristmasDayIII,
+    EasterVigil,
+    PentecostVigil,
+    LiturgyOfThePalms,
+    EasterDayEveningService,
     // Saints' Days
     AbsalomJones,
     AdelaideTeagueCase,

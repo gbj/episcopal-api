@@ -12,4 +12,6 @@ pub enum ReadingType {
     Morning2,
     Evening1,
     Evening2,
+    // Special Services
+    PalmsGospel,
 }

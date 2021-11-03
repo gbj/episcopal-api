@@ -6,9 +6,11 @@
   - [x] Daily Office Psalms
     - [x] Deduplicate feast day psalms (using Year::Any)
     - [ ] Check sorting of these psalms
-  - [ ] RCL (general)
-  - [ ] RCL Track 1
-  - [ ] RCL Track 2
+  - [x] RCL Track 1
+  - [x] RCL Track 2
+  - [ ] Fix Easter Vigil and Pentecost Vigil readings (add add'l ReadingTypes, I think)
+  - [ ] Extract shared into RCL (general)
+  - [ ] Deduplicate entries
 - [ ] Lectionary tests against JS versions
   - [ ] Daily Office
   - [ ] Daily Psalms
