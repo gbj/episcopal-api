@@ -24,7 +24,7 @@ impl Lectionary {
         let observed = if let LiturgicalDayId::TransferredFeast(feast) = day.observed {
             LiturgicalDayId::Feast(feast)
         } else {
-            day.observed.clone()
+            day.observed
         };
 
         self.readings

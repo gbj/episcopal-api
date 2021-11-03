@@ -18,7 +18,7 @@ pub struct LiturgicalDay {
     pub alternate: Option<LiturgicalDayId>,
 }
 
-#[derive(Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
 pub enum LiturgicalDayId {
     Feast(Feast),
     WeekAndDay(LiturgicalWeek, Weekday),
