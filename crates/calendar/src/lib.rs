@@ -21,7 +21,7 @@ pub use self::calendar::Calendar;
 pub use bcp1979::BCP1979_CALENDAR;
 pub use date::{Date, Weekday};
 pub use feasts::Feast;
-pub use holy_day::HolyDay;
+pub use holy_day::{HolyDay, HolyDayId};
 pub use liturgical_color::Color;
 pub use liturgical_day::{LiturgicalDay, LiturgicalDayId};
 pub use liturgical_week::{Cycle, LiturgicalWeek};
