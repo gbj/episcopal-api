@@ -31,42 +31,6 @@ pub const BCP1979_DAILY_OFFICE_LECTIONARY: Lectionary = Lectionary {
             "Revelation 21:1-4,22-22:5",
         ),
         (
-            LiturgicalDayId::Feast(Feast::AllSoulsDay),
-            Year::DailyOffice(DailyOfficeYear::One),
-            ReadingType::FirstReading,
-            "Wisdom 3:1–9",
-        ),
-        (
-            LiturgicalDayId::Feast(Feast::AllSoulsDay),
-            Year::DailyOffice(DailyOfficeYear::One),
-            ReadingType::SecondReading,
-            "1 Thessalonians 4:13–18",
-        ),
-        (
-            LiturgicalDayId::Feast(Feast::AllSoulsDay),
-            Year::DailyOffice(DailyOfficeYear::One),
-            ReadingType::Gospel,
-            "John 5:24-27",
-        ),
-        (
-            LiturgicalDayId::Feast(Feast::AllSoulsDay),
-            Year::DailyOffice(DailyOfficeYear::Two),
-            ReadingType::FirstReading,
-            "Isaiah 25:6–9",
-        ),
-        (
-            LiturgicalDayId::Feast(Feast::AllSoulsDay),
-            Year::DailyOffice(DailyOfficeYear::Two),
-            ReadingType::SecondReading,
-            "Revelation 21:1-4,22-22:5",
-        ),
-        (
-            LiturgicalDayId::Feast(Feast::AllSoulsDay),
-            Year::DailyOffice(DailyOfficeYear::Two),
-            ReadingType::Gospel,
-            "John 5:24-27",
-        ),
-        (
             LiturgicalDayId::Feast(Feast::Andrew),
             Year::DailyOffice(DailyOfficeYear::One),
             ReadingType::Morning1,
