@@ -2,7 +2,7 @@ mod lectionaries;
 mod reading;
 mod reading_type;
 
-pub use lectionaries::{BCP1979_30_DAY_PSALTER, BCP1979_DAILY_OFFICE_LECTIONARY};
+pub use lectionaries::*;
 pub use reading::Reading;
 pub use reading_type::ReadingType;
 

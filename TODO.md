@@ -3,7 +3,8 @@
   - [x] Daily office
   - [x] 30-day psalms
     - [x] Clean up citations
-  - [ ] Daily Office Psalms
+  - [x] Daily Office Psalms
+    - [ ] Deduplicate feast day psalms (using Year::Any)
   - [ ] RCL (general)
   - [ ] RCL Track 1
   - [ ] RCL Track 2
