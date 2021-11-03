@@ -53,6 +53,10 @@ impl Date {
         self.naive_date.weekday()
     }
 
+    pub fn nth_instance_in_month(&self) -> u8 {
+        (self.day() + 7 - 1) / 7
+    }
+
     pub fn add_weeks(&self, weeks: impl Into<i64>) -> Self {
         let naive_date = self.naive_date + chrono::Duration::weeks(weeks.into());
         Self { naive_date }

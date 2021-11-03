@@ -169,10 +169,9 @@ impl Calendar {
                 }
                 HolyDayId::DayOfMonth { month, week, day } => {
                     // divide date by 7 and round up => nth instance of a day of week
-                    let nth_instance_of_weekday = (today_day + 7 - 1) / 7;
                     if *month == today_month
                         && *day == today_weekday
-                        && nth_instance_of_weekday == *week
+                        && date.nth_instance_in_month() == *week
                     {
                         Some(*feast)
                     } else {
