@@ -6,9 +6,7 @@ pub use lectionaries::{BCP1979_30_DAY_PSALTER, BCP1979_DAILY_OFFICE_LECTIONARY};
 pub use reading::Reading;
 pub use reading_type::ReadingType;
 
-use serde::{Deserialize, Serialize};
-
-use calendar::{DailyOfficeYear, LiturgicalDay, LiturgicalDayId, RCLYear, Year, YearType};
+use calendar::{LiturgicalDay, LiturgicalDayId, Year, YearType};
 
 /// Represents a given lectionary cycle of readings, e.g., the Revised Common Lectionary
 /// or the 1979 Book of Common Prayer Daily Office Lectionary.
