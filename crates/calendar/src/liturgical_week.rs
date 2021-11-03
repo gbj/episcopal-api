@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, PartialOrd, Ord, Serialize, Deserialize)]
 pub enum Cycle {
     Advent,
     Christmas,
@@ -16,13 +16,6 @@ struct LiturgicalWeekIndex {
 }
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, PartialOrd, Ord, Serialize, Deserialize)]
-/* pub struct LiturgicalWeek {
-    cycle: Cycle,
-    week: u8,
-    season: Season,
-    proper: Option<u8>,
-    color: Option<Color>,
-} */
 pub enum LiturgicalWeek {
     Advent1,
     Advent2,

@@ -24,7 +24,7 @@ pub use feasts::Feast;
 pub use holy_day::HolyDay;
 pub use liturgical_color::Color;
 pub use liturgical_day::{LiturgicalDay, LiturgicalDayId};
-pub use liturgical_week::LiturgicalWeek;
+pub use liturgical_week::{Cycle, LiturgicalWeek};
 pub use propers::Proper;
 pub use rank::Rank;
 pub use sanctoral::Sanctoral;
