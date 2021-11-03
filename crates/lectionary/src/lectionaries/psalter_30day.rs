@@ -2,7 +2,7 @@ use calendar::{LiturgicalDayId, Year, YearType};
 
 use crate::{Lectionary, ReadingType};
 
-pub const PSALTER_30_DAY: Lectionary = Lectionary {
+pub const BCP1979_30_DAY_PSALTER: Lectionary = Lectionary {
     year_type: YearType::None,
     readings: &[
         (
