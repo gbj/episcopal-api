@@ -14,7 +14,6 @@ pub const BCP1979_CALENDAR: Calendar = Calendar {
     holy_day_ranks: &BCP1979_HOLY_DAY_RANKS,
 };
 
-// TODO sort this for presentation
 const BCP1979_WEEKS: [(Cycle, u8, LiturgicalWeek); 59] = [
     (Cycle::Advent, 0, LiturgicalWeek::LastPentecost),
     (Cycle::Advent, 1, LiturgicalWeek::Advent1),
@@ -160,9 +159,6 @@ const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 79] = [
 ];
 
 /// Array of all observances in the BCP 1979 calendar
-// TODO sort this by date for presentation
-// TODO add special days
-// TODO add Thanksgiving and Labor Day
 pub const BCP1979_FEASTS: [KalendarEntry; 200] = [
     // Thanksgiving, Labor Day, All Saints’ Sunday
     (
@@ -177,71 +173,40 @@ pub const BCP1979_FEASTS: [KalendarEntry; 200] = [
     (
         HolyDayId::DayOfMonth {
             month: 11,
-            week: 4,
-            day: Weekday::Thu,
-        },
-        Feast::ThanksgivingDay,
-        false,
-    ),
-    (
-        HolyDayId::DayOfMonth {
-            month: 11,
             week: 1,
             day: Weekday::Sun,
         },
         Feast::AllSaintsDay,
         false,
     ),
+    (
+        HolyDayId::DayOfMonth {
+            month: 11,
+            week: 4,
+            day: Weekday::Thu,
+        },
+        Feast::ThanksgivingDay,
+        false,
+    ),
     // Special days
-    // TODO sort
     (
-        HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Fri),
-        Feast::FridayAfterAscension,
+        HolyDayId::SpecialDay(LiturgicalWeek::Epiphany, Weekday::Sat),
+        Feast::EveOfEpiphany1,
+        true,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::LastEpiphany, Weekday::Wed),
+        Feast::AshWednesday,
         false,
     ),
     (
-        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Fri),
-        Feast::FridayinEasterWeek,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Fri),
-        Feast::GoodFriday,
+        HolyDayId::SpecialDay(LiturgicalWeek::LastEpiphany, Weekday::Thu),
+        Feast::ThursdayafterAshWednesday,
         false,
     ),
     (
         HolyDayId::SpecialDay(LiturgicalWeek::LastEpiphany, Weekday::Fri),
         Feast::FridayafterAshWednesday,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Mon),
-        Feast::MondayinEasterWeek,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Mon),
-        Feast::MondayinHolyWeek,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Sat),
-        Feast::SaturdayAfterAscension,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Sat),
-        Feast::EveOfPentecost,
-        true,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Sat),
-        Feast::SaturdayinEasterWeek,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Sat),
-        Feast::HolySaturday,
         false,
     ),
     (
@@ -253,6 +218,91 @@ pub const BCP1979_FEASTS: [KalendarEntry; 200] = [
         HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Sun),
         Feast::PalmSunday,
         false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Mon),
+        Feast::MondayinHolyWeek,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Tue),
+        Feast::TuesdayinHolyWeek,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Wed),
+        Feast::WednesdayinHolyWeek,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Thu),
+        Feast::MaundyThursday,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Fri),
+        Feast::GoodFriday,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Sat),
+        Feast::HolySaturday,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Mon),
+        Feast::MondayinEasterWeek,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Tue),
+        Feast::TuesdayinEasterWeek,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Wed),
+        Feast::WednesdayinEasterWeek,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Thu),
+        Feast::ThursdayinEasterWeek,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Fri),
+        Feast::FridayinEasterWeek,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Sat),
+        Feast::SaturdayinEasterWeek,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Wed),
+        Feast::EveOfTheAscension,
+        true,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Thu),
+        Feast::AscensionDay,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Fri),
+        Feast::FridayAfterAscension,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Sat),
+        Feast::SaturdayAfterAscension,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Sat),
+        Feast::EveOfPentecost,
+        true,
     ),
     (
         HolyDayId::SpecialDay(LiturgicalWeek::Pentecost, Weekday::Sun),
@@ -268,61 +318,6 @@ pub const BCP1979_FEASTS: [KalendarEntry; 200] = [
         HolyDayId::SpecialDay(LiturgicalWeek::TrinitySunday, Weekday::Sun),
         Feast::TrinitySunday,
         false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Thu),
-        Feast::AscensionDay,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Thu),
-        Feast::ThursdayinEasterWeek,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Thu),
-        Feast::MaundyThursday,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::LastEpiphany, Weekday::Thu),
-        Feast::ThursdayafterAshWednesday,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Tue),
-        Feast::TuesdayinEasterWeek,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Tue),
-        Feast::TuesdayinHolyWeek,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Wed),
-        Feast::EveOfTheAscension,
-        true,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Wed),
-        Feast::WednesdayinEasterWeek,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Wed),
-        Feast::WednesdayinHolyWeek,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::LastEpiphany, Weekday::Wed),
-        Feast::AshWednesday,
-        false,
-    ),
-    (
-        HolyDayId::SpecialDay(LiturgicalWeek::Epiphany, Weekday::Sat),
-        Feast::EveOfEpiphany1,
-        true,
     ),
     // MM/DD feast days
     (HolyDayId::Date(1, 1), Feast::HolyName, false),
