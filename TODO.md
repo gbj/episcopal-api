@@ -2,7 +2,7 @@
 - [ ] Lectionary content
   - [x] Daily office
   - [x] 30-day psalms
-    - [ ] Clean up citations
+    - [x] Clean up citations
   - [ ] Daily Office Psalms
   - [ ] RCL (general)
   - [ ] RCL Track 1
