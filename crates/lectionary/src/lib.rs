@@ -23,6 +23,8 @@ impl Lectionary {
         observed: &LiturgicalDayId,
         day: &LiturgicalDay,
     ) -> impl Iterator<Item = Reading> {
+        let date = day.date;
+
         let year = match self.year_type {
             YearType::Rcl => Year::Rcl(day.rcl_year),
             YearType::DailyOffice => Year::DailyOffice(day.daily_office_year),
@@ -38,7 +40,12 @@ impl Lectionary {
         self.readings
             .iter()
             .filter(move |(search_id, search_year, _, _)| {
-                *search_id == observed && (*search_year == year || *search_year == Year::Any)
+                let matches_year = *search_year == year || *search_year == Year::Any;
+                let matches_day = match search_id {
+                    LiturgicalDayId::DayOfMonth(n) => *n == date.day(),
+                    _ => *search_id == observed,
+                };
+                matches_day && matches_year
             })
             .map(|(_, _, reading_type, citation)| Reading::new(*reading_type, citation.to_string()))
     }
