@@ -3,7 +3,6 @@ use calendar::{
     DailyOfficeYear, Feast, LiturgicalDayId, LiturgicalWeek, Proper, Weekday, Year, YearType,
 };
 
-// TODO sort readings
 pub const BCP1979_DAILY_OFFICE_LECTIONARY: Lectionary = Lectionary {
     year_type: YearType::DailyOffice,
     readings: &[
