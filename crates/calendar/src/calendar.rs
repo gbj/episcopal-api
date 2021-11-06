@@ -117,7 +117,7 @@ impl Calendar {
     }
 
     /// The rank of the given feast day in this calendar
-    pub(crate) fn feast_day_rank(&self, feast: &Feast) -> Rank {
+    pub fn feast_day_rank(&self, feast: &Feast) -> Rank {
         self.holy_day_ranks
             .iter()
             .find(|(search_feast, _)| search_feast == feast)
@@ -126,7 +126,7 @@ impl Calendar {
     }
 
     /// Whether the given feast is the "Eve of ___"
-    pub(crate) fn feast_is_eve(&self, feast: &Feast) -> bool {
+    pub fn feast_is_eve(&self, feast: &Feast) -> bool {
         self.holy_days
             .iter()
             .find(|(_, search_feast, _)| search_feast == feast)
@@ -150,7 +150,7 @@ impl Calendar {
                 HolyDayId::Date(f_month, f_day) => {
                     if *f_month == today_month
                         && *f_day == today_day
-                        && (!evening || (!ignore_evening && *f_evening == evening))
+                        && (!f_evening || (!ignore_evening && *f_evening == evening))
                     {
                         Some(*feast)
                     } else {
@@ -160,7 +160,7 @@ impl Calendar {
                 HolyDayId::SpecialDay(f_week, f_weekday) => {
                     if *f_week == week
                         && *f_weekday == today_weekday
-                        && (!evening || (!ignore_evening && *f_evening == evening))
+                        && (!f_evening || (!ignore_evening && *f_evening == evening))
                     {
                         Some(*feast)
                     } else {
@@ -172,6 +172,7 @@ impl Calendar {
                     if *month == today_month
                         && *day == today_weekday
                         && date.nth_instance_in_month() == *week
+                        && (!f_evening || (!ignore_evening && *f_evening == evening))
                     {
                         Some(*feast)
                     } else {
@@ -347,5 +348,15 @@ mod tests {
             day.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sun)
         );
+    }
+
+    #[test]
+    fn should_not_observe_eve_if_not_evening() {
+        let date = Date::from_ymd(2018, 5, 19);
+        let day = BCP1979_CALENDAR.liturgical_day(date, false);
+        assert_ne!(day.observed, LiturgicalDayId::Feast(Feast::EveOfPentecost));
+
+        let day = BCP1979_CALENDAR.liturgical_day(date, true);
+        assert_eq!(day.observed, LiturgicalDayId::Feast(Feast::EveOfPentecost));
     }
 }
