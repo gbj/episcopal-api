@@ -115,9 +115,10 @@ impl Calendar {
             yesterday_feasts.sort_by_cached_key(|feast| Reverse(self.feast_day_rank(feast)));
             yesterday_feasts.get(0).copied()
         }
-        // transfer feasts to the next day, if the day before was a major feast
+        // transfer feasts to the next day, if the day before was a major feast and today is open
         else if let LiturgicalDayId::Feast(higher_feast) = yesterday.observed {
-            if self.feast_day_rank(&higher_feast) > Rank::HolyDay {
+            if self.feast_day_rank(&higher_feast) > Rank::HolyDay && date.weekday() != Weekday::Sun
+            {
                 self.holy_days(yesterday.date, yesterday.week, false, true)
                     .find(|feast| self.feast_day_rank(feast) == Rank::HolyDay)
             } else {
