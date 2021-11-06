@@ -9,10 +9,11 @@
   - [x] RCL Track 1
   - [x] RCL Track 2
   - [ ] Fix Easter Vigil and Pentecost Vigil readings (add add'l ReadingTypes, I think)
-  - [ ] Extract shared into RCL (general)
+  - [x] Extract shared into RCL (general)
   - [ ] Deduplicate entries
 - [ ] Lectionary tests against JS versions
   - [ ] Daily Office
+    - [ ] Days like days in Holy Week, Christmas Day, days in Easter Week may need fixing (as did with RCL)
   - [ ] Daily Psalms
   - [ ] 30-day psalter
   - [ ] RCL

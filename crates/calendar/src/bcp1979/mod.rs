@@ -100,7 +100,7 @@ const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 79] = [
     (Feast::TuesdayinHolyWeek, Rank::PrecedenceOverHolyDay),
     (Feast::WednesdayinEasterWeek, Rank::PrecedenceOverHolyDay),
     (Feast::WednesdayinHolyWeek, Rank::PrecedenceOverHolyDay),
-    (Feast::AllSoulsDay, Rank::HolyDay),
+    (Feast::AllSoulsDay, Rank::OptionalObservance),
     (Feast::Annunciation, Rank::HolyDay),
     (Feast::ConfessionOfStPeter, Rank::HolyDay),
     (Feast::ConversionOfStPaul, Rank::HolyDay),
@@ -291,7 +291,7 @@ pub const BCP1979_FEASTS: [KalendarEntry; 199] = [
         false,
     ),
     (
-        HolyDayId::SpecialDay(LiturgicalWeek::Easter6, Weekday::Sat),
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter7, Weekday::Sat),
         Feast::EveOfPentecost,
         true,
     ),
