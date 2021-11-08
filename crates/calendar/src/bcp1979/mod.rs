@@ -76,7 +76,7 @@ const BCP1979_WEEKS: [(Cycle, u8, LiturgicalWeek); 59] = [
     (Cycle::Easter, 41, LiturgicalWeek::Pentecost27),
 ];
 
-const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 79] = [
+const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 80] = [
     (Feast::AllSaintsDay, Rank::PrincipalFeast),
     (Feast::ChristmasDay, Rank::PrincipalFeast),
     (Feast::ChristmasEve, Rank::PrincipalFeast),
@@ -84,6 +84,7 @@ const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 79] = [
     (Feast::HolyName, Rank::PrincipalFeast),
     (Feast::EveOfPentecost, Rank::PrincipalFeast),
     (Feast::PalmSunday, Rank::PrincipalFeast),
+    (Feast::EasterSunday, Rank::PrincipalFeast),
     (Feast::Pentecost, Rank::PrincipalFeast),
     (Feast::TrinitySunday, Rank::PrincipalFeast),
     (Feast::AscensionDay, Rank::PrincipalFeast),
@@ -159,7 +160,7 @@ const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 79] = [
 ];
 
 /// Array of all observances in the BCP 1979 calendar
-pub const BCP1979_FEASTS: [KalendarEntry; 199] = [
+pub const BCP1979_FEASTS: [KalendarEntry; 200] = [
     // Thanksgiving, Labor Day, All Saints’ Sunday
     (
         HolyDayId::DayOfMonth {
@@ -238,6 +239,11 @@ pub const BCP1979_FEASTS: [KalendarEntry; 199] = [
     (
         HolyDayId::SpecialDay(LiturgicalWeek::HolyWeek, Weekday::Sat),
         Feast::HolySaturday,
+        false,
+    ),
+    (
+        HolyDayId::SpecialDay(LiturgicalWeek::Easter, Weekday::Sun),
+        Feast::EasterSunday,
         false,
     ),
     (
