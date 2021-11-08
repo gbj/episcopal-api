@@ -66,19 +66,21 @@ impl Calendar {
         else if day.week == LiturgicalWeek::Easter2
             && (date.weekday() == Weekday::Mon || date.weekday() == Weekday::Tue)
         {
+            let week = day.week;
             let mut dates = (1..=14)
                 .flat_map(|delta| {
                     let subtracted_date = date.subtract_days(delta);
                     let month = subtracted_date.month();
                     let day = subtracted_date.day();
-                    self.holy_days
-                        .iter()
-                        .filter_map(move |(id, feast, evening)| {
+                    self.holy_days.iter().filter_map(
+                        move |(id, feast, evening, stops_at_sunday)| {
                             if let HolyDayId::Date(s_month, s_day) = id {
                                 if !evening
                                     && month == *s_month
                                     && day == *s_day
                                     && self.feast_day_rank(feast) == Rank::HolyDay
+                                    && (stops_at_sunday.is_none()
+                                        || stops_at_sunday.unwrap() < week)
                                 {
                                     Some((Date::from_ymd(date.year(), month, day), *feast))
                                 } else {
@@ -87,7 +89,8 @@ impl Calendar {
                             } else {
                                 None
                             }
-                        })
+                        },
+                    )
                 })
                 .collect::<Vec<_>>();
             dates.sort_by_key(|d| {

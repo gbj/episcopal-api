@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::holy_day::HolyDayId;
 use crate::lff2018::LFF_BIOS;
+use crate::LiturgicalWeek;
 
 pub use crate::bcp1979::BCP1979_FEASTS;
 pub use crate::lff2018::LFF2018_FEASTS;
@@ -356,5 +357,5 @@ pub enum Feast {
     EveOfEpiphany1,
 }
 
-/// (month, day, Feast, eve)
-pub type KalendarEntry = (HolyDayId, Feast, bool);
+/// (month, day, Feast, eve, not observed after this week begins (used for days between Epiphany and Epiphany 1))
+pub type KalendarEntry = (HolyDayId, Feast, bool, Option<LiturgicalWeek>);

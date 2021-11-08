@@ -129,8 +129,8 @@ impl Calendar {
     pub fn feast_is_eve(&self, feast: &Feast) -> bool {
         self.holy_days
             .iter()
-            .find(|(_, search_feast, _)| search_feast == feast)
-            .map(|(_, _, evening)| *evening)
+            .find(|(_, search_feast, _, _)| search_feast == feast)
+            .map(|(_, _, evening, _)| *evening)
             .unwrap_or(false)
     }
 
@@ -146,37 +146,47 @@ impl Calendar {
         let today_weekday = date.weekday();
         self.holy_days
             .iter()
-            .filter_map(move |(id, feast, f_evening)| match id {
-                HolyDayId::Date(f_month, f_day) => {
-                    if *f_month == today_month
-                        && *f_day == today_day
-                        && (!f_evening || (!ignore_evening && *f_evening == evening))
-                    {
-                        Some(*feast)
-                    } else {
-                        None
+            .filter_map(move |(id, feast, f_evening, f_stops_at_sunday)| {
+                let has_stopped = if let Some(stopping_week) = f_stops_at_sunday {
+                    week >= *stopping_week
+                } else {
+                    false
+                };
+                match id {
+                    HolyDayId::Date(f_month, f_day) => {
+                        if *f_month == today_month
+                            && *f_day == today_day
+                            && (!f_evening || (!ignore_evening && *f_evening == evening))
+                            && !has_stopped
+                        {
+                            Some(*feast)
+                        } else {
+                            None
+                        }
                     }
-                }
-                HolyDayId::SpecialDay(f_week, f_weekday) => {
-                    if *f_week == week
-                        && *f_weekday == today_weekday
-                        && (!f_evening || (!ignore_evening && *f_evening == evening))
-                    {
-                        Some(*feast)
-                    } else {
-                        None
+                    HolyDayId::SpecialDay(f_week, f_weekday) => {
+                        if *f_week == week
+                            && *f_weekday == today_weekday
+                            && (!f_evening || (!ignore_evening && *f_evening == evening))
+                            && !has_stopped
+                        {
+                            Some(*feast)
+                        } else {
+                            None
+                        }
                     }
-                }
-                HolyDayId::DayOfMonth { month, week, day } => {
-                    // divide date by 7 and round up => nth instance of a day of week
-                    if *month == today_month
-                        && *day == today_weekday
-                        && date.nth_instance_in_month() == *week
-                        && (!f_evening || (!ignore_evening && *f_evening == evening))
-                    {
-                        Some(*feast)
-                    } else {
-                        None
+                    HolyDayId::DayOfMonth { month, week, day } => {
+                        // divide date by 7 and round up => nth instance of a day of week
+                        if *month == today_month
+                            && *day == today_weekday
+                            && date.nth_instance_in_month() == *week
+                            && (!f_evening || (!ignore_evening && *f_evening == evening))
+                            && !has_stopped
+                        {
+                            Some(*feast)
+                        } else {
+                            None
+                        }
                     }
                 }
             })
