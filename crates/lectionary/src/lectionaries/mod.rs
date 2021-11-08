@@ -14,11 +14,9 @@ pub use rcl2::RCL_TRACK_2;
 
 #[cfg(test)]
 mod tests {
-    use calendar::{
-        Date, LiturgicalDayId, LiturgicalWeek, Proper, Rank, Weekday, BCP1979_CALENDAR,
-    };
+    use calendar::{Date, LiturgicalDayId, LiturgicalWeek, Rank, Weekday, BCP1979_CALENDAR};
 
-    use crate::{rcl_readings, RCLTrack, RCL};
+    use crate::{rcl_readings, RCLTrack};
 
     #[test]
     fn rcl_readings_for_every_sunday() {
@@ -27,12 +25,7 @@ mod tests {
                 for day in 1..=28 {
                     let date = Date::from_ymd(year, month, day);
                     let liturgical_day = BCP1979_CALENDAR.liturgical_day(date, false);
-                    let readings_1 =
-                        rcl_readings(&liturgical_day.observed, &liturgical_day, RCLTrack::One)
-                            .collect::<Vec<_>>();
-                    let readings_2 =
-                        rcl_readings(&liturgical_day.observed, &liturgical_day, RCLTrack::Two)
-                            .collect::<Vec<_>>();
+
                     if date.weekday() == Weekday::Sun
                         && (matches!(liturgical_day.observed, LiturgicalDayId::WeekAndDay(_, _))
                             || matches!(
@@ -40,8 +33,16 @@ mod tests {
                                 LiturgicalDayId::ProperAndDay(_, _)
                             ))
                     {
-                        assert!(readings_1.len() >= 4);
-                        assert!(readings_2.len() >= 4);
+                        assert!(
+                            rcl_readings(&liturgical_day.observed, &liturgical_day, RCLTrack::One)
+                                .count()
+                                >= 4
+                        );
+                        assert!(
+                            rcl_readings(&liturgical_day.observed, &liturgical_day, RCLTrack::Two)
+                                .count()
+                                >= 4
+                        );
                     }
                 }
             }
@@ -62,19 +63,22 @@ mod tests {
                         _ => None,
                     };
                     if let Some(feast) = feast {
-                        if !BCP1979_CALENDAR.feast_is_eve(&feast)
-                            && BCP1979_CALENDAR.feast_day_rank(&feast) >= Rank::HolyDay
-                            // don't need them for every day in Easter Week or days after Ascension
-                            && !(liturgical_day.week == LiturgicalWeek::Easter && date.weekday() != Weekday::Sun)
-                            && !(liturgical_day.week == LiturgicalWeek::Easter6 && date.weekday() != Weekday::Thu)
+                        if !(BCP1979_CALENDAR.feast_is_eve(&feast)
+                            || BCP1979_CALENDAR.feast_day_rank(&feast) < Rank::HolyDay
+                            || liturgical_day.week == LiturgicalWeek::Easter
+                                && date.weekday() != Weekday::Sun
+                            || liturgical_day.week == LiturgicalWeek::Easter6
+                                && date.weekday() != Weekday::Thu)
                         {
-                            let readings = rcl_readings(
-                                &liturgical_day.observed,
-                                &liturgical_day,
-                                RCLTrack::One,
-                            )
-                            .collect::<Vec<_>>();
-                            assert!(readings.len() >= 4);
+                            assert!(
+                                rcl_readings(
+                                    &liturgical_day.observed,
+                                    &liturgical_day,
+                                    RCLTrack::One,
+                                )
+                                .count()
+                                    >= 4
+                            );
                         }
                     }
                     if date.weekday() == Weekday::Sun
