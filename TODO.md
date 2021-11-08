@@ -5,10 +5,10 @@
     - [x] Clean up citations
   - [x] Daily Office Psalms
     - [x] Deduplicate feast day psalms (using Year::Any)
-    - [ ] Check sorting of these psalms
+    - [x] Check sorting of these psalms
   - [x] RCL Track 1
   - [x] RCL Track 2
-  - [ ] Fix Easter Vigil and Pentecost Vigil readings (add add'l ReadingTypes, I think)
+  - [x] Fix Easter Vigil readings (add add'l ReadingTypes, I think)
   - [x] Extract shared into RCL (general)
   - [ ] Deduplicate entries
 - [ ] Lectionary tests against JS versions
