@@ -322,13 +322,18 @@ impl Calendar {
     }
 
     fn easter_cycle_week(&self, date: Date, easter: Date) -> LiturgicalWeekIndex {
-        let weeks_from_easter: i64 = (date - easter).num_weeks();
-        let week: u8 = (weeks_from_easter + self.easter_cycle_begins as i64)
-            .try_into()
-            .unwrap();
+        let num_weeks = (date - easter).num_weeks();
+        let weeks_from_easter: i64 = if date.weekday() == Weekday::Sun || num_weeks >= 0 {
+            (date - easter).num_weeks()
+        } else {
+            (date - easter).num_weeks() - 1
+        };
+
+        let week = weeks_from_easter + self.easter_cycle_begins as i64;
+
         LiturgicalWeekIndex {
             cycle: Cycle::Easter,
-            week,
+            week: week.try_into().unwrap(),
         }
     }
 }

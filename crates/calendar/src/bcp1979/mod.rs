@@ -798,4 +798,14 @@ mod tests {
             LiturgicalDayId::Feast(Feast::ThanksgivingDay)
         );
     }
+
+    #[test]
+    fn last_week_after_epiphany() {
+        let tday = BCP1979_CALENDAR
+            .liturgical_day_without_transferred_feasts(Date::from_ymd(2022, 2, 28), false);
+        assert_eq!(
+            tday.observed,
+            LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Mon)
+        );
+    }
 }
