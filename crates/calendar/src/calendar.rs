@@ -323,10 +323,13 @@ impl Calendar {
 
     fn easter_cycle_week(&self, date: Date, easter: Date) -> LiturgicalWeekIndex {
         let num_weeks = (date - easter).num_weeks();
-        let weeks_from_easter: i64 = if date.weekday() == Weekday::Sun || num_weeks >= 0 {
-            (date - easter).num_weeks()
+
+        let weeks_from_easter: i64 = if date == easter {
+            0
+        } else if date < easter && date.weekday() != Weekday::Sun {
+            num_weeks - 1
         } else {
-            (date - easter).num_weeks() - 1
+            num_weeks
         };
 
         let week = weeks_from_easter + self.easter_cycle_begins as i64;
@@ -337,6 +340,7 @@ impl Calendar {
         }
     }
 }
+#[derive(PartialEq, Eq, Debug)]
 struct LiturgicalWeekIndex {
     cycle: Cycle,
     week: u8,
@@ -347,6 +351,50 @@ mod tests {
     use crate::BCP1979_CALENDAR;
 
     use super::*;
+
+    #[test]
+    fn easter_cycle_dates() {
+        let easter = Date::from_ymd(2022, 4, 17);
+        let monday_lent_1 = Date::from_ymd(2022, 3, 7);
+        let monday_holy_week = Date::from_ymd(2022, 4, 11);
+        let monday_easter_week = Date::from_ymd(2022, 4, 19);
+        let monday_easter_2 = Date::from_ymd(2022, 4, 26);
+        assert_eq!(
+            BCP1979_CALENDAR.easter_cycle_week(monday_lent_1, easter),
+            LiturgicalWeekIndex {
+                cycle: Cycle::Easter,
+                week: 1
+            }
+        );
+        assert_eq!(
+            BCP1979_CALENDAR.easter_cycle_week(monday_holy_week, easter),
+            LiturgicalWeekIndex {
+                cycle: Cycle::Easter,
+                week: 6
+            }
+        );
+        assert_eq!(
+            BCP1979_CALENDAR.easter_cycle_week(easter, easter),
+            LiturgicalWeekIndex {
+                cycle: Cycle::Easter,
+                week: 7
+            }
+        );
+        assert_eq!(
+            BCP1979_CALENDAR.easter_cycle_week(monday_easter_week, easter),
+            LiturgicalWeekIndex {
+                cycle: Cycle::Easter,
+                week: 7
+            }
+        );
+        assert_eq!(
+            BCP1979_CALENDAR.easter_cycle_week(monday_easter_2, easter),
+            LiturgicalWeekIndex {
+                cycle: Cycle::Easter,
+                week: 8
+            }
+        );
+    }
 
     #[test]
     fn should_not_override_principal_feasts() {
