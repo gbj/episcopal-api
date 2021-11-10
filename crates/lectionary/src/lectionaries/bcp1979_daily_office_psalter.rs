@@ -987,13 +987,13 @@ pub const BCP1979_DAILY_OFFICE_PSALTER: Lectionary = Lectionary {
         ),
         (
             LiturgicalDayId::Feast(Feast::ThanksgivingDay),
-            Year::DailyOffice(DailyOfficeYear::One),
+            Year::Any,
             ReadingType::MorningPsalm,
             "Psalm 147",
         ),
         (
             LiturgicalDayId::Feast(Feast::ThanksgivingDay),
-            Year::DailyOffice(DailyOfficeYear::One),
+            Year::Any,
             ReadingType::EveningPsalm,
             "Psalm 145",
         ),

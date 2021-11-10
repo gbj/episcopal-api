@@ -60,7 +60,10 @@ impl Calendar {
             }
         }
         // no holy days are observed during Holy Week or Easter Week
-        // this means that during the week after the Second Sunday of Easter, we should check for any holy dates
+        else if day.week == LiturgicalWeek::HolyWeek || day.week == LiturgicalWeek::Easter {
+            None
+        }
+        // during the week after the Second Sunday of Easter, we should check for any holy dates
         // that fell during the previous two weeks, and transfer them
         // there can be between 0 and 2 of these, so only apply on Monday and Tuesday
         else if day.week == LiturgicalWeek::Easter2
@@ -252,6 +255,17 @@ mod tests {
 
         assert_eq!(transfer_1, Some(Feast::Joseph));
         assert_eq!(transfer_2, Some(Feast::Annunciation));
+    }
+
+    #[test]
+    fn no_feasts_during_holy_week() {
+        let date = Date::from_ymd(2024, 3, 26);
+        let day = BCP1979_CALENDAR.liturgical_day(date, false);
+
+        assert_eq!(
+            day.observed,
+            LiturgicalDayId::Feast(Feast::TuesdayInHolyWeek)
+        );
     }
 
     #[test]

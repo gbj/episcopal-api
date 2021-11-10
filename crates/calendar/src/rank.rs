@@ -8,7 +8,7 @@ pub enum Rank {
     PrecedenceOverHolyDay = 7,
     HolyDay = 6,
     SpecialDevotion = 5,
-    DaysOfChristmas = 4,
+    PrecedenceOverWeekday = 4,
     OptionalObservance = 2,
     FerialWeekday = 0,
 }
