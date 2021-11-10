@@ -429,25 +429,25 @@ pub const BCP1979_DAILY_OFFICE_LECTIONARY: Lectionary = Lectionary {
         (
             LiturgicalDayId::Feast(Feast::EveOfHolyName),
             Year::Any,
-            ReadingType::FirstReading,
+            ReadingType::Evening1,
             "Isa. 65:15b-25",
         ),
         (
             LiturgicalDayId::Feast(Feast::EveOfHolyName),
             Year::Any,
-            ReadingType::SecondReading,
+            ReadingType::Evening2,
             "Rev. 21:1-6",
         ),
         (
             LiturgicalDayId::Feast(Feast::EveOfPentecost),
             Year::Any,
-            ReadingType::FirstReading,
+            ReadingType::Evening1,
             "Exod. 19:3-8a,16-20",
         ),
         (
             LiturgicalDayId::Feast(Feast::EveOfPentecost),
             Year::Any,
-            ReadingType::SecondReading,
+            ReadingType::Evening2,
             "1 Pet. 2:4-10",
         ),
         (
@@ -8107,13 +8107,13 @@ pub const BCP1979_DAILY_OFFICE_LECTIONARY: Lectionary = Lectionary {
             "Eph. 3:14-21",
         ),
         (
-            LiturgicalDayId::WeekAndDay(LiturgicalWeek::Pentecost, Weekday::Sat),
+            LiturgicalDayId::Feast(Feast::EveOfTrinitySunday),
             Year::Any,
             ReadingType::Evening1,
             "Ecclus. 42:15-25",
         ),
         (
-            LiturgicalDayId::WeekAndDay(LiturgicalWeek::Pentecost, Weekday::Sat),
+            LiturgicalDayId::Feast(Feast::EveOfTrinitySunday),
             Year::Any,
             ReadingType::Evening2,
             "Eph. 3:14-21",

@@ -76,11 +76,14 @@ const BCP1979_WEEKS: [(Cycle, u8, LiturgicalWeek); 59] = [
     (Cycle::Easter, 41, LiturgicalWeek::Pentecost27),
 ];
 
-const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 84] = [
+const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 85] = [
+    (Feast::EveOfAllSaints, Rank::PrincipalFeast),
     (Feast::AllSaintsDay, Rank::PrincipalFeast),
     (Feast::ChristmasDay, Rank::PrincipalFeast),
     (Feast::ChristmasEve, Rank::PrincipalFeast),
+    (Feast::EveOfEpiphany, Rank::PrincipalFeast),
     (Feast::Epiphany, Rank::PrincipalFeast),
+    (Feast::EveOfHolyName, Rank::PrincipalFeast),
     (Feast::HolyName, Rank::PrincipalFeast),
     (Feast::EveOfPentecost, Rank::PrincipalFeast),
     (Feast::PalmSunday, Rank::PrincipalFeast),
@@ -105,8 +108,6 @@ const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 84] = [
     (Feast::Annunciation, Rank::HolyDay),
     (Feast::ConfessionOfStPeter, Rank::HolyDay),
     (Feast::ConversionOfStPaul, Rank::HolyDay),
-    (Feast::EveOfHolyName, Rank::HolyDay),
-    (Feast::EveOfAllSaints, Rank::HolyDay),
     (Feast::EveOfHolyCross, Rank::HolyDay),
     (Feast::EveOfStJohnTheBaptist, Rank::HolyDay),
     (Feast::EveOfTheAnnunciation, Rank::HolyDay),

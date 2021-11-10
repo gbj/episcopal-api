@@ -1,12 +1,10 @@
 - [ ] Lectionary tests against JS versions
-  - [ ] Daily Office
-    - [ ] Days like days in Holy Week, Christmas Day, days in Easter Week may need fixing (as did with RCL)
-  - [ ] Daily Psalms
-  - [ ] 30-day psalter
   - [ ] RCL
 - [ ] Calendar tests
   - [ ] Test days like 12/24 and 1/5 that have different things in the morning/evening
+  - [ ] Should days like 6/4/2022 where a saint and e.g., Eve of Pentecost conflict give saint as alternate? Probably.
   - [ ] Test Eve of Epiphany 1
+- [ ] Test lectionaries against other APIs (like old Forward Movement API)
 - [ ] Sort and prettify various constant arrays
 - [ ] Localization
   - [ ] LiturgicalWeek => string
