@@ -25,32 +25,33 @@ pub fn bio_for_feast(feast: Feast) -> Option<&'static str> {
 pub enum Feast {
     // Special Days
     FridayAfterAscension,
-    FridayinEasterWeek,
+    FridayInEasterWeek,
     GoodFriday,
-    FridayafterAshWednesday,
-    MondayinEasterWeek,
-    MondayinHolyWeek,
+    FridayAfterAshWednesday,
+    MondayInEasterWeek,
+    MondayInHolyWeek,
     SaturdayAfterAscension,
     EveOfPentecost,
-    SaturdayinEasterWeek,
+    SaturdayInEasterWeek,
     HolySaturday,
-    SaturdayafterAshWednesday,
+    SaturdayAfterAshWednesday,
     PalmSunday,
     Pentecost,
     EveOfTrinitySunday,
     TrinitySunday,
     ThanksgivingDay,
     AscensionDay,
-    ThursdayinEasterWeek,
+    ThursdayInEasterWeek,
     MaundyThursday,
-    ThursdayafterAshWednesday,
-    TuesdayinEasterWeek,
-    TuesdayinHolyWeek,
+    ThursdayAfterAshWednesday,
+    TuesdayInEasterWeek,
+    TuesdayInHolyWeek,
     EveOfTheAscension,
-    WednesdayinEasterWeek,
-    WednesdayinHolyWeek,
+    WednesdayInEasterWeek,
+    WednesdayInHolyWeek,
     AshWednesday,
     EasterSunday,
+    LaborDay,
     // Additional RCL selections for special services on select feast days
     ChristmasDayII,
     ChristmasDayIII,
@@ -357,5 +358,5 @@ pub enum Feast {
     EveOfEpiphany1,
 }
 
-/// (month, day, Feast, eve, not observed after this week begins (used for days between Epiphany and Epiphany 1))
+/// (month, day, Feast, eve, not observed After this week begins (used for days between Epiphany and Epiphany 1))
 pub type KalendarEntry = (HolyDayId, Feast, bool, Option<LiturgicalWeek>);
