@@ -3,7 +3,7 @@ use std::{cmp::Reverse, convert::TryInto};
 use crate::{
     easter_in_year, feasts::KalendarEntry, holy_day::HolyDayId, liturgical_day::LiturgicalDayId,
     liturgical_week::Cycle, propers::calculate_proper, DailyOfficeYear, Date, Feast, LiturgicalDay,
-    LiturgicalWeek, Proper, RCLYear, Rank, Weekday,
+    LiturgicalWeek, Proper, RCLYear, Rank, Time, Weekday,
 };
 
 /// The settings for a particular calendar. Different calendars vary slightly
@@ -130,7 +130,7 @@ impl Calendar {
         self.holy_days
             .iter()
             .find(|(_, search_feast, _, _)| search_feast == feast)
-            .map(|(_, _, evening, _)| *evening)
+            .map(|(_, _, time, _)| *time == Time::EveningOnly)
             .unwrap_or(false)
     }
 
@@ -146,18 +146,18 @@ impl Calendar {
         let today_weekday = date.weekday();
         self.holy_days
             .iter()
-            .filter_map(move |(id, feast, f_evening, f_stops_at_sunday)| {
+            .filter_map(move |(id, feast, f_time, f_stops_at_sunday)| {
                 let has_stopped = if let Some(stopping_week) = f_stops_at_sunday {
                     week >= *stopping_week
                 } else {
                     false
                 };
+                let time_ok = (*f_time != Time::EveningOnly
+                    || (!ignore_evening && *f_time == Time::EveningOnly && evening))
+                    && (*f_time != Time::MorningOnly || !evening);
                 match id {
                     HolyDayId::Date(f_month, f_day) => {
-                        if *f_month == today_month
-                            && *f_day == today_day
-                            && (!f_evening || (!ignore_evening && *f_evening == evening))
-                            && !has_stopped
+                        if *f_month == today_month && *f_day == today_day && time_ok && !has_stopped
                         {
                             Some(*feast)
                         } else {
@@ -165,10 +165,7 @@ impl Calendar {
                         }
                     }
                     HolyDayId::SpecialDay(f_week, f_weekday) => {
-                        if *f_week == week
-                            && *f_weekday == today_weekday
-                            && (!f_evening || (!ignore_evening && *f_evening == evening))
-                            && !has_stopped
+                        if *f_week == week && *f_weekday == today_weekday && time_ok && !has_stopped
                         {
                             Some(*feast)
                         } else {
@@ -180,7 +177,7 @@ impl Calendar {
                         if *month == today_month
                             && *day == today_weekday
                             && date.nth_instance_in_month() == *week
-                            && (!f_evening || (!ignore_evening && *f_evening == evening))
+                            && time_ok
                             && !has_stopped
                         {
                             Some(*feast)

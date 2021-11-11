@@ -707,10 +707,7 @@ mod tests {
             evening.observed,
             LiturgicalDayId::Feast(Feast::ChristmasEve)
         );
-        assert_eq!(
-            evening.alternate,
-            Some(LiturgicalDayId::Feast(Feast::December24))
-        );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_25() {
@@ -887,10 +884,7 @@ mod tests {
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfEpiphany)
         );
-        assert_eq!(
-            evening.alternate,
-            Some(LiturgicalDayId::Feast(Feast::January5))
-        );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_6() {
@@ -6505,10 +6499,7 @@ mod tests {
             evening.observed,
             LiturgicalDayId::Feast(Feast::ChristmasEve)
         );
-        assert_eq!(
-            evening.alternate,
-            Some(LiturgicalDayId::Feast(Feast::December24))
-        );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_25() {
@@ -6673,10 +6664,7 @@ mod tests {
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfEpiphany)
         );
-        assert_eq!(
-            evening.alternate,
-            Some(LiturgicalDayId::Feast(Feast::January5))
-        );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_6() {
@@ -12477,10 +12465,7 @@ mod tests {
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfEpiphany)
         );
-        assert_eq!(
-            evening.alternate,
-            Some(LiturgicalDayId::Feast(Feast::January5))
-        );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_6() {

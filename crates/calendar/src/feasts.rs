@@ -358,5 +358,12 @@ pub enum Feast {
     EveOfEpiphany1,
 }
 
+#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
+pub enum Time {
+    AllDay,
+    MorningOnly,
+    EveningOnly,
+}
+
 /// (month, day, Feast, eve, not observed After this week begins (used for days between Epiphany and Epiphany 1))
-pub type KalendarEntry = (HolyDayId, Feast, bool, Option<LiturgicalWeek>);
+pub type KalendarEntry = (HolyDayId, Feast, Time, Option<LiturgicalWeek>);

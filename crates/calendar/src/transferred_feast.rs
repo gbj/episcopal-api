@@ -2,7 +2,7 @@ use std::cmp::Reverse;
 
 use crate::{
     holy_day::HolyDayId, Calendar, Date, Feast, LiturgicalDay, LiturgicalDayId, LiturgicalWeek,
-    Rank, Weekday,
+    Rank, Time, Weekday,
 };
 
 impl Calendar {
@@ -75,10 +75,11 @@ impl Calendar {
                     let subtracted_date = date.subtract_days(delta);
                     let month = subtracted_date.month();
                     let day = subtracted_date.day();
-                    self.holy_days.iter().filter_map(
-                        move |(id, feast, evening, stops_at_sunday)| {
+                    self.holy_days
+                        .iter()
+                        .filter_map(move |(id, feast, time, stops_at_sunday)| {
                             if let HolyDayId::Date(s_month, s_day) = id {
-                                if !evening
+                                if *time == Time::AllDay
                                     && month == *s_month
                                     && day == *s_day
                                     && self.feast_day_rank(feast) == Rank::HolyDay
@@ -92,8 +93,7 @@ impl Calendar {
                             } else {
                                 None
                             }
-                        },
-                    )
+                        })
                 })
                 .collect::<Vec<_>>();
             dates.sort_by_key(|d| {
