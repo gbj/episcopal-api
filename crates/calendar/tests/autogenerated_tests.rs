@@ -822,10 +822,7 @@ mod tests {
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfHolyName)
         );
-        assert_eq!(
-            evening.alternate,
-            Some(LiturgicalDayId::Feast(Feast::December31))
-        );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_1() {
@@ -913,7 +910,10 @@ mod tests {
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January8));
         assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
-        assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January8));
+        assert_eq!(
+            evening.observed,
+            LiturgicalDayId::Feast(Feast::EveOfEpiphany1)
+        );
         assert_eq!(evening.alternate, None);
     }
     #[test]
@@ -6596,10 +6596,7 @@ mod tests {
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfHolyName)
         );
-        assert_eq!(
-            evening.alternate,
-            Some(LiturgicalDayId::Feast(Feast::December31))
-        );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_1() {
@@ -6683,7 +6680,10 @@ mod tests {
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January7));
         assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
-        assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January7));
+        assert_eq!(
+            evening.observed,
+            LiturgicalDayId::Feast(Feast::EveOfEpiphany1)
+        );
         assert_eq!(evening.alternate, None);
     }
     #[test]
@@ -7443,16 +7443,10 @@ mod tests {
         let date = Date::from_ymd(2023, 2, 24);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Matthias));
-        assert_eq!(
-            morning.alternate,
-            Some(LiturgicalDayId::Feast(Feast::FridayAfterAshWednesday))
-        );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Matthias));
-        assert_eq!(
-            evening.alternate,
-            Some(LiturgicalDayId::Feast(Feast::FridayAfterAshWednesday))
-        );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_25() {
@@ -12475,7 +12469,10 @@ mod tests {
         assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Epiphany));
-        assert_eq!(evening.alternate, None);
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::EveOfEpiphany1))
+        );
     }
     #[test]
     fn test_calendar_for_2024_1_7() {

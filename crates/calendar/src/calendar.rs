@@ -231,7 +231,9 @@ impl Calendar {
                     (
                         LiturgicalDayId::Feast(**highest_ranking_feast),
                         observable_feasts
-                            .get(1)
+                            .iter()
+                            .filter(|feast| self.feast_day_rank(feast) >= Rank::SpecialDevotion)
+                            .nth(1)
                             .copied()
                             .copied()
                             .map(LiturgicalDayId::Feast),
