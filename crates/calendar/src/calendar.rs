@@ -218,34 +218,50 @@ impl Calendar {
                 })
                 .collect::<Vec<_>>();
 
+            // sort in reverse order, i.e., from highest-ranking feast to lowest
+            observable_feasts.sort_by_cached_key(|feast| Reverse(self.feast_day_rank(feast)));
+            let highest_ranking_feast = observable_feasts.get(0);
+
+            if let Some(highest_ranking_feast) = highest_ranking_feast {
+                if weekday == Weekday::Sun
+                    && self.feast_day_rank(highest_ranking_feast) > Rank::Sunday
+                {
+                    (
+                        LiturgicalDayId::Feast(**highest_ranking_feast),
+                        Some(self.observed_day_from_week_or_proper(week, proper, weekday)),
+                    )
+                } else {
+                    (
+                        LiturgicalDayId::Feast(**highest_ranking_feast),
+                        observable_feasts
+                            .get(1)
+                            .copied()
+                            .copied()
+                            .map(LiturgicalDayId::Feast),
+                    )
+                }
+            }
             // Holy days that fall on a Sunday in ordinary time
             // can be used as alternatives to the Sunday propers,
             // but aren't by default
-            let alternate_feast = if weekday == Weekday::Sun
+            else if weekday == Weekday::Sun
                 && ((week > LiturgicalWeek::TrinitySunday && week < LiturgicalWeek::LastPentecost)
                     || (week > LiturgicalWeek::Epiphany1 && week < LiturgicalWeek::LastEpiphany))
             {
-                holy_days
+                let alternate_feast = holy_days
                     .iter()
                     .find(|feast| self.feast_day_rank(feast) > Rank::OptionalObservance)
                     .copied()
-                    .map(LiturgicalDayId::Feast)
-            } else {
-                None
-            };
+                    .map(LiturgicalDayId::Feast);
 
-            // sort in reverse order, i.e., from highest-ranking feast to lowest
-            observable_feasts.sort_by_cached_key(|feast| Reverse(self.feast_day_rank(feast)));
-            if observable_feasts.is_empty() {
                 (
                     self.observed_day_from_week_or_proper(week, proper, weekday),
                     alternate_feast,
                 )
             } else {
-                let highest_ranking_feast = observable_feasts[0];
                 (
-                    LiturgicalDayId::Feast(*highest_ranking_feast),
-                    alternate_feast,
+                    self.observed_day_from_week_or_proper(week, proper, weekday),
+                    None,
                 )
             }
         }

@@ -4,7 +4,6 @@ mod tests {
     use calendar::{
         Date, Feast, LiturgicalDayId, LiturgicalWeek, Proper, Weekday, BCP1979_CALENDAR,
     };
-
     #[test]
     fn test_calendar_for_2021_11_10() {
         let date = Date::from_ymd(2021, 11, 10);
@@ -13,11 +12,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_11() {
@@ -27,11 +28,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_12() {
@@ -41,11 +44,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_13() {
@@ -55,11 +60,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_14() {
@@ -69,11 +76,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_15() {
@@ -83,11 +92,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_16() {
@@ -97,11 +108,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_17() {
@@ -111,11 +124,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_18() {
@@ -125,11 +140,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_19() {
@@ -139,11 +156,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_20() {
@@ -153,11 +172,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_21() {
@@ -167,11 +188,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_22() {
@@ -181,11 +204,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_23() {
@@ -195,11 +220,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_24() {
@@ -209,11 +236,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_25() {
@@ -223,11 +252,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ThanksgivingDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ThanksgivingDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_26() {
@@ -237,11 +268,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_27() {
@@ -251,11 +284,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_28() {
@@ -265,11 +300,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_29() {
@@ -279,19 +316,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_11_30() {
         let date = Date::from_ymd(2021, 11, 30);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Andrew));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Andrew));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_1() {
@@ -301,11 +342,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_2() {
@@ -315,11 +358,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_3() {
@@ -329,11 +374,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_4() {
@@ -343,11 +390,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_5() {
@@ -357,11 +406,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_6() {
@@ -371,11 +422,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_7() {
@@ -385,11 +438,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_8() {
@@ -399,11 +454,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_9() {
@@ -413,11 +470,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_10() {
@@ -427,11 +486,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_11() {
@@ -441,11 +502,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_12() {
@@ -455,11 +518,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_13() {
@@ -469,11 +534,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_14() {
@@ -483,11 +550,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_15() {
@@ -497,11 +566,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_16() {
@@ -511,11 +582,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_17() {
@@ -525,11 +598,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_18() {
@@ -539,11 +614,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_19() {
@@ -553,11 +630,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_20() {
@@ -567,19 +646,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_21() {
         let date = Date::from_ymd(2021, 12, 21);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Thomas));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Thomas));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_22() {
@@ -589,11 +672,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_23() {
@@ -603,21 +688,28 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_24() {
         let date = Date::from_ymd(2021, 12, 24);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::December24));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ChristmasEve)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::December24))
         );
     }
     #[test]
@@ -628,11 +720,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ChristmasDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ChristmasDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_26() {
@@ -642,11 +736,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Christmas1, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Christmas1, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_27() {
@@ -656,11 +752,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::Stephen)
         );
+        assert_eq!(morning.alternate, Some(LiturgicalDayId::Feast(Feast::John)));
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::Stephen)
         );
+        assert_eq!(evening.alternate, Some(LiturgicalDayId::Feast(Feast::John)));
     }
     #[test]
     fn test_calendar_for_2021_12_28() {
@@ -670,10 +768,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::John)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::Feast(Feast::HolyInnocents))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::John)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::HolyInnocents))
         );
     }
     #[test]
@@ -684,10 +790,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::HolyInnocents)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::Feast(Feast::December29))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::HolyInnocents)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::December29))
         );
     }
     #[test]
@@ -695,18 +809,25 @@ mod tests {
         let date = Date::from_ymd(2021, 12, 30);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::December30));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::December30));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2021_12_31() {
         let date = Date::from_ymd(2021, 12, 31);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::December31));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfHolyName)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::December31))
         );
     }
     #[test]
@@ -714,8 +835,10 @@ mod tests {
         let date = Date::from_ymd(2022, 1, 1);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::HolyName));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::HolyName));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_2() {
@@ -725,37 +848,48 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Christmas2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Christmas2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_3() {
         let date = Date::from_ymd(2022, 1, 3);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January3));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January3));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_4() {
         let date = Date::from_ymd(2022, 1, 4);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January4));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January4));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_5() {
         let date = Date::from_ymd(2022, 1, 5);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January5));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfEpiphany)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::January5))
         );
     }
     #[test]
@@ -763,24 +897,30 @@ mod tests {
         let date = Date::from_ymd(2022, 1, 6);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Epiphany));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Epiphany));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_7() {
         let date = Date::from_ymd(2022, 1, 7);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January7));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January7));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_8() {
         let date = Date::from_ymd(2022, 1, 8);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January8));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January8));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_9() {
@@ -790,11 +930,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_10() {
@@ -804,11 +946,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_11() {
@@ -818,11 +962,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_12() {
@@ -832,11 +978,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_13() {
@@ -846,11 +994,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_14() {
@@ -860,11 +1010,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_15() {
@@ -874,11 +1026,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_16() {
@@ -888,11 +1042,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_17() {
@@ -902,11 +1058,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_18() {
@@ -916,11 +1074,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ConfessionOfStPeter)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ConfessionOfStPeter)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_19() {
@@ -930,11 +1090,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_20() {
@@ -944,11 +1106,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_21() {
@@ -958,11 +1122,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_22() {
@@ -972,11 +1138,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_23() {
@@ -986,11 +1154,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_24() {
@@ -1000,11 +1170,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_25() {
@@ -1014,11 +1186,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ConversionOfStPaul)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ConversionOfStPaul)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_26() {
@@ -1028,11 +1202,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_27() {
@@ -1042,11 +1218,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_28() {
@@ -1056,11 +1234,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_29() {
@@ -1070,11 +1250,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_30() {
@@ -1084,11 +1266,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_1_31() {
@@ -1098,11 +1282,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_1() {
@@ -1112,11 +1298,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfThePresentation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_2() {
@@ -1126,11 +1314,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ThePresentation)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ThePresentation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_3() {
@@ -1140,11 +1330,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_4() {
@@ -1154,11 +1346,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_5() {
@@ -1168,11 +1362,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_6() {
@@ -1182,11 +1378,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_7() {
@@ -1196,11 +1394,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_8() {
@@ -1210,11 +1410,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_9() {
@@ -1224,11 +1426,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_10() {
@@ -1238,11 +1442,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_11() {
@@ -1252,11 +1458,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_12() {
@@ -1266,11 +1474,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_13() {
@@ -1280,11 +1490,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_14() {
@@ -1294,11 +1506,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_15() {
@@ -1308,11 +1522,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_16() {
@@ -1322,11 +1538,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_17() {
@@ -1336,11 +1554,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_18() {
@@ -1350,11 +1570,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_19() {
@@ -1364,11 +1586,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_20() {
@@ -1378,11 +1602,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_21() {
@@ -1392,11 +1618,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_22() {
@@ -1406,11 +1634,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_23() {
@@ -1420,19 +1650,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_24() {
         let date = Date::from_ymd(2022, 2, 24);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Matthias));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Matthias));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_25() {
@@ -1442,11 +1676,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_26() {
@@ -1456,11 +1692,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_27() {
@@ -1470,11 +1708,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_2_28() {
@@ -1484,11 +1724,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_1() {
@@ -1498,11 +1740,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_2() {
@@ -1512,11 +1756,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::AshWednesday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::AshWednesday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_3() {
@@ -1526,11 +1772,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ThursdayAfterAshWednesday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ThursdayAfterAshWednesday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_4() {
@@ -1540,11 +1788,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::FridayAfterAshWednesday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::FridayAfterAshWednesday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_5() {
@@ -1554,11 +1804,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::SaturdayAfterAshWednesday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::SaturdayAfterAshWednesday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_6() {
@@ -1568,11 +1820,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_7() {
@@ -1582,11 +1836,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_8() {
@@ -1596,11 +1852,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_9() {
@@ -1610,11 +1868,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_10() {
@@ -1624,11 +1884,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_11() {
@@ -1638,11 +1900,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_12() {
@@ -1652,11 +1916,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_13() {
@@ -1666,11 +1932,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_14() {
@@ -1680,11 +1948,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_15() {
@@ -1694,11 +1964,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_16() {
@@ -1708,11 +1980,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_17() {
@@ -1722,11 +1996,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_18() {
@@ -1736,19 +2012,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_19() {
         let date = Date::from_ymd(2022, 3, 19);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Joseph));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Joseph));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_20() {
@@ -1758,11 +2038,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_21() {
@@ -1772,11 +2054,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_22() {
@@ -1786,11 +2070,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_23() {
@@ -1800,11 +2086,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_24() {
@@ -1814,11 +2102,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTheAnnunciation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_25() {
@@ -1828,11 +2118,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::Annunciation)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::Annunciation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_26() {
@@ -1842,11 +2134,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_27() {
@@ -1856,11 +2150,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_28() {
@@ -1870,11 +2166,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_29() {
@@ -1884,11 +2182,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_30() {
@@ -1898,11 +2198,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_3_31() {
@@ -1912,11 +2214,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_1() {
@@ -1926,11 +2230,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_2() {
@@ -1940,11 +2246,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_3() {
@@ -1954,11 +2262,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_4() {
@@ -1968,11 +2278,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_5() {
@@ -1982,11 +2294,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_6() {
@@ -1996,11 +2310,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_7() {
@@ -2010,11 +2326,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_8() {
@@ -2024,11 +2342,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_9() {
@@ -2038,19 +2358,35 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_10() {
         let date = Date::from_ymd(2022, 4, 10);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::PalmSunday));
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::HolyWeek,
+                Weekday::Sun
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::PalmSunday));
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::HolyWeek,
+                Weekday::Sun
+            ))
+        );
     }
     #[test]
     fn test_calendar_for_2022_4_11() {
@@ -2060,11 +2396,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::MondayInHolyWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::MondayInHolyWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_12() {
@@ -2074,11 +2412,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TuesdayInHolyWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TuesdayInHolyWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_13() {
@@ -2088,11 +2428,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::WednesdayInHolyWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::WednesdayInHolyWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_14() {
@@ -2102,19 +2444,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::MaundyThursday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::MaundyThursday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_15() {
         let date = Date::from_ymd(2022, 4, 15);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::GoodFriday));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::GoodFriday));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_16() {
@@ -2124,11 +2470,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::HolySaturday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::HolySaturday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_17() {
@@ -2138,10 +2486,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::EasterSunday)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Easter,
+                Weekday::Sun
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EasterSunday)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Easter,
+                Weekday::Sun
+            ))
         );
     }
     #[test]
@@ -2152,11 +2514,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::MondayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::MondayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_19() {
@@ -2166,11 +2530,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TuesdayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TuesdayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_20() {
@@ -2180,11 +2546,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::WednesdayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::WednesdayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_21() {
@@ -2194,11 +2562,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ThursdayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ThursdayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_22() {
@@ -2208,11 +2578,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::FridayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::FridayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_23() {
@@ -2222,11 +2594,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::SaturdayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::SaturdayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_24() {
@@ -2236,19 +2610,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_25() {
         let date = Date::from_ymd(2022, 4, 25);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Mark));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Mark));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_26() {
@@ -2258,11 +2636,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_27() {
@@ -2272,11 +2652,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_28() {
@@ -2286,11 +2668,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_29() {
@@ -2300,11 +2684,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_4_30() {
@@ -2314,11 +2700,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_1() {
@@ -2328,11 +2716,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_2() {
@@ -2342,10 +2732,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::PhilipAndJames)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Easter3,
+                Weekday::Mon
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::PhilipAndJames)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Easter3,
+                Weekday::Mon
+            ))
         );
     }
     #[test]
@@ -2356,11 +2760,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_4() {
@@ -2370,11 +2776,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_5() {
@@ -2384,11 +2792,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_6() {
@@ -2398,11 +2808,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_7() {
@@ -2412,11 +2824,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_8() {
@@ -2426,11 +2840,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_9() {
@@ -2440,11 +2856,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_10() {
@@ -2454,11 +2872,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_11() {
@@ -2468,11 +2888,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_12() {
@@ -2482,11 +2904,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_13() {
@@ -2496,11 +2920,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_14() {
@@ -2510,11 +2936,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_15() {
@@ -2524,11 +2952,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_16() {
@@ -2538,11 +2968,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_17() {
@@ -2552,11 +2984,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_18() {
@@ -2566,11 +3000,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_19() {
@@ -2580,11 +3016,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_20() {
@@ -2594,11 +3032,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_21() {
@@ -2608,11 +3048,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_22() {
@@ -2622,11 +3064,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_23() {
@@ -2636,11 +3080,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_24() {
@@ -2650,11 +3096,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_25() {
@@ -2664,11 +3112,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTheAscension)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_26() {
@@ -2678,11 +3128,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::AscensionDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::AscensionDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_27() {
@@ -2692,11 +3144,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::FridayAfterAscension)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::FridayAfterAscension)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_28() {
@@ -2706,11 +3160,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::SaturdayAfterAscension)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::SaturdayAfterAscension)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_29() {
@@ -2720,11 +3176,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_30() {
@@ -2734,11 +3192,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTheVisitation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_5_31() {
@@ -2748,11 +3208,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TheVisitation)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TheVisitation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_1() {
@@ -2762,11 +3224,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_2() {
@@ -2776,11 +3240,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_3() {
@@ -2790,11 +3256,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_4() {
@@ -2804,19 +3272,29 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfPentecost)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_5() {
         let date = Date::from_ymd(2022, 6, 5);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Pentecost));
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Sun))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Pentecost));
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Sun))
+        );
     }
     #[test]
     fn test_calendar_for_2022_6_6() {
@@ -2826,11 +3304,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_7() {
@@ -2840,11 +3320,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_8() {
@@ -2854,11 +3336,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_9() {
@@ -2868,11 +3352,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_10() {
@@ -2882,21 +3368,28 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_11() {
         let date = Date::from_ymd(2022, 6, 11);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Barnabas));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTrinitySunday)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::Barnabas))
         );
     }
     #[test]
@@ -2907,10 +3400,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TrinitySunday)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Sun))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TrinitySunday)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Sun))
         );
     }
     #[test]
@@ -2921,11 +3422,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_14() {
@@ -2935,11 +3438,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_15() {
@@ -2949,11 +3454,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_16() {
@@ -2963,11 +3470,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_17() {
@@ -2977,11 +3486,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_18() {
@@ -2991,11 +3502,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_19() {
@@ -3005,11 +3518,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_20() {
@@ -3019,11 +3534,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_21() {
@@ -3033,11 +3550,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_22() {
@@ -3047,11 +3566,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_23() {
@@ -3061,11 +3582,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfStJohnTheBaptist)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_24() {
@@ -3075,11 +3598,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::NativityOfStJohnTheBaptist)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::NativityOfStJohnTheBaptist)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_25() {
@@ -3089,11 +3614,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_26() {
@@ -3103,11 +3630,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_27() {
@@ -3117,11 +3646,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_28() {
@@ -3131,11 +3662,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_29() {
@@ -3145,11 +3678,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::PeterAndPaul)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::PeterAndPaul)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_6_30() {
@@ -3159,11 +3694,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_1() {
@@ -3173,11 +3710,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_2() {
@@ -3187,11 +3726,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_3() {
@@ -3201,11 +3742,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_4() {
@@ -3215,11 +3758,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::IndependenceDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::IndependenceDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_5() {
@@ -3229,11 +3774,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_6() {
@@ -3243,11 +3790,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_7() {
@@ -3257,11 +3806,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_8() {
@@ -3271,11 +3822,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_9() {
@@ -3285,11 +3838,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_10() {
@@ -3299,11 +3854,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_11() {
@@ -3313,11 +3870,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_12() {
@@ -3327,11 +3886,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_13() {
@@ -3341,11 +3902,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_14() {
@@ -3355,11 +3918,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_15() {
@@ -3369,11 +3934,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_16() {
@@ -3383,11 +3950,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_17() {
@@ -3397,11 +3966,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_18() {
@@ -3411,11 +3982,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_19() {
@@ -3425,11 +3998,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_20() {
@@ -3439,11 +4014,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_21() {
@@ -3453,11 +4030,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_22() {
@@ -3467,11 +4046,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::MaryMagdalene)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::MaryMagdalene)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_23() {
@@ -3481,11 +4062,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_24() {
@@ -3495,19 +4078,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_25() {
         let date = Date::from_ymd(2022, 7, 25);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::James));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::James));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_26() {
@@ -3517,11 +4104,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_27() {
@@ -3531,11 +4120,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_28() {
@@ -3545,11 +4136,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_29() {
@@ -3559,11 +4152,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_30() {
@@ -3573,11 +4168,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_7_31() {
@@ -3587,11 +4184,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_1() {
@@ -3601,11 +4200,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_2() {
@@ -3615,11 +4216,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_3() {
@@ -3629,11 +4232,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_4() {
@@ -3643,11 +4248,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_5() {
@@ -3657,11 +4264,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTheTransfiguration)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_6() {
@@ -3671,11 +4280,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TheTransfiguration)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TheTransfiguration)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_7() {
@@ -3685,11 +4296,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_8() {
@@ -3699,11 +4312,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_9() {
@@ -3713,11 +4328,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_10() {
@@ -3727,11 +4344,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_11() {
@@ -3741,11 +4360,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_12() {
@@ -3755,11 +4376,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_13() {
@@ -3769,11 +4392,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_14() {
@@ -3783,19 +4408,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_15() {
         let date = Date::from_ymd(2022, 8, 15);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Mary));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Mary));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_16() {
@@ -3805,11 +4434,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_17() {
@@ -3819,11 +4450,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_18() {
@@ -3833,11 +4466,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_19() {
@@ -3847,11 +4482,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_20() {
@@ -3861,11 +4498,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_21() {
@@ -3875,11 +4514,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_22() {
@@ -3889,11 +4530,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_23() {
@@ -3903,19 +4546,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_24() {
         let date = Date::from_ymd(2022, 8, 24);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Bartholomew));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Bartholomew));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_25() {
@@ -3925,11 +4572,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_26() {
@@ -3939,11 +4588,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_27() {
@@ -3953,11 +4604,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_28() {
@@ -3967,11 +4620,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_29() {
@@ -3981,11 +4636,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_30() {
@@ -3995,11 +4652,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_8_31() {
@@ -4009,11 +4668,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_1() {
@@ -4023,11 +4684,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_2() {
@@ -4037,11 +4700,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_3() {
@@ -4051,11 +4716,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_4() {
@@ -4065,11 +4732,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_5() {
@@ -4079,11 +4748,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_6() {
@@ -4093,11 +4764,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_7() {
@@ -4107,11 +4780,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_8() {
@@ -4121,11 +4796,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_9() {
@@ -4135,11 +4812,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_10() {
@@ -4149,11 +4828,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_11() {
@@ -4163,11 +4844,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_12() {
@@ -4177,11 +4860,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_13() {
@@ -4191,19 +4876,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfHolyCross)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_14() {
         let date = Date::from_ymd(2022, 9, 14);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::HolyCross));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::HolyCross));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_15() {
@@ -4213,11 +4902,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_16() {
@@ -4227,11 +4918,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_17() {
@@ -4241,11 +4934,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_18() {
@@ -4255,11 +4950,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_19() {
@@ -4269,11 +4966,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_20() {
@@ -4283,19 +4982,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_21() {
         let date = Date::from_ymd(2022, 9, 21);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Matthew));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Matthew));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_22() {
@@ -4305,11 +5008,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_23() {
@@ -4319,11 +5024,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_24() {
@@ -4333,11 +5040,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_25() {
@@ -4347,11 +5056,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_26() {
@@ -4361,11 +5072,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_27() {
@@ -4375,11 +5088,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_28() {
@@ -4389,19 +5104,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_29() {
         let date = Date::from_ymd(2022, 9, 29);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Michael));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Michael));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_9_30() {
@@ -4411,11 +5130,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_1() {
@@ -4425,11 +5146,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_2() {
@@ -4439,11 +5162,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_3() {
@@ -4453,11 +5178,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_4() {
@@ -4467,11 +5194,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_5() {
@@ -4481,11 +5210,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_6() {
@@ -4495,11 +5226,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_7() {
@@ -4509,11 +5242,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_8() {
@@ -4523,11 +5258,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_9() {
@@ -4537,11 +5274,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_10() {
@@ -4551,11 +5290,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_11() {
@@ -4565,11 +5306,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_12() {
@@ -4579,11 +5322,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_13() {
@@ -4593,11 +5338,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_14() {
@@ -4607,11 +5354,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_15() {
@@ -4621,11 +5370,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_16() {
@@ -4635,11 +5386,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_17() {
@@ -4649,19 +5402,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_18() {
         let date = Date::from_ymd(2022, 10, 18);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Luke));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Luke));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_19() {
@@ -4671,11 +5428,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_20() {
@@ -4685,11 +5444,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_21() {
@@ -4699,11 +5460,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_22() {
@@ -4713,11 +5476,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_23() {
@@ -4727,10 +5492,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Sun)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::Feast(Feast::JamesOfJerusalem))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Sun)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::JamesOfJerusalem))
         );
     }
     #[test]
@@ -4741,10 +5514,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::JamesOfJerusalem)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(
+                Proper::Proper25,
+                Weekday::Mon
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::JamesOfJerusalem)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(
+                Proper::Proper25,
+                Weekday::Mon
+            ))
         );
     }
     #[test]
@@ -4755,11 +5542,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_26() {
@@ -4769,11 +5558,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_27() {
@@ -4783,11 +5574,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_28() {
@@ -4797,11 +5590,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::SimonAndJude)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::SimonAndJude)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_29() {
@@ -4811,11 +5606,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_30() {
@@ -4825,11 +5622,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_10_31() {
@@ -4839,11 +5638,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfAllSaints)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_1() {
@@ -4853,11 +5654,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::AllSaintsDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::AllSaintsDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_2() {
@@ -4867,11 +5670,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_3() {
@@ -4881,11 +5686,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_4() {
@@ -4895,11 +5702,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_5() {
@@ -4909,11 +5718,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_6() {
@@ -4923,10 +5734,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::AllSaintsDay)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(
+                Proper::Proper27,
+                Weekday::Sun
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::AllSaintsDay)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(
+                Proper::Proper27,
+                Weekday::Sun
+            ))
         );
     }
     #[test]
@@ -4937,11 +5762,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_8() {
@@ -4951,11 +5778,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_9() {
@@ -4965,11 +5794,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_10() {
@@ -4979,11 +5810,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_11() {
@@ -4993,11 +5826,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_12() {
@@ -5007,11 +5842,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_13() {
@@ -5021,11 +5858,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_14() {
@@ -5035,11 +5874,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_15() {
@@ -5049,11 +5890,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_16() {
@@ -5063,11 +5906,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_17() {
@@ -5077,11 +5922,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_18() {
@@ -5091,11 +5938,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_19() {
@@ -5105,11 +5954,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_20() {
@@ -5119,11 +5970,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_21() {
@@ -5133,11 +5986,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_22() {
@@ -5147,11 +6002,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_23() {
@@ -5161,11 +6018,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_24() {
@@ -5175,11 +6034,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ThanksgivingDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ThanksgivingDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_25() {
@@ -5189,11 +6050,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_26() {
@@ -5203,11 +6066,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_27() {
@@ -5217,11 +6082,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_28() {
@@ -5231,11 +6098,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_29() {
@@ -5245,19 +6114,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_11_30() {
         let date = Date::from_ymd(2022, 11, 30);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Andrew));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Andrew));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_1() {
@@ -5267,11 +6140,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_2() {
@@ -5281,11 +6156,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_3() {
@@ -5295,11 +6172,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_4() {
@@ -5309,11 +6188,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_5() {
@@ -5323,11 +6204,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_6() {
@@ -5337,11 +6220,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_7() {
@@ -5351,11 +6236,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_8() {
@@ -5365,11 +6252,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_9() {
@@ -5379,11 +6268,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_10() {
@@ -5393,11 +6284,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_11() {
@@ -5407,11 +6300,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_12() {
@@ -5421,11 +6316,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_13() {
@@ -5435,11 +6332,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_14() {
@@ -5449,11 +6348,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_15() {
@@ -5463,11 +6364,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_16() {
@@ -5477,11 +6380,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_17() {
@@ -5491,11 +6396,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_18() {
@@ -5505,11 +6412,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_19() {
@@ -5519,11 +6428,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_20() {
@@ -5533,19 +6444,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_21() {
         let date = Date::from_ymd(2022, 12, 21);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Thomas));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Thomas));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_22() {
@@ -5555,11 +6470,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_23() {
@@ -5569,21 +6486,28 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_24() {
         let date = Date::from_ymd(2022, 12, 24);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::December24));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ChristmasEve)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::December24))
         );
     }
     #[test]
@@ -5594,10 +6518,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ChristmasDay)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Christmas,
+                Weekday::Sun
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ChristmasDay)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Christmas,
+                Weekday::Sun
+            ))
         );
     }
     #[test]
@@ -5605,16 +6543,20 @@ mod tests {
         let date = Date::from_ymd(2022, 12, 26);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Stephen));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Stephen));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_27() {
         let date = Date::from_ymd(2022, 12, 27);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::John));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::John));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_28() {
@@ -5624,37 +6566,48 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::HolyInnocents)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::HolyInnocents)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_29() {
         let date = Date::from_ymd(2022, 12, 29);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::December29));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::December29));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_30() {
         let date = Date::from_ymd(2022, 12, 30);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::December30));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::December30));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2022_12_31() {
         let date = Date::from_ymd(2022, 12, 31);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::December31));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfHolyName)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::December31))
         );
     }
     #[test]
@@ -5662,42 +6615,67 @@ mod tests {
         let date = Date::from_ymd(2023, 1, 1);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::HolyName));
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Christmas1,
+                Weekday::Sun
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::HolyName));
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Christmas1,
+                Weekday::Sun
+            ))
+        );
     }
     #[test]
     fn test_calendar_for_2023_1_2() {
         let date = Date::from_ymd(2023, 1, 2);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January2));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January2));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_3() {
         let date = Date::from_ymd(2023, 1, 3);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January3));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January3));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_4() {
         let date = Date::from_ymd(2023, 1, 4);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January4));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January4));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_5() {
         let date = Date::from_ymd(2023, 1, 5);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January5));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfEpiphany)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::January5))
         );
     }
     #[test]
@@ -5705,16 +6683,20 @@ mod tests {
         let date = Date::from_ymd(2023, 1, 6);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Epiphany));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Epiphany));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_7() {
         let date = Date::from_ymd(2023, 1, 7);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January7));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January7));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_8() {
@@ -5724,11 +6706,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_9() {
@@ -5738,11 +6722,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_10() {
@@ -5752,11 +6738,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_11() {
@@ -5766,11 +6754,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_12() {
@@ -5780,11 +6770,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_13() {
@@ -5794,11 +6786,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_14() {
@@ -5808,11 +6802,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_15() {
@@ -5822,11 +6818,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_16() {
@@ -5836,11 +6834,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_17() {
@@ -5850,11 +6850,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_18() {
@@ -5864,11 +6866,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ConfessionOfStPeter)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ConfessionOfStPeter)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_19() {
@@ -5878,11 +6882,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_20() {
@@ -5892,11 +6898,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_21() {
@@ -5906,11 +6914,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_22() {
@@ -5920,11 +6930,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_23() {
@@ -5934,11 +6946,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_24() {
@@ -5948,11 +6962,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_25() {
@@ -5962,11 +6978,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ConversionOfStPaul)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ConversionOfStPaul)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_26() {
@@ -5976,11 +6994,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_27() {
@@ -5990,11 +7010,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_28() {
@@ -6004,11 +7026,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_29() {
@@ -6018,11 +7042,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_30() {
@@ -6032,11 +7058,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_1_31() {
@@ -6046,11 +7074,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_1() {
@@ -6060,11 +7090,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfThePresentation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_2() {
@@ -6074,11 +7106,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ThePresentation)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ThePresentation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_3() {
@@ -6088,11 +7122,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_4() {
@@ -6102,11 +7138,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_5() {
@@ -6116,11 +7154,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_6() {
@@ -6130,11 +7170,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_7() {
@@ -6144,11 +7186,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_8() {
@@ -6158,11 +7202,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_9() {
@@ -6172,11 +7218,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_10() {
@@ -6186,11 +7234,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_11() {
@@ -6200,11 +7250,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_12() {
@@ -6214,11 +7266,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_13() {
@@ -6228,11 +7282,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_14() {
@@ -6242,11 +7298,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_15() {
@@ -6256,11 +7314,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_16() {
@@ -6270,11 +7330,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_17() {
@@ -6284,11 +7346,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_18() {
@@ -6298,11 +7362,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany6, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_19() {
@@ -6312,11 +7378,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_20() {
@@ -6326,11 +7394,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_21() {
@@ -6340,11 +7410,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_22() {
@@ -6354,11 +7426,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::AshWednesday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::AshWednesday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_23() {
@@ -6368,19 +7442,29 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ThursdayAfterAshWednesday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ThursdayAfterAshWednesday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_24() {
         let date = Date::from_ymd(2023, 2, 24);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Matthias));
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::Feast(Feast::FridayAfterAshWednesday))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Matthias));
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::FridayAfterAshWednesday))
+        );
     }
     #[test]
     fn test_calendar_for_2023_2_25() {
@@ -6390,11 +7474,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::SaturdayAfterAshWednesday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::SaturdayAfterAshWednesday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_26() {
@@ -6404,11 +7490,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_27() {
@@ -6418,11 +7506,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_2_28() {
@@ -6432,11 +7522,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_1() {
@@ -6446,11 +7538,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_2() {
@@ -6460,11 +7554,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_3() {
@@ -6474,11 +7570,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_4() {
@@ -6488,11 +7586,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_5() {
@@ -6502,11 +7602,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_6() {
@@ -6516,11 +7618,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_7() {
@@ -6530,11 +7634,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_8() {
@@ -6544,11 +7650,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_9() {
@@ -6558,11 +7666,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_10() {
@@ -6572,11 +7682,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_11() {
@@ -6586,11 +7698,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_12() {
@@ -6600,11 +7714,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_13() {
@@ -6614,11 +7730,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_14() {
@@ -6628,11 +7746,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_15() {
@@ -6642,11 +7762,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_16() {
@@ -6656,11 +7778,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_17() {
@@ -6670,11 +7794,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_18() {
@@ -6684,11 +7810,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_19() {
@@ -6698,11 +7826,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_20() {
@@ -6712,10 +7842,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::Joseph)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Lent4,
+                Weekday::Mon
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::Joseph)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Lent4,
+                Weekday::Mon
+            ))
         );
     }
     #[test]
@@ -6726,11 +7870,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_22() {
@@ -6740,11 +7886,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_23() {
@@ -6754,11 +7902,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_24() {
@@ -6768,11 +7918,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTheAnnunciation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_25() {
@@ -6782,11 +7934,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::Annunciation)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::Annunciation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_26() {
@@ -6796,11 +7950,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_27() {
@@ -6810,11 +7966,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_28() {
@@ -6824,11 +7982,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_29() {
@@ -6838,11 +7998,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_30() {
@@ -6852,11 +8014,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_3_31() {
@@ -6866,11 +8030,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_1() {
@@ -6880,19 +8046,35 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_2() {
         let date = Date::from_ymd(2023, 4, 2);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::PalmSunday));
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::HolyWeek,
+                Weekday::Sun
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::PalmSunday));
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::HolyWeek,
+                Weekday::Sun
+            ))
+        );
     }
     #[test]
     fn test_calendar_for_2023_4_3() {
@@ -6902,11 +8084,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::MondayInHolyWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::MondayInHolyWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_4() {
@@ -6916,11 +8100,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TuesdayInHolyWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TuesdayInHolyWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_5() {
@@ -6930,11 +8116,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::WednesdayInHolyWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::WednesdayInHolyWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_6() {
@@ -6944,19 +8132,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::MaundyThursday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::MaundyThursday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_7() {
         let date = Date::from_ymd(2023, 4, 7);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::GoodFriday));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::GoodFriday));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_8() {
@@ -6966,11 +8158,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::HolySaturday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::HolySaturday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_9() {
@@ -6980,10 +8174,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::EasterSunday)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Easter,
+                Weekday::Sun
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EasterSunday)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Easter,
+                Weekday::Sun
+            ))
         );
     }
     #[test]
@@ -6994,11 +8202,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::MondayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::MondayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_11() {
@@ -7008,11 +8218,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TuesdayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TuesdayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_12() {
@@ -7022,11 +8234,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::WednesdayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::WednesdayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_13() {
@@ -7036,11 +8250,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ThursdayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ThursdayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_14() {
@@ -7050,11 +8266,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::FridayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::FridayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_15() {
@@ -7064,11 +8282,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::SaturdayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::SaturdayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_16() {
@@ -7078,11 +8298,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_17() {
@@ -7092,11 +8314,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_18() {
@@ -7106,11 +8330,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_19() {
@@ -7120,11 +8346,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_20() {
@@ -7134,11 +8362,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_21() {
@@ -7148,11 +8378,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_22() {
@@ -7162,11 +8394,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_23() {
@@ -7176,11 +8410,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_24() {
@@ -7190,19 +8426,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_25() {
         let date = Date::from_ymd(2023, 4, 25);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Mark));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Mark));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_26() {
@@ -7212,11 +8452,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_27() {
@@ -7226,11 +8468,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_28() {
@@ -7240,11 +8484,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_29() {
@@ -7254,11 +8500,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_4_30() {
@@ -7268,11 +8516,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_1() {
@@ -7282,11 +8532,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::PhilipAndJames)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::PhilipAndJames)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_2() {
@@ -7296,11 +8548,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_3() {
@@ -7310,11 +8564,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_4() {
@@ -7324,11 +8580,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_5() {
@@ -7338,11 +8596,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_6() {
@@ -7352,11 +8612,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_7() {
@@ -7366,11 +8628,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_8() {
@@ -7380,11 +8644,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_9() {
@@ -7394,11 +8660,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_10() {
@@ -7408,11 +8676,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_11() {
@@ -7422,11 +8692,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_12() {
@@ -7436,11 +8708,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_13() {
@@ -7450,11 +8724,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_14() {
@@ -7464,11 +8740,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_15() {
@@ -7478,11 +8756,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_16() {
@@ -7492,11 +8772,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_17() {
@@ -7506,11 +8788,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTheAscension)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_18() {
@@ -7520,11 +8804,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::AscensionDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::AscensionDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_19() {
@@ -7534,11 +8820,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::FridayAfterAscension)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::FridayAfterAscension)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_20() {
@@ -7548,11 +8836,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::SaturdayAfterAscension)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::SaturdayAfterAscension)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_21() {
@@ -7562,11 +8852,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_22() {
@@ -7576,11 +8868,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_23() {
@@ -7590,11 +8884,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_24() {
@@ -7604,11 +8900,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_25() {
@@ -7618,11 +8916,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_26() {
@@ -7632,11 +8932,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_27() {
@@ -7646,19 +8948,29 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfPentecost)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_28() {
         let date = Date::from_ymd(2023, 5, 28);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Pentecost));
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Sun))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Pentecost));
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Sun))
+        );
     }
     #[test]
     fn test_calendar_for_2023_5_29() {
@@ -7668,11 +8980,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_30() {
@@ -7682,11 +8996,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTheVisitation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_5_31() {
@@ -7696,11 +9012,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TheVisitation)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TheVisitation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_1() {
@@ -7710,11 +9028,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_2() {
@@ -7724,11 +9044,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_3() {
@@ -7738,11 +9060,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTrinitySunday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_4() {
@@ -7752,10 +9076,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TrinitySunday)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Sun))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TrinitySunday)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Sun))
         );
     }
     #[test]
@@ -7766,11 +9098,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_6() {
@@ -7780,11 +9114,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_7() {
@@ -7794,11 +9130,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_8() {
@@ -7808,11 +9146,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_9() {
@@ -7822,11 +9162,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_10() {
@@ -7836,11 +9178,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_11() {
@@ -7850,10 +9194,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Sun)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::Feast(Feast::Barnabas))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Sun)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::Barnabas))
         );
     }
     #[test]
@@ -7864,10 +9216,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::Barnabas)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Mon))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::Barnabas)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Mon))
         );
     }
     #[test]
@@ -7878,11 +9238,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_14() {
@@ -7892,11 +9254,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_15() {
@@ -7906,11 +9270,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_16() {
@@ -7920,11 +9286,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_17() {
@@ -7934,11 +9302,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_18() {
@@ -7948,11 +9318,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_19() {
@@ -7962,11 +9334,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_20() {
@@ -7976,11 +9350,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_21() {
@@ -7990,11 +9366,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_22() {
@@ -8004,11 +9382,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_23() {
@@ -8018,11 +9398,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfStJohnTheBaptist)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_24() {
@@ -8032,11 +9414,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::NativityOfStJohnTheBaptist)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::NativityOfStJohnTheBaptist)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_25() {
@@ -8046,11 +9430,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_26() {
@@ -8060,11 +9446,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_27() {
@@ -8074,11 +9462,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_28() {
@@ -8088,11 +9478,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_29() {
@@ -8102,11 +9494,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::PeterAndPaul)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::PeterAndPaul)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_6_30() {
@@ -8116,11 +9510,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_1() {
@@ -8130,11 +9526,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_2() {
@@ -8144,11 +9542,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_3() {
@@ -8158,11 +9558,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_4() {
@@ -8172,11 +9574,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::IndependenceDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::IndependenceDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_5() {
@@ -8186,11 +9590,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_6() {
@@ -8200,11 +9606,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_7() {
@@ -8214,11 +9622,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_8() {
@@ -8228,11 +9638,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_9() {
@@ -8242,11 +9654,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_10() {
@@ -8256,11 +9670,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_11() {
@@ -8270,11 +9686,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_12() {
@@ -8284,11 +9702,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_13() {
@@ -8298,11 +9718,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_14() {
@@ -8312,11 +9734,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_15() {
@@ -8326,11 +9750,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_16() {
@@ -8340,11 +9766,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_17() {
@@ -8354,11 +9782,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_18() {
@@ -8368,11 +9798,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_19() {
@@ -8382,11 +9814,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_20() {
@@ -8396,11 +9830,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_21() {
@@ -8410,11 +9846,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_22() {
@@ -8424,11 +9862,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::MaryMagdalene)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::MaryMagdalene)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_23() {
@@ -8438,11 +9878,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_24() {
@@ -8452,19 +9894,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_25() {
         let date = Date::from_ymd(2023, 7, 25);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::James));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::James));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_26() {
@@ -8474,11 +9920,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_27() {
@@ -8488,11 +9936,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_28() {
@@ -8502,11 +9952,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_29() {
@@ -8516,11 +9968,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_30() {
@@ -8530,11 +9984,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_7_31() {
@@ -8544,11 +10000,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_1() {
@@ -8558,11 +10016,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_2() {
@@ -8572,11 +10032,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_3() {
@@ -8586,11 +10048,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_4() {
@@ -8600,11 +10064,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_5() {
@@ -8614,11 +10080,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTheTransfiguration)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_6() {
@@ -8628,10 +10096,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Sun)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::Feast(Feast::TheTransfiguration))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Sun)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::TheTransfiguration))
         );
     }
     #[test]
@@ -8642,10 +10118,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::TheTransfiguration)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(
+                Proper::Proper13,
+                Weekday::Mon
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::TheTransfiguration)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(
+                Proper::Proper13,
+                Weekday::Mon
+            ))
         );
     }
     #[test]
@@ -8656,11 +10146,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_9() {
@@ -8670,11 +10162,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_10() {
@@ -8684,11 +10178,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_11() {
@@ -8698,11 +10194,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_12() {
@@ -8712,11 +10210,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_13() {
@@ -8726,11 +10226,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_14() {
@@ -8740,19 +10242,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_15() {
         let date = Date::from_ymd(2023, 8, 15);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Mary));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Mary));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_16() {
@@ -8762,11 +10268,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_17() {
@@ -8776,11 +10284,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_18() {
@@ -8790,11 +10300,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_19() {
@@ -8804,11 +10316,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_20() {
@@ -8818,11 +10332,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_21() {
@@ -8832,11 +10348,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_22() {
@@ -8846,11 +10364,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_23() {
@@ -8860,19 +10380,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_24() {
         let date = Date::from_ymd(2023, 8, 24);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Bartholomew));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Bartholomew));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_25() {
@@ -8882,11 +10406,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_26() {
@@ -8896,11 +10422,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_27() {
@@ -8910,11 +10438,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_28() {
@@ -8924,11 +10454,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_29() {
@@ -8938,11 +10470,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_30() {
@@ -8952,11 +10486,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_8_31() {
@@ -8966,11 +10502,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_1() {
@@ -8980,11 +10518,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_2() {
@@ -8994,11 +10534,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_3() {
@@ -9008,11 +10550,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_4() {
@@ -9022,11 +10566,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_5() {
@@ -9036,11 +10582,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_6() {
@@ -9050,11 +10598,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_7() {
@@ -9064,11 +10614,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_8() {
@@ -9078,11 +10630,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_9() {
@@ -9092,11 +10646,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_10() {
@@ -9106,11 +10662,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_11() {
@@ -9120,11 +10678,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_12() {
@@ -9134,11 +10694,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_13() {
@@ -9148,19 +10710,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfHolyCross)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_14() {
         let date = Date::from_ymd(2023, 9, 14);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::HolyCross));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::HolyCross));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_15() {
@@ -9170,11 +10736,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_16() {
@@ -9184,11 +10752,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_17() {
@@ -9198,11 +10768,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_18() {
@@ -9212,11 +10784,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_19() {
@@ -9226,11 +10800,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_20() {
@@ -9240,19 +10816,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_21() {
         let date = Date::from_ymd(2023, 9, 21);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Matthew));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Matthew));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_22() {
@@ -9262,11 +10842,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_23() {
@@ -9276,11 +10858,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_24() {
@@ -9290,11 +10874,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_25() {
@@ -9304,11 +10890,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_26() {
@@ -9318,11 +10906,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_27() {
@@ -9332,11 +10922,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_28() {
@@ -9346,19 +10938,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_29() {
         let date = Date::from_ymd(2023, 9, 29);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Michael));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Michael));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_9_30() {
@@ -9368,11 +10964,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_1() {
@@ -9382,11 +10980,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_2() {
@@ -9396,11 +10996,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_3() {
@@ -9410,11 +11012,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_4() {
@@ -9424,11 +11028,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_5() {
@@ -9438,11 +11044,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_6() {
@@ -9452,11 +11060,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_7() {
@@ -9466,11 +11076,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_8() {
@@ -9480,11 +11092,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_9() {
@@ -9494,11 +11108,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_10() {
@@ -9508,11 +11124,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_11() {
@@ -9522,11 +11140,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_12() {
@@ -9536,11 +11156,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_13() {
@@ -9550,11 +11172,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_14() {
@@ -9564,11 +11188,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_15() {
@@ -9578,11 +11204,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_16() {
@@ -9592,11 +11220,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_17() {
@@ -9606,19 +11236,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_18() {
         let date = Date::from_ymd(2023, 10, 18);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Luke));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Luke));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_19() {
@@ -9628,11 +11262,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_20() {
@@ -9642,11 +11278,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_21() {
@@ -9656,11 +11294,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_22() {
@@ -9670,11 +11310,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_23() {
@@ -9684,11 +11326,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::JamesOfJerusalem)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::JamesOfJerusalem)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_24() {
@@ -9698,11 +11342,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_25() {
@@ -9712,11 +11358,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_26() {
@@ -9726,11 +11374,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_27() {
@@ -9740,11 +11390,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_28() {
@@ -9754,11 +11406,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::SimonAndJude)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::SimonAndJude)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_29() {
@@ -9768,11 +11422,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_30() {
@@ -9782,11 +11438,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_10_31() {
@@ -9796,11 +11454,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfAllSaints)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_1() {
@@ -9810,11 +11470,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::AllSaintsDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::AllSaintsDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_2() {
@@ -9824,11 +11486,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_3() {
@@ -9838,11 +11502,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_4() {
@@ -9852,11 +11518,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_5() {
@@ -9866,10 +11534,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::AllSaintsDay)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(
+                Proper::Proper26,
+                Weekday::Sun
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::AllSaintsDay)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(
+                Proper::Proper26,
+                Weekday::Sun
+            ))
         );
     }
     #[test]
@@ -9880,11 +11562,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_7() {
@@ -9894,11 +11578,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_8() {
@@ -9908,11 +11594,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_9() {
@@ -9922,11 +11610,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_10() {
@@ -9936,11 +11626,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_11() {
@@ -9950,11 +11642,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_12() {
@@ -9964,11 +11658,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_13() {
@@ -9978,11 +11674,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_14() {
@@ -9992,11 +11690,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_15() {
@@ -10006,11 +11706,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_16() {
@@ -10020,11 +11722,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_17() {
@@ -10034,11 +11738,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_18() {
@@ -10048,11 +11754,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper27, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_19() {
@@ -10062,11 +11770,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_20() {
@@ -10076,11 +11786,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_21() {
@@ -10090,11 +11802,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_22() {
@@ -10104,11 +11818,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_23() {
@@ -10118,11 +11834,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ThanksgivingDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ThanksgivingDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_24() {
@@ -10132,11 +11850,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_25() {
@@ -10146,11 +11866,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper28, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_26() {
@@ -10160,11 +11882,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_27() {
@@ -10174,11 +11898,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_28() {
@@ -10188,11 +11914,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_29() {
@@ -10202,19 +11930,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_11_30() {
         let date = Date::from_ymd(2023, 11, 30);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Andrew));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Andrew));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_1() {
@@ -10224,11 +11956,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_2() {
@@ -10238,11 +11972,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper29, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_3() {
@@ -10252,11 +11988,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_4() {
@@ -10266,11 +12004,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_5() {
@@ -10280,11 +12020,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_6() {
@@ -10294,11 +12036,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_7() {
@@ -10308,11 +12052,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_8() {
@@ -10322,11 +12068,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_9() {
@@ -10336,11 +12084,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent1, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_10() {
@@ -10350,11 +12100,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_11() {
@@ -10364,11 +12116,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_12() {
@@ -10378,11 +12132,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_13() {
@@ -10392,11 +12148,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_14() {
@@ -10406,11 +12164,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_15() {
@@ -10420,11 +12180,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_16() {
@@ -10434,11 +12196,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent2, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_17() {
@@ -10448,11 +12212,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_18() {
@@ -10462,11 +12228,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_19() {
@@ -10476,11 +12244,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_20() {
@@ -10490,19 +12260,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_21() {
         let date = Date::from_ymd(2023, 12, 21);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Thomas));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Thomas));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_22() {
@@ -10512,11 +12286,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_23() {
@@ -10526,11 +12302,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_24() {
@@ -10540,10 +12318,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Advent4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ChristmasEve)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Advent4,
+                Weekday::Sun
+            ))
         );
     }
     #[test]
@@ -10554,27 +12340,33 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ChristmasDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ChristmasDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_26() {
         let date = Date::from_ymd(2023, 12, 26);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Stephen));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Stephen));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_27() {
         let date = Date::from_ymd(2023, 12, 27);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::John));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::John));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_28() {
@@ -10584,27 +12376,33 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::HolyInnocents)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::HolyInnocents)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_29() {
         let date = Date::from_ymd(2023, 12, 29);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::December29));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::December29));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_30() {
         let date = Date::from_ymd(2023, 12, 30);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::December30));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::December30));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2023_12_31() {
@@ -10614,10 +12412,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Christmas1, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfHolyName)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Christmas1,
+                Weekday::Sun
+            ))
         );
     }
     #[test]
@@ -10625,42 +12431,55 @@ mod tests {
         let date = Date::from_ymd(2024, 1, 1);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::HolyName));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::HolyName));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_2() {
         let date = Date::from_ymd(2024, 1, 2);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January2));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January2));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_3() {
         let date = Date::from_ymd(2024, 1, 3);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January3));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January3));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_4() {
         let date = Date::from_ymd(2024, 1, 4);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January4));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::January4));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_5() {
         let date = Date::from_ymd(2024, 1, 5);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::January5));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfEpiphany)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::January5))
         );
     }
     #[test]
@@ -10668,8 +12487,10 @@ mod tests {
         let date = Date::from_ymd(2024, 1, 6);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Epiphany));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Epiphany));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_7() {
@@ -10679,11 +12500,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_8() {
@@ -10693,11 +12516,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_9() {
@@ -10707,11 +12532,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_10() {
@@ -10721,11 +12548,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_11() {
@@ -10735,11 +12564,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_12() {
@@ -10749,11 +12580,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_13() {
@@ -10763,11 +12596,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany1, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_14() {
@@ -10777,11 +12612,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_15() {
@@ -10791,11 +12628,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_16() {
@@ -10805,11 +12644,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_17() {
@@ -10819,11 +12660,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_18() {
@@ -10833,11 +12676,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ConfessionOfStPeter)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ConfessionOfStPeter)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_19() {
@@ -10847,11 +12692,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_20() {
@@ -10861,11 +12708,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany2, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_21() {
@@ -10875,11 +12724,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_22() {
@@ -10889,11 +12740,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_23() {
@@ -10903,11 +12756,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_24() {
@@ -10917,11 +12772,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_25() {
@@ -10931,11 +12788,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ConversionOfStPaul)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ConversionOfStPaul)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_26() {
@@ -10945,11 +12804,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_27() {
@@ -10959,11 +12820,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_28() {
@@ -10973,11 +12836,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_29() {
@@ -10987,11 +12852,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_30() {
@@ -11001,11 +12868,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_1_31() {
@@ -11015,11 +12884,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_1() {
@@ -11029,11 +12900,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfThePresentation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_2() {
@@ -11043,11 +12916,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ThePresentation)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ThePresentation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_3() {
@@ -11057,11 +12932,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany4, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_4() {
@@ -11071,11 +12948,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_5() {
@@ -11085,11 +12964,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_6() {
@@ -11099,11 +12980,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_7() {
@@ -11113,11 +12996,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_8() {
@@ -11127,11 +13012,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_9() {
@@ -11141,11 +13028,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_10() {
@@ -11155,11 +13044,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany5, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_11() {
@@ -11169,11 +13060,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_12() {
@@ -11183,11 +13076,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_13() {
@@ -11197,11 +13092,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::LastEpiphany, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_14() {
@@ -11211,11 +13108,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::AshWednesday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::AshWednesday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_15() {
@@ -11225,11 +13124,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ThursdayAfterAshWednesday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ThursdayAfterAshWednesday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_16() {
@@ -11239,11 +13140,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::FridayAfterAshWednesday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::FridayAfterAshWednesday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_17() {
@@ -11253,11 +13156,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::SaturdayAfterAshWednesday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::SaturdayAfterAshWednesday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_18() {
@@ -11267,11 +13172,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_19() {
@@ -11281,11 +13188,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_20() {
@@ -11295,11 +13204,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_21() {
@@ -11309,11 +13220,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_22() {
@@ -11323,11 +13236,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_23() {
@@ -11337,19 +13252,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent1, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_24() {
         let date = Date::from_ymd(2024, 2, 24);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Matthias));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Matthias));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_25() {
@@ -11359,11 +13278,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_26() {
@@ -11373,11 +13294,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_27() {
@@ -11387,11 +13310,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_28() {
@@ -11401,11 +13326,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_2_29() {
@@ -11415,11 +13342,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_1() {
@@ -11429,11 +13358,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_2() {
@@ -11443,11 +13374,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent2, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_3() {
@@ -11457,11 +13390,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_4() {
@@ -11471,11 +13406,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_5() {
@@ -11485,11 +13422,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_6() {
@@ -11499,11 +13438,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_7() {
@@ -11513,11 +13454,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_8() {
@@ -11527,11 +13470,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_9() {
@@ -11541,11 +13486,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_10() {
@@ -11555,11 +13502,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_11() {
@@ -11569,11 +13518,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_12() {
@@ -11583,11 +13534,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_13() {
@@ -11597,11 +13550,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_14() {
@@ -11611,11 +13566,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_15() {
@@ -11625,11 +13582,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_16() {
@@ -11639,11 +13598,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent4, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_17() {
@@ -11653,11 +13614,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_18() {
@@ -11667,19 +13630,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_19() {
         let date = Date::from_ymd(2024, 3, 19);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Joseph));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Joseph));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_20() {
@@ -11689,11 +13656,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_21() {
@@ -11703,11 +13672,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_22() {
@@ -11717,11 +13688,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_23() {
@@ -11731,19 +13704,35 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Lent5, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_24() {
         let date = Date::from_ymd(2024, 3, 24);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::PalmSunday));
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::HolyWeek,
+                Weekday::Sun
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::PalmSunday));
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::HolyWeek,
+                Weekday::Sun
+            ))
+        );
     }
     #[test]
     fn test_calendar_for_2024_3_25() {
@@ -11753,10 +13742,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::MondayInHolyWeek)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::Feast(Feast::Annunciation))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::MondayInHolyWeek)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::Annunciation))
         );
     }
     #[test]
@@ -11767,11 +13764,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TuesdayInHolyWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TuesdayInHolyWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_27() {
@@ -11781,11 +13780,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::WednesdayInHolyWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::WednesdayInHolyWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_28() {
@@ -11795,19 +13796,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::MaundyThursday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::MaundyThursday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_29() {
         let date = Date::from_ymd(2024, 3, 29);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::GoodFriday));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::GoodFriday));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_30() {
@@ -11817,11 +13822,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::HolySaturday)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::HolySaturday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_3_31() {
@@ -11831,10 +13838,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::EasterSunday)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Easter,
+                Weekday::Sun
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EasterSunday)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Easter,
+                Weekday::Sun
+            ))
         );
     }
     #[test]
@@ -11845,11 +13866,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::MondayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::MondayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_2() {
@@ -11859,11 +13882,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TuesdayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TuesdayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_3() {
@@ -11873,11 +13898,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::WednesdayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::WednesdayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_4() {
@@ -11887,11 +13914,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::ThursdayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::ThursdayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_5() {
@@ -11901,11 +13930,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::FridayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::FridayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_6() {
@@ -11915,11 +13946,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::SaturdayInEasterWeek)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::SaturdayInEasterWeek)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_7() {
@@ -11929,11 +13962,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_8() {
@@ -11943,10 +13978,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::Annunciation)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Easter2,
+                Weekday::Mon
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::Annunciation)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::WeekAndDay(
+                LiturgicalWeek::Easter2,
+                Weekday::Mon
+            ))
         );
     }
     #[test]
@@ -11957,11 +14006,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_10() {
@@ -11971,11 +14022,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_11() {
@@ -11985,11 +14038,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_12() {
@@ -11999,11 +14054,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_13() {
@@ -12013,11 +14070,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_14() {
@@ -12027,11 +14086,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_15() {
@@ -12041,11 +14102,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_16() {
@@ -12055,11 +14118,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_17() {
@@ -12069,11 +14134,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_18() {
@@ -12083,11 +14150,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_19() {
@@ -12097,11 +14166,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_20() {
@@ -12111,11 +14182,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_21() {
@@ -12125,11 +14198,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_22() {
@@ -12139,11 +14214,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_23() {
@@ -12153,11 +14230,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_24() {
@@ -12167,19 +14246,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_25() {
         let date = Date::from_ymd(2024, 4, 25);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Mark));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Mark));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_26() {
@@ -12189,11 +14272,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_27() {
@@ -12203,11 +14288,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter4, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_28() {
@@ -12217,11 +14304,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_29() {
@@ -12231,11 +14320,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_4_30() {
@@ -12245,11 +14336,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_1() {
@@ -12259,11 +14352,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::PhilipAndJames)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::PhilipAndJames)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_2() {
@@ -12273,11 +14368,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_3() {
@@ -12287,11 +14384,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_4() {
@@ -12301,11 +14400,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter5, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_5() {
@@ -12315,11 +14416,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_6() {
@@ -12329,11 +14432,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_7() {
@@ -12343,11 +14448,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_8() {
@@ -12357,11 +14464,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter6, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTheAscension)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_9() {
@@ -12371,11 +14480,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::AscensionDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::AscensionDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_10() {
@@ -12385,11 +14496,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::FridayAfterAscension)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::FridayAfterAscension)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_11() {
@@ -12399,11 +14512,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::SaturdayAfterAscension)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::SaturdayAfterAscension)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_12() {
@@ -12413,11 +14528,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_13() {
@@ -12427,11 +14544,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_14() {
@@ -12441,11 +14560,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_15() {
@@ -12455,11 +14576,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_16() {
@@ -12469,11 +14592,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_17() {
@@ -12483,11 +14608,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_18() {
@@ -12497,19 +14624,29 @@ mod tests {
             morning.observed,
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter7, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfPentecost)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_19() {
         let date = Date::from_ymd(2024, 5, 19);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Pentecost));
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Sun))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Pentecost));
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Sun))
+        );
     }
     #[test]
     fn test_calendar_for_2024_5_20() {
@@ -12519,11 +14656,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_21() {
@@ -12533,11 +14672,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_22() {
@@ -12547,11 +14688,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_23() {
@@ -12561,11 +14704,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_24() {
@@ -12575,11 +14720,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_25() {
@@ -12589,11 +14736,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper2, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTrinitySunday)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_26() {
@@ -12603,10 +14752,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TrinitySunday)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Sun))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TrinitySunday)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Sun))
         );
     }
     #[test]
@@ -12617,11 +14774,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_28() {
@@ -12631,11 +14790,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_29() {
@@ -12645,11 +14806,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_30() {
@@ -12659,11 +14822,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTheVisitation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_5_31() {
@@ -12673,11 +14838,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TheVisitation)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TheVisitation)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_1() {
@@ -12687,11 +14854,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper3, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_2() {
@@ -12701,11 +14870,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_3() {
@@ -12715,11 +14886,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_4() {
@@ -12729,11 +14902,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_5() {
@@ -12743,11 +14918,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_6() {
@@ -12757,11 +14934,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_7() {
@@ -12771,11 +14950,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_8() {
@@ -12785,11 +14966,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper4, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_9() {
@@ -12799,11 +14982,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_10() {
@@ -12813,19 +14998,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_11() {
         let date = Date::from_ymd(2024, 6, 11);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Barnabas));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Barnabas));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_12() {
@@ -12835,11 +15024,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_13() {
@@ -12849,11 +15040,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_14() {
@@ -12863,11 +15056,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_15() {
@@ -12877,11 +15072,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper5, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_16() {
@@ -12891,11 +15088,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_17() {
@@ -12905,11 +15104,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_18() {
@@ -12919,11 +15120,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_19() {
@@ -12933,11 +15136,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_20() {
@@ -12947,11 +15152,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_21() {
@@ -12961,11 +15168,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_22() {
@@ -12975,11 +15184,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper6, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_23() {
@@ -12989,10 +15200,15 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Sun)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::EveOfStJohnTheBaptist))
         );
     }
     #[test]
@@ -13003,11 +15219,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::NativityOfStJohnTheBaptist)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::NativityOfStJohnTheBaptist)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_25() {
@@ -13017,11 +15235,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_26() {
@@ -13031,11 +15251,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_27() {
@@ -13045,11 +15267,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_28() {
@@ -13059,11 +15283,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper7, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_29() {
@@ -13073,11 +15299,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::PeterAndPaul)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::PeterAndPaul)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_6_30() {
@@ -13087,11 +15315,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_1() {
@@ -13101,11 +15331,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_2() {
@@ -13115,11 +15347,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_3() {
@@ -13129,11 +15363,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_4() {
@@ -13143,11 +15379,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::IndependenceDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::IndependenceDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_5() {
@@ -13157,11 +15395,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_6() {
@@ -13171,11 +15411,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper8, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_7() {
@@ -13185,11 +15427,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_8() {
@@ -13199,11 +15443,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_9() {
@@ -13213,11 +15459,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_10() {
@@ -13227,11 +15475,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_11() {
@@ -13241,11 +15491,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_12() {
@@ -13255,11 +15507,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_13() {
@@ -13269,11 +15523,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper9, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_14() {
@@ -13283,11 +15539,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_15() {
@@ -13297,11 +15555,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_16() {
@@ -13311,11 +15571,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_17() {
@@ -13325,11 +15587,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_18() {
@@ -13339,11 +15603,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_19() {
@@ -13353,11 +15619,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_20() {
@@ -13367,11 +15635,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper10, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_21() {
@@ -13381,11 +15651,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_22() {
@@ -13395,11 +15667,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::MaryMagdalene)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::MaryMagdalene)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_23() {
@@ -13409,11 +15683,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_24() {
@@ -13423,19 +15699,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_25() {
         let date = Date::from_ymd(2024, 7, 25);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::James));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::James));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_26() {
@@ -13445,11 +15725,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_27() {
@@ -13459,11 +15741,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper11, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_28() {
@@ -13473,11 +15757,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_29() {
@@ -13487,11 +15773,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_30() {
@@ -13501,11 +15789,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_7_31() {
@@ -13515,11 +15805,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_1() {
@@ -13529,11 +15821,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_2() {
@@ -13543,11 +15837,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_3() {
@@ -13557,11 +15853,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper12, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_4() {
@@ -13571,11 +15869,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_5() {
@@ -13585,11 +15885,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfTheTransfiguration)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_6() {
@@ -13599,11 +15901,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::TheTransfiguration)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::TheTransfiguration)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_7() {
@@ -13613,11 +15917,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_8() {
@@ -13627,11 +15933,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_9() {
@@ -13641,11 +15949,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_10() {
@@ -13655,11 +15965,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper13, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_11() {
@@ -13669,11 +15981,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_12() {
@@ -13683,11 +15997,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_13() {
@@ -13697,11 +16013,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_14() {
@@ -13711,19 +16029,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_15() {
         let date = Date::from_ymd(2024, 8, 15);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Mary));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Mary));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_16() {
@@ -13733,11 +16055,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_17() {
@@ -13747,11 +16071,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper14, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_18() {
@@ -13761,11 +16087,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_19() {
@@ -13775,11 +16103,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_20() {
@@ -13789,11 +16119,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_21() {
@@ -13803,11 +16135,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_22() {
@@ -13817,11 +16151,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_23() {
@@ -13831,19 +16167,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper15, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_24() {
         let date = Date::from_ymd(2024, 8, 24);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Bartholomew));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Bartholomew));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_25() {
@@ -13853,11 +16193,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_26() {
@@ -13867,11 +16209,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_27() {
@@ -13881,11 +16225,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_28() {
@@ -13895,11 +16241,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_29() {
@@ -13909,11 +16257,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_30() {
@@ -13923,11 +16273,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_8_31() {
@@ -13937,11 +16289,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper16, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_1() {
@@ -13951,11 +16305,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_2() {
@@ -13965,11 +16321,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_3() {
@@ -13979,11 +16337,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_4() {
@@ -13993,11 +16353,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_5() {
@@ -14007,11 +16369,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_6() {
@@ -14021,11 +16385,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_7() {
@@ -14035,11 +16401,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper17, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_8() {
@@ -14049,11 +16417,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_9() {
@@ -14063,11 +16433,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_10() {
@@ -14077,11 +16449,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_11() {
@@ -14091,11 +16465,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_12() {
@@ -14105,11 +16481,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_13() {
@@ -14119,19 +16497,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfHolyCross)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_14() {
         let date = Date::from_ymd(2024, 9, 14);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::HolyCross));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::HolyCross));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_15() {
@@ -14141,11 +16523,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_16() {
@@ -14155,11 +16539,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_17() {
@@ -14169,11 +16555,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_18() {
@@ -14183,11 +16571,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_19() {
@@ -14197,11 +16587,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_20() {
@@ -14211,19 +16603,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper19, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_21() {
         let date = Date::from_ymd(2024, 9, 21);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Matthew));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Matthew));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_22() {
@@ -14233,11 +16629,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_23() {
@@ -14247,11 +16645,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_24() {
@@ -14261,11 +16661,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_25() {
@@ -14275,11 +16677,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_26() {
@@ -14289,11 +16693,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_27() {
@@ -14303,11 +16709,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_28() {
@@ -14317,11 +16725,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper20, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_9_29() {
@@ -14331,10 +16741,18 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Sun)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::Feast(Feast::Michael))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Sun)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::Feast(Feast::Michael))
         );
     }
     #[test]
@@ -14345,10 +16763,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::Michael)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(
+                Proper::Proper21,
+                Weekday::Mon
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::Michael)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(
+                Proper::Proper21,
+                Weekday::Mon
+            ))
         );
     }
     #[test]
@@ -14359,11 +16791,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_2() {
@@ -14373,11 +16807,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_3() {
@@ -14387,11 +16823,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_4() {
@@ -14401,11 +16839,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_5() {
@@ -14415,11 +16855,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper21, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_6() {
@@ -14429,11 +16871,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_7() {
@@ -14443,11 +16887,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_8() {
@@ -14457,11 +16903,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_9() {
@@ -14471,11 +16919,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_10() {
@@ -14485,11 +16935,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_11() {
@@ -14499,11 +16951,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_12() {
@@ -14513,11 +16967,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper22, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_13() {
@@ -14527,11 +16983,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_14() {
@@ -14541,11 +16999,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_15() {
@@ -14555,11 +17015,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_16() {
@@ -14569,11 +17031,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_17() {
@@ -14583,19 +17047,23 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_18() {
         let date = Date::from_ymd(2024, 10, 18);
         let morning = BCP1979_CALENDAR.liturgical_day(date, false);
         assert_eq!(morning.observed, LiturgicalDayId::Feast(Feast::Luke));
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(evening.observed, LiturgicalDayId::Feast(Feast::Luke));
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_19() {
@@ -14605,11 +17073,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper23, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_20() {
@@ -14619,11 +17089,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_21() {
@@ -14633,11 +17105,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_22() {
@@ -14647,11 +17121,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_23() {
@@ -14661,11 +17137,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::JamesOfJerusalem)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::JamesOfJerusalem)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_24() {
@@ -14675,11 +17153,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_25() {
@@ -14689,11 +17169,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_26() {
@@ -14703,11 +17185,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper24, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_27() {
@@ -14717,11 +17201,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Sun)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Sun)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_28() {
@@ -14731,11 +17217,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::SimonAndJude)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::SimonAndJude)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_29() {
@@ -14745,11 +17233,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_30() {
@@ -14759,11 +17249,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_10_31() {
@@ -14773,11 +17265,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::EveOfAllSaints)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_11_1() {
@@ -14787,11 +17281,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::Feast(Feast::AllSaintsDay)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::Feast(Feast::AllSaintsDay)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_11_2() {
@@ -14801,11 +17297,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper25, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_11_3() {
@@ -14815,10 +17313,24 @@ mod tests {
             morning.observed,
             LiturgicalDayId::TransferredFeast(Feast::AllSaintsDay)
         );
+        assert_eq!(
+            morning.alternate,
+            Some(LiturgicalDayId::ProperAndDay(
+                Proper::Proper26,
+                Weekday::Sun
+            ))
+        );
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::TransferredFeast(Feast::AllSaintsDay)
+        );
+        assert_eq!(
+            evening.alternate,
+            Some(LiturgicalDayId::ProperAndDay(
+                Proper::Proper26,
+                Weekday::Sun
+            ))
         );
     }
     #[test]
@@ -14829,11 +17341,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Mon)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Mon)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_11_5() {
@@ -14843,11 +17357,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Tue)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Tue)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_11_6() {
@@ -14857,11 +17373,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Wed)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Wed)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_11_7() {
@@ -14871,11 +17389,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Thu)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Thu)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_11_8() {
@@ -14885,11 +17405,13 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Fri)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Fri)
         );
+        assert_eq!(evening.alternate, None);
     }
     #[test]
     fn test_calendar_for_2024_11_9() {
@@ -14899,10 +17421,12 @@ mod tests {
             morning.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Sat)
         );
+        assert_eq!(morning.alternate, None);
         let evening = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(
             evening.observed,
             LiturgicalDayId::ProperAndDay(Proper::Proper26, Weekday::Sat)
         );
+        assert_eq!(evening.alternate, None);
     }
 }
