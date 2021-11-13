@@ -2,6 +2,7 @@ use crate::{book_name_to_book, BibleReferenceQuery, BibleReferenceRange};
 use regex::{Match, Regex};
 
 const POSSIBLE_BRACKET_DELIMITERS: [&str; 7] = ["", ",", ";", "[", "]", "(", ")"];
+const VERSE_CITATION_CHARS: [char; 7] = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
 pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
     let mut list: Vec<BibleReferenceRange> = Vec::new();
@@ -36,64 +37,22 @@ pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
         .is_none()
         && list.get(1).map(|range| range.bracketed).unwrap_or(false);
 
-    // TODO this is a disaster
     if starts_with_bracket {
-        let start_book = match (
-            list.get(1).and_then(|range| range.start.book),
-            list.get(0).and_then(|range| range.start.book),
-        ) {
-            (Some(book), Some(_)) => Some(book),
-            (None, Some(book)) => Some(book),
-            (Some(book), None) => Some(book),
-            (None, None) => None,
-        };
+        let start_book = fallback_to_previous_entry(&list, |range| range.start.book);
+        let start_chapter = fallback_to_previous_entry(&list, |range| range.start.chapter);
+        let start_verse = fallback_to_previous_entry(&list, |range| range.start.verse);
 
-        let start_chapter = match (
-            list.get(1).and_then(|range| range.start.chapter),
-            list.get(0).and_then(|range| range.start.chapter),
-        ) {
-            (Some(c), Some(_)) => Some(c),
-            (None, Some(c)) => Some(c),
-            (Some(c), None) => Some(c),
-            (None, None) => None,
-        };
+        let end_book =
+            fallback_to_previous_entry(&list, |range| range.end.and_then(|query| query.book))
+                .or(start_book);
 
-        let start_verse = match (
-            list.get(1).and_then(|range| range.start.verse),
-            list.get(0).and_then(|range| range.start.verse),
-        ) {
-            (Some(v), Some(_)) => Some(v),
-            (None, Some(v)) => Some(v),
-            (Some(v), None) => Some(v),
-            (None, None) => None,
-        };
+        let end_chapter =
+            fallback_to_previous_entry(&list, |range| range.end.and_then(|query| query.chapter))
+                .or(start_chapter);
 
-        let end_book = list
-            .get(1)
-            .and_then(|range| range.end.map(|query| query.book))
-            .unwrap_or_else(|| {
-                list.get(0)
-                    .and_then(|range| range.end.and_then(|query| query.book))
-            })
-            .or(start_book);
-
-        let end_chapter = list
-            .get(1)
-            .and_then(|range| range.end.map(|query| query.chapter))
-            .unwrap_or_else(|| {
-                list.get(0)
-                    .and_then(|range| range.end.and_then(|query| query.chapter))
-            })
-            .or(start_chapter);
-
-        let end_verse = list
-            .get(1)
-            .and_then(|range| range.end.map(|query| query.verse))
-            .unwrap_or_else(|| {
-                list.get(0)
-                    .and_then(|range| range.end.and_then(|query| query.verse))
-            })
-            .or(start_verse);
+        let end_verse =
+            fallback_to_previous_entry(&list, |range| range.end.and_then(|query| query.verse))
+                .or(start_verse);
 
         list.remove(0);
         list[0] = BibleReferenceRange {
@@ -112,6 +71,18 @@ pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
     }
     // return
     list
+}
+
+fn fallback_to_previous_entry<T>(
+    list: &[BibleReferenceRange],
+    field: fn(&BibleReferenceRange) -> Option<T>,
+) -> Option<T> {
+    match (list.get(1).and_then(field), list.get(0).and_then(field)) {
+        (Some(v), Some(_)) => Some(v),
+        (None, Some(v)) => Some(v),
+        (Some(v), None) => Some(v),
+        (None, None) => None,
+    }
 }
 
 fn split_str_and_keep_delimiters(text: &str, delimiters: &[char]) -> Vec<String> {
@@ -300,7 +271,7 @@ fn fill_out(
 fn match_to_int(input: Match) -> Option<u16> {
     let input_digits_only = input
         .as_str()
-        .replace(|c| ['a', 'b', 'c', 'd', 'e', 'f', 'g'].contains(&c), "");
+        .replace(|c| VERSE_CITATION_CHARS.contains(&c), "");
     match str::parse::<u16>(&input_digits_only) {
         Ok(val) => Some(val),
         Err(_) => None,

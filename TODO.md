@@ -1,6 +1,3 @@
-- [x] Bible Reference parsing
-  - [x] Additional tests
-  - [ ] Refactoring
 - [ ] Lectionary tests against JS versions
   - [ ] RCL
 - [ ] Calendar tests
