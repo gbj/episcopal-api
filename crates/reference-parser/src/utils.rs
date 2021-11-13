@@ -1,21 +1,21 @@
-use crate::{book_name_to_book, BibleReferenceQuery, BibleReferenceRange, Book};
+use crate::{book_name_to_book, BibleReferenceQuery, BibleReferenceRange};
 use regex::{Match, Regex};
+
+const POSSIBLE_BRACKET_DELIMITERS: [&str; 7] = ["", ",", ";", "[", "]", "(", ")"];
 
 pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
     let mut list: Vec<BibleReferenceRange> = Vec::new();
     let mut prev: Option<BibleReferenceRange> = None;
     let mut bracket_opened = false;
 
-    let possible_bracket_delimiters = ["", ",", ";", "[", "]", "(", ")"]
-        .iter()
-        .map(|n| n.to_string())
-        .collect::<Vec<_>>();
-
     // basic case -- add a range for each of the pieces of the citation
     for part in split_str_and_keep_delimiters(reference, &[',', ';', '[', ']', '(', ')'][..]) {
         let trimmed = part.trim();
         // if it's only a delimiter, open or close bracket if necessary, but otherwise do nothing
-        if possible_bracket_delimiters.contains(&trimmed.to_string()) {
+        if POSSIBLE_BRACKET_DELIMITERS
+            .iter()
+            .any(|delimiter| *delimiter == trimmed)
+        {
             if trimmed == "[" || trimmed == "(" {
                 bracket_opened = true;
             } else if trimmed == "]" || trimmed == ")" {
@@ -139,14 +139,11 @@ fn parse_single_reference(
     let first_half = range_pieces.next();
     let second_half = range_pieces.next();
 
-    let start_partial_structure = match previous {
-        Some(_) => true,
-        None => false,
-    };
+    let start_partial_structure = previous.is_some();
 
     let start: BibleReferenceQuery = match first_half {
         Some(cite) => match query_from_re(
-            &cite,
+            cite,
             Regex::new(r"([\d\s]*[\w\.]+[a-zA-Z\s]*)\s*(\d+)?:?(\d+)?").expect("Regex invalid."),
             start_partial_structure,
             None,
@@ -187,7 +184,7 @@ fn parse_single_reference(
 
     let end = match second_half {
         Some(cite) => query_from_re(
-            &cite,
+            cite,
             Regex::new(r"([\d\s]*[\w\.]+)\s*(\d+)?:?(\d+)?").expect("Regex invalid."),
             true,
             augmented_start,
@@ -254,10 +251,9 @@ fn query_from_re(
             _ => None,
         };
     } else {
-        let book = match matches.1 {
-            Some(book_name) => Some(book_name_to_book(book_name.as_str())),
-            None => None,
-        };
+        let book = matches
+            .1
+            .map(|book_name| book_name_to_book(book_name.as_str()));
         let chapter = match matches.2 {
             Some(num) => match_to_int(num),
             None => None,
@@ -285,13 +281,13 @@ fn fill_out(
     // if template provided, fill out query as needed
     if let Some(tpl) = template {
         if let Some(mut q) = query {
-            if let None = q.book {
+            if q.book.is_none() {
                 q.book = tpl.book;
             }
-            if let None = q.chapter {
+            if q.chapter.is_none() {
                 q.chapter = tpl.chapter;
             }
-            if let None = q.verse {
+            if q.verse.is_none() {
                 q.verse = tpl.verse;
             }
             final_query = Some(q);

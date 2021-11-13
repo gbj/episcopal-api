@@ -1,6 +1,6 @@
 use crate::Book;
 
-pub const BOOKS: [(&'static str, Book); 162] = [
+pub const BOOKS: [(&str, Book); 162] = [
     ("Genesis", Book::Genesis),
     ("Gen.", Book::Genesis),
     ("Exodus", Book::Exodus),
