@@ -216,8 +216,8 @@ mod tests {
             vec!(BibleReferenceRange {
                 start: BibleReferenceQuery {
                     book: Some(Book::Philemon),
-                    chapter: Some(12),
-                    verse: None
+                    chapter: None,
+                    verse: Some(12),
                 },
                 end: None,
                 bracketed: false
@@ -675,6 +675,26 @@ mod tests {
                     })
                 },
             ]
+        );
+    }
+
+    #[test]
+    fn books_with_only_one_chapter() {
+        assert_eq!(
+            parse_reference("Jude 1-16"),
+            vec![BibleReferenceRange {
+                start: BibleReferenceQuery {
+                    book: Some(Book::Jude),
+                    chapter: None,
+                    verse: Some(1)
+                },
+                end: Some(BibleReferenceQuery {
+                    book: Some(Book::Jude),
+                    chapter: None,
+                    verse: Some(16)
+                }),
+                bracketed: false
+            }]
         );
     }
 }

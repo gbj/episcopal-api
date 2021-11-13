@@ -1,6 +1,13 @@
-use crate::{book_name_to_book, BibleReferenceQuery, BibleReferenceRange};
+use crate::{book_name_to_book, BibleReferenceQuery, BibleReferenceRange, Book};
 use regex::{Match, Regex};
 
+const SINGLE_CHAPTER_BOOKS: [Book; 5] = [
+    Book::Obadiah,
+    Book::SecondJohn,
+    Book::ThirdJohn,
+    Book::Philemon,
+    Book::Jude,
+];
 const POSSIBLE_BRACKET_DELIMITERS: [&str; 7] = ["", ",", ";", "[", "]", "(", ")"];
 const VERSE_CITATION_CHARS: [char; 7] = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
@@ -225,14 +232,25 @@ fn query_from_re(
         let book = matches
             .1
             .map(|book_name| book_name_to_book(book_name.as_str()));
-        let chapter = match matches.2 {
+        let mut chapter = match matches.2 {
             Some(num) => match_to_int(num),
             None => None,
         };
-        let verse = match matches.3 {
+        let mut verse = match matches.3 {
             Some(num) => match_to_int(num),
             None => None,
         };
+
+        if let Some(book) = book {
+            if SINGLE_CHAPTER_BOOKS.iter().any(|b| *b == book)
+                && chapter.is_some()
+                && verse.is_none()
+            {
+                verse = chapter;
+                chapter = None;
+            }
+        }
+
         query = Some(BibleReferenceQuery {
             book,
             chapter,
