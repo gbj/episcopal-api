@@ -12,7 +12,7 @@ pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
         .collect::<Vec<_>>();
 
     // basic case -- add a range for each of the pieces of the citation
-    for part in reference.split(&[',', ';', '[', ']', '(', ')'][..]) {
+    for part in split_str_and_keep_delimiters(reference, &[',', ';', '[', ']', '(', ')'][..]) {
         let trimmed = part.trim();
         // if it's only a delimiter, open or close bracket if necessary, but otherwise do nothing
         if possible_bracket_delimiters.contains(&trimmed.to_string()) {
@@ -22,7 +22,7 @@ pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
                 bracket_opened = false;
             }
         } else {
-            let current = parse_single_reference(part, prev, bracket_opened);
+            let current = parse_single_reference(&part, prev, bracket_opened);
             list.push(current);
             prev = Some(current);
         }
@@ -38,20 +38,35 @@ pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
 
     // TODO this is a disaster
     if starts_with_bracket {
-        let start_book = list
-            .get(1)
-            .map(|range| range.start.book)
-            .unwrap_or_else(|| list.get(0).and_then(|range| range.start.book));
+        let start_book = match (
+            list.get(1).and_then(|range| range.start.book),
+            list.get(0).and_then(|range| range.start.book),
+        ) {
+            (Some(book), Some(_)) => Some(book),
+            (None, Some(book)) => Some(book),
+            (Some(book), None) => Some(book),
+            (None, None) => None,
+        };
 
-        let start_chapter = list
-            .get(1)
-            .map(|range| range.start.chapter)
-            .unwrap_or_else(|| list.get(0).and_then(|range| range.start.chapter));
+        let start_chapter = match (
+            list.get(1).and_then(|range| range.start.chapter),
+            list.get(0).and_then(|range| range.start.chapter),
+        ) {
+            (Some(c), Some(_)) => Some(c),
+            (None, Some(c)) => Some(c),
+            (Some(c), None) => Some(c),
+            (None, None) => None,
+        };
 
-        let start_verse = list
-            .get(1)
-            .map(|range| range.start.verse)
-            .unwrap_or_else(|| list.get(0).and_then(|range| range.start.verse));
+        let start_verse = match (
+            list.get(1).and_then(|range| range.start.verse),
+            list.get(0).and_then(|range| range.start.verse),
+        ) {
+            (Some(v), Some(_)) => Some(v),
+            (None, Some(v)) => Some(v),
+            (Some(v), None) => Some(v),
+            (None, None) => None,
+        };
 
         let end_book = list
             .get(1)
@@ -80,6 +95,7 @@ pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
             })
             .or(start_verse);
 
+        list.remove(0);
         list[0] = BibleReferenceRange {
             start: BibleReferenceQuery {
                 book: start_book,
@@ -94,9 +110,24 @@ pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
             bracketed: true,
         };
     }
-
     // return
     list
+}
+
+fn split_str_and_keep_delimiters(text: &str, delimiters: &[char]) -> Vec<String> {
+    let mut result = Vec::new();
+    let mut last = 0;
+    for (index, matched) in text.match_indices(delimiters) {
+        if last != index {
+            result.push(text[last..index].to_string());
+        }
+        result.push(matched.to_string());
+        last = index + matched.len();
+    }
+    if last < text.len() {
+        result.push(text[last..].to_string());
+    }
+    result
 }
 
 fn parse_single_reference(
@@ -116,7 +147,7 @@ fn parse_single_reference(
     let start: BibleReferenceQuery = match first_half {
         Some(cite) => match query_from_re(
             &cite,
-            Regex::new(r"([\d\s]*[\w\.]+)\s*(\d+)?:?(\d+)?").expect("Regex invalid."),
+            Regex::new(r"([\d\s]*[\w\.]+[a-zA-Z\s]*)\s*(\d+)?:?(\d+)?").expect("Regex invalid."),
             start_partial_structure,
             None,
         ) {
@@ -271,7 +302,10 @@ fn fill_out(
 }
 
 fn match_to_int(input: Match) -> Option<u16> {
-    match str::parse::<u16>(input.as_str()) {
+    let input_digits_only = input
+        .as_str()
+        .replace(|c| ['a', 'b', 'c', 'd', 'e', 'f', 'g'].contains(&c), "");
+    match str::parse::<u16>(&input_digits_only) {
         Ok(val) => Some(val),
         Err(_) => None,
     }

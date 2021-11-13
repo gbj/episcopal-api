@@ -1,11 +1,10 @@
-- [x] Auto-generate tests from current state to guard against further changes breaking it
+- [x] Bible Reference parsing
+  - [x] Additional tests
+  - [ ] Refactoring
 - [ ] Lectionary tests against JS versions
   - [ ] RCL
 - [ ] Calendar tests
-  - [x] Test days like 12/24 and 1/5 that have different things in the morning/evening
-  - [x] Should days like 6/4/2022 where a saint and e.g., Eve of Pentecost conflict give saint as alternate? (cf. 10/31/21) Probably.
-  - [x] Test Eve of Epiphany 1
-    - [ ] Test any other eves of Sundays
+  - [ ] Test feasts like "Eve of Trinity Sunday" etc.
 - [ ] Test lectionaries against other APIs (like old Forward Movement API)
 - [ ] Sort and prettify various constant arrays
 - [ ] Localization
