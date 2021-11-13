@@ -1,3 +1,11 @@
+- [ ] Calendar helpers
+  - [ ] season()
+  - [ ] rank()
+- [ ] Liturgical documents
+  - [ ] Conditions
+    - [ ] Tests
+  - [ ] Document types
+  - [ ] Rendering
 - [ ] Lectionary tests against JS versions
   - [ ] RCL
 - [ ] Calendar tests

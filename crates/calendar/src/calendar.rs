@@ -3,7 +3,7 @@ use std::{cmp::Reverse, convert::TryInto};
 use crate::{
     easter_in_year, feasts::KalendarEntry, holy_day::HolyDayId, liturgical_day::LiturgicalDayId,
     liturgical_week::Cycle, propers::calculate_proper, DailyOfficeYear, Date, Feast, LiturgicalDay,
-    LiturgicalWeek, Proper, RCLYear, Rank, Time, Weekday,
+    LiturgicalWeek, Proper, RCLYear, Rank, Season, Time, Weekday,
 };
 
 /// The settings for a particular calendar. Different calendars vary slightly
@@ -93,6 +93,16 @@ impl Calendar {
             observed,
             alternate,
         }
+    }
+
+    // Gives the appropriate liturgical [Season] for the given day
+    pub fn season(&self, day: &LiturgicalDay) -> Season {
+        todo!()
+    }
+
+    // Gives the appropriate [Rank] for the given day
+    pub fn rank(&self, day: &LiturgicalDay) -> Rank {
+        todo!()
     }
 
     /// The [LiturgicalWeek](LiturgicalWeek) within which a given date falls,
