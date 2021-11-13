@@ -1,6 +1,8 @@
 - [ ] Calendar helpers
-  - [ ] season()
-  - [ ] rank()
+  - [x] season()
+    - [ ] tests
+  - [x] rank()
+    - [ ] tests
 - [ ] Liturgical documents
   - [ ] Conditions
     - [ ] Tests

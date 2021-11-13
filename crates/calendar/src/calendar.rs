@@ -25,6 +25,10 @@ pub struct Calendar {
     pub holy_days: &'static [KalendarEntry],
     /// Ranks of holy days in this calendar
     pub holy_day_ranks: &'static [(Feast, Rank)],
+    /// Associations between [Feast]s and [Seasons]s
+    pub feast_seasons: &'static [(Feast, Season)],
+    /// Associations between [LiturgicalWeek]s and [Season]s
+    pub week_seasons: &'static [(LiturgicalWeek, Season)],
 }
 
 impl Calendar {
@@ -97,12 +101,43 @@ impl Calendar {
 
     // Gives the appropriate liturgical [Season] for the given day
     pub fn season(&self, day: &LiturgicalDay) -> Season {
-        todo!()
+        match day.observed {
+            LiturgicalDayId::Feast(feast) => self
+                .feast_seasons
+                .iter()
+                .find(|(search, _)| *search == feast)
+                .map(|(_, season)| *season)
+                .unwrap_or(Season::Saints),
+            LiturgicalDayId::TransferredFeast(feast) => self
+                .feast_seasons
+                .iter()
+                .find(|(search, _)| *search == feast)
+                .map(|(_, season)| *season)
+                .unwrap_or(Season::Saints),
+            _ => self
+                .week_seasons
+                .iter()
+                .find(|(search, _)| *search == day.week)
+                .map(|(_, season)| *season)
+                .unwrap_or(Season::OrdinaryTime),
+        }
     }
 
     // Gives the appropriate [Rank] for the given day
     pub fn rank(&self, day: &LiturgicalDay) -> Rank {
-        todo!()
+        match day.observed {
+            LiturgicalDayId::Feast(feast) => self.feast_day_rank(&feast),
+            LiturgicalDayId::TransferredFeast(feast) => self.feast_day_rank(&feast),
+            _ => {
+                if day.weekday == Weekday::Sun {
+                    Rank::Sunday
+                } else if !day.holy_days.is_empty() {
+                    Rank::OptionalObservance
+                } else {
+                    Rank::FerialWeekday
+                }
+            }
+        }
     }
 
     /// The [LiturgicalWeek](LiturgicalWeek) within which a given date falls,

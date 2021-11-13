@@ -1,6 +1,6 @@
 use crate::{
     feasts::KalendarEntry, holy_day::HolyDayId, liturgical_week::Cycle, Calendar, Feast,
-    LiturgicalWeek, Rank, Time, Weekday,
+    LiturgicalWeek, Rank, Season, Time, Weekday,
 };
 
 /// [Calendar](Calendar) that calculates dates from the liturgical and sanctoral calendar
@@ -12,6 +12,8 @@ pub const BCP1979_CALENDAR: Calendar = Calendar {
     weeks: &BCP1979_WEEKS,
     holy_days: &BCP1979_FEASTS,
     holy_day_ranks: &BCP1979_HOLY_DAY_RANKS,
+    feast_seasons: &BCP1979_HOLY_DAY_SEASONS,
+    week_seasons: &BCP1979_WEEK_SEASONS,
 };
 
 const BCP1979_WEEKS: [(Cycle, u8, LiturgicalWeek); 59] = [
@@ -74,6 +76,80 @@ const BCP1979_WEEKS: [(Cycle, u8, LiturgicalWeek); 59] = [
     (Cycle::Easter, 39, LiturgicalWeek::Pentecost25),
     (Cycle::Easter, 40, LiturgicalWeek::Pentecost26),
     (Cycle::Easter, 41, LiturgicalWeek::Pentecost27),
+];
+
+const BCP1979_WEEK_SEASONS: [(LiturgicalWeek, Season); 31] = [
+    (LiturgicalWeek::Advent1, Season::Advent),
+    (LiturgicalWeek::Advent2, Season::Advent),
+    (LiturgicalWeek::Advent3, Season::Advent),
+    (LiturgicalWeek::Advent4, Season::Advent),
+    (LiturgicalWeek::Christmas, Season::Christmas),
+    (LiturgicalWeek::Christmas1, Season::Christmas),
+    (LiturgicalWeek::Christmas2, Season::Christmas),
+    (LiturgicalWeek::Epiphany, Season::Epiphany),
+    (LiturgicalWeek::Epiphany1, Season::Epiphany),
+    (LiturgicalWeek::Epiphany2, Season::Epiphany),
+    (LiturgicalWeek::Epiphany3, Season::Epiphany),
+    (LiturgicalWeek::Epiphany4, Season::Epiphany),
+    (LiturgicalWeek::Epiphany5, Season::Epiphany),
+    (LiturgicalWeek::Epiphany6, Season::Epiphany),
+    (LiturgicalWeek::Epiphany7, Season::Epiphany),
+    (LiturgicalWeek::Epiphany8, Season::Epiphany),
+    (LiturgicalWeek::LastEpiphany, Season::Epiphany),
+    (LiturgicalWeek::Lent1, Season::Lent),
+    (LiturgicalWeek::Lent2, Season::Lent),
+    (LiturgicalWeek::Lent3, Season::Lent),
+    (LiturgicalWeek::Lent4, Season::Lent),
+    (LiturgicalWeek::Lent5, Season::Lent),
+    (LiturgicalWeek::HolyWeek, Season::HolyWeek),
+    (LiturgicalWeek::Easter, Season::Easter),
+    (LiturgicalWeek::Easter2, Season::Easter),
+    (LiturgicalWeek::Easter3, Season::Easter),
+    (LiturgicalWeek::Easter4, Season::Easter),
+    (LiturgicalWeek::Easter5, Season::Easter),
+    (LiturgicalWeek::Easter6, Season::Easter),
+    (LiturgicalWeek::Easter7, Season::Ascension),
+    (LiturgicalWeek::Pentecost, Season::Pentecost),
+    // Algorithm defaults to Season::OrdinaryTime, so can ignore the season after Pentecost
+    // This will (nominally, but not relevantly) reduce search times since this is O(n)
+];
+
+const BCP1979_HOLY_DAY_SEASONS: [(Feast, Season); 35] = [
+    (Feast::ChristmasDay, Season::Christmas),
+    (Feast::December29, Season::Christmas),
+    (Feast::December30, Season::Christmas),
+    (Feast::Epiphany, Season::Epiphany),
+    (Feast::EveOfHolyCross, Season::HolyWeek),
+    (Feast::FridayAfterAscension, Season::Ascension),
+    (Feast::FridayInEasterWeek, Season::Easter),
+    (Feast::GoodFriday, Season::HolyWeek),
+    (Feast::FridayAfterAshWednesday, Season::Lent),
+    (Feast::HolyCross, Season::HolyWeek),
+    (Feast::HolyName, Season::Christmas),
+    (Feast::January2, Season::Christmas),
+    (Feast::January3, Season::Christmas),
+    (Feast::January4, Season::Christmas),
+    (Feast::MondayInEasterWeek, Season::Easter),
+    (Feast::MondayInHolyWeek, Season::HolyWeek),
+    (Feast::SaturdayAfterAscension, Season::Ascension),
+    (Feast::EveOfPentecost, Season::Pentecost),
+    (Feast::SaturdayInEasterWeek, Season::Easter),
+    (Feast::HolySaturday, Season::HolyWeek),
+    (Feast::SaturdayAfterAshWednesday, Season::Lent),
+    (Feast::PalmSunday, Season::HolyWeek),
+    (Feast::Pentecost, Season::Pentecost),
+    (Feast::EveOfTrinitySunday, Season::Trinity),
+    (Feast::TrinitySunday, Season::Trinity),
+    (Feast::AscensionDay, Season::Ascension),
+    (Feast::ThursdayInEasterWeek, Season::Easter),
+    (Feast::MaundyThursday, Season::HolyWeek),
+    (Feast::ThursdayAfterAshWednesday, Season::Lent),
+    (Feast::TuesdayInEasterWeek, Season::Easter),
+    (Feast::TuesdayInHolyWeek, Season::HolyWeek),
+    (Feast::EveOfTheAscension, Season::Ascension),
+    (Feast::WednesdayInEasterWeek, Season::Easter),
+    (Feast::WednesdayInHolyWeek, Season::HolyWeek),
+    (Feast::AshWednesday, Season::Lent),
 ];
 
 const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 86] = [

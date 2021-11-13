@@ -10,6 +10,7 @@ pub enum Season {
     Easter,
     Ascension,
     Pentecost,
+    Trinity,
     Saints,
     OrdinaryTime,
     Ember,
