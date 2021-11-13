@@ -604,7 +604,7 @@ pub const BCP1979_DAILY_OFFICE_LECTIONARY: Lectionary = Lectionary {
             LiturgicalDayId::Feast(Feast::HolyName),
             Year::DailyOffice(DailyOfficeYear::Two),
             ReadingType::SecondReading,
-            "Rev. 19:1-16",
+            "Rev. 19:11-16",
         ),
         (
             LiturgicalDayId::Feast(Feast::HolyName),
