@@ -99,7 +99,7 @@ impl Calendar {
         }
     }
 
-    // Gives the appropriate liturgical [Season] for the given day
+    /// Gives the appropriate liturgical [Season] for the given day
     pub fn season(&self, day: &LiturgicalDay) -> Season {
         match day.observed {
             LiturgicalDayId::Feast(feast) => self
@@ -121,6 +121,15 @@ impl Calendar {
                 .map(|(_, season)| *season)
                 .unwrap_or(Season::OrdinaryTime),
         }
+    }
+
+    /// Gives the [Season] of the week during which a day falls
+    pub fn base_season(&self, day: &LiturgicalDay) -> Season {
+        self.week_seasons
+            .iter()
+            .find(|(search, _)| *search == day.week)
+            .map(|(_, season)| *season)
+            .unwrap_or(Season::OrdinaryTime)
     }
 
     // Gives the appropriate [Rank] for the given day

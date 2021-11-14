@@ -5,3 +5,4 @@ edition = "2018"
 
 [dependencies]
 calendar = { path = "../calendar" }
+serde = { version = "1.0", features = ["derive"]}

@@ -4,8 +4,8 @@
   - [x] rank()
     - [ ] tests
 - [ ] Liturgical documents
-  - [ ] Conditions
-    - [ ] Tests
+  - [x] Conditions
+    - [x] Tests
   - [ ] Document types
   - [ ] Rendering
 - [ ] Lectionary tests against JS versions
