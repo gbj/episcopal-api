@@ -2,12 +2,14 @@
 extern crate rocket;
 
 mod calendar;
+mod document;
 
 #[launch]
 fn rocket() -> _ {
     rocket::build()
         .attach(CORS)
         .mount("/calendar", routes![calendar::day])
+        .mount("/document", routes![document::document])
 }
 
 use rocket::fairing::{Fairing, Info, Kind};

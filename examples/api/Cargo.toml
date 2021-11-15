@@ -7,4 +7,6 @@ edition = "2018"
 serde = { version = "1.0", features = ["derive"] }
 calendar = { path = "../../crates/calendar" }
 lectionary = { path = "../../crates/lectionary" }
+library = { path = "../../crates/library" }
+liturgy = { path = "../../crates/liturgy" }
 rocket = { version = "0.5.0-rc.1", features = ["json"] }
