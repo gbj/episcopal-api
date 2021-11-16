@@ -6,7 +6,10 @@
 - [ ] Liturgical documents
   - [x] Conditions
     - [x] Tests
+  - [ ] Source field
   - [ ] Document types
+    - [x] Psalms
+      - [ ] verse range parser
   - [ ] Rendering
 - [ ] Lectionary tests against JS versions
   - [ ] RCL
