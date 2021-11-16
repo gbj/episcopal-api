@@ -1,3 +1,5 @@
+use std::iter;
+
 use serde::{Deserialize, Serialize};
 
 use crate::Reference;
@@ -52,6 +54,146 @@ pub struct PsalmVerse {
     pub b: String,
 }
 
-// TODO
+impl PsalmVerse {
+    /// Tests whether this verse is included in the given [PsalmCitation].
+    ///     /// ```
+    /// # use crate::liturgy::{PsalmCitation, PsalmVerseRange, PsalmVerseId, PsalmVersePart, PsalmVerse};
+    /// let citation = PsalmCitation {
+    ///     ranges: vec![
+    ///         PsalmVerseRange {
+    ///             start: PsalmVerseId {
+    ///                 verse_number: 1,
+    ///                 part: PsalmVersePart::B
+    ///             },
+    ///             end: PsalmVerseId {
+    ///                 verse_number: 3,
+    ///                 part: PsalmVersePart::A
+    ///             }
+    ///         },
+    ///         PsalmVerseRange {
+    ///             start: PsalmVerseId {
+    ///                 verse_number: 5,
+    ///                 part: PsalmVersePart::All
+    ///             },
+    ///             end: PsalmVerseId {
+    ///                 verse_number: 9,
+    ///                 part: PsalmVersePart::All
+    ///             }
+    ///         }
+    ///     ]
+    /// };
+    /// let verse_7 = PsalmVerse { number: 7, a: String::from(""), b: String::from("") };
+    /// let verse_10 = PsalmVerse { number: 10, a: String::from(""), b: String::from("") };
+    /// assert_eq!(verse_7.included_in_citation(&citation), true);
+    /// assert_eq!(verse_10.included_in_citation(&citation), false);
+    /// ```
+    pub fn included_in_citation(&self, citation: &PsalmCitation) -> bool {
+        citation
+            .to_verse_ids()
+            .any(|id| id.verse_number == self.number)
+    }
+}
+
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
-pub struct PsalmVerseRange {}
+pub struct PsalmCitation {
+    pub ranges: Vec<PsalmVerseRange>,
+}
+
+impl PsalmCitation {
+    /// Iterator over the verses included in this range.
+    /// ```
+    /// # use crate::liturgy::{PsalmCitation, PsalmVerseRange, PsalmVerseId, PsalmVersePart};
+    /// let citation = PsalmCitation {
+    ///     ranges: vec![
+    ///         PsalmVerseRange {
+    ///             start: PsalmVerseId {
+    ///                 verse_number: 1,
+    ///                 part: PsalmVersePart::B
+    ///             },
+    ///             end: PsalmVerseId {
+    ///                 verse_number: 3,
+    ///                 part: PsalmVersePart::A
+    ///             }
+    ///         },
+    ///         PsalmVerseRange {
+    ///             start: PsalmVerseId {
+    ///                 verse_number: 5,
+    ///                 part: PsalmVersePart::All
+    ///             },
+    ///             end: PsalmVerseId {
+    ///                 verse_number: 9,
+    ///                 part: PsalmVersePart::All
+    ///             }
+    ///         }
+    ///     ]
+    /// };
+    /// assert_eq!(
+    ///     citation.to_verse_ids().collect::<Vec<_>>(),
+    ///     vec![
+    ///         PsalmVerseId {
+    ///             verse_number: 1,
+    ///             part: PsalmVersePart::B
+    ///         },
+    ///         PsalmVerseId {
+    ///             verse_number: 2,
+    ///             part: PsalmVersePart::All
+    ///         },
+    ///         PsalmVerseId {
+    ///             verse_number: 3,
+    ///             part: PsalmVersePart::A
+    ///         },
+    ///         PsalmVerseId {
+    ///             verse_number: 5,
+    ///             part: PsalmVersePart::All
+    ///         },
+    ///         PsalmVerseId {
+    ///             verse_number: 6,
+    ///             part: PsalmVersePart::All
+    ///         },
+    ///         PsalmVerseId {
+    ///             verse_number: 7,
+    ///             part: PsalmVersePart::All
+    ///         },
+    ///         PsalmVerseId {
+    ///             verse_number: 8,
+    ///             part: PsalmVersePart::All
+    ///         },
+    ///         PsalmVerseId {
+    ///             verse_number: 9,
+    ///             part: PsalmVersePart::All
+    ///         }
+    ///     ]
+    /// )
+    /// ```
+    pub fn to_verse_ids(&self) -> impl Iterator<Item = PsalmVerseId> + '_ {
+        self.ranges.iter().flat_map(|range| {
+            let first = range.start;
+            let last = range.end;
+            let between =
+                ((first.verse_number + 1)..(last.verse_number)).map(|verse_number| PsalmVerseId {
+                    verse_number,
+                    part: PsalmVersePart::All,
+                });
+            iter::once(first).chain(between).chain(iter::once(last))
+        })
+    }
+}
+
+#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+pub struct PsalmVerseRange {
+    pub start: PsalmVerseId,
+    pub end: PsalmVerseId,
+}
+
+#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+pub struct PsalmVerseId {
+    pub verse_number: u8,
+    pub part: PsalmVersePart,
+}
+
+#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+pub enum PsalmVersePart {
+    A,
+    B,
+    All,
+}

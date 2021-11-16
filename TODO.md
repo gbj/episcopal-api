@@ -10,6 +10,7 @@
   - [ ] Document types
     - [x] Psalms
       - [ ] verse range parser
+      - [ ] filter psalms
   - [ ] Rendering
 - [ ] Lectionary tests against JS versions
   - [ ] RCL
