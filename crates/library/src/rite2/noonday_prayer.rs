@@ -1,4 +1,4 @@
-use liturgy::{Condition, Content, Document, Heading, SubLiturgy, Words};
+use liturgy::{Condition, Content, Document, Heading, SubLiturgy};
 
 lazy_static! {
     pub static ref NOONDAY_PRAYER: Document =
@@ -38,8 +38,8 @@ lazy_static! {
                 ,
                 Document::new()
                     .content(Content::Preces(vec![
-                      (Words::EnII(String::from("Officiant")), Words::EnII(String::from("O God, make speed to save us."))),
-                      (Words::EnII(String::from("People")), Words::EnII(String::from("O Lord, make haste to help us.")))
+                      (String::from("Officiant"), String::from("O God, make speed to save us.")),
+                      (String::from("People"), String::from("O Lord, make haste to help us."))
                     ]))
             ]));
 }
