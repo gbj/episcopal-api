@@ -2,7 +2,7 @@ use liturgy::{Psalm, PsalmSection, PsalmVerse, Reference, Source};
 lazy_static! {
     pub static ref PSALM_30: Psalm = Psalm {
         number: 30,
-        range: None,
+        citation: None,
         sections: vec![PsalmSection {
             reference: Reference {
                 source: Source::BCP1979,

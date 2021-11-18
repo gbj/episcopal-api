@@ -1,6 +1,8 @@
 #[cfg(test)]
 mod tests {
-    use reference_parser::{parse_reference, BibleReferenceQuery, BibleReferenceRange, Book};
+    use reference_parser::{
+        parse_reference, BibleReferenceQuery, BibleReferenceRange, BibleVersePart, Book,
+    };
 
     #[test]
     fn simple_range() {
@@ -10,12 +12,14 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::Colossians),
                     chapter: Some(1),
-                    verse: Some(29)
+                    verse: Some(29),
+                    verse_part: BibleVersePart::All,
                 },
                 end: Some(BibleReferenceQuery {
                     book: Some(Book::Colossians),
                     chapter: Some(2),
-                    verse: Some(2)
+                    verse: Some(2),
+                    verse_part: BibleVersePart::All,
                 }),
                 bracketed: false
             })
@@ -27,12 +31,14 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::Nehemiah),
                     chapter: Some(20),
-                    verse: Some(1)
+                    verse: Some(1),
+                    verse_part: BibleVersePart::All,
                 },
                 end: Some(BibleReferenceQuery {
                     book: Some(Book::Nehemiah),
                     chapter: Some(20),
-                    verse: Some(4)
+                    verse: Some(4),
+                    verse_part: BibleVersePart::All,
                 }),
                 bracketed: false
             })
@@ -48,12 +54,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::FirstTimothy),
                         chapter: Some(4),
-                        verse: Some(1)
+                        verse: Some(1),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::FirstTimothy),
                         chapter: Some(4),
-                        verse: Some(3)
+                        verse: Some(3),
+                        verse_part: BibleVersePart::All,
                     }),
                     bracketed: false
                 },
@@ -61,12 +69,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::FirstTimothy),
                         chapter: Some(4),
-                        verse: Some(4)
+                        verse: Some(4),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::FirstTimothy),
                         chapter: Some(4),
-                        verse: Some(6)
+                        verse: Some(6),
+                        verse_part: BibleVersePart::All,
                     }),
                     bracketed: false
                 }
@@ -83,12 +93,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::FirstTimothy),
                         chapter: Some(4),
-                        verse: Some(1)
+                        verse: Some(1),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::FirstTimothy),
                         chapter: Some(4),
-                        verse: Some(3)
+                        verse: Some(3),
+                        verse_part: BibleVersePart::All,
                     }),
                     bracketed: false
                 },
@@ -96,7 +108,8 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::Colossians),
                         chapter: Some(3),
-                        verse: Some(1)
+                        verse: Some(1),
+                        verse_part: BibleVersePart::All,
                     },
                     end: None,
                     bracketed: false
@@ -113,12 +126,14 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::FirstTimothy),
                     chapter: Some(4),
-                    verse: Some(1)
+                    verse: Some(1),
+                    verse_part: BibleVersePart::All,
                 },
                 end: Some(BibleReferenceQuery {
                     book: Some(Book::FirstTimothy),
                     chapter: Some(4),
-                    verse: Some(3)
+                    verse: Some(3),
+                    verse_part: BibleVersePart::All,
                 }),
                 bracketed: false
             })
@@ -133,7 +148,8 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::FirstTimothy),
                     chapter: None,
-                    verse: None
+                    verse: None,
+                    verse_part: BibleVersePart::All,
                 },
                 end: None,
                 bracketed: false
@@ -149,7 +165,8 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::Colossians),
                     chapter: None,
-                    verse: None
+                    verse: None,
+                    verse_part: BibleVersePart::All,
                 },
                 end: None,
                 bracketed: false
@@ -165,7 +182,8 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::Colossians),
                     chapter: Some(1),
-                    verse: Some(1)
+                    verse: Some(1),
+                    verse_part: BibleVersePart::All,
                 },
                 end: None,
                 bracketed: false
@@ -181,7 +199,8 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::FirstCorinthians),
                     chapter: Some(13),
-                    verse: Some(1)
+                    verse: Some(1),
+                    verse_part: BibleVersePart::All,
                 },
                 end: None,
                 bracketed: false
@@ -193,7 +212,8 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::FirstThessalonians),
                     chapter: Some(2),
-                    verse: Some(3)
+                    verse: Some(3),
+                    verse_part: BibleVersePart::All,
                 },
                 end: None,
                 bracketed: false
@@ -205,7 +225,8 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::FirstTimothy),
                     chapter: Some(2),
-                    verse: Some(3)
+                    verse: Some(3),
+                    verse_part: BibleVersePart::All,
                 },
                 end: None,
                 bracketed: false
@@ -218,6 +239,7 @@ mod tests {
                     book: Some(Book::Philemon),
                     chapter: None,
                     verse: Some(12),
+                    verse_part: BibleVersePart::All,
                 },
                 end: None,
                 bracketed: false
@@ -229,7 +251,8 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::Hebrews),
                     chapter: Some(1),
-                    verse: None
+                    verse: None,
+                    verse_part: BibleVersePart::All,
                 },
                 end: None,
                 bracketed: false
@@ -241,7 +264,8 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::Philippians),
                     chapter: Some(1),
-                    verse: None
+                    verse: None,
+                    verse_part: BibleVersePart::All,
                 },
                 end: None,
                 bracketed: false
@@ -253,7 +277,8 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::Philippians),
                     chapter: Some(1),
-                    verse: None
+                    verse: None,
+                    verse_part: BibleVersePart::All,
                 },
                 end: None,
                 bracketed: false
@@ -265,7 +290,8 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::Romans),
                     chapter: Some(1),
-                    verse: None
+                    verse: None,
+                    verse_part: BibleVersePart::All,
                 },
                 end: None,
                 bracketed: false
@@ -283,7 +309,8 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::SecondSamuel),
                         chapter: Some(7),
-                        verse: Some(4)
+                        verse: Some(4),
+                        verse_part: BibleVersePart::All,
                     },
                     end: None
                 },
@@ -292,12 +319,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(8)
+                        verse: Some(8),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(16)
+                        verse: Some(16),
+                        verse_part: BibleVersePart::All,
                     })
                 },
             ]
@@ -314,7 +343,8 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::Judith),
                         chapter: Some(9),
-                        verse: Some(1)
+                        verse: Some(1),
+                        verse_part: BibleVersePart::All,
                     },
                     end: None
                 },
@@ -323,12 +353,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(11)
+                        verse: Some(11),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(14)
+                        verse: Some(14),
+                        verse_part: BibleVersePart::All,
                     })
                 },
             ]
@@ -344,12 +376,14 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::Wisdom),
                     chapter: Some(1),
-                    verse: Some(16)
+                    verse: Some(16),
+                    verse_part: BibleVersePart::All,
                 },
                 end: Some(BibleReferenceQuery {
                     book: Some(Book::Wisdom),
                     chapter: Some(2),
-                    verse: Some(1)
+                    verse: Some(1),
+                    verse_part: BibleVersePart::All,
                 })
             },]
         );
@@ -365,12 +399,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::Wisdom),
                         chapter: Some(1),
-                        verse: Some(16)
+                        verse: Some(16),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::Wisdom),
                         chapter: Some(2),
-                        verse: Some(1)
+                        verse: Some(1),
+                        verse_part: BibleVersePart::All,
                     })
                 },
                 BibleReferenceRange {
@@ -378,12 +414,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::Wisdom),
                         chapter: Some(2),
-                        verse: Some(12)
+                        verse: Some(12),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::Wisdom),
                         chapter: Some(2),
-                        verse: Some(22)
+                        verse: Some(22),
+                        verse_part: BibleVersePart::All,
                     })
                 }
             ]
@@ -400,12 +438,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::FirstCorinthians),
                         chapter: Some(13),
-                        verse: Some(1)
+                        verse: Some(1),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::FirstCorinthians),
                         chapter: Some(13),
-                        verse: Some(3)
+                        verse: Some(3),
+                        verse_part: BibleVersePart::All,
                     })
                 },
                 BibleReferenceRange {
@@ -413,12 +453,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(4)
+                        verse: Some(4),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(13)
+                        verse: Some(13),
+                        verse_part: BibleVersePart::All,
                     })
                 }
             ]
@@ -432,12 +474,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::FirstCorinthians),
                         chapter: Some(13),
-                        verse: Some(1)
+                        verse: Some(1),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::FirstCorinthians),
                         chapter: Some(13),
-                        verse: Some(3)
+                        verse: Some(3),
+                        verse_part: BibleVersePart::All,
                     })
                 },
                 BibleReferenceRange {
@@ -445,12 +489,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(4)
+                        verse: Some(4),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(13)
+                        verse: Some(13),
+                        verse_part: BibleVersePart::All,
                     })
                 }
             ]
@@ -467,12 +513,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::Luke),
                         chapter: Some(2),
-                        verse: Some(1)
+                        verse: Some(1),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::Luke),
                         chapter: Some(2),
-                        verse: Some(14)
+                        verse: Some(14),
+                        verse_part: BibleVersePart::All,
                     })
                 },
                 BibleReferenceRange {
@@ -480,12 +528,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::Luke),
                         chapter: Some(2),
-                        verse: Some(15)
+                        verse: Some(15),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::Luke),
                         chapter: Some(2),
-                        verse: Some(20)
+                        verse: Some(20),
+                        verse_part: BibleVersePart::All,
                     })
                 }
             ]
@@ -499,12 +549,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::Genesis),
                         chapter: Some(18),
-                        verse: Some(1)
+                        verse: Some(1),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::Genesis),
                         chapter: Some(18),
-                        verse: Some(15)
+                        verse: Some(15),
+                        verse_part: BibleVersePart::All,
                     })
                 },
                 BibleReferenceRange {
@@ -512,12 +564,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::Genesis),
                         chapter: Some(21),
-                        verse: Some(1)
+                        verse: Some(1),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::Genesis),
                         chapter: Some(21),
-                        verse: Some(7)
+                        verse: Some(7),
+                        verse_part: BibleVersePart::All,
                     })
                 }
             ]
@@ -534,12 +588,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::Matthew),
                         chapter: Some(9),
-                        verse: Some(35)
+                        verse: Some(35),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::Matthew),
                         chapter: Some(10),
-                        verse: Some(8)
+                        verse: Some(8),
+                        verse_part: BibleVersePart::All,
                     })
                 },
                 BibleReferenceRange {
@@ -547,12 +603,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::Matthew),
                         chapter: Some(10),
-                        verse: Some(9)
+                        verse: Some(9),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::Matthew),
                         chapter: Some(10),
-                        verse: Some(23)
+                        verse: Some(23),
+                        verse_part: BibleVersePart::All,
                     })
                 }
             ]
@@ -566,12 +624,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::FirstSamuel),
                         chapter: Some(8),
-                        verse: Some(4)
+                        verse: Some(4),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::FirstSamuel),
                         chapter: Some(8),
-                        verse: Some(11)
+                        verse: Some(11),
+                        verse_part: BibleVersePart::All,
                     })
                 },
                 BibleReferenceRange {
@@ -579,12 +639,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::FirstSamuel),
                         chapter: Some(8),
-                        verse: Some(12)
+                        verse: Some(12),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::FirstSamuel),
                         chapter: Some(8),
-                        verse: Some(15)
+                        verse: Some(15),
+                        verse_part: BibleVersePart::All,
                     })
                 },
                 BibleReferenceRange {
@@ -592,12 +654,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::FirstSamuel),
                         chapter: Some(8),
-                        verse: Some(16)
+                        verse: Some(16),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::FirstSamuel),
                         chapter: Some(8),
-                        verse: Some(20)
+                        verse: Some(20),
+                        verse_part: BibleVersePart::All,
                     }),
                 },
                 BibleReferenceRange {
@@ -605,12 +669,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::FirstSamuel),
                         chapter: Some(11),
-                        verse: Some(14)
+                        verse: Some(14),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::FirstSamuel),
                         chapter: Some(11),
-                        verse: Some(15)
+                        verse: Some(15),
+                        verse_part: BibleVersePart::All,
                     })
                 },
             ]
@@ -627,12 +693,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: Some(Book::FirstSamuel),
                         chapter: Some(17),
-                        verse: Some(1)
+                        verse: Some(1),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: Some(Book::FirstSamuel),
                         chapter: Some(17),
-                        verse: Some(1)
+                        verse: Some(1),
+                        verse_part: BibleVersePart::All,
                     })
                 },
                 BibleReferenceRange {
@@ -640,12 +708,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(4)
+                        verse: Some(4),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(11)
+                        verse: Some(11),
+                        verse_part: BibleVersePart::All,
                     })
                 },
                 BibleReferenceRange {
@@ -653,12 +723,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(19)
+                        verse: Some(19),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(23)
+                        verse: Some(23),
+                        verse_part: BibleVersePart::All,
                     }),
                 },
                 BibleReferenceRange {
@@ -666,12 +738,14 @@ mod tests {
                     start: BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(32)
+                        verse: Some(32),
+                        verse_part: BibleVersePart::All,
                     },
                     end: Some(BibleReferenceQuery {
                         book: None,
                         chapter: None,
-                        verse: Some(49)
+                        verse: Some(49),
+                        verse_part: BibleVersePart::All,
                     })
                 },
             ]
@@ -686,12 +760,36 @@ mod tests {
                 start: BibleReferenceQuery {
                     book: Some(Book::Jude),
                     chapter: None,
-                    verse: Some(1)
+                    verse: Some(1),
+                    verse_part: BibleVersePart::All,
                 },
                 end: Some(BibleReferenceQuery {
                     book: Some(Book::Jude),
                     chapter: None,
-                    verse: Some(16)
+                    verse: Some(16),
+                    verse_part: BibleVersePart::All,
+                }),
+                bracketed: false
+            }]
+        );
+    }
+
+    #[test]
+    fn subverse_citations() {
+        assert_eq!(
+            parse_reference("1 Cor. 1:1-4a"),
+            vec![BibleReferenceRange {
+                start: BibleReferenceQuery {
+                    book: Some(Book::FirstCorinthians),
+                    chapter: Some(1),
+                    verse: Some(1),
+                    verse_part: BibleVersePart::All,
+                },
+                end: Some(BibleReferenceQuery {
+                    book: Some(Book::FirstCorinthians),
+                    chapter: Some(1),
+                    verse: Some(4),
+                    verse_part: BibleVersePart::A,
                 }),
                 bracketed: false
             }]

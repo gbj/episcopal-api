@@ -1,4 +1,6 @@
-use crate::{book_name_to_book, BibleReferenceQuery, BibleReferenceRange, Book};
+use crate::{
+    book_name_to_book, query::BibleVersePart, BibleReferenceQuery, BibleReferenceRange, Book,
+};
 use regex::{Match, Regex};
 
 const SINGLE_CHAPTER_BOOKS: [Book; 5] = [
@@ -67,11 +69,13 @@ pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
                 book: start_book,
                 chapter: start_chapter,
                 verse: start_verse,
+                verse_part: BibleVersePart::All,
             },
             end: Some(BibleReferenceQuery {
                 book: end_book,
                 chapter: end_chapter,
                 verse: end_verse,
+                verse_part: BibleVersePart::All,
             }),
             bracketed: true,
         };
@@ -133,6 +137,7 @@ fn parse_single_reference(
                         book: None,
                         chapter: None,
                         verse: None,
+                        verse_part: BibleVersePart::All,
                     },
                     end: None,
                     bracketed,
@@ -145,6 +150,7 @@ fn parse_single_reference(
                     book: None,
                     chapter: None,
                     verse: None,
+                    verse_part: BibleVersePart::All,
                 },
                 end: None,
                 bracketed,
@@ -207,24 +213,28 @@ fn query_from_re(
             (Some(_), Some(book_name), Some(chapter_str), Some(verse_str)) => {
                 Some(BibleReferenceQuery {
                     book: Some(book_name_to_book(book_name.as_str())),
-                    chapter: match_to_int(chapter_str),
-                    verse: match_to_int(verse_str),
+                    chapter: match_to_int(chapter_str).0,
+                    verse: match_to_int(verse_str).0,
+                    verse_part: match_to_int(verse_str).1,
                 })
             }
             (Some(_), Some(chapter_str), None, Some(verse_str)) => Some(BibleReferenceQuery {
                 book: None,
-                chapter: match_to_int(chapter_str),
-                verse: match_to_int(verse_str),
+                chapter: match_to_int(chapter_str).0,
+                verse: match_to_int(verse_str).0,
+                verse_part: match_to_int(verse_str).1,
             }),
             (Some(_), Some(chapter_str), Some(verse_str), None) => Some(BibleReferenceQuery {
                 book: None,
-                chapter: match_to_int(chapter_str),
-                verse: match_to_int(verse_str),
+                chapter: match_to_int(chapter_str).0,
+                verse: match_to_int(verse_str).0,
+                verse_part: match_to_int(verse_str).1,
             }),
             (Some(_), Some(verse_str), None, None) => Some(BibleReferenceQuery {
                 book: None,
                 chapter: None,
-                verse: match_to_int(verse_str),
+                verse: match_to_int(verse_str).0,
+                verse_part: match_to_int(verse_str).1,
             }),
             _ => None,
         };
@@ -233,11 +243,11 @@ fn query_from_re(
             .1
             .map(|book_name| book_name_to_book(book_name.as_str()));
         let mut chapter = match matches.2 {
-            Some(num) => match_to_int(num),
+            Some(num) => match_to_int(num).0,
             None => None,
         };
         let mut verse = match matches.3 {
-            Some(num) => match_to_int(num),
+            Some(num) => match_to_int(num).0,
             None => None,
         };
 
@@ -255,6 +265,7 @@ fn query_from_re(
             book,
             chapter,
             verse,
+            verse_part: BibleVersePart::All,
         });
     }
 
@@ -286,12 +297,23 @@ fn fill_out(
     final_query
 }
 
-fn match_to_int(input: Match) -> Option<u16> {
-    let input_digits_only = input
-        .as_str()
-        .replace(|c| VERSE_CITATION_CHARS.contains(&c), "");
-    match str::parse::<u16>(&input_digits_only) {
+fn match_to_int(input: Match) -> (Option<u16>, BibleVersePart) {
+    let input_str = input.as_str();
+    let input_digits_only = input_str.replace(|c| VERSE_CITATION_CHARS.contains(&c), "");
+    let verse_number = match str::parse::<u16>(&input_digits_only) {
         Ok(val) => Some(val),
         Err(_) => None,
-    }
+    };
+    let bible_verse_part = if input_str.contains("a") {
+        BibleVersePart::A
+    } else if input_str.contains("b") {
+        BibleVersePart::B
+    } else if input_str.contains("c") {
+        BibleVersePart::C
+    } else if input_str.contains("d") {
+        BibleVersePart::D
+    } else {
+        BibleVersePart::All
+    };
+    (verse_number, bible_verse_part)
 }

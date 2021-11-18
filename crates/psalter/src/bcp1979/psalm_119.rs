@@ -2,14 +2,14 @@ use liturgy::{Psalm, PsalmSection, PsalmVerse, Reference, Source};
 lazy_static! {
     pub static ref PSALM_119: Psalm = Psalm {
         number: 119,
-        range: None,
+        citation: None,
         sections: vec![
             PsalmSection {
                 reference: Reference {
                     source: Source::BCP1979,
                     page: 763
                 },
-                local_name: String::from("Psalm 119: Aleph"),
+                local_name: String::from("Aleph"),
                 latin_name: String::from("Beati immaculati"),
                 verses: vec![
                     PsalmVerse {
@@ -59,7 +59,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 764
                 },
-                local_name: String::from("Psalm 119: Beth"),
+                local_name: String::from("Beth"),
                 latin_name: String::from("In quo corrigit?"),
                 verses: vec![
                     PsalmVerse {
@@ -111,7 +111,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 764
                 },
-                local_name: String::from("Psalm 119: Gimel"),
+                local_name: String::from("Gimel"),
                 latin_name: String::from("Retribue servo tuo"),
                 verses: vec![
                     PsalmVerse {
@@ -161,7 +161,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 765
                 },
-                local_name: String::from("Psalm 119: Daleth"),
+                local_name: String::from("Daleth"),
                 latin_name: String::from("Adhaesit pavimento"),
                 verses: vec![
                     PsalmVerse {
@@ -211,7 +211,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 766
                 },
-                local_name: String::from("Psalm 119: He"),
+                local_name: String::from("He"),
                 latin_name: String::from("Legem pone"),
                 verses: vec![
                     PsalmVerse {
@@ -261,7 +261,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 766
                 },
-                local_name: String::from("Psalm 119: Waw"),
+                local_name: String::from("Waw"),
                 latin_name: String::from("Et veniat super me"),
                 verses: vec![
                     PsalmVerse {
@@ -311,7 +311,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 767
                 },
-                local_name: String::from("Psalm 119: Zayin"),
+                local_name: String::from("Zayin"),
                 latin_name: String::from("Memor esto verbi tui"),
                 verses: vec![
                     PsalmVerse {
@@ -361,7 +361,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 768
                 },
-                local_name: String::from("Psalm 119: Heth"),
+                local_name: String::from("Heth"),
                 latin_name: String::from("Portio mea, Domine"),
                 verses: vec![
                     PsalmVerse {
@@ -411,7 +411,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 768
                 },
-                local_name: String::from("Psalm 119: Teth"),
+                local_name: String::from("Teth"),
                 latin_name: String::from("Bonitatem fecisti"),
                 verses: vec![
                     PsalmVerse {
@@ -461,7 +461,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 769
                 },
-                local_name: String::from("Psalm 119: Yodh"),
+                local_name: String::from("Yodh"),
                 latin_name: String::from("Manus tuae fecerunt me"),
                 verses: vec![
                     PsalmVerse {
@@ -515,7 +515,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 770
                 },
-                local_name: String::from("Psalm 119: Kaph"),
+                local_name: String::from("Kaph"),
                 latin_name: String::from("Defecit in salutare"),
                 verses: vec![
                     PsalmVerse {
@@ -567,7 +567,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 770
                 },
-                local_name: String::from("Psalm 119: Lamedh"),
+                local_name: String::from("Lamedh"),
                 latin_name: String::from("In aeternum, Domine"),
                 verses: vec![
                     PsalmVerse {
@@ -619,7 +619,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 771
                 },
-                local_name: String::from("Psalm 119: Mem"),
+                local_name: String::from("Mem"),
                 latin_name: String::from("Quomodo dilexi!"),
                 verses: vec![
                     PsalmVerse {
@@ -669,7 +669,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 772
                 },
-                local_name: String::from("Psalm 119: Nun"),
+                local_name: String::from("Nun"),
                 latin_name: String::from("Lucerna pedibus meis"),
                 verses: vec![
                     PsalmVerse {
@@ -719,7 +719,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 772
                 },
-                local_name: String::from("Psalm 119: Samekh"),
+                local_name: String::from("Samekh"),
                 latin_name: String::from("Iniquos odio habui"),
                 verses: vec![
                     PsalmVerse {
@@ -771,7 +771,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 773
                 },
-                local_name: String::from("Psalm 119: Ayin"),
+                local_name: String::from("Ayin"),
                 latin_name: String::from("Feci judicium"),
                 verses: vec![
                     PsalmVerse {
@@ -823,7 +823,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 774
                 },
-                local_name: String::from("Psalm 119: Pe"),
+                local_name: String::from("Pe"),
                 latin_name: String::from("Mirabilia"),
                 verses: vec![
                     PsalmVerse {
@@ -873,7 +873,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 774
                 },
-                local_name: String::from("Psalm 119: Sadhe"),
+                local_name: String::from("Sadhe"),
                 latin_name: String::from("Justus es, Domine"),
                 verses: vec![
                     PsalmVerse {
@@ -923,7 +923,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 775
                 },
-                local_name: String::from("Psalm 119: Qoph"),
+                local_name: String::from("Qoph"),
                 latin_name: String::from("Clamavi in toto corde meo"),
                 verses: vec![
                     PsalmVerse {
@@ -975,7 +975,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 776
                 },
-                local_name: String::from("Psalm 119: Resh"),
+                local_name: String::from("Resh"),
                 latin_name: String::from("Vide humilitatem"),
                 verses: vec![
                     PsalmVerse {
@@ -1025,7 +1025,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 777
                 },
-                local_name: String::from("Psalm 119: Shin"),
+                local_name: String::from("Shin"),
                 latin_name: String::from("Principes persecuti sunt"),
                 verses: vec![
                     PsalmVerse {
@@ -1075,7 +1075,7 @@ lazy_static! {
                     source: Source::BCP1979,
                     page: 777
                 },
-                local_name: String::from("Psalm 119: Taw"),
+                local_name: String::from("Taw"),
                 latin_name: String::from("Appropinquet deprecatio"),
                 verses: vec![
                     PsalmVerse {
