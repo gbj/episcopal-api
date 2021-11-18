@@ -60,6 +60,6 @@ impl BibleReference {
     /// ```
     /// Tests whether the given [BibleVerse] is included within this reference.
     pub fn contains(&self, verse: BibleVerse) -> bool {
-        self.ranges.iter().all(|range| range.contains(verse))
+        self.ranges.iter().any(|range| range.contains(verse))
     }
 }
