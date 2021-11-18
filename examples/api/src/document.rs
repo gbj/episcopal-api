@@ -5,8 +5,14 @@ use lectionary::{
     Reading, BCP1979_30_DAY_PSALTER, BCP1979_DAILY_OFFICE_LECTIONARY, BCP1979_DAILY_OFFICE_PSALTER,
 };
 use library::rite2::NOONDAY_PRAYER;
-use liturgy::Document;
+use liturgy::{Document, Psalm};
+use psalter::bcp1979::BCP1979_PSALTER;
 use rocket::serde::{json::Json, Serialize};
+
+#[get("/psalm?<number>")]
+pub fn psalm(number: u8) -> Json<Option<Psalm>> {
+    Json(BCP1979_PSALTER.psalm_by_number(number).cloned())
+}
 
 #[get("/doc?<slug>&<year>&<month>&<day>&<evening>")]
 pub fn document(
