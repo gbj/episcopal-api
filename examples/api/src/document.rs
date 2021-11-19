@@ -1,13 +1,10 @@
 use std::collections::HashMap;
 
-use calendar::{Date, LiturgicalDay, BCP1979_CALENDAR};
-use lectionary::{
-    Reading, BCP1979_30_DAY_PSALTER, BCP1979_DAILY_OFFICE_LECTIONARY, BCP1979_DAILY_OFFICE_PSALTER,
-};
+use calendar::{Date, BCP1979_CALENDAR};
 use library::rite2::NOONDAY_PRAYER;
 use liturgy::{Document, Psalm};
 use psalter::bcp1979::BCP1979_PSALTER;
-use rocket::serde::{json::Json, Serialize};
+use rocket::serde::json::Json;
 
 #[get("/psalm?<number>", rank = 1)]
 pub fn psalm_by_number(number: u8) -> Json<Option<Psalm>> {

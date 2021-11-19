@@ -327,13 +327,13 @@ fn match_to_int(input: Match) -> (Option<u16>, BibleVersePart) {
         Ok(val) => Some(val),
         Err(_) => None,
     };
-    let bible_verse_part = if input_str.contains("a") {
+    let bible_verse_part = if input_str.contains('a') {
         BibleVersePart::A
-    } else if input_str.contains("b") {
+    } else if input_str.contains('b') {
         BibleVersePart::B
-    } else if input_str.contains("c") {
+    } else if input_str.contains('c') {
         BibleVersePart::C
-    } else if input_str.contains("d") {
+    } else if input_str.contains('d') {
         BibleVersePart::D
     } else {
         BibleVersePart::All

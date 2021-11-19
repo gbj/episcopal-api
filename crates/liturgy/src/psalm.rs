@@ -1,6 +1,4 @@
-use std::iter;
-
-use reference_parser::{parse_reference, BibleReference, BibleVerse, BibleVersePart, Book};
+use reference_parser::{BibleReference, BibleVerse, BibleVersePart, Book};
 use serde::{Deserialize, Serialize};
 
 use crate::Reference;
