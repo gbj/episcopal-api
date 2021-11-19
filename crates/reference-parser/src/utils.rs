@@ -80,7 +80,24 @@ pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
             bracketed: true,
         };
     }
-    // return
+
+    // chapter list like Psalms 120, 121, 122
+    // without this, it would interpret that as 120:1, (120:121), (120:122)
+    let first_chapter_has_verse = list
+        .get(0)
+        .map(|range| range.start.verse.is_some())
+        .unwrap_or(false);
+    if !first_chapter_has_verse {
+        for range in list.iter_mut().skip(1) {
+            if range.start.chapter.is_none() && range.start.verse.is_some() {
+                range.start.chapter = range.start.verse.take();
+            } else {
+                break;
+            }
+        }
+    }
+
+    // return the list
     list
 }
 
@@ -123,7 +140,7 @@ fn parse_single_reference(
 
     let start_partial_structure = previous.is_some();
 
-    let start: BibleReferenceQuery = match first_half {
+    let mut start: BibleReferenceQuery = match first_half {
         Some(cite) => match query_from_re(
             cite,
             Regex::new(r"([\d\s]*[\w\.]+[a-zA-Z\s]*)\s*(\d+)?:?(\d+)?").expect("Regex invalid."),
@@ -157,6 +174,12 @@ fn parse_single_reference(
             }
         }
     };
+
+    if start.book.is_none() {
+        if let Some(book) = previous.and_then(|range| range.start.book) {
+            start.book = Some(book);
+        }
+    }
 
     // fill out the start of the range with the details of the end of the previous range
     // e.g., 1 Tim. 4:1-3, 4-6 will fill out with 1 Tim., chapter 4

@@ -57,6 +57,9 @@ impl BibleReference {
     /// assert_eq!(reference.contains(verse), false);
     /// let reference = BibleReference::from("Matt. 1");
     /// assert_eq!(reference.contains(verse), true);
+    /// let reference = BibleReference::from("Psalms 120, 121, 122");
+    /// let verse = BibleVerse { book: Book::Psalms, chapter: 122, verse: 3, verse_part: BibleVersePart::All };
+    /// assert_eq!(reference.contains(verse), true);
     /// ```
     /// Tests whether the given [BibleVerse] is included within this reference.
     pub fn contains(&self, verse: BibleVerse) -> bool {

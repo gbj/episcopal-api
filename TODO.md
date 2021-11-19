@@ -3,6 +3,8 @@
     - [ ] tests
   - [x] rank()
     - [ ] tests
+- [x] Psalter
+  - [x] tests for searching by citation
 - [ ] Liturgical documents
   - [x] Conditions
     - [x] Tests

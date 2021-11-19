@@ -13,6 +13,11 @@ pub struct Psalter {
 }
 
 impl Psalter {
+    /// Returns a single psalm, if it exists, by its number.
+    /// ```
+    /// # use crate::psalter::bcp1979::BCP1979_PSALTER;
+    /// assert_eq!(BCP1979_PSALTER.psalm_by_number(1).map(|psalm| psalm.number), Some(1));
+    /// ```
     pub fn psalm_by_number(&self, number: u8) -> Option<&Psalm> {
         self.psalms
             .iter()
@@ -20,6 +25,16 @@ impl Psalter {
             .map(|(_, psalm)| *psalm)
     }
 
+    /// Returns the set of psalms covered by a given citation, including filtering verses.
+    /// ```
+    /// # use crate::psalter::bcp1979::BCP1979_PSALTER;
+    /// let three_psalms = BCP1979_PSALTER.psalms_by_citation("Psalms 120, 121, 122:1-3");
+    /// assert_eq!(three_psalms.len(), 3);
+    /// assert_eq!(three_psalms[0].number, 120);
+    /// assert_eq!(three_psalms[1].number, 121);
+    /// assert_eq!(three_psalms[2].number, 122);
+    /// assert_eq!(three_psalms[2].sections[0].verses.len(), 3);
+    /// ```
     pub fn psalms_by_citation(&self, citation: &str) -> Vec<Psalm> {
         let reference = BibleReference::from(citation);
         reference
