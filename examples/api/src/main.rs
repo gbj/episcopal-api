@@ -9,7 +9,14 @@ fn rocket() -> _ {
     rocket::build()
         .attach(CORS)
         .mount("/calendar", routes![calendar::day])
-        .mount("/document", routes![document::document, document::psalm])
+        .mount(
+            "/document",
+            routes![
+                document::document,
+                document::psalm_by_number,
+                document::psalms_by_citation
+            ],
+        )
 }
 
 use rocket::fairing::{Fairing, Info, Kind};
