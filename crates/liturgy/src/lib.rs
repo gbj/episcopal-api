@@ -1,17 +1,25 @@
 mod condition;
 mod display_format;
 mod document;
+mod gloria_patri;
 mod heading;
+mod preces;
 mod preference;
 mod psalm;
 mod reference;
+mod rubric;
 mod subliturgy;
+mod text;
 
 pub use condition::Condition;
 pub use display_format::DisplayFormat;
 pub use document::{Content, Document};
-pub use heading::Heading;
+pub use gloria_patri::*;
+pub use heading::*;
+pub use preces::*;
 pub use preference::*;
 pub use psalm::*;
 pub use reference::*;
+pub use rubric::*;
 pub use subliturgy::SubLiturgy;
+pub use text::*;

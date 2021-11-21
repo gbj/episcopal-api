@@ -1,6 +1,9 @@
 use crate::rite2::GLORIA_PATRI;
 use calendar::Season;
-use liturgy::{Condition, Content, DisplayFormat, Document, Heading, SubLiturgy};
+use liturgy::{
+    Condition, Content, DisplayFormat, Document, Heading, HeadingLevel, Preces, Rubric, SubLiturgy,
+    Text,
+};
 
 lazy_static! {
     pub static ref NOONDAY_PRAYER: Document =
@@ -8,18 +11,9 @@ lazy_static! {
             .label("Noonday Prayer")
             .content(Content::Series(vec![
                 // Include the title, date, and day in any case
-                Document::new().content(Content::Heading {
-                    level: Heading::Heading1,
-                    text: Some(String::from("Noonday Prayer"))
-                }),
-                Document::new().content(Content::Heading {
-                    level: Heading::Date,
-                    text: None
-                }),
-                Document::new().content(Content::Heading {
-                    level: Heading::Day,
-                    text: None
-                }),
+                Document::from(Heading::from((HeadingLevel::Heading1, "Noonday Prayer"))),
+                Document::from(Heading::Date),
+                Document::from(Heading::Day),
                 // If the Angelus is included, add the Angelus and then a heading for Noonday Prayer proper
                 Document::new()
                     .content(Content::SubLiturgy(SubLiturgy::Angelus))
@@ -27,28 +21,21 @@ lazy_static! {
                         String::from("angelus"),
                         String::from("before")
                     )),
-                Document::new()
-                    .content(Content::Heading {
-                        level: Heading::Heading1,
-                        text: Some(String::from("Noonday Prayer"))
-                    })
+                Document::from(Heading::from((HeadingLevel::Heading1, "Noonday Prayer")))
                     .condition(Condition::Preference(
                         String::from("angelus"),
                         String::from("before")
                     )),
                 // Opening of Noonday Prayer proper
-                Document::new()
-                    .content(Content::Preces(vec![
-                      (String::from("Officiant"), String::from("O God, make speed to save us.")),
-                      (String::from("People"), String::from("O Lord, make haste to help us."))
-                    ])),
-                Document::new()
-                    .content(Content::Rubric(String::from("Officiant and People"))),
+                Document::from(Preces::from([
+                    ("Officiant", "O God, make speed to save us."),
+                    ("People", "O Lord, make haste to help us.")
+                ])),
+                Document::from(Rubric::from("Officiant and People")),
+                // TODO: add display format
                 GLORIA_PATRI.clone(),
-                Document::new()
-                    .content(Content::Rubric(String::from("Except in Lent, add"))),
-                Document::new()
-                    .content(Content::Text(String::from("Alleluia.")))
+                Document::from(Rubric::from("Except in Lent, add")),
+                Document::from(Text::from("Alleluia."))
                     .condition(
                         Condition::Not(Box::new(
                             Condition::Or(

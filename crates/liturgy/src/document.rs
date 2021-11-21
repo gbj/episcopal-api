@@ -3,7 +3,10 @@ use std::fmt::Display;
 use calendar::{Calendar, LiturgicalDay};
 use serde::{Deserialize, Serialize};
 
-use crate::{ClientPreferences, Condition, DisplayFormat, Heading, Reference, SubLiturgy};
+use crate::{
+    ClientPreferences, Condition, DisplayFormat, GloriaPatri, Heading, Preces, Reference, Rubric,
+    SubLiturgy, Text,
+};
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Document {
@@ -108,18 +111,15 @@ pub enum Content {
     /// A document with no contents
     Empty,
     /// The Gloria Patri is formatted such that it is broken into four lines rather than two if necessary
-    Gloria(String, String, String, String),
+    GloriaPatri(GloriaPatri),
     /// A title, subtitle, label, or other heading
-    Heading {
-        level: Heading,
-        text: Option<String>,
-    },
+    Heading(Heading),
     /// A responsive prayer in which each line has a label and its text: V: ___ / R: ___
-    Preces(Vec<(String, String)>),
+    Preces(Preces),
     /// An explanatory sentence or direction for the liturgy
-    Rubric(String),
+    Rubric(Rubric),
     /// Text, without any additional styling or semantics
-    Text(String),
+    Text(Text),
     /// # Structural Variants
     /// A set of multiple [Document]s, organized one after the other
     Series(Vec<Document>),
@@ -129,4 +129,36 @@ pub enum Content {
     Option(Vec<Document>),
     /// Inserts another liturgy, by its identifier
     SubLiturgy(SubLiturgy),
+}
+
+// Create Documents from various content types
+
+impl From<GloriaPatri> for Document {
+    fn from(content: GloriaPatri) -> Self {
+        Self::new().content(Content::GloriaPatri(content))
+    }
+}
+
+impl From<Heading> for Document {
+    fn from(content: Heading) -> Self {
+        Self::new().content(Content::Heading(content))
+    }
+}
+
+impl From<Preces> for Document {
+    fn from(content: Preces) -> Self {
+        Self::new().content(Content::Preces(content))
+    }
+}
+
+impl From<Rubric> for Document {
+    fn from(content: Rubric) -> Self {
+        Self::new().content(Content::Rubric(content))
+    }
+}
+
+impl From<Text> for Document {
+    fn from(content: Text) -> Self {
+        Self::new().content(Content::Text(content))
+    }
 }
