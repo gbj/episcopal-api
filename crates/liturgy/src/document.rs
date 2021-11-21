@@ -10,7 +10,6 @@ pub struct Document {
     condition: Option<Condition>,
     label: Option<String>,
     source: Option<Reference>,
-    display_format: DisplayFormat,
     content: Content,
 }
 
@@ -20,7 +19,6 @@ impl Document {
             condition: None,
             label: None,
             source: None,
-            display_format: DisplayFormat::Default,
             content: Content::Empty,
         }
     }
@@ -89,11 +87,6 @@ impl Document {
 
     pub fn condition(mut self, condition: Condition) -> Self {
         self.condition = Some(condition);
-        self
-    }
-
-    pub fn display_format(mut self, display_format: DisplayFormat) -> Self {
-        self.display_format = display_format;
         self
     }
 

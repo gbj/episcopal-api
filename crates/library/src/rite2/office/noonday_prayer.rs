@@ -44,7 +44,7 @@ lazy_static! {
                     ])),
                 Document::new()
                     .content(Content::Rubric(String::from("Officiant and People"))),
-                GLORIA_PATRI.clone().display_format(DisplayFormat::Unison),
+                GLORIA_PATRI.clone(),
                 Document::new()
                     .content(Content::Rubric(String::from("Except in Lent, add"))),
                 Document::new()
