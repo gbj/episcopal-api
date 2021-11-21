@@ -1,3 +1,5 @@
-mod noonday_prayer;
+mod gloria_patri;
+mod office;
 
-pub use noonday_prayer::NOONDAY_PRAYER;
+pub use gloria_patri::*;
+pub use office::*;

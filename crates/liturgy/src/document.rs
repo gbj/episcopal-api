@@ -3,13 +3,14 @@ use std::fmt::Display;
 use calendar::{Calendar, LiturgicalDay};
 use serde::{Deserialize, Serialize};
 
-use crate::{ClientPreferences, Condition, Heading, Reference, SubLiturgy};
+use crate::{ClientPreferences, Condition, DisplayFormat, Heading, Reference, SubLiturgy};
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Document {
     condition: Option<Condition>,
     label: Option<String>,
     source: Option<Reference>,
+    display_format: DisplayFormat,
     content: Content,
 }
 
@@ -19,6 +20,7 @@ impl Document {
             condition: None,
             label: None,
             source: None,
+            display_format: DisplayFormat::Default,
             content: Content::Empty,
         }
     }
@@ -90,6 +92,11 @@ impl Document {
         self
     }
 
+    pub fn display_format(mut self, display_format: DisplayFormat) -> Self {
+        self.display_format = display_format;
+        self
+    }
+
     pub fn source(mut self, source: Reference) -> Self {
         self.source = Some(source);
         self
@@ -104,15 +111,23 @@ impl Default for Document {
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub enum Content {
+    /// # Content Variants
     /// A document with no contents
     Empty,
+    /// The Gloria Patri is formatted such that it is broken into four lines rather than two if necessary
+    Gloria(String, String, String, String),
     /// A title, subtitle, label, or other heading
     Heading {
         level: Heading,
         text: Option<String>,
     },
-    // Preces: responsive prayer in which each line has a label and its text: V: ___ / R: ___
+    /// A responsive prayer in which each line has a label and its text: V: ___ / R: ___
     Preces(Vec<(String, String)>),
+    /// An explanatory sentence or direction for the liturgy
+    Rubric(String),
+    /// Text, without any additional styling or semantics
+    Text(String),
+    /// # Structural Variants
     /// A set of multiple [Document]s, organized one after the other
     Series(Vec<Document>),
     /// A set of multiple [Document]s, displayed as parallel options (e.g., in multiple languages or versions)

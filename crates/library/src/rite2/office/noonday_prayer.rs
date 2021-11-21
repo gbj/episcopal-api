@@ -1,4 +1,6 @@
-use liturgy::{Condition, Content, Document, Heading, SubLiturgy};
+use crate::rite2::GLORIA_PATRI;
+use calendar::Season;
+use liturgy::{Condition, Content, DisplayFormat, Document, Heading, SubLiturgy};
 
 lazy_static! {
     pub static ref NOONDAY_PRAYER: Document =
@@ -33,13 +35,27 @@ lazy_static! {
                     .condition(Condition::Preference(
                         String::from("angelus"),
                         String::from("before")
-                    ))
+                    )),
                 // Opening of Noonday Prayer proper
-                ,
                 Document::new()
                     .content(Content::Preces(vec![
                       (String::from("Officiant"), String::from("O God, make speed to save us.")),
                       (String::from("People"), String::from("O Lord, make haste to help us."))
-                    ]))
+                    ])),
+                Document::new()
+                    .content(Content::Rubric(String::from("Officiant and People"))),
+                GLORIA_PATRI.clone().display_format(DisplayFormat::Unison),
+                Document::new()
+                    .content(Content::Rubric(String::from("Except in Lent, add"))),
+                Document::new()
+                    .content(Content::Text(String::from("Alleluia.")))
+                    .condition(
+                        Condition::Not(Box::new(
+                            Condition::Or(
+                                Box::new(Condition::Season(Season::Lent)),
+                                Box::new(Condition::Season(Season::HolyWeek))
+                            )
+                        ))
+                    ),
             ]));
 }
