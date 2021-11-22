@@ -13,6 +13,7 @@ fn rocket() -> _ {
             "/document",
             routes![
                 document::document,
+                document::doc_to_html,
                 document::psalm_by_number,
                 document::psalms_by_citation
             ],

@@ -1,0 +1,8 @@
+[package]
+name = "web"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+sauron = "0.43"
+liturgy = { path = "../../liturgy" }

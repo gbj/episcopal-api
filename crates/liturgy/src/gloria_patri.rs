@@ -6,8 +6,8 @@ use serde::{Deserialize, Serialize};
 /// The Gloria Patri is formatted such that it is broken into four lines rather than two if necessary
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct GloriaPatri {
-    display_format: DisplayFormat,
-    text: (String, String, String, String),
+    pub display_format: DisplayFormat,
+    pub text: (String, String, String, String),
 }
 
 impl GloriaPatri {

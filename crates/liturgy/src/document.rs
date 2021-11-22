@@ -10,10 +10,10 @@ use crate::{
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Document {
-    condition: Option<Condition>,
-    label: Option<String>,
-    source: Option<Reference>,
-    content: Content,
+    pub condition: Option<Condition>,
+    pub label: Option<String>,
+    pub source: Option<Reference>,
+    pub content: Content,
 }
 
 impl Document {
@@ -37,6 +37,8 @@ impl Document {
             None
         } else {
             match self.content {
+                // Lookup types -- TODO
+                // Collection types
                 Content::Series(sub) => Some(Self {
                     content: Content::Series(Series::from(
                         sub.iter()
@@ -71,6 +73,7 @@ impl Document {
                         ..self
                     })
                 }
+                // Every else just passes through as is
                 _ => Some(self),
             }
         }

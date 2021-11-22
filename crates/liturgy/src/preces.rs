@@ -6,6 +6,12 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Preces(Vec<(String, String)>);
 
+impl Preces {
+    pub fn iter(&self) -> impl Iterator<Item = &(String, String)> {
+        self.0.iter()
+    }
+}
+
 impl<T, A, B> From<T> for Preces
 where
     T: IntoIterator<Item = (A, B)>,

@@ -5,11 +5,20 @@ use std::fmt::Display;
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct PsalmCitation(String);
 
-impl<T> From<T> for PsalmCitation
-where
-    T: Display,
-{
-    fn from(text: T) -> Self {
+impl Display for PsalmCitation {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
+        write!(f, "{}", self.0)
+    }
+}
+
+impl From<String> for PsalmCitation {
+    fn from(text: String) -> Self {
+        Self(text)
+    }
+}
+
+impl From<&str> for PsalmCitation {
+    fn from(text: &str) -> Self {
         Self(text.to_string())
     }
 }

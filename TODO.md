@@ -13,8 +13,10 @@
   - [ ] Rendering
 - [ ] Compiler
   - [ ] PsalmCitation
+    - [ ] Allow multiple psalters based on preferences
   - [ ] SubLiturgy
   - [ ] Collect of the Day
+  - [ ] Date/Day
 - [ ] Lectionary tests against JS versions
   - [ ] RCL
 - [ ] Calendar tests

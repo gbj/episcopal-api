@@ -6,9 +6,9 @@ use crate::DisplayFormat;
 /// Text, without any additional styling or semantics
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Text {
-    text: String,
-    display_format: DisplayFormat,
-    response: Option<String>,
+    pub text: String,
+    pub display_format: DisplayFormat,
+    pub response: Option<String>,
 }
 
 impl Text {
