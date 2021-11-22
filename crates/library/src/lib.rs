@@ -91,7 +91,7 @@ impl Default for Psalters {
 }
 
 impl From<PreferenceValue> for Psalters {
-    fn from(value: PreferenceValue) -> Self {
+    fn from(_value: PreferenceValue) -> Self {
         // TODO real logic when/if additional psalters are added
         Self::BCP1979
     }
