@@ -23,8 +23,8 @@ lazy_static! {
                             PreferenceValue::from("before")
                         )
                     ))),
-                Document::from(Heading::Date),
-                Document::from(Heading::Day),
+                Document::from(Heading::Date(None)),
+                Document::from(Heading::Day(None)),
                 // If the Angelus is included, add the Angelus and then a heading for Noonday Prayer proper
                 Document::from(SubLiturgy::Angelus)
                     .condition(Condition::Preference(

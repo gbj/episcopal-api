@@ -1,6 +1,7 @@
 use std::{convert::TryInto, ops::Sub};
 
 use chrono::Datelike;
+use language::Language;
 use serde::{Deserialize, Deserializer, Serialize};
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -101,6 +102,26 @@ impl Date {
         let nth_weekday_from_sunday = date.weekday().num_days_from_sunday();
         let naive_date = date - chrono::Duration::days(nth_weekday_from_sunday.into());
         naive_date.into()
+    }
+
+    pub fn to_localized_name(&self, _language: Language) -> String {
+        // TODO i18n
+        let month = match self.month() {
+            1 => "January",
+            2 => "February",
+            3 => "March",
+            4 => "April",
+            5 => "May",
+            6 => "June",
+            7 => "July",
+            8 => "August",
+            9 => "September",
+            10 => "October",
+            11 => "November",
+            12 => "December",
+            _ => "",
+        };
+        format!("{} {}, {}", month, self.day(), self.year())
     }
 }
 

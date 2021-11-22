@@ -5,4 +5,5 @@ edition = "2018"
 
 [dependencies]
 sauron = "0.43"
+calendar = { path = "../../calendar" }
 liturgy = { path = "../../liturgy" }

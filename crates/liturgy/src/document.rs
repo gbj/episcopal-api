@@ -1,6 +1,7 @@
 use std::fmt::Display;
 
 use calendar::{Calendar, LiturgicalDay};
+use language::Language;
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -12,6 +13,7 @@ use crate::{
 pub struct Document {
     pub condition: Option<Condition>,
     pub label: Option<String>,
+    pub language: Language,
     pub source: Option<Reference>,
     pub content: Content,
 }
@@ -21,6 +23,7 @@ impl Document {
         Self {
             condition: None,
             label: None,
+            language: Language::default(),
             source: None,
             content: Content::Empty,
         }

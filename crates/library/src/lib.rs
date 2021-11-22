@@ -23,6 +23,12 @@ pub trait Library {
             None
         } else {
             match document.content {
+                // Insert day/date into heading if necessary
+                Content::Heading(heading) => match heading {
+                    Heading::Date(_) => Some(Document::from(Heading::Date(Some(day.date)))),
+                    Heading::Day(_) => Some(Document::from(Heading::Day(Some(day.clone())))),
+                    Heading::Text(_, _) => Some(Document::from(Content::Heading(heading))),
+                },
                 // Lookup types
                 Content::PsalmCitation(citation) => {
                     let psalter_pref =

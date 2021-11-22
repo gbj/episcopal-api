@@ -1,7 +1,8 @@
+use calendar::{Date, LiturgicalDay};
 use liturgy::*;
 use sauron::html::text;
 use sauron::prelude::*;
-use sauron::{node, Application, Cmd, Node, Program};
+use sauron::{node, Application, Cmd, Node};
 
 pub enum Msg {}
 pub struct DocumentView {
@@ -73,11 +74,11 @@ impl Application<Msg> for DocumentView {
         };
 
         node! {
-            <article class="document">
+            <div class="document">
                 {label.unwrap_or_else(|| text(""))}
                 {source.unwrap_or_else(|| text(""))}
                 {content}
-            </article>
+            </div>
         }
     }
 }
@@ -116,13 +117,16 @@ impl DocumentView {
         }
     }
 
-    fn date(&self) -> Node<Msg> {
-        node! {
-            <h2 class="date"></h2>
+    fn date(&self, date: &Option<Date>) -> Node<Msg> {
+        match date {
+            Some(date) => node! {
+                <h2 class="date">{text(date.to_localized_name(self.document.language))}</h2>
+            },
+            None => text(""),
         }
     }
 
-    fn day(&self) -> Node<Msg> {
+    fn day(&self, day: &Option<LiturgicalDay>) -> Node<Msg> {
         node! {
             <h2 class="day"></h2>
         }
@@ -146,8 +150,8 @@ impl DocumentView {
 
     fn heading(&self, heading: &Heading) -> Node<Msg> {
         match heading {
-            Heading::Date => self.date(),
-            Heading::Day => self.day(),
+            Heading::Date(date) => self.date(date),
+            Heading::Day(day) => self.day(day),
             Heading::Text(level, content) => match level {
                 HeadingLevel::Heading1 => node! { <h1>{text(content)}</h1> },
                 HeadingLevel::Heading2 => node! { <h2>{text(content)}</h2> },
