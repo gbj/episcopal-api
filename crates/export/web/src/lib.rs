@@ -1,4 +1,4 @@
-use calendar::{Date, LiturgicalDay};
+use calendar::{Calendar, Date, LiturgicalDay, LiturgicalDayId, BCP1979_CALENDAR};
 use liturgy::*;
 use sauron::html::text;
 use sauron::prelude::*;
@@ -6,13 +6,15 @@ use sauron::{node, Application, Cmd, Node};
 
 pub enum Msg {}
 pub struct DocumentView {
-    document: Document,
+    pub document: Document,
+    pub calendar: &'static Calendar,
 }
 
 impl DocumentView {
     pub fn new() -> Self {
         Self {
             document: Document::new(),
+            calendar: &BCP1979_CALENDAR,
         }
     }
 
@@ -31,7 +33,16 @@ impl Default for DocumentView {
 }
 impl From<Document> for DocumentView {
     fn from(document: Document) -> Self {
-        Self { document }
+        Self {
+            document,
+            calendar: &BCP1979_CALENDAR,
+        }
+    }
+}
+
+impl From<(Document, &'static Calendar)> for DocumentView {
+    fn from((document, calendar): (Document, &'static Calendar)) -> Self {
+        Self { document, calendar }
     }
 }
 
@@ -127,9 +138,29 @@ impl DocumentView {
     }
 
     fn day(&self, day: &Option<LiturgicalDay>) -> Node<Msg> {
-        node! {
-            <h2 class="day"></h2>
-        }
+        let observed = day.as_ref().map(|day| day.observed);
+        let holy_day_name = match observed {
+            Some(LiturgicalDayId::Feast(feast)) => self
+                .calendar
+                .feast_name(feast, self.document.language)
+                .map(text),
+            Some(LiturgicalDayId::TransferredFeast(feast)) => self
+                .calendar
+                .feast_name(feast, self.document.language)
+                .map(|name| {
+                    node! {
+                        <p>
+                            {text(name)}
+                            <br/>
+                            // TODO i18n
+                            {text("(Transferred)")}
+                        </p>
+                    }
+                }),
+            _ => None,
+        };
+
+        holy_day_name.unwrap_or_else(|| text("[TODO LiturgicalDay name]"))
     }
 
     fn empty(&self) -> Node<Msg> {
@@ -275,7 +306,7 @@ impl DocumentView {
                             {text(&sentence.text)}
                             {citation}
                         </p>
-                        {DocumentView::from(*response.clone()).view()}
+                        {DocumentView::from((*response.clone(), self.calendar)).view()}
                     </div>
                 },
             }}
@@ -287,7 +318,7 @@ impl DocumentView {
         node! {
             <section class="series">{
                 for doc in series.iter() {
-                    DocumentView::from(doc.clone()).view()
+                    DocumentView::from((doc.clone(), self.calendar)).view()
                 }
             }</section>
         }

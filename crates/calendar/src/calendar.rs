@@ -1,5 +1,7 @@
 use std::{cmp::Reverse, convert::TryInto};
 
+use language::Language;
+
 use crate::{
     easter_in_year, feasts::KalendarEntry, holy_day::HolyDayId, liturgical_day::LiturgicalDayId,
     liturgical_week::Cycle, propers::calculate_proper, DailyOfficeYear, Date, Feast, LiturgicalDay,
@@ -29,6 +31,8 @@ pub struct Calendar {
     pub feast_seasons: &'static [(Feast, Season)],
     /// Associations between [LiturgicalWeek]s and [Season]s
     pub week_seasons: &'static [(LiturgicalWeek, Season)],
+    /// Name for each feast, by language
+    pub feast_names: &'static [(Feast, Language, &'static str)],
 }
 
 impl Calendar {
@@ -147,6 +151,14 @@ impl Calendar {
                 }
             }
         }
+    }
+
+    /// The name of a [Feast](crate::Feast) in a given [Language](language::Language)
+    pub fn feast_name(&self, feast: Feast, language: Language) -> Option<&str> {
+        self.feast_names
+            .iter()
+            .find(|(s_feast, s_language, _)| *s_feast == feast && *s_language == language)
+            .map(|(_, _, name)| *name)
     }
 
     /// The [LiturgicalWeek](LiturgicalWeek) within which a given date falls,

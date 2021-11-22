@@ -25,9 +25,14 @@ pub trait Library {
             match document.content {
                 // Insert day/date into heading if necessary
                 Content::Heading(heading) => match heading {
-                    Heading::Date(_) => Some(Document::from(Heading::Date(Some(day.date)))),
-                    Heading::Day(_) => Some(Document::from(Heading::Day(Some(day.clone())))),
+                    // ordinary headings are passed through
                     Heading::Text(_, _) => Some(Document::from(Content::Heading(heading))),
+
+                    // Dates are filled in with the date we're compiling for
+                    Heading::Date(_) => Some(Document::from(Heading::Date(Some(day.date)))),
+
+                    // Days need to receive the calendar as well, to allow them to look up feast names etc.
+                    Heading::Day(_) => Some(Document::from(Heading::Day(Some(day.clone())))),
                 },
                 // Lookup types
                 Content::PsalmCitation(citation) => {
