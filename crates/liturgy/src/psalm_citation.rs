@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
 
-/// An explanatory sentence or direction for the liturgy
+/// A reference to a [Psalm](crate::Psalm), which will be inserted by the compilation process.
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct PsalmCitation(String);
 

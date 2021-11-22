@@ -130,7 +130,7 @@ pub enum Content {
     /// A set of multiple [Document]s, which are mutually-exclusive choices
     Option(Vec<Document>),
     /// # Lookup Fields
-    /// Includes psalm's citation, and is transformed into a [Psalm](crate::Psalm) by the compilation process.
+    /// A reference to a [Psalm](crate::Psalm), which will be inserted by the compilation process.
     PsalmCitation(PsalmCitation),
     /// Inserts another liturgy, by its identifier
     SubLiturgy(SubLiturgy),
