@@ -15,8 +15,7 @@ lazy_static! {
                 Document::from(Heading::Date),
                 Document::from(Heading::Day),
                 // If the Angelus is included, add the Angelus and then a heading for Noonday Prayer proper
-                Document::new()
-                    .content(Content::SubLiturgy(SubLiturgy::Angelus))
+                Document::from(SubLiturgy::Angelus)
                     .condition(Condition::Preference(
                         String::from("angelus"),
                         String::from("before")

@@ -157,6 +157,12 @@ impl From<Rubric> for Document {
     }
 }
 
+impl From<SubLiturgy> for Document {
+    fn from(content: SubLiturgy) -> Self {
+        Self::new().content(Content::SubLiturgy(content))
+    }
+}
+
 impl From<Text> for Document {
     fn from(content: Text) -> Self {
         Self::new().content(Content::Text(content))
