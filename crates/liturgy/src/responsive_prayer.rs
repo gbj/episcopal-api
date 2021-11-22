@@ -5,6 +5,12 @@ use std::fmt::Display;
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct ResponsivePrayer(Vec<String>);
 
+impl ResponsivePrayer {
+    pub fn iter(&self) -> impl Iterator<Item = &String> {
+        self.0.iter()
+    }
+}
+
 impl<T, A> From<T> for ResponsivePrayer
 where
     T: IntoIterator<Item = A>,

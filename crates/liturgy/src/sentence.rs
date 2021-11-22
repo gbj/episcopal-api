@@ -6,9 +6,9 @@ use crate::Document;
 /// A short Biblical reading, with an optional response.
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Sentence {
-    text: String,
-    citation: Option<String>,
-    response: Option<Box<Document>>,
+    pub text: String,
+    pub citation: Option<String>,
+    pub response: Option<Box<Document>>,
 }
 
 impl Sentence {

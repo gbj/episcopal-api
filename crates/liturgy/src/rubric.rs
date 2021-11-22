@@ -5,11 +5,20 @@ use std::fmt::Display;
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Rubric(String);
 
-impl<T> From<T> for Rubric
-where
-    T: Display,
-{
-    fn from(text: T) -> Self {
+impl From<String> for Rubric {
+    fn from(text: String) -> Self {
+        Self(text)
+    }
+}
+
+impl From<&str> for Rubric {
+    fn from(text: &str) -> Self {
         Self(text.to_string())
+    }
+}
+
+impl Display for Rubric {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.0)
     }
 }

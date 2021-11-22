@@ -118,13 +118,13 @@ impl DocumentView {
 
     fn date(&self) -> Node<Msg> {
         node! {
-            <article class="document empty">{text("TODO")}</article>
+            <h2 class="date"></h2>
         }
     }
 
     fn day(&self) -> Node<Msg> {
         node! {
-            <article class="document empty">{text("TODO")}</article>
+            <h2 class="day"></h2>
         }
     }
 
@@ -178,11 +178,24 @@ impl DocumentView {
             <article class="document psalm">
             {for section in psalm.filtered_sections() {
                 node! {
-                    <header>
-                        <h3 class="local-name">{text(section.local_name)}</h3>
-                        <em class="latin-name">{text(section.latin_name)}</em>
-                        {self.reference(&section.reference)}
-                    </header>
+                    <section>
+                        <header>
+                            <h3 class="local-name">{text(section.local_name)}</h3>
+                            <em class="latin-name">{text(section.latin_name)}</em>
+                            {self.reference(&section.reference)}
+                        </header>
+                        <main>
+                        {for verse in section.verses {
+                            node! {
+                                <p class="verse">
+                                    <sup class="number">{text(verse.number)}</sup>
+                                    <span class="a">{text(verse.a)}</span>
+                                    <span class="b">{text(verse.b)}</span>
+                                </p>
+                            }
+                        }}
+                        </main>
+                    </section>
                 }
             }}
             </article>
@@ -197,19 +210,72 @@ impl DocumentView {
 
     fn responsive_prayer(&self, responsive_prayer: &ResponsivePrayer) -> Node<Msg> {
         node! {
-            <article class="document empty">{text("TODO")}</article>
+            <article class="document responsive-prayer">
+            {for line in responsive_prayer.iter() {
+                node! {
+                    <p>{text(line)}</p>
+                }
+            }}
+            </article>
         }
     }
 
     fn rubric(&self, rubric: &Rubric) -> Node<Msg> {
         node! {
-            <article class="document empty">{text("TODO")}</article>
+            <article class="document rubric">{text(rubric)}</article>
         }
     }
 
     fn sentence(&self, sentence: &Sentence) -> Node<Msg> {
+        let short_text_response = sentence
+            .response
+            .as_ref()
+            .and_then(|doc| match &doc.content {
+                Content::Text(text) => {
+                    if text.text.len() <= 5 && text.response.is_none() {
+                        Some(text)
+                    } else {
+                        None
+                    }
+                }
+                _ => None,
+            });
+
+        let citation: Node<Msg> = match &sentence.citation {
+            Some(citation) => node! { <span class="citation">{text(citation)}</span> },
+            None => text(""),
+        };
+
         node! {
-            <article class="document empty">{text("TODO")}</article>
+            <article class="document sentence">
+            {match (&sentence.response, short_text_response) {
+                // No response
+                (None, _) => node! {
+                    <p>
+                        {text(&sentence.text)}
+                        {citation}
+                    </p>
+                },
+                // With a short enough response to be shown inline
+                (_, Some(response)) => node! {
+                    <p>
+                        {text(&sentence.text)}
+                        <strong class="response">{text(response)}</strong>
+                        {citation}
+                    </p>
+                },
+                // With a longer response, which should be shown on its own level
+                (Some(response), None) => node! {
+                    <div>
+                        <p>
+                            {text(&sentence.text)}
+                            {citation}
+                        </p>
+                        {DocumentView::from(*response.clone()).view()}
+                    </div>
+                },
+            }}
+            </article>
         }
     }
 

@@ -26,15 +26,28 @@ impl Text {
     }
 }
 
-impl<T> From<T> for Text
-where
-    T: Display,
-{
-    fn from(text: T) -> Self {
+impl From<String> for Text {
+    fn from(text: String) -> Self {
+        Self {
+            text,
+            display_format: DisplayFormat::Default,
+            response: None,
+        }
+    }
+}
+
+impl From<&str> for Text {
+    fn from(text: &str) -> Self {
         Self {
             text: text.to_string(),
             display_format: DisplayFormat::Default,
             response: None,
         }
+    }
+}
+
+impl Display for Text {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.text)
     }
 }
