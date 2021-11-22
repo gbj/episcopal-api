@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     ClientPreferences, Condition, GloriaPatri, Heading, Preces, Psalm, PsalmCitation, Reference,
-    Rubric, SubLiturgy, Text,
+    Rubric, Sentence, SubLiturgy, Text,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -120,6 +120,8 @@ pub enum Content {
     Psalm(Psalm),
     /// An explanatory sentence or direction for the liturgy
     Rubric(Rubric),
+    /// A short Biblical reading, with an optional response.
+    Sentence(Sentence),
     /// Text, without any additional styling or semantics
     Text(Text),
     /// # Structural Variants
@@ -171,6 +173,12 @@ impl From<PsalmCitation> for Document {
 impl From<Rubric> for Document {
     fn from(content: Rubric) -> Self {
         Self::new().content(Content::Rubric(content))
+    }
+}
+
+impl From<Sentence> for Document {
+    fn from(content: Sentence) -> Self {
+        Self::new().content(Content::Sentence(content))
     }
 }
 

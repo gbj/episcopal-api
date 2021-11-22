@@ -9,6 +9,7 @@ mod psalm;
 mod psalm_citation;
 mod reference;
 mod rubric;
+mod sentence;
 mod subliturgy;
 mod text;
 
@@ -23,5 +24,6 @@ pub use psalm::*;
 pub use psalm_citation::*;
 pub use reference::*;
 pub use rubric::*;
+pub use sentence::Sentence;
 pub use subliturgy::SubLiturgy;
 pub use text::*;
