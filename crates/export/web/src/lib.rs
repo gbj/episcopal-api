@@ -2,9 +2,13 @@ use calendar::{Calendar, Date, LiturgicalDay, LiturgicalDayId, BCP1979_CALENDAR}
 use liturgy::*;
 use sauron::html::text;
 use sauron::prelude::*;
+use sauron::web_sys::console::{log, log_1};
 use sauron::{node, Application, Cmd, Node};
 
-pub enum Msg {}
+#[derive(Debug)]
+pub enum Msg {
+    SetDocument(Document),
+}
 pub struct DocumentView {
     pub document: Document,
     pub calendar: &'static Calendar,
@@ -47,10 +51,13 @@ impl From<(Document, &'static Calendar)> for DocumentView {
 }
 
 impl Application<Msg> for DocumentView {
-    fn update(&mut self, _msg: Msg) -> Cmd<Self, Msg>
+    fn update(&mut self, msg: Msg) -> Cmd<Self, Msg>
     where
         Self: Sized + 'static,
     {
+        match msg {
+            Msg::SetDocument(doc) => self.document = doc,
+        }
         Cmd::none()
     }
 
