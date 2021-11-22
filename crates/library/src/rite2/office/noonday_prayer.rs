@@ -1,5 +1,5 @@
+use crate::conditions::NOT_LENT;
 use crate::rite2::GLORIA_PATRI;
-use calendar::Season;
 use liturgy::{
     Condition, Content, DisplayFormat, Document, Heading, HeadingLevel, Preces, Rubric, SubLiturgy,
     Text,
@@ -31,17 +31,8 @@ lazy_static! {
                     ("People", "O Lord, make haste to help us.")
                 ])),
                 Document::from(Rubric::from("Officiant and People")),
-                // TODO: add display format
                 Document::from(GLORIA_PATRI.clone().display_format(DisplayFormat::Unison)),
-                Document::from(Rubric::from("Except in Lent, add")),
-                Document::from(Text::from("Alleluia."))
-                    .condition(
-                        Condition::Not(Box::new(
-                            Condition::Or(
-                                Box::new(Condition::Season(Season::Lent)),
-                                Box::new(Condition::Season(Season::HolyWeek))
-                            )
-                        ))
-                    ),
+                Document::from(Rubric::from("Except in Lent, add")).condition(NOT_LENT.clone()),
+                Document::from(Text::from("Alleluia.")).condition(NOT_LENT.clone()),
             ]));
 }
