@@ -2,7 +2,7 @@ use crate::conditions::{NOT_INSERT_GLORIA, NOT_LENT};
 use crate::rite2::GLORIA_PATRI;
 use liturgy::{
     Condition, Content, DisplayFormat, Document, Heading, HeadingLevel, Preces, PsalmCitation,
-    Rubric, Sentence, SubLiturgy, Text,
+    ResponsivePrayer, Rubric, Sentence, SubLiturgy, Text,
 };
 
 lazy_static! {
@@ -57,6 +57,11 @@ lazy_static! {
 
                 // Prayers
                 Document::from(Rubric::from("A meditation, silent or spoken, may follow.")),
-                Document::from(Rubric::from("The Officiant then begins the Prayers"))
+                Document::from(Rubric::from("The Officiant then begins the Prayers")),
+                Document::from(ResponsivePrayer::from([
+                    "Lord, have mercy.",
+                    "Christ, have mercy.",
+                    "Lord, have mercy."
+                ]))
             ]));
 }
