@@ -10,6 +10,14 @@ pub struct GloriaPatri {
     text: (String, String, String, String),
 }
 
+impl GloriaPatri {
+    /// Sets the [DisplayFormat](crate::DisplayFormat) for the document.
+    pub fn display_format(mut self, display_format: DisplayFormat) -> Self {
+        self.display_format = display_format;
+        self
+    }
+}
+
 impl<A, B, C, D> From<(A, B, C, D)> for GloriaPatri
 where
     A: Display,

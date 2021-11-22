@@ -33,7 +33,7 @@ lazy_static! {
                 ])),
                 Document::from(Rubric::from("Officiant and People")),
                 // TODO: add display format
-                GLORIA_PATRI.clone(),
+                Document::from(GLORIA_PATRI.clone().display_format(DisplayFormat::Unison)),
                 Document::from(Rubric::from("Except in Lent, add")),
                 Document::from(Text::from("Alleluia."))
                     .condition(
