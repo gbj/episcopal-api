@@ -1,8 +1,8 @@
 use crate::conditions::{NOT_INSERT_GLORIA, NOT_LENT};
 use crate::rite2::{GLORIA_PATRI, LORDS_PRAYER_ABBREV};
 use liturgy::{
-    Condition, Content, DisplayFormat, Document, Heading, HeadingLevel, Preces, PsalmCitation,
-    ResponsivePrayer, Rubric, Sentence, Series, SubLiturgy, Text,
+    Condition, Content, DisplayFormat, Document, Heading, HeadingLevel, Preces, PreferenceKey,
+    PreferenceValue, PsalmCitation, ResponsivePrayer, Rubric, Sentence, Series, SubLiturgy, Text,
 };
 
 lazy_static! {
@@ -17,13 +17,13 @@ lazy_static! {
                 // If the Angelus is included, add the Angelus and then a heading for Noonday Prayer proper
                 Document::from(SubLiturgy::Angelus)
                     .condition(Condition::Preference(
-                        String::from("angelus"),
-                        String::from("before")
+                        PreferenceKey::from("angelus"),
+                        PreferenceValue::from("before")
                     )),
                 Document::from(Heading::from((HeadingLevel::Heading1, "Noonday Prayer")))
                     .condition(Condition::Preference(
-                        String::from("angelus"),
-                        String::from("before")
+                        PreferenceKey::from("angelus"),
+                        PreferenceValue::from("before")
                     )),
 
                 // Opening of Noonday Prayer proper

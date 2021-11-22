@@ -1,5 +1,5 @@
 use calendar::Season;
-use liturgy::Condition;
+use liturgy::{Condition, PreferenceKey, PreferenceValue};
 
 lazy_static! {
     /// True when it is not Lent (including Holy Week)
@@ -10,7 +10,7 @@ lazy_static! {
 
     /// True when the "Insert Gloria Patri between psalms" preference is not set
     pub static ref NOT_INSERT_GLORIA: Condition = Condition::Not(Box::new(Condition::Preference(
-        String::from("insertGloria"),
-        String::from("true")
+        PreferenceKey::from("insertGloria"),
+        PreferenceValue::from("true")
     )));
 }
