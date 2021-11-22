@@ -144,75 +144,84 @@ pub enum Content {
     /// A set of multiple [Document]s, which are mutually-exclusive choices
     Choice(Choice),
     /// # Lookup Fields
+    /// Inserts the Collect of the Day
+    CollectOfTheDay,
     /// A reference to a [Psalm](crate::Psalm), which will be inserted by the compilation process.
     PsalmCitation(PsalmCitation),
     /// Inserts another liturgy, by its identifier
     SubLiturgy(SubLiturgy),
 }
 
+// Create Document from a Content enum
+impl From<Content> for Document {
+    fn from(content: Content) -> Self {
+        Self::new().content(content)
+    }
+}
+
 // Create Documents from various content types
 impl From<Choice> for Document {
     fn from(content: Choice) -> Self {
-        Self::new().content(Content::Choice(content))
+        Self::from(Content::Choice(content))
     }
 }
 
 impl From<GloriaPatri> for Document {
     fn from(content: GloriaPatri) -> Self {
-        Self::new().content(Content::GloriaPatri(content))
+        Self::from(Content::GloriaPatri(content))
     }
 }
 
 impl From<Heading> for Document {
     fn from(content: Heading) -> Self {
-        Self::new().content(Content::Heading(content))
+        Self::from(Content::Heading(content))
     }
 }
 
 impl From<Preces> for Document {
     fn from(content: Preces) -> Self {
-        Self::new().content(Content::Preces(content))
+        Self::from(Content::Preces(content))
     }
 }
 
 impl From<Psalm> for Document {
     fn from(content: Psalm) -> Self {
-        Self::new().content(Content::Psalm(content))
+        Self::from(Content::Psalm(content))
     }
 }
 
 impl From<PsalmCitation> for Document {
     fn from(content: PsalmCitation) -> Self {
-        Self::new().content(Content::PsalmCitation(content))
+        Self::from(Content::PsalmCitation(content))
     }
 }
 
 impl From<ResponsivePrayer> for Document {
     fn from(content: ResponsivePrayer) -> Self {
-        Self::new().content(Content::ResponsivePrayer(content))
+        Self::from(Content::ResponsivePrayer(content))
     }
 }
 
 impl From<Rubric> for Document {
     fn from(content: Rubric) -> Self {
-        Self::new().content(Content::Rubric(content))
+        Self::from(Content::Rubric(content))
     }
 }
 
 impl From<Sentence> for Document {
     fn from(content: Sentence) -> Self {
-        Self::new().content(Content::Sentence(content))
+        Self::from(Content::Sentence(content))
     }
 }
 
 impl From<SubLiturgy> for Document {
     fn from(content: SubLiturgy) -> Self {
-        Self::new().content(Content::SubLiturgy(content))
+        Self::from(Content::SubLiturgy(content))
     }
 }
 
 impl From<Text> for Document {
     fn from(content: Text) -> Self {
-        Self::new().content(Content::Text(content))
+        Self::from(Content::Text(content))
     }
 }

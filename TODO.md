@@ -14,6 +14,7 @@
 - [ ] Compiler
   - [ ] PsalmCitation
   - [ ] SubLiturgy
+  - [ ] Collect of the Day
 - [ ] Lectionary tests against JS versions
   - [ ] RCL
 - [ ] Calendar tests
