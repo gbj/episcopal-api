@@ -1,3 +1,4 @@
+mod choice;
 mod condition;
 mod display_format;
 mod document;
@@ -14,6 +15,7 @@ mod sentence;
 mod subliturgy;
 mod text;
 
+pub use choice::*;
 pub use condition::Condition;
 pub use display_format::DisplayFormat;
 pub use document::{Content, Document};

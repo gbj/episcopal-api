@@ -1,5 +1,5 @@
 use crate::conditions::{NOT_INSERT_GLORIA, NOT_LENT};
-use crate::rite2::GLORIA_PATRI;
+use crate::rite2::{GLORIA_PATRI, LORDS_PRAYER_ABBREV};
 use liturgy::{
     Condition, Content, DisplayFormat, Document, Heading, HeadingLevel, Preces, PsalmCitation,
     ResponsivePrayer, Rubric, Sentence, SubLiturgy, Text,
@@ -62,6 +62,8 @@ lazy_static! {
                     "Lord, have mercy.",
                     "Christ, have mercy.",
                     "Lord, have mercy."
-                ]))
+                ])),
+                Document::from(Rubric::from("Officiant and People")),
+                Document::from(LORDS_PRAYER_ABBREV.clone()),
             ]));
 }

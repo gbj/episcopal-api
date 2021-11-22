@@ -4,8 +4,8 @@ use calendar::{Calendar, LiturgicalDay};
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    ClientPreferences, Condition, GloriaPatri, Heading, Preces, Psalm, PsalmCitation, Reference,
-    ResponsivePrayer, Rubric, Sentence, SubLiturgy, Text,
+    Choice, ClientPreferences, Condition, GloriaPatri, Heading, Preces, Psalm, PsalmCitation,
+    Reference, ResponsivePrayer, Rubric, Sentence, SubLiturgy, Text,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -53,14 +53,24 @@ impl Document {
                     ),
                     ..self
                 }),
-                Content::Option(sub) => Some(Self {
-                    content: Content::Option(
-                        sub.into_iter()
-                            .filter_map(|doc| doc.compile(calendar, day, prefs))
-                            .collect::<Vec<_>>(),
-                    ),
-                    ..self
-                }),
+                Content::Choice(sub) => {
+                    // try, when filtering selections, to maintain the currently-selected item -- or default to 0
+                    let prev_selection = sub.options.get(sub.selected);
+                    let index_of_prev_selection = prev_selection
+                        .and_then(|prev| sub.options.iter().position(|search| search == prev));
+
+                    Some(Self {
+                        content: Content::Choice(Choice {
+                            options: sub
+                                .options
+                                .into_iter()
+                                .filter_map(|doc| doc.compile(calendar, day, prefs))
+                                .collect(),
+                            selected: index_of_prev_selection.unwrap_or(0),
+                        }),
+                        ..self
+                    })
+                }
                 _ => Some(self),
             }
         }
@@ -132,7 +142,7 @@ pub enum Content {
     /// A set of multiple [Document]s, displayed as parallel options (e.g., in multiple languages or versions)
     Parallel(Vec<Document>),
     /// A set of multiple [Document]s, which are mutually-exclusive choices
-    Option(Vec<Document>),
+    Choice(Choice),
     /// # Lookup Fields
     /// A reference to a [Psalm](crate::Psalm), which will be inserted by the compilation process.
     PsalmCitation(PsalmCitation),
@@ -141,6 +151,11 @@ pub enum Content {
 }
 
 // Create Documents from various content types
+impl From<Choice> for Document {
+    fn from(content: Choice) -> Self {
+        Self::new().content(Content::Choice(content))
+    }
+}
 
 impl From<GloriaPatri> for Document {
     fn from(content: GloriaPatri) -> Self {
