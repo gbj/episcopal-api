@@ -4,8 +4,8 @@ use calendar::{Calendar, LiturgicalDay};
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    ClientPreferences, Condition, DisplayFormat, GloriaPatri, Heading, Preces, Reference, Rubric,
-    SubLiturgy, Text,
+    ClientPreferences, Condition, GloriaPatri, Heading, Preces, Psalm, PsalmCitation, Reference,
+    Rubric, SubLiturgy, Text,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -116,6 +116,8 @@ pub enum Content {
     Heading(Heading),
     /// A responsive prayer in which each line has a label and its text: V: ___ / R: ___
     Preces(Preces),
+    /// A psalm.
+    Psalm(Psalm),
     /// An explanatory sentence or direction for the liturgy
     Rubric(Rubric),
     /// Text, without any additional styling or semantics
@@ -127,6 +129,9 @@ pub enum Content {
     Parallel(Vec<Document>),
     /// A set of multiple [Document]s, which are mutually-exclusive choices
     Option(Vec<Document>),
+    /// # Lookup Fields
+    /// Includes psalm's citation, and is transformed into a [Psalm](crate::Psalm) by the compilation process.
+    PsalmCitation(PsalmCitation),
     /// Inserts another liturgy, by its identifier
     SubLiturgy(SubLiturgy),
 }
@@ -148,6 +153,18 @@ impl From<Heading> for Document {
 impl From<Preces> for Document {
     fn from(content: Preces) -> Self {
         Self::new().content(Content::Preces(content))
+    }
+}
+
+impl From<Psalm> for Document {
+    fn from(content: Psalm) -> Self {
+        Self::new().content(Content::Psalm(content))
+    }
+}
+
+impl From<PsalmCitation> for Document {
+    fn from(content: PsalmCitation) -> Self {
+        Self::new().content(Content::PsalmCitation(content))
     }
 }
 

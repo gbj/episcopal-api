@@ -11,6 +11,9 @@
   - [ ] Source field
   - [ ] Document types
   - [ ] Rendering
+- [ ] Compiler
+  - [ ] PsalmCitation
+  - [ ] SubLiturgy
 - [ ] Lectionary tests against JS versions
   - [ ] RCL
 - [ ] Calendar tests
