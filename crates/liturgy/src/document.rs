@@ -26,59 +26,6 @@ impl Document {
         }
     }
 
-    pub fn compile(
-        self,
-        calendar: &Calendar,
-        day: &LiturgicalDay,
-        prefs: &impl ClientPreferences,
-    ) -> Option<Self> {
-        let include = self.include(calendar, day, prefs);
-        if !include {
-            None
-        } else {
-            match self.content {
-                // Lookup types -- TODO
-                // Collection types
-                Content::Series(sub) => Some(Self {
-                    content: Content::Series(Series::from(
-                        sub.iter()
-                            .filter_map(|doc| doc.clone().compile(calendar, day, prefs))
-                            .collect::<Vec<_>>(),
-                    )),
-                    ..self
-                }),
-                Content::Parallel(sub) => Some(Self {
-                    content: Content::Parallel(
-                        sub.into_iter()
-                            .filter_map(|doc| doc.compile(calendar, day, prefs))
-                            .collect::<Vec<_>>(),
-                    ),
-                    ..self
-                }),
-                Content::Choice(sub) => {
-                    // try, when filtering selections, to maintain the currently-selected item -- or default to 0
-                    let prev_selection = sub.options.get(sub.selected);
-                    let index_of_prev_selection = prev_selection
-                        .and_then(|prev| sub.options.iter().position(|search| search == prev));
-
-                    Some(Self {
-                        content: Content::Choice(Choice {
-                            options: sub
-                                .options
-                                .into_iter()
-                                .filter_map(|doc| doc.compile(calendar, day, prefs))
-                                .collect(),
-                            selected: index_of_prev_selection.unwrap_or(0),
-                        }),
-                        ..self
-                    })
-                }
-                // Every else just passes through as is
-                _ => Some(self),
-            }
-        }
-    }
-
     pub fn include(
         &self,
         calendar: &Calendar,
@@ -214,6 +161,12 @@ impl From<Rubric> for Document {
 impl From<Sentence> for Document {
     fn from(content: Sentence) -> Self {
         Self::from(Content::Sentence(content))
+    }
+}
+
+impl From<Series> for Document {
+    fn from(content: Series) -> Self {
+        Self::from(Content::Series(content))
     }
 }
 

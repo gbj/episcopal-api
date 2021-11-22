@@ -5,6 +5,12 @@ use std::fmt::Display;
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct PsalmCitation(String);
 
+impl PsalmCitation {
+    pub fn as_str(&self) -> &str {
+        &self.0
+    }
+}
+
 impl Display for PsalmCitation {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
         write!(f, "{}", self.0)

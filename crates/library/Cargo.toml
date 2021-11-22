@@ -7,3 +7,4 @@ edition = "2018"
 lazy_static = '1.0'
 liturgy = { path = "../liturgy" }
 calendar = { path = "../calendar" }
+psalter = { path = "../psalter" }

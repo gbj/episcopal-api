@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use calendar::{Date, BCP1979_CALENDAR};
-use library::rite2::NOONDAY_PRAYER;
+use library::{rite2::NOONDAY_PRAYER, CommonPrayer, Library};
 use liturgy::{Document, Psalm};
 use psalter::bcp1979::BCP1979_PSALTER;
 use rocket::{response::content::Html, serde::json::Json};
@@ -32,7 +32,8 @@ pub fn document(
         _ => None,
     };
     let prefs = HashMap::new();
-    let compiled = document.and_then(|doc| doc.compile(&BCP1979_CALENDAR, &day, &prefs));
+    let compiled =
+        document.and_then(|doc| CommonPrayer::compile(doc, &BCP1979_CALENDAR, &day, &prefs));
 
     Json(compiled)
 }
@@ -46,7 +47,8 @@ pub fn doc_to_html(slug: &str, year: u16, month: u8, day: u8, evening: bool) -> 
         _ => None,
     };
     let prefs = HashMap::new();
-    let compiled = document.and_then(|doc| doc.compile(&BCP1979_CALENDAR, &day, &prefs));
+    let compiled =
+        document.and_then(|doc| CommonPrayer::compile(doc, &BCP1979_CALENDAR, &day, &prefs));
 
     let component = DocumentView::from(compiled.unwrap_or_default());
     Html(component.to_html())
