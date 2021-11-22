@@ -12,6 +12,7 @@ mod reference;
 mod responsive_prayer;
 mod rubric;
 mod sentence;
+mod series;
 mod subliturgy;
 mod text;
 
@@ -28,6 +29,7 @@ pub use psalm_citation::*;
 pub use reference::*;
 pub use responsive_prayer::*;
 pub use rubric::*;
-pub use sentence::Sentence;
+pub use sentence::*;
+pub use series::*;
 pub use subliturgy::SubLiturgy;
 pub use text::*;

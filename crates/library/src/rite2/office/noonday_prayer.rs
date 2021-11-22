@@ -2,14 +2,14 @@ use crate::conditions::{NOT_INSERT_GLORIA, NOT_LENT};
 use crate::rite2::{GLORIA_PATRI, LORDS_PRAYER_ABBREV};
 use liturgy::{
     Condition, Content, DisplayFormat, Document, Heading, HeadingLevel, Preces, PsalmCitation,
-    ResponsivePrayer, Rubric, Sentence, SubLiturgy, Text,
+    ResponsivePrayer, Rubric, Sentence, Series, SubLiturgy, Text,
 };
 
 lazy_static! {
     pub static ref NOONDAY_PRAYER: Document =
         Document::new()
             .label("Noonday Prayer")
-            .content(Content::Series(vec![
+            .content(Content::Series(Series::from([
                 // Include the title, date, and day in any case
                 Document::from(Heading::from((HeadingLevel::Heading1, "Noonday Prayer"))),
                 Document::from(Heading::Date),
@@ -65,5 +65,11 @@ lazy_static! {
                 ])),
                 Document::from(Rubric::from("Officiant and People")),
                 Document::from(LORDS_PRAYER_ABBREV.clone()),
-            ]));
+                Document::from(Preces::from([
+                    ("Officiant", "Lord, hear our prayer."),
+                    ("People", "And let our cry come to you."),
+                    ("Officiant", "Let us pray.")
+                ])),
+                Document::from(Rubric::from("The Officiant then says one of the following Collect. If desired, the Collect of the Day may be used."))
+            ])));
 }

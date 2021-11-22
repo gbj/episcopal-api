@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     Choice, ClientPreferences, Condition, GloriaPatri, Heading, Preces, Psalm, PsalmCitation,
-    Reference, ResponsivePrayer, Rubric, Sentence, SubLiturgy, Text,
+    Reference, ResponsivePrayer, Rubric, Sentence, Series, SubLiturgy, Text,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -38,11 +38,11 @@ impl Document {
         } else {
             match self.content {
                 Content::Series(sub) => Some(Self {
-                    content: Content::Series(
-                        sub.into_iter()
-                            .filter_map(|doc| doc.compile(calendar, day, prefs))
+                    content: Content::Series(Series::from(
+                        sub.iter()
+                            .filter_map(|doc| doc.clone().compile(calendar, day, prefs))
                             .collect::<Vec<_>>(),
-                    ),
+                    )),
                     ..self
                 }),
                 Content::Parallel(sub) => Some(Self {
@@ -138,7 +138,7 @@ pub enum Content {
     Text(Text),
     /// # Structural Variants
     /// A set of multiple [Document]s, organized one after the other
-    Series(Vec<Document>),
+    Series(Series),
     /// A set of multiple [Document]s, displayed as parallel options (e.g., in multiple languages or versions)
     Parallel(Vec<Document>),
     /// A set of multiple [Document]s, which are mutually-exclusive choices
