@@ -31,8 +31,12 @@ pub struct Calendar {
     pub feast_seasons: &'static [(Feast, Season)],
     /// Associations between [LiturgicalWeek]s and [Season]s
     pub week_seasons: &'static [(LiturgicalWeek, Season)],
-    /// Name for each feast, by language
+    /// Name for each [Feast](crate::Feast), by language
     pub feast_names: &'static [(Feast, Language, &'static str)],
+    /// Name for each [LiturgicalWeek](crate::LiturgicalWeek), by language
+    pub week_names: &'static [(LiturgicalWeek, Language, &'static str)],
+    /// Name for each [Proper](crate::Proper), by language
+    pub proper_names: &'static [(Proper, Language, &'static str)],
 }
 
 impl Calendar {
@@ -158,6 +162,22 @@ impl Calendar {
         self.feast_names
             .iter()
             .find(|(s_feast, s_language, _)| *s_feast == feast && *s_language == language)
+            .map(|(_, _, name)| *name)
+    }
+
+    /// The name of a [LiturgicalWeek](crate::LiturgicalWeek) in a given [Language](language::Language)
+    pub fn week_name(&self, week: LiturgicalWeek, language: Language) -> Option<&str> {
+        self.week_names
+            .iter()
+            .find(|(s_week, s_language, _)| *s_week == week && *s_language == language)
+            .map(|(_, _, name)| *name)
+    }
+
+    /// The name of a [Proper](crate::Proper) in a given [Language](language::Language)
+    pub fn proper_name(&self, proper: Proper, language: Language) -> Option<&str> {
+        self.proper_names
+            .iter()
+            .find(|(s_proper, s_language, _)| *s_proper == proper && *s_language == language)
             .map(|(_, _, name)| *name)
     }
 

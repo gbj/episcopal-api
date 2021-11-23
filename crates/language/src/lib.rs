@@ -18,3 +18,20 @@ impl Default for Language {
         Self::En
     }
 }
+
+impl Language {
+    // TODO i18n when other languages are added
+    pub fn i18n(&self, string: &str) -> String {
+        match (self, string) {
+            (Language::En, "Mon") => "Monday",
+            (Language::En, "Tue") => "Tuesday",
+            (Language::En, "Wed") => "Wednesday",
+            (Language::En, "Thu") => "Thursday",
+            (Language::En, "Fri") => "Friday",
+            (Language::En, "Sat") => "Saturday",
+            (Language::En, "Sun") => "Sunday",
+            _ => string,
+        }
+        .to_string()
+    }
+}

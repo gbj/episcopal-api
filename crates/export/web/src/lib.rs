@@ -1,8 +1,7 @@
-use calendar::{Calendar, Date, LiturgicalDay, LiturgicalDayId, BCP1979_CALENDAR};
+use calendar::{Calendar, Date, LiturgicalDay, LiturgicalDayId, Weekday, BCP1979_CALENDAR};
 use liturgy::*;
 use sauron::html::text;
 use sauron::prelude::*;
-use sauron::web_sys::console::{log, log_1};
 use sauron::{node, Application, Cmd, Node};
 
 #[derive(Debug)]
@@ -121,6 +120,10 @@ impl DocumentView {
         }
     }
 
+    fn i18n(&self, text: &str) -> String {
+        self.document.language.i18n(text)
+    }
+
     // Content Types
 
     fn choice(&self, choice: &Choice) -> Node<Msg> {
@@ -146,7 +149,7 @@ impl DocumentView {
 
     fn day(&self, day: &Option<LiturgicalDay>) -> Node<Msg> {
         let observed = day.as_ref().map(|day| day.observed);
-        let holy_day_name = match observed {
+        let base_name = match observed {
             Some(LiturgicalDayId::Feast(feast)) => self
                 .calendar
                 .feast_name(feast, self.document.language)
@@ -160,14 +163,54 @@ impl DocumentView {
                             {text(name)}
                             <br/>
                             // TODO i18n
-                            {text("(Transferred)")}
+                            {text(self.i18n("(Transferred)"))}
                         </p>
                     }
                 }),
-            _ => None,
+            _ => {
+                if let Some(day) = day {
+                    self.calendar
+                        .week_name(day.week, self.document.language)
+                        .map(|name| {
+                            if day.weekday == Weekday::Sun {
+                                node! {
+                                    <p>
+                                        {text(name)}
+                                    </p>
+                                }
+                            } else {
+                                node! {
+                                    <p>
+                                        {text(self.i18n(&day.weekday.to_string()))}
+                                        {text(self.i18n("after"))}
+                                        {text(name.replace("The", "the"))}
+                                    </p>
+                                }
+                            }
+                        })
+                } else {
+                    None
+                }
+            }
         };
 
-        holy_day_name.unwrap_or_else(|| text("[TODO LiturgicalDay name]"))
+        let proper = observed
+            .and_then(|id| {
+                if let LiturgicalDayId::ProperAndDay(proper, _) = id {
+                    Some(proper)
+                } else {
+                    None
+                }
+            })
+            .and_then(|proper| self.calendar.proper_name(proper, self.document.language))
+            .map(|name| format!("({})", name));
+
+        node! {
+            <h2>
+                {base_name.unwrap_or_else(|| text(""))}
+                {text(proper.unwrap_or_else(String::default))}
+            </h2>
+        }
     }
 
     fn empty(&self) -> Node<Msg> {

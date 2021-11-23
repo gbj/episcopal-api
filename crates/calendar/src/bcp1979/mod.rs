@@ -2,7 +2,7 @@ use language::Language;
 
 use crate::{
     feasts::KalendarEntry, holy_day::HolyDayId, liturgical_week::Cycle, Calendar, Feast,
-    LiturgicalWeek, Rank, Season, Time, Weekday,
+    LiturgicalWeek, Proper, Rank, Season, Time, Weekday,
 };
 
 /// [Calendar](Calendar) that calculates dates from the liturgical and sanctoral calendar
@@ -17,6 +17,8 @@ pub const BCP1979_CALENDAR: Calendar = Calendar {
     feast_seasons: &BCP1979_HOLY_DAY_SEASONS,
     week_seasons: &BCP1979_WEEK_SEASONS,
     feast_names: &BCP1979_FEAST_NAMES,
+    week_names: &BCP1979_WEEK_NAMES,
+    proper_names: &BCP1979_PROPER_NAMES,
 };
 
 const BCP1979_WEEKS: [(Cycle, u8, LiturgicalWeek); 59] = [
@@ -1456,6 +1458,316 @@ const BCP1979_FEAST_NAMES : [(Feast, Language, &str); 180] = [
     (Feast::WilliamWilberforce, Language::En, "William Wilberforce, 1833"),
     (Feast::Willibrord, Language::En, "Willibrord, Archbishop of Utrecht, Missionary to Frisia, 739"),
     (Feast::WulfstanOfWorcester, Language::En, "Wulfstan, Bishop of Worcester, 1095")
+];
+
+const BCP1979_WEEK_NAMES: [(LiturgicalWeek, Language, &str); 59] = [
+    (
+        LiturgicalWeek::Pentecost10,
+        Language::En,
+        "The Tenth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost11,
+        Language::En,
+        "The Eleventh Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost12,
+        Language::En,
+        "The Twelfth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost13,
+        Language::En,
+        "The Thirteenth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost14,
+        Language::En,
+        "The Fourteenth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost15,
+        Language::En,
+        "The Fifteenth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost16,
+        Language::En,
+        "The Sixteenth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost17,
+        Language::En,
+        "The Seventeenth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost18,
+        Language::En,
+        "The Eighteenth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost19,
+        Language::En,
+        "The Nineteenth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Epiphany1,
+        Language::En,
+        "The First Sunday after the Epiphany",
+    ),
+    (
+        LiturgicalWeek::Lent1,
+        Language::En,
+        "The First Sunday in Lent",
+    ),
+    (
+        LiturgicalWeek::Christmas1,
+        Language::En,
+        "The First Sunday after Christmas",
+    ),
+    (
+        LiturgicalWeek::Pentecost20,
+        Language::En,
+        "The Twentieth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost21,
+        Language::En,
+        "The Twenty-First Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost22,
+        Language::En,
+        "The Twenty-Second Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost23,
+        Language::En,
+        "The Twenty-Third Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost24,
+        Language::En,
+        "The Twenty-Fourth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost25,
+        Language::En,
+        "The Twenty-Fifth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost26,
+        Language::En,
+        "The Twenty-Sixth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost27,
+        Language::En,
+        "The Twenty-Seventh Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Easter2,
+        Language::En,
+        "The Second Sunday of Easter",
+    ),
+    (
+        LiturgicalWeek::Epiphany2,
+        Language::En,
+        "The Second Sunday after the Epiphany",
+    ),
+    (
+        LiturgicalWeek::Lent2,
+        Language::En,
+        "The Second Sunday in Lent",
+    ),
+    (
+        LiturgicalWeek::Pentecost2,
+        Language::En,
+        "The Second Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Christmas2,
+        Language::En,
+        "The Second Sunday after Christmas",
+    ),
+    (
+        LiturgicalWeek::Easter3,
+        Language::En,
+        "The Third Sunday of Easter",
+    ),
+    (
+        LiturgicalWeek::Epiphany3,
+        Language::En,
+        "The Third Sunday after the Epiphany",
+    ),
+    (
+        LiturgicalWeek::Lent3,
+        Language::En,
+        "The Third Sunday in Lent",
+    ),
+    (
+        LiturgicalWeek::Pentecost3,
+        Language::En,
+        "The Third Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Easter4,
+        Language::En,
+        "The Fourth Sunday of Easter",
+    ),
+    (
+        LiturgicalWeek::Epiphany4,
+        Language::En,
+        "The Fourth Sunday after the Epiphany",
+    ),
+    (
+        LiturgicalWeek::Lent4,
+        Language::En,
+        "The Fourth Sunday in Lent",
+    ),
+    (
+        LiturgicalWeek::Pentecost4,
+        Language::En,
+        "The Fourth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Easter5,
+        Language::En,
+        "The Fifth Sunday of Easter",
+    ),
+    (
+        LiturgicalWeek::Epiphany5,
+        Language::En,
+        "The Fifth Sunday after the Epiphany",
+    ),
+    (
+        LiturgicalWeek::Lent5,
+        Language::En,
+        "The Fifth Sunday in Lent",
+    ),
+    (
+        LiturgicalWeek::Pentecost5,
+        Language::En,
+        "The Fifth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Easter6,
+        Language::En,
+        "The Sixth Sunday of Easter",
+    ),
+    (
+        LiturgicalWeek::Epiphany6,
+        Language::En,
+        "The Sixth Sunday after the Epiphany",
+    ),
+    (
+        LiturgicalWeek::Pentecost6,
+        Language::En,
+        "The Sixth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Easter7,
+        Language::En,
+        "The Seventh Sunday of Easter",
+    ),
+    (
+        LiturgicalWeek::Epiphany7,
+        Language::En,
+        "The Seventh Sunday after the Epiphany",
+    ),
+    (
+        LiturgicalWeek::Pentecost7,
+        Language::En,
+        "The Seventh Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Epiphany8,
+        Language::En,
+        "The Eighth Sunday after the Epiphany",
+    ),
+    (
+        LiturgicalWeek::Pentecost8,
+        Language::En,
+        "The Eighth Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::Pentecost9,
+        Language::En,
+        "The Ninth Sunday after Pentecost",
+    ),
+    (LiturgicalWeek::Christmas, Language::En, "Christmas"),
+    (LiturgicalWeek::Easter, Language::En, "Easter Day"),
+    (LiturgicalWeek::Epiphany, Language::En, "Epiphany"),
+    (
+        LiturgicalWeek::Advent1,
+        Language::En,
+        "The First Sunday of Advent",
+    ),
+    (
+        LiturgicalWeek::Advent4,
+        Language::En,
+        "The Fourth Sunday of Advent",
+    ),
+    (LiturgicalWeek::HolyWeek, Language::En, "Palm Sunday"),
+    (
+        LiturgicalWeek::LastPentecost,
+        Language::En,
+        "The Last Sunday after Pentecost",
+    ),
+    (
+        LiturgicalWeek::LastEpiphany,
+        Language::En,
+        "The Last Sunday after the Epiphany",
+    ),
+    (LiturgicalWeek::Pentecost, Language::En, "Pentecost"),
+    (
+        LiturgicalWeek::Advent2,
+        Language::En,
+        "The Second Sunday of Advent",
+    ),
+    (
+        LiturgicalWeek::Advent3,
+        Language::En,
+        "The Third Sunday of Advent",
+    ),
+    (
+        LiturgicalWeek::TrinitySunday,
+        Language::En,
+        "Trinity Sunday",
+    ),
+];
+
+const BCP1979_PROPER_NAMES: [(Proper, Language, &str); 29] = [
+    (Proper::Proper1, Language::En, "Proper 1"),
+    (Proper::Proper2, Language::En, "Proper 2"),
+    (Proper::Proper3, Language::En, "Proper 3"),
+    (Proper::Proper4, Language::En, "Proper 4"),
+    (Proper::Proper5, Language::En, "Proper 5"),
+    (Proper::Proper6, Language::En, "Proper 6"),
+    (Proper::Proper7, Language::En, "Proper 7"),
+    (Proper::Proper8, Language::En, "Proper 8"),
+    (Proper::Proper9, Language::En, "Proper 9"),
+    (Proper::Proper10, Language::En, "Proper 10"),
+    (Proper::Proper11, Language::En, "Proper 11"),
+    (Proper::Proper12, Language::En, "Proper 12"),
+    (Proper::Proper13, Language::En, "Proper 13"),
+    (Proper::Proper14, Language::En, "Proper 14"),
+    (Proper::Proper15, Language::En, "Proper 15"),
+    (Proper::Proper16, Language::En, "Proper 16"),
+    (Proper::Proper17, Language::En, "Proper 17"),
+    (Proper::Proper18, Language::En, "Proper 18"),
+    (Proper::Proper19, Language::En, "Proper 19"),
+    (Proper::Proper20, Language::En, "Proper 20"),
+    (Proper::Proper21, Language::En, "Proper 21"),
+    (Proper::Proper22, Language::En, "Proper 22"),
+    (Proper::Proper23, Language::En, "Proper 23"),
+    (Proper::Proper24, Language::En, "Proper 24"),
+    (Proper::Proper25, Language::En, "Proper 25"),
+    (Proper::Proper26, Language::En, "Proper 26"),
+    (Proper::Proper27, Language::En, "Proper 27"),
+    (Proper::Proper28, Language::En, "Proper 28"),
+    (Proper::Proper29, Language::En, "Proper 29"),
 ];
 
 #[cfg(test)]
