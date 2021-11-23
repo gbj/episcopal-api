@@ -15,7 +15,6 @@
   - [ ] RCL
 - [ ] Calendar tests
   - [ ] Test feasts like "Eve of Trinity Sunday" etc.
-- [ ] Test lectionaries against other APIs (like old Forward Movement API)
 - [ ] Sort and prettify various constant arrays
 - [ ] Localization
   - [ ] LiturgicalWeek => string
