@@ -5,18 +5,12 @@
     - [ ] tests
 - [x] Psalter
   - [x] tests for searching by citation
-- [ ] Liturgical documents
-  - [x] Conditions
-    - [x] Tests
-  - [ ] Source field
-  - [ ] Document types
-  - [ ] Rendering
 - [ ] Compiler
-  - [ ] PsalmCitation
+  - [x] PsalmCitation
     - [ ] Allow multiple psalters based on preferences
   - [ ] SubLiturgy
   - [ ] Collect of the Day
-  - [ ] Date/Day
+  - [x] Date/Day
 - [ ] Lectionary tests against JS versions
   - [ ] RCL
 - [ ] Calendar tests
