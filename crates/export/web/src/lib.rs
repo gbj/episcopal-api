@@ -131,7 +131,7 @@ impl DocumentView {
             <section class="document choice">
                 <nav>
                     <ul>
-                        {for (doc, ii) in choice.options.iter().enumerate() {
+                        {for (ii, doc) in choice.options.iter().enumerate() {
                             node! {
                                 <li>{text(choice.option_label(&doc, ii))}</li>
                             }
