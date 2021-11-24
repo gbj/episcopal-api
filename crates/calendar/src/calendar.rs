@@ -108,6 +108,15 @@ impl Calendar {
     }
 
     /// Gives the appropriate liturgical [Season] for the given day
+    /// ```
+    /// # use crate::calendar::{BCP1979_CALENDAR, Date, Season};
+    /// let date = Date::from_ymd(2021, 11, 29);
+    /// let monday_advent_1 = BCP1979_CALENDAR.liturgical_day(date, false);
+    /// assert_eq!(BCP1979_CALENDAR.season(&monday_advent_1), Season::Advent);
+    /// let date = Date::from_ymd(2020, 5, 21);
+    /// let thursday_easter_6 = BCP1979_CALENDAR.liturgical_day(date, false);
+    /// assert_eq!(BCP1979_CALENDAR.season(&thursday_easter_6), Season::Ascension);
+    /// ```
     pub fn season(&self, day: &LiturgicalDay) -> Season {
         match day.observed {
             LiturgicalDayId::Feast(feast) => self
@@ -132,6 +141,17 @@ impl Calendar {
     }
 
     /// Gives the [Season] of the week during which a day falls
+    /// ```
+    /// # use crate::calendar::{BCP1979_CALENDAR, Date, Season};
+    /// let date = Date::from_ymd(2020, 3, 25);
+    /// let annunciation = BCP1979_CALENDAR.liturgical_day(date, false);
+    /// assert_eq!(BCP1979_CALENDAR.season(&annunciation), Season::Saints);
+    /// assert_eq!(BCP1979_CALENDAR.base_season(&annunciation), Season::Lent);
+    /// let date = Date::from_ymd(2020, 12, 25);
+    /// let christmas = BCP1979_CALENDAR.liturgical_day(date, false);
+    /// assert_eq!(BCP1979_CALENDAR.season(&christmas), Season::Christmas);
+    /// assert_eq!(BCP1979_CALENDAR.base_season(&christmas), Season::Christmas);
+    /// ```
     pub fn base_season(&self, day: &LiturgicalDay) -> Season {
         self.week_seasons
             .iter()
@@ -141,6 +161,15 @@ impl Calendar {
     }
 
     // Gives the appropriate [Rank] for the given day
+    /// ```
+    /// # use crate::calendar::{BCP1979_CALENDAR, Date, Rank};
+    /// let date = Date::from_ymd(2021, 11, 29);
+    /// let monday_advent_1 = BCP1979_CALENDAR.liturgical_day(date, false);
+    /// assert_eq!(BCP1979_CALENDAR.rank(&monday_advent_1), Rank::FerialWeekday);
+    /// let date = Date::from_ymd(2020, 5, 21);
+    /// let thursday_easter_6 = BCP1979_CALENDAR.liturgical_day(date, false);
+    /// assert_eq!(BCP1979_CALENDAR.rank(&thursday_easter_6), Rank::PrincipalFeast);
+    /// ```
     pub fn rank(&self, day: &LiturgicalDay) -> Rank {
         match day.observed {
             LiturgicalDayId::Feast(feast) => self.feast_day_rank(&feast),

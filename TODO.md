@@ -1,10 +1,7 @@
 - [ ] `BibleReference` to `String`
-- [ ] Calendar helpers
-  - [x] season()
-    - [ ] tests
-  - [x] rank()
-    - [ ] tests
 - [ ] Document Types
+  - [ ] `BiblicalReading`
+    - [ ] intros
   - [ ] `LectionaryReading`
   - `Choice`
     - [ ] Option labels
