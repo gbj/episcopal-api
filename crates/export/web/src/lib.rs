@@ -208,7 +208,7 @@ impl DocumentView {
         node! {
             <h2>
                 {base_name.unwrap_or_else(|| text(""))}
-                {text(proper.unwrap_or_else(String::default))}
+                {text(proper.unwrap_or_default())}
             </h2>
         }
     }
