@@ -21,13 +21,13 @@ impl Psalm {
     /// # use reference_parser::BibleReference;
     /// // simple filtering within a single-section psalm
     /// let mut psalm_1 = PSALM_1.clone();
-    /// psalm_1.citation = Some(BibleReference::from("Psalm 1:1-4"));
+    /// psalm_1.citation = Some(String::from("Psalm 1:1-4"));
     /// assert_eq!(psalm_1.filtered_sections().len(), 1);
     /// assert_eq!(psalm_1.filtered_sections()[0].verses.len(), 4);
     ///
     /// // filtering across multiple sections of a single psalm with a single citation
     /// let mut psalm_119 = PSALM_119.clone();
-    /// psalm_119.citation = Some(BibleReference::from("Psalm 119:145-176"));
+    /// psalm_119.citation = Some(String::from("Psalm 119:145-176"));
     /// assert_eq!(psalm_119.filtered_sections().len(), 4);
     /// assert_eq!(psalm_119.filtered_sections()[0].verses.len(), 8);
     /// assert_eq!(psalm_119.filtered_sections()[0].local_name, "Qoph");

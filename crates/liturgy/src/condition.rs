@@ -167,10 +167,10 @@ pub enum Condition {
     /// # let day = BCP1979_CALENDAR.liturgical_day(Date::from_ymd(2022, 3, 25), false);
     /// # use std::collections::HashMap;
     /// let mut prefs = HashMap::new();
-    /// prefs.insert(String::from("bibleVersion"), String::from("NRSV"));
-    /// let condition = Condition::Preference(String::from("bibleVersion"), String::from("NRSV"));
+    /// prefs.insert(PreferenceKey::from("bibleVersion"), PreferenceValue::from("NRSV"));
+    /// let condition = Condition::Preference(PreferenceKey::from("bibleVersion"), PreferenceValue::from("NRSV"));
     /// assert_eq!(condition.include(&BCP1979_CALENDAR, &day, &prefs), true);
-    /// prefs.insert(String::from("bibleVersion"), String::from("ESV"));
+    /// prefs.insert(PreferenceKey::from("bibleVersion"), PreferenceValue::from("ESV"));
     /// assert_eq!(condition.include(&BCP1979_CALENDAR, &day, &prefs), false);
     /// ```
     Preference(PreferenceKey, PreferenceValue),
