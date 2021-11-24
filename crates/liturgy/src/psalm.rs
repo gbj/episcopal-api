@@ -34,7 +34,7 @@ impl Psalm {
     /// assert_eq!(psalm_119.filtered_sections()[0].verses[0].a, "I call with my whole heart; *");
     /// ```
     pub fn filtered_sections(&self) -> Vec<PsalmSection> {
-        let citation = self.citation.map(|citation| BibleReference::from(citation));
+        let citation = self.citation.as_ref().map(BibleReference::from);
         if let Some(citation) = citation {
             self.sections
                 .iter()
