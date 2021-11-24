@@ -128,7 +128,20 @@ impl DocumentView {
 
     fn choice(&self, choice: &Choice) -> Node<Msg> {
         node! {
-            <article class="document empty"></article>
+            <section class="document choice">
+                <nav>
+                    <ul>
+                        {for (doc, ii) in choice.options.iter().enumerate() {
+                            node! {
+                                <li>{text(choice.option_label(&doc, ii))}</li>
+                            }
+                        }}
+                    </ul>
+                </nav>
+            {for doc in choice.options.iter() {
+                {DocumentView::from(doc.clone()).view()}
+            }}
+            </section>
         }
     }
 

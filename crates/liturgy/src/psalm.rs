@@ -9,7 +9,7 @@ pub struct Psalm {
     /// The psalm number (e.g., 8 for Psalm 8)
     pub number: u8,
     /// Present when only a subset of verses should be displayed
-    pub citation: Option<BibleReference>,
+    pub citation: Option<String>,
     /// The content of the psalm, by section
     pub sections: Vec<PsalmSection>,
 }
@@ -34,7 +34,8 @@ impl Psalm {
     /// assert_eq!(psalm_119.filtered_sections()[0].verses[0].a, "I call with my whole heart; *");
     /// ```
     pub fn filtered_sections(&self) -> Vec<PsalmSection> {
-        if let Some(citation) = &self.citation {
+        let citation = self.citation.map(|citation| BibleReference::from(citation));
+        if let Some(citation) = citation {
             self.sections
                 .iter()
                 .map(|section| PsalmSection {

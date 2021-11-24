@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     Choice, ClientPreferences, Condition, GloriaPatri, Heading, Preces, Psalm, PsalmCitation,
-    Reference, ResponsivePrayer, Rubric, Sentence, Series, SubLiturgy, Text,
+    Reference, ResponsivePrayer, Rubric, Sentence, Series, SubLiturgy, Text, Version,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -15,6 +15,8 @@ pub struct Document {
     pub label: Option<String>,
     pub language: Language,
     pub source: Option<Reference>,
+    pub version: Version,
+    pub version_label: Option<String>,
     pub content: Content,
 }
 
@@ -25,6 +27,8 @@ impl Document {
             label: None,
             language: Language::default(),
             source: None,
+            version: Version::RiteII,
+            version_label: None,
             content: Content::Empty,
         }
     }
@@ -58,6 +62,16 @@ impl Document {
 
     pub fn source(mut self, source: Reference) -> Self {
         self.source = Some(source);
+        self
+    }
+
+    pub fn version(mut self, version: Version) -> Self {
+        self.version = version;
+        self
+    }
+
+    pub fn version_label(mut self, version_label: impl Display) -> Self {
+        self.version_label = Some(version_label.to_string());
         self
     }
 }

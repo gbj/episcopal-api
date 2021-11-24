@@ -15,6 +15,7 @@ mod sentence;
 mod series;
 mod subliturgy;
 mod text;
+mod version;
 
 pub use choice::*;
 pub use condition::Condition;
@@ -33,3 +34,4 @@ pub use sentence::*;
 pub use series::*;
 pub use subliturgy::SubLiturgy;
 pub use text::*;
+pub use version::*;

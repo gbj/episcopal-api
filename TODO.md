@@ -3,12 +3,23 @@
     - [ ] tests
   - [x] rank()
     - [ ] tests
-- [x] Psalter
-  - [x] tests for searching by citation
+- [ ] Document Types
+  - [ ] `LectionaryReading`
+  - [ ] `BibleReading`
+  - [ ] `Canticle`
+  - `Choice`
+    - [ ] Option labels
+      - [ ] Tests
+      - [ ] Efficiency
+    - [ ] HTML rendering
+    - [ ] Client-side/server-side logic for switching
+  - [ ] Update `Choice` labels based on these types
+    - `SubLiturgy`
+    - [ ] Compiler
+    - [ ] HTML rendering
 - [ ] Compiler
   - [x] PsalmCitation
     - [ ] Allow multiple psalters based on preferences
-  - [ ] SubLiturgy
   - [ ] Collect of the Day
   - [x] Date/Day
 - [ ] Lectionary tests against JS versions
