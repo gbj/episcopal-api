@@ -17,7 +17,5 @@
   - [ ] Test feasts like "Eve of Trinity Sunday" etc.
 - [ ] Sort and prettify various constant arrays
 - [ ] Localization
-  - [ ] LiturgicalWeek => string
-  - [ ] LiturgicalWeek => season
   - [ ] LiturgicalWeek => color
 
