@@ -72,7 +72,6 @@ impl Psalter {
                     .and_then(|number| self.psalm_by_number(number))
             })
             .map({
-                let reference = reference.clone();
                 move |psalm| {
                     let mut new_psalm = Psalm {
                         number: psalm.number,
