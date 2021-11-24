@@ -1,3 +1,4 @@
+- [ ] `BibleReference` to `String`
 - [ ] Calendar helpers
   - [x] season()
     - [ ] tests

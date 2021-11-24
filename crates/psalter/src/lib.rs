@@ -76,7 +76,8 @@ impl Psalter {
                 move |psalm| {
                     let mut new_psalm = Psalm {
                         number: psalm.number,
-                        citation: Some(reference.clone()),
+                        // TODO correctly convert this from a section of a citation into Some(String)
+                        citation: None,
                         sections: psalm.sections.clone(),
                     };
                     let filtered_sections = new_psalm.filtered_sections();
