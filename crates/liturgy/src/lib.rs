@@ -1,3 +1,6 @@
+mod biblical_citation;
+mod biblical_reading;
+mod canticle;
 mod choice;
 mod condition;
 mod display_format;
@@ -17,6 +20,9 @@ mod subliturgy;
 mod text;
 mod version;
 
+pub use biblical_citation::*;
+pub use biblical_reading::*;
+pub use canticle::*;
 pub use choice::*;
 pub use condition::Condition;
 pub use display_format::DisplayFormat;

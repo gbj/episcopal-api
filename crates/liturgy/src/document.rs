@@ -5,8 +5,9 @@ use language::Language;
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    Choice, ClientPreferences, Condition, GloriaPatri, Heading, Preces, Psalm, PsalmCitation,
-    Reference, ResponsivePrayer, Rubric, Sentence, Series, SubLiturgy, Text, Version,
+    BiblicalCitation, BiblicalReading, Canticle, Choice, ClientPreferences, Condition, GloriaPatri,
+    Heading, Preces, Psalm, PsalmCitation, Reference, ResponsivePrayer, Rubric, Sentence, Series,
+    SubLiturgy, Text, Version,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -87,6 +88,13 @@ pub enum Content {
     /// # Content Variants
     /// A document with no contents
     Empty,
+    /// A reference to a passage of the Bible, which will be inserted as a
+    /// [BibleReading](crate::BibleReading) by the compilation process.
+    BiblicalCitation(BiblicalCitation),
+    /// A reading that contains the text of a portion of the Bible.
+    BiblicalReading(BiblicalReading),
+    /// A Canticle (i.e., a psalm-like text not found in the Book of Psalms, and used liturgically)
+    Canticle(Canticle),
     /// The Gloria Patri is formatted such that it is broken into four lines rather than two if necessary
     GloriaPatri(GloriaPatri),
     /// A title, subtitle, label, or other heading

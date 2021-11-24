@@ -5,8 +5,6 @@
     - [ ] tests
 - [ ] Document Types
   - [ ] `LectionaryReading`
-  - [ ] `BibleReading`
-  - [ ] `Canticle`
   - `Choice`
     - [ ] Option labels
       - [ ] Tests
