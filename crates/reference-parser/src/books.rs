@@ -106,18 +106,26 @@ impl Display for Book {
     }
 }
 
-pub fn book_name_to_book(book_name: &str) -> Book {
-    let ratings = BOOKS
-        .iter()
-        .map(|(abbrev, book)| (strsim::sorensen_dice(book_name, abbrev), book));
+impl From<&str> for Book {
+    fn from(book_name: &str) -> Self {
+        let ratings = BOOKS
+            .iter()
+            .map(|(abbrev, book)| (strsim::sorensen_dice(book_name, abbrev), book));
 
-    let (_, closest_book) = ratings
-        .max_by(|(rating_a, _), (rating_b, _)| {
-            rating_a.partial_cmp(rating_b).unwrap_or(Ordering::Equal)
-        })
-        .unwrap_or((0.0, &Book::None));
+        let (_, closest_book) = ratings
+            .max_by(|(rating_a, _), (rating_b, _)| {
+                rating_a.partial_cmp(rating_b).unwrap_or(Ordering::Equal)
+            })
+            .unwrap_or((0.0, &Book::None));
 
-    *closest_book
+        *closest_book
+    }
+}
+
+impl From<String> for Book {
+    fn from(book_name: String) -> Self {
+        Self::from(book_name.as_str())
+    }
 }
 
 impl Book {
@@ -305,26 +313,26 @@ impl Book {
 
 #[cfg(test)]
 mod tests {
-    use crate::{book_name_to_book, Book};
+    use crate::Book;
 
     #[test]
     fn exact_matches() {
-        assert_eq!(book_name_to_book("1 Cor."), Book::FirstCorinthians);
-        assert_eq!(book_name_to_book("Matt."), Book::Matthew);
-        assert_eq!(book_name_to_book("John"), Book::John);
-        assert_eq!(book_name_to_book("Neh."), Book::Nehemiah);
+        assert_eq!(Book::from("1 Cor."), Book::FirstCorinthians);
+        assert_eq!(Book::from("Matt."), Book::Matthew);
+        assert_eq!(Book::from("John"), Book::John);
+        assert_eq!(Book::from("Neh."), Book::Nehemiah);
     }
 
     #[test]
     fn misspellings() {
-        assert_eq!(book_name_to_book("1 Tin."), Book::FirstTimothy);
+        assert_eq!(Book::from("1 Tin."), Book::FirstTimothy);
     }
 
     #[test]
     fn possible_ambiguities() {
-        assert_eq!(book_name_to_book("Ecclus."), Book::Ecclesiasticus);
-        assert_eq!(book_name_to_book("Eccl."), Book::Ecclesiastes);
-        assert_eq!(book_name_to_book("1 Ch"), Book::FirstChronicles);
-        assert_eq!(book_name_to_book("Phil"), Book::Philippians);
+        assert_eq!(Book::from("Ecclus."), Book::Ecclesiasticus);
+        assert_eq!(Book::from("Eccl."), Book::Ecclesiastes);
+        assert_eq!(Book::from("1 Ch"), Book::FirstChronicles);
+        assert_eq!(Book::from("Phil"), Book::Philippians);
     }
 }

@@ -4,7 +4,7 @@ mod query;
 mod range;
 mod utils;
 
-pub use books::{book_name_to_book, Book};
+pub use books::Book;
 pub use query::*;
 pub use range::BibleReferenceRange;
 pub use utils::parse_reference;

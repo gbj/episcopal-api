@@ -1,6 +1,4 @@
-use crate::{
-    book_name_to_book, query::BibleVersePart, BibleReferenceQuery, BibleReferenceRange, Book,
-};
+use crate::{query::BibleVersePart, BibleReferenceQuery, BibleReferenceRange, Book};
 use regex::{Match, Regex};
 
 const SINGLE_CHAPTER_BOOKS: [Book; 5] = [
@@ -235,7 +233,7 @@ fn query_from_re(
         query = match matches {
             (Some(_), Some(book_name), Some(chapter_str), Some(verse_str)) => {
                 Some(BibleReferenceQuery {
-                    book: Some(book_name_to_book(book_name.as_str())),
+                    book: Some(Book::from(book_name.as_str())),
                     chapter: match_to_int(chapter_str).0,
                     verse: match_to_int(verse_str).0,
                     verse_part: match_to_int(verse_str).1,
@@ -262,9 +260,7 @@ fn query_from_re(
             _ => None,
         };
     } else {
-        let book = matches
-            .1
-            .map(|book_name| book_name_to_book(book_name.as_str()));
+        let book = matches.1.map(|book_name| Book::from(book_name.as_str()));
         let mut chapter = match matches.2 {
             Some(num) => match_to_int(num).0,
             None => None,
