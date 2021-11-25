@@ -1,6 +1,7 @@
 use calendar::{Calendar, LiturgicalDay};
 use liturgy::*;
 use psalter::{bcp1979::BCP1979_PSALTER, Psalter};
+use reference_parser::{BibleReference, Book};
 
 #[macro_use]
 extern crate lazy_static;
@@ -22,11 +23,29 @@ pub trait Library {
         if !include {
             None
         } else {
-            match document.content {
+            match &document.content {
+                // Compile Biblical reading intros
+                Content::BiblicalReading(reading) => {
+                    if let BiblicalReadingIntro::Template(template) = &reading.intro {
+                        let compiled = Self::compile_biblical_reading_intro(
+                            *template.clone(),
+                            &reading.citation,
+                        );
+                        Some(Document {
+                            content: Content::BiblicalReading(BiblicalReading {
+                                intro: BiblicalReadingIntro::Compiled(Box::new(compiled)),
+                                ..reading.clone()
+                            }),
+                            ..document
+                        })
+                    } else {
+                        Some(document)
+                    }
+                }
                 // Insert day/date into heading if necessary
                 Content::Heading(heading) => match heading {
                     // ordinary headings are passed through
-                    Heading::Text(_, _) => Some(Document::from(Content::Heading(heading))),
+                    Heading::Text(_, _) => Some(document),
 
                     // Dates are filled in with the date we're compiling for
                     Heading::Date(_) => Some(Document::from(Heading::Date(Some(day.date)))),
@@ -59,8 +78,8 @@ pub trait Library {
                 }),
                 Content::Parallel(sub) => Some(Document {
                     content: Content::Parallel(
-                        sub.into_iter()
-                            .filter_map(|doc| Self::compile(doc, calendar, day, prefs))
+                        sub.iter()
+                            .filter_map(|doc| Self::compile(doc.clone(), calendar, day, prefs))
                             .collect::<Vec<_>>(),
                     ),
                     ..document
@@ -75,8 +94,8 @@ pub trait Library {
                         content: Content::Choice(Choice {
                             options: sub
                                 .options
-                                .into_iter()
-                                .filter_map(|doc| Self::compile(doc, calendar, day, prefs))
+                                .iter()
+                                .filter_map(|doc| Self::compile(doc.clone(), calendar, day, prefs))
                                 .collect(),
                             selected: index_of_prev_selection.unwrap_or(0),
                         }),
@@ -86,6 +105,49 @@ pub trait Library {
                 // Every else just passes through as is
                 _ => Some(document),
             }
+        }
+    }
+
+    fn compile_biblical_reading_intro(template: Document, citation: &str) -> Document {
+        let citation = BibleReference::from(citation);
+        let book = citation
+            .ranges
+            .get(0)
+            .and_then(|range| range.start.book)
+            .unwrap_or(Book::None);
+        let short_name = book.book_short_name(template.language);
+        let long_name = book.book_long_name(template.language);
+
+        fn replace_names(base: &str, short_name: &str, long_name: &str) -> String {
+            base.replace("${short_name}", short_name)
+                .replace("${long_name}", long_name)
+        }
+
+        match &template.content {
+            Content::Preces(content) => Document {
+                content: Content::Preces(Preces::from(
+                    content
+                        .iter()
+                        .map(|(label, text)| (label, replace_names(text, short_name, long_name))),
+                )),
+                ..template
+            },
+            Content::ResponsivePrayer(content) => Document {
+                content: Content::ResponsivePrayer(ResponsivePrayer::from(
+                    content
+                        .iter()
+                        .map(|text| replace_names(text, short_name, long_name)),
+                )),
+                ..template
+            },
+            Content::Text(content) => Document {
+                content: Content::Text(Text {
+                    text: replace_names(&content.text, short_name, long_name),
+                    ..content.clone()
+                }),
+                ..template
+            },
+            _ => template,
         }
     }
 }

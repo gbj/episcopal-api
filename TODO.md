@@ -1,7 +1,7 @@
-- [ ] `BibleReference` to `String`
 - [ ] Document Types
   - [ ] `BiblicalReading`
-    - [ ] intros
+    - [x] intros
+    - [ ] rendering
   - [ ] `LectionaryReading`
   - `Choice`
     - [ ] Option labels
@@ -13,6 +13,8 @@
     - `SubLiturgy`
     - [ ] Compiler
     - [ ] HTML rendering
+- [ ] `BibleReference` to `String`
+  - [ ] and TODO in `crates/psalter/lib.rs`
 - [ ] Compiler
   - [x] PsalmCitation
     - [ ] Allow multiple psalters based on preferences

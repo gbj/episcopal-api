@@ -8,3 +8,4 @@ lazy_static = '1.0'
 liturgy = { path = "../liturgy" }
 calendar = { path = "../calendar" }
 psalter = { path = "../psalter" }
+reference-parser = { path = "../reference-parser" }

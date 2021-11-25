@@ -73,6 +73,9 @@ impl Application<Msg> for DocumentView {
             .map(|reference| self.reference(&reference));
 
         let content: Node<Msg> = match &self.document.content {
+            Content::BiblicalCitation(content) => self.biblical_citation(content),
+            Content::BiblicalReading(content) => self.biblical_reading(content),
+            Content::Canticle(content) => self.canticle(content),
             Content::Empty => self.empty(),
             Content::GloriaPatri(content) => self.gloria_patri(content),
             Content::Heading(content) => self.heading(content),
@@ -125,6 +128,22 @@ impl DocumentView {
     }
 
     // Content Types
+
+    fn biblical_citation(&self, biblical_citation: &BiblicalCitation) -> Node<Msg> {
+        node! {
+            <article class="document biblical-citation">
+                <h3>{text(biblical_citation)}</h3>
+            </article>
+        }
+    }
+
+    fn biblical_reading(&self, reading: &BiblicalReading) -> Node<Msg> {
+        node! {
+            <article class="document biblical-reading">
+                <h3>{text(biblical_citation)}</h3>
+            </article>
+        }
+    }
 
     fn choice(&self, choice: &Choice) -> Node<Msg> {
         node! {
