@@ -121,6 +121,8 @@ pub trait Library {
         fn replace_names(base: &str, short_name: &str, long_name: &str) -> String {
             base.replace("${short_name}", short_name)
                 .replace("${long_name}", long_name)
+                // replace internal "The" (i.e., "A Reading from The Gospel" => "A Reading from the Gospel")
+                .replace(" The", " the")
         }
 
         match &template.content {
@@ -177,5 +179,71 @@ impl Library for CommonPrayer {
         match psalter {
             Psalters::BCP1979 => &BCP1979_PSALTER,
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use liturgy::{BiblicalReading, BiblicalReadingIntro, Document, Preces, Text};
+
+    use crate::{CommonPrayer, Library};
+
+    #[test]
+    fn compile_biblical_reading_intros() {
+        let intro = Document::from(Text::from("A Reading from ${short_name}."));
+        let reading = BiblicalReading {
+            citation: String::from("Ecclus. 1:1-14"),
+            text: vec![],
+            intro: BiblicalReadingIntro::Template(Box::new(intro.clone())),
+        };
+        assert_eq!(
+            CommonPrayer::compile_biblical_reading_intro(intro, &reading.citation),
+            Document::from(Text::from("A Reading from Sirach."))
+        );
+
+        let intro = Document::from(Text::from("A Reading from ${short_name}."));
+        let reading = BiblicalReading {
+            citation: String::from("Mark 1:1-14"),
+            text: vec![],
+            intro: BiblicalReadingIntro::Template(Box::new(intro.clone())),
+        };
+        assert_eq!(
+            CommonPrayer::compile_biblical_reading_intro(intro, &reading.citation),
+            Document::from(Text::from("A Reading from Mark."))
+        );
+
+        let intro = Document::from(Text::from("A Reading from ${long_name}."));
+        let reading = BiblicalReading {
+            citation: String::from("Mark 1:1-14"),
+            text: vec![],
+            intro: BiblicalReadingIntro::Template(Box::new(intro.clone())),
+        };
+        assert_eq!(
+            CommonPrayer::compile_biblical_reading_intro(intro, &reading.citation),
+            Document::from(Text::from("A Reading from the Gospel According to Mark."))
+        );
+
+        let intro = Document::from(Preces::from([
+            (
+                "Celebrant",
+                "The Holy Gospel of our Lord Jesus Christ according to ${short_name}.",
+            ),
+            ("People", "Glory to you, Lord Christ."),
+        ]));
+        let reading = BiblicalReading {
+            citation: String::from("Mark 1:1-14"),
+            text: vec![],
+            intro: BiblicalReadingIntro::Template(Box::new(intro.clone())),
+        };
+        assert_eq!(
+            CommonPrayer::compile_biblical_reading_intro(intro, &reading.citation),
+            Document::from(Preces::from([
+                (
+                    "Celebrant",
+                    "The Holy Gospel of our Lord Jesus Christ according to Mark."
+                ),
+                ("People", "Glory to you, Lord Christ.")
+            ]))
+        );
     }
 }

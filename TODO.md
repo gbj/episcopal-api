@@ -1,6 +1,5 @@
 - [ ] Document Types
   - [ ] `BiblicalReading`
-    - [x] intros
     - [ ] rendering
   - [ ] `LectionaryReading`
   - `Choice`
