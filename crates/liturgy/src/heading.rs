@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-use calendar::{Calendar, Date, LiturgicalDay};
+use calendar::{Date, LiturgicalDay};
 use serde::{Deserialize, Serialize};
 
 /// A title, subtitle, label, or other heading; can be used to automatically insert date/liturgical day name, or text with a level.
