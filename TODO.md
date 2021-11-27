@@ -3,9 +3,6 @@
     - [ ] rendering
   - [ ] `LectionaryReading`
   - `Choice`
-    - [ ] Option labels
-      - [ ] Tests
-      - [ ] Efficiency
     - [ ] HTML rendering
     - [ ] Client-side/server-side logic for switching
   - [ ] Update `Choice` labels based on these types
