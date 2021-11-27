@@ -135,6 +135,18 @@ impl From<Content> for Document {
 }
 
 // Create Documents from various content types
+impl From<BiblicalReading> for Document {
+    fn from(content: BiblicalReading) -> Self {
+        Self::from(Content::BiblicalReading(content))
+    }
+}
+
+impl From<Canticle> for Document {
+    fn from(content: Canticle) -> Self {
+        Self::from(Content::Canticle(content))
+    }
+}
+
 impl From<Choice> for Document {
     fn from(content: Choice) -> Self {
         Self::from(Content::Choice(content))

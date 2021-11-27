@@ -11,18 +11,20 @@ pub struct Canticle {
     pub number: CanticleId,
     /// Present when only a subset of verses should be displayed
     pub citation: Option<String>,
-    /// The content of the psalm, by section
-    pub sections: Vec<CanticleSection>,
-}
-
-#[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
-pub struct CanticleSection {
     /// Reference to e.g., a BCP page
     pub reference: Reference,
     /// Name for the section in the psalm's own language (e.g., "Part I" or "Aleph")
     pub local_name: String,
     /// Latin name for the section (e.g., "Beatus vir qui non abiit")
     pub latin_name: String,
+    /// The content of the psalm, by section
+    pub sections: Vec<CanticleSection>,
+}
+
+#[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+pub struct CanticleSection {
+    /// Title of section, if any
+    pub title: Option<String>,
     /// The set of verses included in this section
     pub verses: Vec<CanticleVerse>,
 }

@@ -24,6 +24,15 @@ impl Display for Reference {
     }
 }
 
+impl From<u16> for Reference {
+    fn from(page: u16) -> Self {
+        Self {
+            source: Source::default(),
+            page,
+        }
+    }
+}
+
 #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub enum Source {
     BCP1979,
@@ -37,5 +46,11 @@ impl Display for Source {
             Source::EOW1 => "EOW 1",
         };
         write!(f, "{}", name)
+    }
+}
+
+impl Default for Source {
+    fn default() -> Self {
+        Self::BCP1979
     }
 }
