@@ -138,9 +138,76 @@ impl DocumentView {
     }
 
     fn biblical_reading(&self, reading: &BiblicalReading) -> Node<Msg> {
+        let intro = if let BiblicalReadingIntro::Compiled(intro) = &reading.intro {
+            DocumentView::from(*intro.clone()).view()
+        } else {
+            text("")
+        };
+
         node! {
             <article class="document biblical-reading">
-                <h3>{text(biblical_citation)}</h3>
+                <header>
+                    <h3 class="citation">{text(&reading.citation)}</h3>
+                </header>
+                <main>
+                    {intro}
+                    {for (verse, verse_text) in &reading.text {
+                        node! {
+                            <span class="verse">
+                                <sup class="verse-number">{text(verse.verse)}</sup>
+                                {text(verse_text)}
+                            </span>
+                        }
+                    }}
+                </main>
+            </article>
+        }
+    }
+
+    fn canticle(&self, canticle: &Canticle) -> Node<Msg> {
+        let citation = if let Some(citation) = &canticle.citation {
+            node! {
+                <h3 class="citation">{text(citation)}</h3>
+            }
+        } else {
+            text("")
+        };
+
+        node! {
+            <article class="document canticle">
+                <header>
+                    <h3 class="local-name">{text(format!("{}. {}", canticle.number, canticle.local_name))}</h3>
+                    <em class="latin-name">{text(&canticle.latin_name)}</em>
+                    {self.reference(&canticle.reference)}
+                    {citation}
+                </header>
+            {for section in &canticle.sections {
+                let header = if let Some(title) = &section.title {
+                    node! {
+                        <header>
+                            <h4 class="canticle-section-title">{text(title)}</h4>
+                        </header>
+                    }
+                } else {
+                    text("")
+                };
+
+                node! {
+                    <section>
+                        {header}
+                        <main>
+                        {for verse in &section.verses {
+                            node! {
+                                <p class="verse">
+                                    <span class="a">{text(&verse.a)}</span>
+                                    <span class="b">{text(&verse.b)}</span>
+                                </p>
+                            }
+                        }}
+                        </main>
+                    </section>
+                }
+            }}
             </article>
         }
     }
@@ -152,7 +219,7 @@ impl DocumentView {
                     <ul>
                         {for (ii, doc) in choice.options.iter().enumerate() {
                             node! {
-                                <li>{text(choice.option_label(&doc, ii))}</li>
+                                <li>{text(choice.option_label(doc, ii))}</li>
                             }
                         }}
                     </ul>
