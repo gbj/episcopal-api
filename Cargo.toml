@@ -1,6 +1,17 @@
+
 [workspace]
 members = [
   "crates/calendar",
+  "crates/export/web",
+  "crates/export/web-component",
+  "crates/language",
   "crates/lectionary",
-  "examples/api"
+  "crates/library",
+  "crates/liturgy",
+  "crates/psalter",
+  "crates/reference-parser",
+  "examples/api",
+  "examples/web",
+  "utils/sorting",
+  "utils/fm_api_test"
 ]
