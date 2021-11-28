@@ -1,7 +1,10 @@
 - [ ] Document Types
-  - [ ] `BiblicalReading`
-    - [ ] rendering
   - [ ] `LectionaryReading`
+- [ ] Liturgies
+  - [ ] Compline
+  - [ ] Morning Prayer
+  - [ ] Evening Prayer
+- [ ] Rendering
   - `Choice`
     - [ ] HTML rendering
     - [ ] Client-side/server-side logic for switching

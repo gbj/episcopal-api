@@ -41,3 +41,9 @@ impl Display for Version {
         write!(f, "{}", label)
     }
 }
+
+impl Default for Version {
+    fn default() -> Self {
+        Self::BCP1979
+    }
+}

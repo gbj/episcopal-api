@@ -9,9 +9,7 @@ extern crate lazy_static;
 pub mod conditions;
 pub mod rite2;
 pub trait Library {
-    type Psalters: From<PreferenceValue>;
-
-    fn psalter(psalter: Self::Psalters) -> &'static Psalter;
+    fn psalter(psalter: Version) -> &'static Psalter;
 
     fn compile(
         document: Document,
@@ -56,7 +54,11 @@ pub trait Library {
                 // Lookup types
                 Content::PsalmCitation(citation) => {
                     let psalter_pref =
-                        Self::Psalters::from(prefs.value(&PreferenceKey::from("psalter")));
+                        match prefs.value(&PreferenceKey::from(GlobalPref::PsalterVersion)) {
+                            PreferenceValue::Version(v) => Some(v),
+                            _ => None,
+                        }
+                        .unwrap_or_default();
                     let psalter = Self::psalter(psalter_pref);
                     let psalms: Vec<Psalm> = psalter.psalms_by_citation(citation.as_str());
                     if psalms.is_empty() {
@@ -155,30 +157,10 @@ pub trait Library {
 }
 
 pub struct CommonPrayer {}
-pub enum Psalters {
-    BCP1979,
-}
-
-impl Default for Psalters {
-    fn default() -> Self {
-        Self::BCP1979
-    }
-}
-
-impl From<PreferenceValue> for Psalters {
-    fn from(_value: PreferenceValue) -> Self {
-        // TODO real logic when/if additional psalters are added
-        Self::BCP1979
-    }
-}
 
 impl Library for CommonPrayer {
-    type Psalters = Psalters;
-
-    fn psalter(psalter: Self::Psalters) -> &'static Psalter {
-        match psalter {
-            Psalters::BCP1979 => &BCP1979_PSALTER,
-        }
+    fn psalter(_psalter: Version) -> &'static Psalter {
+        &BCP1979_PSALTER
     }
 }
 
