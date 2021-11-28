@@ -1,9 +1,11 @@
 - [ ] Document Types
-  - [ ] `LectionaryReading`
+  - [x] `LectionaryReading`
+    - [ ] Rationalize presence/compiled-ness of `BiblicalReadingIntro` across `LectionaryReading`, `BiblicalCitation`, and `BiblicalReading`
 - [ ] Liturgies
   - [ ] Compline
   - [ ] Morning Prayer
   - [ ] Evening Prayer
+  - [ ] Build preferences/choices into liturgies
 - [ ] Rendering
   - `Choice`
     - [ ] HTML rendering
