@@ -33,7 +33,7 @@ impl Psalter {
     /// assert_eq!(three_psalms[0].number, 120);
     /// assert_eq!(three_psalms[1].number, 121);
     /// assert_eq!(three_psalms[2].number, 122);
-    /// assert_eq!(three_psalms[2].sections[0].verses.len(), 3);
+    /// assert_eq!(three_psalms[2].filtered_sections()[0].verses.len(), 3);
     /// ```
     pub fn psalms_by_citation(&self, citation: &str) -> Vec<Psalm> {
         let reference = BibleReference::from(citation);
@@ -76,7 +76,7 @@ impl Psalter {
                     let mut new_psalm = Psalm {
                         number: psalm.number,
                         // TODO correctly convert this from a section of a citation into Some(String)
-                        citation: None,
+                        citation: Some(citation.to_string()),
                         sections: psalm.sections.clone(),
                     };
                     let filtered_sections = new_psalm.filtered_sections();
