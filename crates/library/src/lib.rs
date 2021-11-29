@@ -1,7 +1,6 @@
 use calendar::{Calendar, LiturgicalDay};
 use liturgy::*;
 use psalter::{bcp1979::BCP1979_PSALTER, Psalter};
-use reference_parser::{BibleReference, Book};
 
 #[macro_use]
 extern crate lazy_static;
@@ -22,24 +21,13 @@ pub trait Library {
             None
         } else {
             match &document.content {
-                // Compile Biblical reading intros
-                Content::BiblicalReading(reading) => {
-                    if let BiblicalReadingIntro::Template(template) = &reading.intro {
-                        let compiled = Self::compile_biblical_reading_intro(
-                            *template.clone(),
-                            &reading.citation,
-                        );
-                        Some(Document {
-                            content: Content::BiblicalReading(BiblicalReading {
-                                intro: BiblicalReadingIntro::Compiled(Box::new(compiled)),
-                                ..reading.clone()
-                            }),
-                            ..document
-                        })
-                    } else {
-                        Some(document)
-                    }
-                }
+                // TODO LectionaryReading
+                // 1) look up reading from lectionary
+                // 2) compile intro
+                // 3) look up Biblical text
+                // TODO BiblicalCitation
+                // 1) compile intro
+                // 2) look up Biblical text
                 // Insert day/date into heading if necessary
                 Content::Heading(heading) => match heading {
                     // ordinary headings are passed through
@@ -109,51 +97,6 @@ pub trait Library {
             }
         }
     }
-
-    fn compile_biblical_reading_intro(template: Document, citation: &str) -> Document {
-        let citation = BibleReference::from(citation);
-        let book = citation
-            .ranges
-            .get(0)
-            .and_then(|range| range.start.book)
-            .unwrap_or(Book::None);
-        let short_name = book.book_short_name(template.language);
-        let long_name = book.book_long_name(template.language);
-
-        fn replace_names(base: &str, short_name: &str, long_name: &str) -> String {
-            base.replace("${short_name}", short_name)
-                .replace("${long_name}", long_name)
-                // replace internal "The" (i.e., "A Reading from The Gospel" => "A Reading from the Gospel")
-                .replace(" The", " the")
-        }
-
-        match &template.content {
-            Content::Preces(content) => Document {
-                content: Content::Preces(Preces::from(
-                    content
-                        .iter()
-                        .map(|(label, text)| (label, replace_names(text, short_name, long_name))),
-                )),
-                ..template
-            },
-            Content::ResponsivePrayer(content) => Document {
-                content: Content::ResponsivePrayer(ResponsivePrayer::from(
-                    content
-                        .iter()
-                        .map(|text| replace_names(text, short_name, long_name)),
-                )),
-                ..template
-            },
-            Content::Text(content) => Document {
-                content: Content::Text(Text {
-                    text: replace_names(&content.text, short_name, long_name),
-                    ..content.clone()
-                }),
-                ..template
-            },
-            _ => template,
-        }
-    }
 }
 
 pub struct CommonPrayer {}
@@ -161,71 +104,5 @@ pub struct CommonPrayer {}
 impl Library for CommonPrayer {
     fn psalter(_psalter: Version) -> &'static Psalter {
         &BCP1979_PSALTER
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use liturgy::{BiblicalReading, BiblicalReadingIntro, Document, Preces, Text};
-
-    use crate::{CommonPrayer, Library};
-
-    #[test]
-    fn compile_biblical_reading_intros() {
-        let intro = Document::from(Text::from("A Reading from ${short_name}."));
-        let reading = BiblicalReading {
-            citation: String::from("Ecclus. 1:1-14"),
-            text: vec![],
-            intro: BiblicalReadingIntro::Template(Box::new(intro.clone())),
-        };
-        assert_eq!(
-            CommonPrayer::compile_biblical_reading_intro(intro, &reading.citation),
-            Document::from(Text::from("A Reading from Sirach."))
-        );
-
-        let intro = Document::from(Text::from("A Reading from ${short_name}."));
-        let reading = BiblicalReading {
-            citation: String::from("Mark 1:1-14"),
-            text: vec![],
-            intro: BiblicalReadingIntro::Template(Box::new(intro.clone())),
-        };
-        assert_eq!(
-            CommonPrayer::compile_biblical_reading_intro(intro, &reading.citation),
-            Document::from(Text::from("A Reading from Mark."))
-        );
-
-        let intro = Document::from(Text::from("A Reading from ${long_name}."));
-        let reading = BiblicalReading {
-            citation: String::from("Mark 1:1-14"),
-            text: vec![],
-            intro: BiblicalReadingIntro::Template(Box::new(intro.clone())),
-        };
-        assert_eq!(
-            CommonPrayer::compile_biblical_reading_intro(intro, &reading.citation),
-            Document::from(Text::from("A Reading from the Gospel According to Mark."))
-        );
-
-        let intro = Document::from(Preces::from([
-            (
-                "Celebrant",
-                "The Holy Gospel of our Lord Jesus Christ according to ${short_name}.",
-            ),
-            ("People", "Glory to you, Lord Christ."),
-        ]));
-        let reading = BiblicalReading {
-            citation: String::from("Mark 1:1-14"),
-            text: vec![],
-            intro: BiblicalReadingIntro::Template(Box::new(intro.clone())),
-        };
-        assert_eq!(
-            CommonPrayer::compile_biblical_reading_intro(intro, &reading.citation),
-            Document::from(Preces::from([
-                (
-                    "Celebrant",
-                    "The Holy Gospel of our Lord Jesus Christ according to Mark."
-                ),
-                ("People", "Glory to you, Lord Christ.")
-            ]))
-        );
     }
 }

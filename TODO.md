@@ -1,6 +1,8 @@
 - [ ] Document Types
   - [x] `LectionaryReading`
-    - [ ] Rationalize presence/compiled-ness of `BiblicalReadingIntro` across `LectionaryReading`, `BiblicalCitation`, and `BiblicalReading`
+    - [x] Rationalize presence/compiled-ness of `BiblicalReadingIntro` across `LectionaryReading`, `BiblicalCitation`, and `BiblicalReading`
+    - [x] Add intro to `BiblicalCitation`
+    - [ ] Compile `LectionaryReading` and `BiblicalCitation` (library/lib.rs lines 24 ff.)
 - [ ] Liturgies
   - [ ] Compline
   - [ ] Morning Prayer

@@ -10,14 +10,15 @@ pub struct BiblicalReading {
     pub citation: String,
     /// The text
     pub text: Vec<(BibleVerse, String)>,
-    /// Introduction to the reading. The introduction begins as a template, and is filled in by replacing
-    /// ${long_name} or ${short_name} with the name of the appropriate Biblical book.
-    pub intro: BiblicalReadingIntro,
+    /// Introduction to the reading. The introduction begins as a [BiblicalReadingIntroTemplate](crate::BiblicalReadingIntroTemplate).
+    pub intro: Option<BiblicalReadingIntro>,
 }
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
-pub enum BiblicalReadingIntro {
-    None,
-    Template(Box<Document>),
-    Compiled(Box<Document>),
+pub struct BiblicalReadingIntro(Box<Document>);
+
+impl From<Document> for BiblicalReadingIntro {
+    fn from(document: Document) -> Self {
+        Self(Box::new(document))
+    }
 }
