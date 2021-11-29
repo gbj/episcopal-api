@@ -5,9 +5,9 @@ use language::Language;
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    BiblicalCitation, BiblicalReading, Canticle, Choice, ClientPreferences, Condition, GloriaPatri,
-    Heading, LectionaryReading, Parallel, Preces, Psalm, PsalmCitation, Reference,
-    ResponsivePrayer, Rubric, Sentence, Series, SubLiturgy, Text, Version,
+    Antiphon, BiblicalCitation, BiblicalReading, Canticle, Choice, ClientPreferences, Condition,
+    GloriaPatri, Heading, LectionaryReading, Litany, Parallel, Preces, Psalm, PsalmCitation,
+    Reference, ResponsivePrayer, Rubric, Sentence, Series, SubLiturgy, Text, Version,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -134,6 +134,8 @@ pub enum Content {
     /// # Content Variants
     /// A document with no contents
     Empty,
+    /// A brief passage or verse, usually extracted from a psalm.
+    Antiphon(Antiphon),
     /// A reference to a passage of the Bible, which will be inserted as a
     /// [BibleReading](crate::BibleReading) by the compilation process.
     BiblicalCitation(BiblicalCitation),
@@ -147,6 +149,8 @@ pub enum Content {
     Heading(Heading),
     /// A generic reference to a lectionary reading (i.e., “First Reading” from the Daily Office Lectionary).
     LectionaryReading(LectionaryReading),
+    /// A responsive prayer in which the same response is given to every petition
+    Litany(Litany),
     /// A responsive prayer in which each line has a label and its text: V: ___ / R: ___
     Preces(Preces),
     /// A psalm.
@@ -182,7 +186,26 @@ impl From<Content> for Document {
     }
 }
 
+// Plain strings are converted into Text
+impl From<&str> for Document {
+    fn from(text: &str) -> Self {
+        Document::from(Text::from(text))
+    }
+}
+
+impl From<String> for Document {
+    fn from(text: String) -> Self {
+        Document::from(Text::from(text))
+    }
+}
+
 // Create Documents from various content types
+impl From<Antiphon> for Document {
+    fn from(content: Antiphon) -> Self {
+        Self::from(Content::Antiphon(content))
+    }
+}
+
 impl From<BiblicalCitation> for Document {
     fn from(content: BiblicalCitation) -> Self {
         Self::from(Content::BiblicalCitation(content))
@@ -216,6 +239,12 @@ impl From<GloriaPatri> for Document {
 impl From<Heading> for Document {
     fn from(content: Heading) -> Self {
         Self::from(Content::Heading(content))
+    }
+}
+
+impl From<Litany> for Document {
+    fn from(content: Litany) -> Self {
+        Self::from(Content::Litany(content))
     }
 }
 

@@ -9,6 +9,6 @@ pub enum DisplayFormat {
     Abbreviated,
     /// Omit the text itself, showing only labels/headings
     Omit,
-    /// Style the text to indicate it should be said in unison
+    /// Style the text to indicate it should be said in unison (e.g., bolded)
     Unison,
 }

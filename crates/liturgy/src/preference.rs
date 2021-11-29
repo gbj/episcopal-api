@@ -21,6 +21,8 @@ pub enum GlobalPref {
     ReadingA,
     ReadingB,
     ReadingC,
+    /// Whether to insert the Gloria Patri after each psalm in the Daily Office, or only at the end of the psalms
+    InsertGloria,
 }
 
 impl<T> From<T> for PreferenceKey

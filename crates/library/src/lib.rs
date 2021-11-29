@@ -3,11 +3,20 @@ use lectionary::Lectionary;
 use liturgy::*;
 use psalter::{bcp1979::BCP1979_PSALTER, Psalter};
 
+use serde::{Deserialize, Serialize};
+
 #[macro_use]
 extern crate lazy_static;
 
 pub mod conditions;
 pub mod rite2;
+
+#[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+pub enum CommonPrayerLiturgies {
+    NoondayPrayer,
+    Compline,
+}
+
 pub trait Library {
     fn psalter(psalter: Version) -> &'static Psalter;
 

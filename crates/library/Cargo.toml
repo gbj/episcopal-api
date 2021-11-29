@@ -10,3 +10,4 @@ liturgy = { path = "../liturgy" }
 calendar = { path = "../calendar" }
 psalter = { path = "../psalter" }
 reference-parser = { path = "../reference-parser" }
+serde = { version = "1", features = ["derive"]}

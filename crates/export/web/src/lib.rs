@@ -92,6 +92,8 @@ impl Application<Msg> for DocumentView {
             Content::PsalmCitation(content) => self.psalm_citation(content),
             Content::SubLiturgy(content) => self.sub_liturgy(content),
             Content::LectionaryReading(content) => todo!(),
+            Content::Antiphon(content) => self.antiphon(content),
+            Content::Litany(content) => self.litany(content),
         };
 
         node! {
@@ -406,6 +408,21 @@ impl DocumentView {
         }
     }
 
+    fn litany(&self, litany: &Litany) -> Node<Msg> {
+        node! {
+            <article class="document litany">
+                {for line in litany.iter() {
+                    node! {
+                        <p>
+                            <span>{text(line)}</span>
+                            <strong class="response">{text(&litany.response)}</strong>
+                        </p>
+                    }
+                }}
+            </article>
+        }
+    }
+
     fn rubric(&self, rubric: &Rubric) -> Node<Msg> {
         node! {
             <article class="document rubric">{text(rubric)}</article>
@@ -492,6 +509,12 @@ impl DocumentView {
                     }
                 }}
             </article>
+        }
+    }
+
+    fn antiphon(&self, antiphon: &Antiphon) -> Node<Msg> {
+        node! {
+            <article class="document antiphon">{text(antiphon)}</article>
         }
     }
 }

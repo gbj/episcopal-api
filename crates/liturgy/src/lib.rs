@@ -1,3 +1,4 @@
+mod antiphon;
 mod biblical_citation;
 mod biblical_reading;
 mod canticle;
@@ -8,6 +9,7 @@ mod document;
 mod gloria_patri;
 mod heading;
 mod lectionary_reading;
+mod litany;
 mod parallel;
 mod preces;
 mod preference;
@@ -22,6 +24,7 @@ mod subliturgy;
 mod text;
 mod version;
 
+pub use antiphon::*;
 pub use biblical_citation::*;
 pub use biblical_reading::*;
 pub use canticle::*;
@@ -32,6 +35,7 @@ pub use document::{Content, Document};
 pub use gloria_patri::*;
 pub use heading::*;
 pub use lectionary_reading::*;
+pub use litany::*;
 pub use parallel::*;
 pub use preces::*;
 pub use preference::*;

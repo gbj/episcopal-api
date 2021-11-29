@@ -8,11 +8,16 @@
       - [x] Translate them into `BiblicalCitation`s and/or `BiblicalReading`s
       - [ ] Test this lectionary lookup
       - [ ] Look up actual reading content (some kind of injected `ReadingService`?)
+- [ ] Tool to export LDF to Rust format
+  - [ ] Add compile_hidden support
 - [ ] Liturgies
-  - [ ] Compline
+  - [x] Compline
   - [ ] Morning Prayer
   - [ ] Evening Prayer
   - [ ] Build preferences/choices into liturgies
+  - [ ] Add many more source citations
+- [ ] Compiler additions
+  - [ ] Rotate/randomize
   - [ ] In-depth compiler tests to prevent future breakage
 - [ ] Rendering
   - `Choice`
