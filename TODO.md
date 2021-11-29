@@ -9,7 +9,8 @@
       - [ ] Test this lectionary lookup
       - [ ] Look up actual reading content (some kind of injected `ReadingService`?)
 - [ ] Tool to export LDF to Rust format
-  - [ ] Add compile_hidden support
+  - [x] Add compile_hidden support
+- [ ] CSS for rendering
 - [ ] Liturgies
   - [x] Compline
   - [ ] Morning Prayer
