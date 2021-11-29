@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 use crate::{
     Antiphon, BiblicalCitation, BiblicalReading, Canticle, Choice, ClientPreferences, Condition,
     GloriaPatri, Heading, LectionaryReading, Litany, Parallel, Preces, Psalm, PsalmCitation,
-    Reference, ResponsivePrayer, Rubric, Sentence, Series, SubLiturgy, Text, Version,
+    Reference, ResponsivePrayer, Rubric, Sentence, Series, Show, Status, SubLiturgy, Text, Version,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -16,6 +16,8 @@ pub struct Document {
     pub label: Option<String>,
     pub language: Language,
     pub source: Option<Reference>,
+    pub status: Status,
+    pub display: Show,
     pub version: Version,
     pub version_label: Option<String>,
     pub content: Content,
@@ -28,6 +30,8 @@ impl Document {
             label: None,
             language: Language::default(),
             source: None,
+            status: Status::Authorized,
+            display: Show::Always,
             version: Version::RiteII,
             version_label: None,
             content: Content::Empty,
@@ -107,8 +111,18 @@ impl Document {
         self
     }
 
+    pub fn display(mut self, show: Show) -> Self {
+        self.display = show;
+        self
+    }
+
     pub fn source(mut self, source: Reference) -> Self {
         self.source = Some(source);
+        self
+    }
+
+    pub fn status(mut self, status: Status) -> Self {
+        self.status = status;
         self
     }
 
