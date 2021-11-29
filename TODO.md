@@ -13,6 +13,7 @@
   - [ ] Morning Prayer
   - [ ] Evening Prayer
   - [ ] Build preferences/choices into liturgies
+  - [ ] In-depth compiler tests to prevent future breakage
 - [ ] Rendering
   - `Choice`
     - [ ] HTML rendering
