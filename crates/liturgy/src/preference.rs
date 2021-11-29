@@ -106,3 +106,9 @@ pub enum Lectionaries {
     RCLTrack1,
     RCLTrack2,
 }
+
+impl Default for Lectionaries {
+    fn default() -> Self {
+        Self::BCP1979DailyOffice
+    }
+}

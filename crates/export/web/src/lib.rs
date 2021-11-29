@@ -91,6 +91,7 @@ impl Application<Msg> for DocumentView {
             Content::CollectOfTheDay => self.collect_of_the_day(),
             Content::PsalmCitation(content) => self.psalm_citation(content),
             Content::SubLiturgy(content) => self.sub_liturgy(content),
+            Content::LectionaryReading(content) => todo!(),
         };
 
         node! {

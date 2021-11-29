@@ -32,8 +32,8 @@ pub fn document(
         _ => None,
     };
     let prefs = HashMap::new();
-    let compiled =
-        document.and_then(|doc| CommonPrayer::compile(doc, &BCP1979_CALENDAR, &day, &prefs));
+    let compiled = document
+        .and_then(|doc| CommonPrayer::compile(doc, &BCP1979_CALENDAR, &day, &day.observed, &prefs));
 
     Json(compiled)
 }
@@ -47,8 +47,8 @@ pub fn doc_to_html(slug: &str, year: u16, month: u8, day: u8, evening: bool) -> 
         _ => None,
     };
     let prefs = HashMap::new();
-    let compiled =
-        document.and_then(|doc| CommonPrayer::compile(doc, &BCP1979_CALENDAR, &day, &prefs));
+    let compiled = document
+        .and_then(|doc| CommonPrayer::compile(doc, &BCP1979_CALENDAR, &day, &day.observed, &prefs));
 
     let component = DocumentView::from(compiled.unwrap_or_default());
     Html(component.to_html())

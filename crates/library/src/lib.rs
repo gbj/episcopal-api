@@ -1,4 +1,5 @@
-use calendar::{Calendar, LiturgicalDay};
+use calendar::{Calendar, LiturgicalDay, LiturgicalDayId};
+use lectionary::Lectionary;
 use liturgy::*;
 use psalter::{bcp1979::BCP1979_PSALTER, Psalter};
 
@@ -10,10 +11,13 @@ pub mod rite2;
 pub trait Library {
     fn psalter(psalter: Version) -> &'static Psalter;
 
+    fn lectionary(lectionary: Lectionaries) -> &'static Lectionary;
+
     fn compile(
         document: Document,
         calendar: &Calendar,
         day: &LiturgicalDay,
+        observed: &LiturgicalDayId,
         prefs: &impl ClientPreferences,
     ) -> Option<Document> {
         let include = document.include(calendar, day, prefs);
@@ -29,6 +33,32 @@ pub trait Library {
                 // 1) compile intro
                 // 2) look up Biblical text
                 // Insert day/date into heading if necessary
+
+                // Lectionaries
+                Content::LectionaryReading(lectionary_reading) => {
+                    let chosen_lectionary = match &lectionary_reading.lectionary {
+                        LectionaryTable::Preference(key) => match prefs.value(key) {
+                            PreferenceValue::Lectionary(lectionary) => lectionary,
+                            _ => Lectionaries::default(),
+                        },
+                        LectionaryTable::Selected(lectionary) => *lectionary,
+                    };
+                    let lectionary = Self::lectionary(chosen_lectionary);
+                    let mut docs = lectionary
+                        .reading_by_type(observed, day, lectionary_reading.reading_type)
+                        .map(|reading| {
+                            let intro = lectionary_reading.intro.as_ref().map(|intro| {
+                                BiblicalReadingIntro::from(intro.compile(&reading.citation))
+                            });
+                            Document::from(BiblicalCitation {
+                                citation: reading.citation,
+                                intro,
+                            })
+                        });
+                    Document::choice_or_document(&mut docs)
+                }
+
+                // Headings
                 Content::Heading(heading) => match heading {
                     // ordinary headings are passed through
                     Heading::Text(_, _) => Some(document),
@@ -39,6 +69,7 @@ pub trait Library {
                     // Days need to receive the calendar as well, to allow them to look up feast names etc.
                     Heading::Day(_) => Some(Document::from(Heading::Day(Some(day.clone())))),
                 },
+
                 // Lookup types
                 Content::PsalmCitation(citation) => {
                     let psalter_pref =
@@ -61,17 +92,21 @@ pub trait Library {
                 Content::Series(sub) => Some(Document {
                     content: Content::Series(Series::from(
                         sub.iter()
-                            .filter_map(|doc| Self::compile(doc.clone(), calendar, day, prefs))
+                            .filter_map(|doc| {
+                                Self::compile(doc.clone(), calendar, day, observed, prefs)
+                            })
                             .collect::<Vec<_>>(),
                     )),
                     ..document
                 }),
                 Content::Parallel(sub) => Some(Document {
-                    content: Content::Parallel(
+                    content: Content::Parallel(Parallel::from(
                         sub.iter()
-                            .filter_map(|doc| Self::compile(doc.clone(), calendar, day, prefs))
+                            .filter_map(|doc| {
+                                Self::compile(doc.clone(), calendar, day, observed, prefs)
+                            })
                             .collect::<Vec<_>>(),
-                    ),
+                    )),
                     ..document
                 }),
                 Content::Choice(sub) => {
@@ -85,7 +120,9 @@ pub trait Library {
                             options: sub
                                 .options
                                 .iter()
-                                .filter_map(|doc| Self::compile(doc.clone(), calendar, day, prefs))
+                                .filter_map(|doc| {
+                                    Self::compile(doc.clone(), calendar, day, observed, prefs)
+                                })
                                 .collect(),
                             selected: index_of_prev_selection.unwrap_or(0),
                         }),
@@ -104,5 +141,15 @@ pub struct CommonPrayer {}
 impl Library for CommonPrayer {
     fn psalter(_psalter: Version) -> &'static Psalter {
         &BCP1979_PSALTER
+    }
+
+    fn lectionary(lectionary: Lectionaries) -> &'static Lectionary {
+        match lectionary {
+            Lectionaries::BCP1979DailyOffice => &lectionary::BCP1979_DAILY_OFFICE_LECTIONARY,
+            Lectionaries::BCP1979DailyOfficePsalms => &lectionary::BCP1979_DAILY_OFFICE_PSALTER,
+            Lectionaries::BCP1979ThirtyDayPsalms => &lectionary::BCP1979_30_DAY_PSALTER,
+            Lectionaries::RCLTrack1 => &lectionary::RCL_TRACK_1,
+            Lectionaries::RCLTrack2 => &lectionary::RCL_TRACK_2,
+        }
     }
 }

@@ -5,6 +5,7 @@ edition = "2018"
 
 [dependencies]
 lazy_static = '1.0'
+lectionary = { path = "../lectionary" }
 liturgy = { path = "../liturgy" }
 calendar = { path = "../calendar" }
 psalter = { path = "../psalter" }

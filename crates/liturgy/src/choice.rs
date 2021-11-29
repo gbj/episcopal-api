@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{Content, Document};
 
-/// An explanatory sentence or direction for the liturgy
+/// Multiple [Document](crate::Document)s that are displayed one at a time, with a menu to choose between them.
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Choice {
     pub options: Vec<Document>,

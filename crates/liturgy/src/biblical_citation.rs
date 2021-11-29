@@ -7,8 +7,8 @@ use crate::BiblicalReadingIntro;
 /// [BibleReading](crate::BibleReading) by the compilation process.
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct BiblicalCitation {
-    citation: String,
-    intro: Option<BiblicalReadingIntro>,
+    pub citation: String,
+    pub intro: Option<BiblicalReadingIntro>,
 }
 
 impl BiblicalCitation {

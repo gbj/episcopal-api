@@ -72,8 +72,8 @@ impl BiblicalReadingIntroTemplate {
     ///     ]))
     /// );
     /// ```
-    pub fn compile(self, citation: &str) -> Document {
-        let template = *self.0;
+    pub fn compile(&self, citation: &str) -> Document {
+        let template = *self.0.clone();
         let citation = BibleReference::from(citation);
         let book = citation
             .ranges

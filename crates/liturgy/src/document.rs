@@ -6,8 +6,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     BiblicalCitation, BiblicalReading, Canticle, Choice, ClientPreferences, Condition, GloriaPatri,
-    Heading, Preces, Psalm, PsalmCitation, Reference, ResponsivePrayer, Rubric, Sentence, Series,
-    SubLiturgy, Text, Version,
+    Heading, LectionaryReading, Parallel, Preces, Psalm, PsalmCitation, Reference,
+    ResponsivePrayer, Rubric, Sentence, Series, SubLiturgy, Text, Version,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -34,6 +34,7 @@ impl Document {
         }
     }
 
+    /// Whether a `Document` should be included in the liturgy or omitted, based on its included [Condition]s.
     pub fn include(
         &self,
         calendar: &Calendar,
@@ -43,6 +44,51 @@ impl Document {
         match &self.condition {
             None => true,
             Some(condition) => condition.include(calendar, day, prefs),
+        }
+    }
+
+    /// Builds a new Document from an iterator of Documents; either a [Choice] (if multiple Documents) or a single Document.
+    pub fn choice_or_document<I>(docs: &mut I) -> Option<Document>
+    where
+        I: Iterator<Item = Document>,
+    {
+        let count = docs.count();
+        if count == 0 {
+            None
+        } else if count == 1 {
+            Some(docs.next().unwrap())
+        } else {
+            Some(Document::from(Choice::from(docs)))
+        }
+    }
+
+    /// Builds a new Document from an iterator of Documents; either a [Series] (if multiple Documents) or a single Document.
+    pub fn series_or_document<I>(docs: &mut I) -> Option<Document>
+    where
+        I: Iterator<Item = Document>,
+    {
+        let count = docs.count();
+        if count == 0 {
+            None
+        } else if count == 1 {
+            Some(docs.next().unwrap())
+        } else {
+            Some(Document::from(Series::from(docs)))
+        }
+    }
+
+    /// Builds a new Document from an iterator of Documents; either a [Parallel] (if multiple Documents) or a single Document.
+    pub fn parallel_or_document<I>(docs: &mut I) -> Option<Document>
+    where
+        I: Iterator<Item = Document>,
+    {
+        let count = docs.count();
+        if count == 0 {
+            None
+        } else if count == 1 {
+            Some(docs.next().unwrap())
+        } else {
+            Some(Document::from(Parallel::from(docs)))
         }
     }
 
@@ -99,6 +145,8 @@ pub enum Content {
     GloriaPatri(GloriaPatri),
     /// A title, subtitle, label, or other heading
     Heading(Heading),
+    /// A generic reference to a lectionary reading (i.e., “First Reading” from the Daily Office Lectionary).
+    LectionaryReading(LectionaryReading),
     /// A responsive prayer in which each line has a label and its text: V: ___ / R: ___
     Preces(Preces),
     /// A psalm.
@@ -115,7 +163,7 @@ pub enum Content {
     /// A set of multiple [Document]s, organized one after the other
     Series(Series),
     /// A set of multiple [Document]s, displayed as parallel options (e.g., in multiple languages or versions)
-    Parallel(Vec<Document>),
+    Parallel(Parallel),
     /// A set of multiple [Document]s, which are mutually-exclusive choices
     Choice(Choice),
     /// # Lookup Fields
@@ -135,6 +183,12 @@ impl From<Content> for Document {
 }
 
 // Create Documents from various content types
+impl From<BiblicalCitation> for Document {
+    fn from(content: BiblicalCitation) -> Self {
+        Self::from(Content::BiblicalCitation(content))
+    }
+}
+
 impl From<BiblicalReading> for Document {
     fn from(content: BiblicalReading) -> Self {
         Self::from(Content::BiblicalReading(content))
@@ -168,6 +222,18 @@ impl From<Heading> for Document {
 impl From<Preces> for Document {
     fn from(content: Preces) -> Self {
         Self::from(Content::Preces(content))
+    }
+}
+
+impl From<LectionaryReading> for Document {
+    fn from(content: LectionaryReading) -> Self {
+        Self::from(Content::LectionaryReading(content))
+    }
+}
+
+impl From<Parallel> for Document {
+    fn from(content: Parallel) -> Self {
+        Self::from(Content::Parallel(content))
     }
 }
 
