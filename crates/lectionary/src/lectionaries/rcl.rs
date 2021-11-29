@@ -4675,7 +4675,7 @@ pub const RCL: Lectionary = Lectionary {
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Sun),
             Year::Rcl(RCLYear::C),
             ReadingType::SecondReading,
-            "Philemon 1:1-21",
+            "Philemon 1-21",
         ),
         (
             LiturgicalDayId::ProperAndDay(Proper::Proper18, Weekday::Sun),
