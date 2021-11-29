@@ -333,13 +333,13 @@ mod tests {
             Document::from(BiblicalReading {
                 citation: String::from("John 1:1"),
                 text: vec![],
-                intro: BiblicalReadingIntro::None,
+                intro: None,
             })
             .version(Version::NRSV),
             Document::from(BiblicalReading {
                 citation: String::from("John 1:1"),
                 text: vec![],
-                intro: BiblicalReadingIntro::None,
+                intro: None,
             })
             .version(Version::ESV),
         ]);
@@ -375,7 +375,7 @@ mod tests {
                 text: vec![
                     (BibleVerse {book:Book::John,chapter:1,verse:1, verse_part: BibleVersePart::All }, String::from("'In the beginning was the Word, and the Word was with God, and the Word was God."))
                 ],
-                intro: BiblicalReadingIntro::None,
+                intro: None
             })
             .version(Version::NRSV),
             Document::from(BiblicalReading {
@@ -383,7 +383,7 @@ mod tests {
                 text: vec![
                     (BibleVerse {book:Book::John,chapter:1,verse:2, verse_part: BibleVersePart::All }, String::from("He was in the beginning with God."))
                 ],
-                intro: BiblicalReadingIntro::None,
+                intro: None
             })
             .version(Version::ESV),
         ]);
@@ -432,7 +432,7 @@ mod tests {
                         verse_part: BibleVersePart::All
                     }, String::from("In the beginning was the Word, and the Word was with God, and the Word was God."))
                 ],
-                intro: BiblicalReadingIntro::None,
+                intro: None,
             })
             .version(Version::NRSV),
             Document::from(BiblicalReading {
@@ -445,7 +445,7 @@ mod tests {
                         verse_part: BibleVersePart::All
                     }, String::from("He was in the beginning with God."))
                 ],
-                intro: BiblicalReadingIntro::None,
+                intro: None,
             })
             .version(Version::NRSV),
         ]);

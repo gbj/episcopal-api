@@ -22,3 +22,9 @@ impl From<Document> for BiblicalReadingIntro {
         Self(Box::new(document))
     }
 }
+
+impl From<BiblicalReadingIntro> for Document {
+    fn from(intro: BiblicalReadingIntro) -> Self {
+        *intro.0
+    }
+}

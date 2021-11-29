@@ -138,8 +138,9 @@ impl DocumentView {
     }
 
     fn biblical_reading(&self, reading: &BiblicalReading) -> Node<Msg> {
-        let intro = if let BiblicalReadingIntro::Compiled(intro) = &reading.intro {
-            DocumentView::from(*intro.clone()).view()
+        let intro = if let Some(intro) = &reading.intro {
+            let doc = Document::from(intro.clone());
+            DocumentView::from(doc).view()
         } else {
             text("")
         };
