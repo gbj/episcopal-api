@@ -11,6 +11,7 @@ pub enum Msg {
 pub struct DocumentView {
     pub document: Document,
     pub calendar: &'static Calendar,
+    top_level: bool,
 }
 
 impl DocumentView {
@@ -18,6 +19,7 @@ impl DocumentView {
         Self {
             document: Document::new(),
             calendar: &BCP1979_CALENDAR,
+            top_level: false,
         }
     }
 
@@ -26,6 +28,11 @@ impl DocumentView {
         let mut buffer = String::new();
         view.render(&mut buffer).expect("failed to render document");
         buffer
+    }
+
+    pub fn mark_as_top_level(mut self) -> Self {
+        self.top_level = true;
+        self
     }
 }
 
@@ -39,13 +46,18 @@ impl From<Document> for DocumentView {
         Self {
             document,
             calendar: &BCP1979_CALENDAR,
+            top_level: false,
         }
     }
 }
 
 impl From<(Document, &'static Calendar)> for DocumentView {
     fn from((document, calendar): (Document, &'static Calendar)) -> Self {
-        Self { document, calendar }
+        Self {
+            document,
+            calendar,
+            top_level: false,
+        }
     }
 }
 
@@ -61,9 +73,14 @@ impl Application<Msg> for DocumentView {
     }
 
     fn view(&self) -> Node<Msg> {
-        let label: Option<Node<Msg>> = self.document.label.as_ref().map(|label| {
-            node! {
-                <h3>{text(label)}</h3>
+        let label: Option<Node<Msg>> = self.document.label.as_ref().and_then(|label| {
+            // top-level label handled differently
+            if self.top_level {
+                None
+            } else {
+                Some(node! {
+                    <h3 class="label">{text(label)}</h3>
+                })
             }
         });
 
@@ -72,7 +89,7 @@ impl Application<Msg> for DocumentView {
             .source
             .map(|reference| self.reference(&reference));
 
-        let content: Node<Msg> = match &self.document.content {
+        let (header, content) = match &self.document.content {
             Content::BiblicalCitation(content) => self.biblical_citation(content),
             Content::BiblicalReading(content) => self.biblical_reading(content),
             Content::Canticle(content) => self.canticle(content),
@@ -96,12 +113,34 @@ impl Application<Msg> for DocumentView {
             Content::Litany(content) => self.litany(content),
         };
 
+        let header = match (label, source, header) {
+            (None, None, None) => text(""),
+            (label, source, Some(headers)) => {
+                node! {
+                    <header>
+                        {label.unwrap_or_else(|| text(""))}
+                        {source.unwrap_or_else(|| text(""))}
+                        {for header in headers {
+                            header
+                        }}
+                    </header>
+                }
+            }
+            (label, source, None) => {
+                node! {
+                    <header>
+                        {label.unwrap_or_else(|| text(""))}
+                        {source.unwrap_or_else(|| text(""))}
+                    </header>
+                }
+            }
+        };
+
         node! {
-            <div class="document">
-                {label.unwrap_or_else(|| text(""))}
-                {source.unwrap_or_else(|| text(""))}
+            <article class="document">
+                {header}
                 {content}
-            </div>
+            </article>
         }
     }
 }
@@ -132,15 +171,21 @@ impl DocumentView {
 
     // Content Types
 
-    fn biblical_citation(&self, biblical_citation: &BiblicalCitation) -> Node<Msg> {
-        node! {
-            <article class="document biblical-citation">
-                <h3>{text(biblical_citation)}</h3>
-            </article>
-        }
+    fn biblical_citation(
+        &self,
+        biblical_citation: &BiblicalCitation,
+    ) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        (
+            None,
+            node! {
+                <article class="document biblical-citation">
+                    <h3>{text(biblical_citation)}</h3>
+                </article>
+            },
+        )
     }
 
-    fn biblical_reading(&self, reading: &BiblicalReading) -> Node<Msg> {
+    fn biblical_reading(&self, reading: &BiblicalReading) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
         let intro = if let Some(intro) = &reading.intro {
             let doc = Document::from(intro.clone());
             DocumentView::from(doc).view()
@@ -148,27 +193,28 @@ impl DocumentView {
             text("")
         };
 
-        node! {
-            <article class="document biblical-reading">
-                <header>
-                    <h3 class="citation">{text(&reading.citation)}</h3>
-                </header>
-                <main>
-                    {intro}
-                    {for (verse, verse_text) in &reading.text {
-                        node! {
-                            <span class="verse">
-                                <sup class="verse-number">{text(verse.verse)}</sup>
-                                {text(verse_text)}
-                            </span>
-                        }
-                    }}
-                </main>
-            </article>
-        }
+        let header = node! {
+            <h3 class="citation">{text(&reading.citation)}</h3>
+        };
+
+        let main = node! {
+            <main class="biblical-reading">
+                {intro}
+                {for (verse, verse_text) in &reading.text {
+                    node! {
+                        <span class="verse">
+                            <sup class="verse-number">{text(verse.verse)}</sup>
+                            {text(verse_text)}
+                        </span>
+                    }
+                }}
+            </main>
+        };
+
+        (Some(vec![header]), main)
     }
 
-    fn canticle(&self, canticle: &Canticle) -> Node<Msg> {
+    fn canticle(&self, canticle: &Canticle) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
         let citation = if let Some(citation) = &canticle.citation {
             node! {
                 <h3 class="citation">{text(citation)}</h3>
@@ -177,14 +223,15 @@ impl DocumentView {
             text("")
         };
 
-        node! {
-            <article class="document canticle">
-                <header>
-                    <h3 class="local-name">{text(format!("{}. {}", canticle.number, canticle.local_name))}</h3>
-                    <em class="latin-name">{text(&canticle.latin_name)}</em>
-                    {self.reference(&canticle.reference)}
-                    {citation}
-                </header>
+        let header = vec![
+            node! { <h3 class="local-name">{text(format!("{}. {}", canticle.number, canticle.local_name))}</h3> },
+            node! { <em class="latin-name">{text(&canticle.latin_name)}</em> },
+            self.reference(&canticle.reference),
+            citation,
+        ];
+
+        let main = node! {
+            <main class="canticle">
             {for section in &canticle.sections {
                 let header = if let Some(title) = &section.title {
                     node! {
@@ -212,13 +259,15 @@ impl DocumentView {
                     </section>
                 }
             }}
-            </article>
-        }
+            </main>
+        };
+
+        (Some(header), main)
     }
 
-    fn choice(&self, choice: &Choice) -> Node<Msg> {
-        node! {
-            <section class="document choice">
+    fn choice(&self, choice: &Choice) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
+            <section class="choice">
                 <nav>
                     <ul>
                         {for (ii, doc) in choice.options.iter().enumerate() {
@@ -232,16 +281,60 @@ impl DocumentView {
                 {DocumentView::from(doc.clone()).view()}
             }}
             </section>
-        }
+        };
+
+        (None, main)
     }
 
-    fn collect_of_the_day(&self) -> Node<Msg> {
-        node! {
+    fn collect_of_the_day(&self) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
             <article class="document empty">{text("TODO")}</article>
-        }
+        };
+
+        (None, main)
     }
 
-    fn date(&self, date: &Option<Date>) -> Node<Msg> {
+    fn empty(&self) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
+            <main class="empty"></main>
+        };
+
+        (None, main)
+    }
+
+    fn gloria_patri(&self, content: &GloriaPatri) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let display_format = self.display_format_as_class(content.display_format);
+        let main = node! {
+            <main class={format!("gloria-patri {}", display_format)}>
+                <p>{text(format!("{} {}", content.text.0, content.text.1))}</p>
+                <p>{text(format!("{} {}", content.text.2, content.text.3))}</p>
+            </main>
+        };
+
+        (None, main)
+    }
+
+    fn heading(&self, heading: &Heading) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
+            <main class="heading">
+                {match heading {
+                    Heading::Date(date) => self.heading_date(date),
+                    Heading::Day(day) => self.heading_day(day),
+                    Heading::Text(level, content) => match level {
+                        HeadingLevel::Heading1 => node! { <h1>{text(content)}</h1> },
+                        HeadingLevel::Heading2 => node! { <h2>{text(content)}</h2> },
+                        HeadingLevel::Heading3 => node! { <h3>{text(content)}</h3> },
+                        HeadingLevel::Heading4 => node! { <h4>{text(content)}</h4> },
+                        HeadingLevel::Heading5 => node! { <h5>{text(content)}</h5> },
+                    },
+                }}
+            </main>
+        };
+
+        (None, main)
+    }
+
+    fn heading_date(&self, date: &Option<Date>) -> Node<Msg> {
         match date {
             Some(date) => node! {
                 <h2 class="date">{text(date.to_localized_name(self.document.language))}</h2>
@@ -250,7 +343,7 @@ impl DocumentView {
         }
     }
 
-    fn day(&self, day: &Option<LiturgicalDay>) -> Node<Msg> {
+    fn heading_day(&self, day: &Option<LiturgicalDay>) -> Node<Msg> {
         let observed = day.as_ref().map(|day| day.observed);
         let base_name = match observed {
             Some(LiturgicalDayId::Feast(feast)) => self
@@ -309,46 +402,33 @@ impl DocumentView {
             .map(|name| format!("({})", name));
 
         node! {
-            <h2>
+            <h2 class="day">
                 {base_name.unwrap_or_else(|| text(""))}
                 {text(proper.unwrap_or_default())}
             </h2>
         }
     }
 
-    fn empty(&self) -> Node<Msg> {
-        node! {
-            <article class="document empty"></article>
-        }
+    fn litany(&self, litany: &Litany) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
+            <main class="litany">
+                {for line in litany.iter() {
+                    node! {
+                        <p>
+                            <span>{text(line)}</span>
+                            <strong class="response">{text(&litany.response)}</strong>
+                        </p>
+                    }
+                }}
+            </main>
+        };
+
+        (None, main)
     }
 
-    fn gloria_patri(&self, content: &GloriaPatri) -> Node<Msg> {
-        let display_format = self.display_format_as_class(content.display_format);
-        node! {
-            <article class={format!("document gloria-patri {}", display_format)}>
-                <p>{text(format!("{} {}", content.text.0, content.text.1))}</p>
-                <p>{text(format!("{} {}", content.text.2, content.text.3))}</p>
-            </article>
-        }
-    }
-
-    fn heading(&self, heading: &Heading) -> Node<Msg> {
-        match heading {
-            Heading::Date(date) => self.date(date),
-            Heading::Day(day) => self.day(day),
-            Heading::Text(level, content) => match level {
-                HeadingLevel::Heading1 => node! { <h1>{text(content)}</h1> },
-                HeadingLevel::Heading2 => node! { <h2>{text(content)}</h2> },
-                HeadingLevel::Heading3 => node! { <h3>{text(content)}</h3> },
-                HeadingLevel::Heading4 => node! { <h4>{text(content)}</h4> },
-                HeadingLevel::Heading5 => node! { <h5>{text(content)}</h5> },
-            },
-        }
-    }
-
-    fn preces(&self, preces: &Preces) -> Node<Msg> {
-        node! {
-            <article class="document preces">{
+    fn preces(&self, preces: &Preces) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
+            <main class="preces">{
                 for (label, prayer) in preces.iter() {
                     node! {
                         <p class="line">
@@ -357,13 +437,16 @@ impl DocumentView {
                         </p>
                     }
                 }
-            }</article>
-        }
+            }
+            </main>
+        };
+
+        (None, main)
     }
 
-    fn psalm(&self, psalm: &Psalm) -> Node<Msg> {
-        node! {
-            <article class="document psalm">
+    fn psalm(&self, psalm: &Psalm) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
+            <main class="psalm">
             {for section in psalm.filtered_sections() {
                 node! {
                     <section>
@@ -386,50 +469,49 @@ impl DocumentView {
                     </section>
                 }
             }}
-            </article>
-        }
+            </main>
+        };
+
+        (None, main)
     }
 
-    fn psalm_citation(&self, psalm_citation: &PsalmCitation) -> Node<Msg> {
-        node! {
-            <article class="document psalm-citation"><h3>{text(psalm_citation)}</h3></article>
-        }
+    fn psalm_citation(
+        &self,
+        psalm_citation: &PsalmCitation,
+    ) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
+            <main class="psalm-citation"><h3>{text(psalm_citation)}</h3></main>
+        };
+
+        (None, main)
     }
 
-    fn responsive_prayer(&self, responsive_prayer: &ResponsivePrayer) -> Node<Msg> {
-        node! {
-            <article class="document responsive-prayer">
+    fn responsive_prayer(
+        &self,
+        responsive_prayer: &ResponsivePrayer,
+    ) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
+            <main class="responsive-prayer">
             {for line in responsive_prayer.iter() {
                 node! {
                     <p>{text(line)}</p>
                 }
             }}
-            </article>
-        }
+            </main>
+        };
+
+        (None, main)
     }
 
-    fn litany(&self, litany: &Litany) -> Node<Msg> {
-        node! {
-            <article class="document litany">
-                {for line in litany.iter() {
-                    node! {
-                        <p>
-                            <span>{text(line)}</span>
-                            <strong class="response">{text(&litany.response)}</strong>
-                        </p>
-                    }
-                }}
-            </article>
-        }
+    fn rubric(&self, rubric: &Rubric) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
+            <main class="rubric">{text(rubric)}</main>
+        };
+
+        (None, main)
     }
 
-    fn rubric(&self, rubric: &Rubric) -> Node<Msg> {
-        node! {
-            <article class="document rubric">{text(rubric)}</article>
-        }
-    }
-
-    fn sentence(&self, sentence: &Sentence) -> Node<Msg> {
+    fn sentence(&self, sentence: &Sentence) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
         let short_text_response = sentence
             .response
             .as_ref()
@@ -449,8 +531,8 @@ impl DocumentView {
             None => text(""),
         };
 
-        node! {
-            <article class="document sentence">
+        let main = node! {
+            <main class="sentence">
             {match (&sentence.response, short_text_response) {
                 // No response
                 (None, _) => node! {
@@ -478,43 +560,52 @@ impl DocumentView {
                     </div>
                 },
             }}
-            </article>
-        }
+            </main>
+        };
+
+        (None, main)
     }
 
-    fn series(&self, series: &Series) -> Node<Msg> {
-        node! {
+    fn series(&self, series: &Series) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
             <section class="series">{
                 for doc in series.iter() {
                     DocumentView::from((doc.clone(), self.calendar)).view()
                 }
             }</section>
-        }
+        };
+        (None, main)
     }
 
-    fn sub_liturgy(&self, sub_liturgy: &SubLiturgy) -> Node<Msg> {
-        node! {
-            <article class="document empty">{text("TODO")}</article>
-        }
+    fn sub_liturgy(&self, sub_liturgy: &SubLiturgy) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
+            <main class="sub_liturgy">{text("TODO")}</main>
+        };
+
+        (None, main)
     }
 
-    fn text(&self, content: &liturgy::Text) -> Node<Msg> {
+    fn text(&self, content: &liturgy::Text) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
         let paragraphs = content.text.split("\n\n");
         let display_format = self.display_format_as_class(content.display_format);
-        node! {
-            <article class={format!("document text {}", display_format)}>
+        let main = node! {
+            <main class={format!("text {}", display_format)}>
                 {for paragraph in paragraphs {
                     node! {
                         <p>{text(paragraph)}</p>
                     }
                 }}
-            </article>
-        }
+            </main>
+        };
+
+        (None, main)
     }
 
-    fn antiphon(&self, antiphon: &Antiphon) -> Node<Msg> {
-        node! {
-            <article class="document antiphon">{text(antiphon)}</article>
-        }
+    fn antiphon(&self, antiphon: &Antiphon) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
+            <main class="antiphon">{text(antiphon)}</main>
+        };
+
+        (None, main)
     }
 }

@@ -1,0 +1,166 @@
+/* Styles for Episcopal API documents that have been rendered into HTML */
+
+/* CSS variables determining appearance */
+:root {
+  --background: #fefefe;
+  --font-family: "Sabon", Garamond, serif;
+  --page-padding: 1rem;
+  --rubric-size: 0.9rem;
+
+  /* Settings */
+  --response-weight: bold;
+  --response-style: normal;
+}
+
+/* Font Definitions */
+@font-face {
+  font-family: "Sabon";
+  font-weight: normal;
+  font-style: normal;
+  src: url("/static/fonts/Sabon_Roman.ttf");
+}
+@font-face {
+  font-family: "Sabon";
+  font-weight: normal;
+  font-style: italic;
+  src: url("/static/fonts/Sabon_Italic.ttf");
+}
+@font-face {
+  font-family: "Sabon";
+  font-weight: bold;
+  font-style: normal;
+  src: url("/static/fonts/Sabon_Bold.ttf");
+}
+@font-face {
+  font-family: "Sabon";
+  font-weight: bold;
+  font-style: italic;
+  src: url("/static/fonts/Sabon_BoldItalic.ttf");
+}
+
+/* Utility Classes */
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+
+/* Styles applying to everything */
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+}
+
+body > main {
+  padding: 0.25rem;
+}
+
+/* Top-level documents */
+body > main > .document {
+  /* Optimal line width for a single column is ~65 characters */
+  width: 30rem;
+  max-width: calc(100vw - calc(2 * var(--page-padding)));
+  /* Centers the documents horizontally within the page */
+  margin: auto;
+}
+
+@media(min-width: 767px) {
+  body > main > .document {
+    width: 35rem;
+  }
+}
+
+/* Top-level heading in a top-level Series = the document's label */
+body > header {
+  text-align: center;
+  /* Floats along the top of the screen */
+  position: sticky;
+  top: 0;
+  background: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: middle;
+  padding: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+body > header > h1 {
+  font-variant: small-caps;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+/** Document Header (label, citation, etc.) */
+.document > header, .psalm > section > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: middle;
+}
+
+.document > header > *, .psalm > section > header > * {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+a.reference {
+  display: block;
+  margin-left: auto;
+  font-size: var(--rubric-size);
+}
+
+/** Document Content Types */
+
+/* Margin after each document in a series */
+.series > .document {
+  margin-bottom: 1rem;
+}
+
+/* Heading */
+.heading > h1 {
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.heading > .date, .heading > .day {
+  text-align: center;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: normal;
+}
+
+/* Rubric */
+.rubric {
+  color: #ea0000;
+  font-style: italic;
+  font-size: var(--rubric-size);
+}
+
+/* Preces */
+.preces {
+  display: table;
+}
+
+.preces > .line {
+  display: table-row;
+}
+
+.preces > .line > .label, .preces > .line > .text {
+  display: table-cell;
+}
+
+.preces > .line > .label {
+  padding-right: 0.5rem;
+}
+
+/* Responses to things */
+.response, .preces > .line:nth-child(2n) .text {
+  font-weight: var(--response-weight);
+  font-style: var(--response-style);
+}

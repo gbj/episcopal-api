@@ -6,7 +6,7 @@ use library::{
     CommonPrayer, Library,
 };
 use liturgy::Document;
-use rocket::{response::content::Html, serde::json::Json};
+use rocket::{futures::TryFutureExt, response::content::Html, serde::json::Json};
 use web::DocumentView;
 
 fn slug_to_doc(slug: &str) -> Option<Document> {
@@ -44,6 +44,31 @@ pub fn doc_to_html(slug: &str, year: u16, month: u8, day: u8, evening: bool) -> 
     let compiled = document
         .and_then(|doc| CommonPrayer::compile(doc, &BCP1979_CALENDAR, &day, &day.observed, &prefs));
 
-    let component = DocumentView::from(compiled.unwrap_or_default());
-    Html(component.to_html())
+    let label = compiled
+        .as_ref()
+        .and_then(|doc| doc.label.as_ref())
+        .cloned()
+        .unwrap_or_default();
+
+    let html = DocumentView::from(compiled.unwrap_or_default())
+        .mark_as_top_level()
+        .to_html();
+    Html(format!(
+        r#"
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <link rel="stylesheet" href="/static/document.css">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+            </head>
+            <body>
+                <header><h1>{}</h1></header>
+                <main>
+                {}
+                </main>
+            </body>
+        </html>
+    "#,
+        label, html
+    ))
 }

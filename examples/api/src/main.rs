@@ -1,6 +1,11 @@
 #[macro_use]
 extern crate rocket;
 
+use rocket::fairing::{Fairing, Info, Kind};
+use rocket::fs::{relative, FileServer};
+use rocket::http::Header;
+use rocket::{Request, Response};
+
 mod calendar;
 mod document;
 mod psalm;
@@ -9,6 +14,7 @@ mod psalm;
 fn rocket() -> _ {
     rocket::build()
         .attach(CORS)
+        .mount("/static", FileServer::from(relative!("static")))
         .mount("/calendar", routes![calendar::day])
         .mount(
             "/document",
@@ -20,11 +26,6 @@ fn rocket() -> _ {
             ],
         )
 }
-
-use rocket::fairing::{Fairing, Info, Kind};
-use rocket::http::Header;
-use rocket::{Request, Response};
-
 pub struct CORS;
 
 #[rocket::async_trait]

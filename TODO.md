@@ -10,6 +10,7 @@
       - [ ] Look up actual reading content (some kind of injected `ReadingService`?)
 - [ ] Tool to export LDF to Rust format
   - [x] Add compile_hidden support
+  - [ ] Responses in old "Prayer" type
 - [ ] CSS for rendering
 - [ ] Liturgies
   - [x] Compline
