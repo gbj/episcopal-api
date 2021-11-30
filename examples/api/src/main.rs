@@ -3,6 +3,7 @@ extern crate rocket;
 
 mod calendar;
 mod document;
+mod psalm;
 
 #[launch]
 fn rocket() -> _ {
@@ -12,10 +13,10 @@ fn rocket() -> _ {
         .mount(
             "/document",
             routes![
-                document::document,
+                document::doc_to_json,
                 document::doc_to_html,
-                document::psalm_by_number,
-                document::psalms_by_citation
+                psalm::psalm_by_number,
+                psalm::psalms_by_citation
             ],
         )
 }
