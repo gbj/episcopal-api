@@ -306,8 +306,16 @@ impl DocumentView {
         let display_format = self.display_format_as_class(content.display_format);
         let main = node! {
             <main class={format!("gloria-patri {}", display_format)}>
-                <p>{text(format!("{} {}", content.text.0, content.text.1))}</p>
-                <p>{text(format!("{} {}", content.text.2, content.text.3))}</p>
+                <p>
+                    <span class="a">{text(&content.text.0)}</span>
+                    <span class="b">{text(&content.text.1)}</span>
+                    <br/>
+                    <span class="c">{text(&content.text.2)}</span>
+                    <span class="d">{text(&content.text.3)}</span>
+                </p>
+                /* <p></p>
+                <p>{text(format!("{}<wb>{}", content.text.0, content.text.1))}</p>
+                <p>{text(format!("{}<wb>{}", content.text.2, content.text.3))}</p> */
             </main>
         };
 

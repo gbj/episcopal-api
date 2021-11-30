@@ -10,6 +10,13 @@
   /* Settings */
   --response-weight: bold;
   --response-style: normal;
+
+  --psalm-number-display: inline-block;
+}
+
+.psalmverses-hidden {
+  --psalm-number-display: none;
+  --psalm-grid-display: block;
 }
 
 /* Font Definitions */
@@ -49,7 +56,6 @@
   width: 1px;
 }
 
-
 /* Styles applying to everything */
 body {
   font-family: var(--font-family);
@@ -70,7 +76,7 @@ body > main > .document {
   margin: auto;
 }
 
-@media(min-width: 767px) {
+@media (min-width: 767px) {
   body > main > .document {
     width: 35rem;
   }
@@ -97,13 +103,15 @@ body > header > h1 {
 }
 
 /** Document Header (label, citation, etc.) */
-.document > header, .psalm > section > header {
+.document > header,
+.psalm > section > header {
   display: flex;
   justify-content: space-between;
   align-items: middle;
 }
 
-.document > header > *, .psalm > section > header > * {
+.document > header > *,
+.psalm > section > header > * {
   display: inline-block;
   padding: 0;
   margin: 0;
@@ -128,7 +136,8 @@ a.reference {
   font-size: 2.5rem;
 }
 
-.heading > .date, .heading > .day {
+.heading > .date,
+.heading > .day {
   text-align: center;
   font-size: 1rem;
   font-style: italic;
@@ -151,7 +160,8 @@ a.reference {
   display: table-row;
 }
 
-.preces > .line > .label, .preces > .line > .text {
+.preces > .line > .label,
+.preces > .line > .text {
   display: table-cell;
 }
 
@@ -160,7 +170,99 @@ a.reference {
 }
 
 /* Responses to things */
-.response, .preces > .line:nth-child(2n) .text {
+.response,
+.preces > .line:nth-child(2n) .text {
   font-weight: var(--response-weight);
   font-style: var(--response-style);
+}
+
+/* Gloria */
+.gloria-patri p {
+  font-style: inherit;
+  margin-bottom: 0;
+  margin: 0;
+}
+
+.gloria-patri br {
+  display: none;
+}
+
+.gloria-patri .a,
+.gloria-patri .b,
+.gloria-patri .c,
+.gloria-patri .d {
+  display: block;
+}
+
+.gloria-patri .b,
+.gloria-patri .d {
+  margin-left: 1rem;
+}
+
+.gloria-patri .a::after,
+.gloria-patri .c::after {
+  content: " * ";
+}
+
+@media (min-width: 450px) {
+  .gloria-patri {
+    margin-left: 2rem;
+    text-indent: -2rem;
+  }
+
+  .gloria-patri br {
+    display: block;
+  }
+
+  .gloria-patri .a,
+  .gloria-patri .b,
+  .gloria-patri .c,
+  .gloria-patri .d {
+    display: inline;
+  }
+
+  .gloria-patri .b,
+  .gloria-patri .d {
+    margin-left: 0;
+  }
+
+  .gloria-patri .a::after,
+  .gloria-patri .c::after {
+    content: " ";
+  }
+
+  .gloria-patri .b::after {
+    content: " * ";
+  }
+}
+
+/* Psalm */
+.psalm > section > header,
+.psalm > section > main {
+  margin-bottom: 1rem;
+}
+
+.psalm > section > main > .verse > sup.number {
+  display: var(--psalm-number-display);
+  grid-area: number;
+  margin-right: 1em;
+}
+
+.psalm > section > main > .verse {
+  display: grid;
+  grid-template-columns: 1.5rem 1.5rem 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: var(
+    --psalm-verse-grid,
+    "number verse verse" "spacing spacing half-verse"
+  );
+  margin: 0;
+}
+
+.psalm > section > main > .verse > .a {
+  display: block;
+  grid-area: verse;
+}
+.psalm > section > main > .verse > .b {
+  grid-area: half-verse;
 }

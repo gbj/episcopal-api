@@ -30,12 +30,7 @@ Document::from(Preces::from([
 ("People", "O Lord, make haste to help us.")
         ])),
 Document::from(Rubric::from("Officiant and People")),
-Document::from(GloriaPatri::from((
-          "Glory to the Father, and to the Son, ",
-          "and to the Holy Spirit: * ",
-          "as it was in the beginning, is now, ",
-          "and will be for ever. Amen."
-        ))).version_label("Rite II"),
+Document::from(GLORIA_PATRI.clone()),
         Document::from(Rubric::from("Except in Lent, add")).condition(NOT_LENT.clone()),
         Document::from(Text::from("Alleluia.")).condition(NOT_LENT.clone()),
 Document::from(Rubric::from("\nOne or more of the following Psalms are sung or said. Other suitable selections may be substituted.")),
