@@ -11,6 +11,4 @@ members = [
   "crates/psalter",
   "crates/reference-parser",
   "examples/api",
-  "utils/sorting",
-  "utils/fm_api_test"
 ]
