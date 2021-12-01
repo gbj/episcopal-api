@@ -171,7 +171,8 @@ a.reference {
 
 /* Responses to things */
 .response,
-.preces > .line:nth-child(2n) .text {
+.preces > .line:nth-child(2n) .text,
+.unison {
   font-weight: var(--response-weight);
   font-style: var(--response-style);
 }
@@ -265,4 +266,25 @@ a.reference {
 }
 .psalm > section > main > .verse > .b {
   grid-area: half-verse;
+}
+
+/* Choice */
+.choice-nav {
+  width: 100%;
+}
+.choice-menu {
+  display: block;
+  margin-left: auto;
+}
+
+/* Text */
+.text p {
+  white-space: pre-wrap;
+}
+
+/* Sentence */
+.sentence .citation {
+  font-style: italic;
+  font-size: var(--rubric-size);
+  margin-left: 2rem;
 }

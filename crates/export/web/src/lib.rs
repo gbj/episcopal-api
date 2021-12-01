@@ -266,24 +266,27 @@ impl DocumentView {
     }
 
     fn choice(&self, choice: &Choice) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let header = node! {
+            <nav class="choice-nav">
+                <select class="choice-menu">
+                    {for (ii, doc) in choice.options.iter().enumerate() {
+                        node! {
+                            <option value={ii}>{text(choice.option_label(doc, ii))}</option>
+                        }
+                    }}
+                </select>
+            </nav>
+        };
+
         let main = node! {
             <section class="choice">
-                <nav>
-                    <ul>
-                        {for (ii, doc) in choice.options.iter().enumerate() {
-                            node! {
-                                <li>{text(choice.option_label(doc, ii))}</li>
-                            }
-                        }}
-                    </ul>
-                </nav>
             {for doc in choice.options.iter() {
                 {DocumentView::from(doc.clone()).view()}
             }}
             </section>
         };
 
-        (None, main)
+        (Some(vec![header]), main)
     }
 
     fn collect_of_the_day(&self) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {

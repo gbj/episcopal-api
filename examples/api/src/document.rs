@@ -66,6 +66,7 @@ pub fn doc_to_html(slug: &str, year: u16, month: u8, day: u8, evening: bool) -> 
                 <main>
                 {}
                 </main>
+                <script src="/static/document.js"></script>
             </body>
         </html>
     "#,
