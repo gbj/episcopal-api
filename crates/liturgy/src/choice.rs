@@ -58,7 +58,7 @@ impl Choice {
                 if unique_versions == 1 {
                     citation
                 } else {
-                    format!("{} ({})", citation, doc.version.to_string())
+                    format!("{} ({})", citation, doc.version)
                 }
             }
         } else if let Content::BiblicalReading(reading) = &doc.content {
