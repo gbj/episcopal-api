@@ -1,9 +1,9 @@
 use crate::conditions::{NOT_INSERT_GLORIA, NOT_LENT};
 use crate::rite2::{GLORIA_PATRI, LORDS_PRAYER_ABBREV};
 use liturgy::{
-    Condition, Content, DisplayFormat, Document, Heading, HeadingLevel, Preces, PreferenceKey,
-    PreferenceValue, PsalmCitation, Reference, ResponsivePrayer, Rubric, Sentence, Series, Source,
-    SubLiturgy, Text,
+    Condition, Content, DisplayFormat, Document, Heading, HeadingLevel, Liturgy, Preces,
+    PreferenceKey, PreferenceValue, PsalmCitation, Reference, ResponsivePrayer, Rubric, Sentence,
+    Series, Source, SubLiturgy, Text,
 };
 
 lazy_static! {
@@ -14,7 +14,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 103
             })
-            .content(Content::Series(Series::from([
+            .content(Content::Liturgy(Liturgy::from(Series::from([
                 // Include the title, date, and day in any case
                 Document::from(Heading::from((HeadingLevel::Heading1, "An Order of Service for Noonday")))
                     .condition(Condition::Not(Box::new(
@@ -109,5 +109,5 @@ lazy_static! {
                     ("Officiant", "Let us bless the Lord."),
                     ("People", "Thanks be to God.")
                 ]))
-            ])));
+            ]))));
 }

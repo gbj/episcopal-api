@@ -6,8 +6,9 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     Antiphon, BiblicalCitation, BiblicalReading, Canticle, Choice, ClientPreferences, Condition,
-    GloriaPatri, Heading, LectionaryReading, Litany, Parallel, Preces, Psalm, PsalmCitation,
-    Reference, ResponsivePrayer, Rubric, Sentence, Series, Show, Status, SubLiturgy, Text, Version,
+    GloriaPatri, Heading, LectionaryReading, Litany, Liturgy, Parallel, Preces, Psalm,
+    PsalmCitation, Reference, ResponsivePrayer, Rubric, Sentence, Series, Show, Status, SubLiturgy,
+    Text, Version,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -165,6 +166,9 @@ pub enum Content {
     LectionaryReading(LectionaryReading),
     /// A responsive prayer in which the same response is given to every petition
     Litany(Litany),
+    /// A liturgical template that can carry a set of possible preferences and
+    /// other metadata, as well as sub-documents.
+    Liturgy(Liturgy),
     /// A responsive prayer in which each line has a label and its text: V: ___ / R: ___
     Preces(Preces),
     /// A psalm.
@@ -271,6 +275,12 @@ impl From<Preces> for Document {
 impl From<LectionaryReading> for Document {
     fn from(content: LectionaryReading) -> Self {
         Self::from(Content::LectionaryReading(content))
+    }
+}
+
+impl From<Liturgy> for Document {
+    fn from(content: Liturgy) -> Self {
+        Self::from(Content::Liturgy(content))
     }
 }
 

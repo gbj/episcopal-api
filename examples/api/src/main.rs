@@ -8,13 +8,13 @@ use rocket::{Request, Response};
 
 mod calendar;
 mod document;
+mod error;
 mod psalm;
 
 #[launch]
 fn rocket() -> _ {
     rocket::build()
         .attach(CORS)
-        .mount("/static", FileServer::from(relative!("static")))
         .mount("/calendar", routes![calendar::day])
         .mount(
             "/document",
@@ -25,6 +25,8 @@ fn rocket() -> _ {
                 psalm::psalms_by_citation
             ],
         )
+        .mount("/pray", routes![document::doc_to_html])
+        .mount("/", FileServer::from(relative!("static")))
 }
 pub struct CORS;
 

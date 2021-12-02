@@ -2,12 +2,12 @@ use crate::conditions::{EASTER_SEASON, NOT_INSERT_GLORIA, NOT_LENT};
 use crate::rite2::{GLORIA_PATRI, LORDS_PRAYER_ABBREV};
 use calendar::Weekday;
 use liturgy::{
-    Antiphon, Choice, Condition, DisplayFormat, Document, Heading, HeadingLevel, Preces,
+    Antiphon, Choice, Condition, DisplayFormat, Document, Heading, HeadingLevel, Liturgy, Preces,
     PsalmCitation, Reference, Rubric, Sentence, Series, Text, Version,
 };
 
 lazy_static! {
-    pub static ref COMPLINE: Document = Document::from(Series::from([
+    pub static ref COMPLINE: Document = Document::from(Liturgy::from(Series::from([
       Document::from(Heading::from((HeadingLevel::Heading1, "An Order for Compline"))),
       Document::from(Heading::Date(None)),
       Document::from(Heading::Day(None)),
@@ -96,6 +96,6 @@ Document::from(Preces::from([
         ])),
 Document::from(Rubric::from("The Officiant concludes")),
 Document::from(Text::from("The almighty and merciful Lord, Father, Son, and Holy Spirit, bless us and keep us.").response("Amen"))
-    ])).version(Version::RiteII).label("Compline")
+    ])).evening(true)).version(Version::RiteII).label("Compline")
 ;
 }

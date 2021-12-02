@@ -96,6 +96,7 @@ impl Application<Msg> for DocumentView {
             Content::Empty => self.empty(),
             Content::GloriaPatri(content) => self.gloria_patri(content),
             Content::Heading(content) => self.heading(content),
+            Content::Liturgy(content) => self.series(&content.body),
             Content::Preces(content) => self.preces(content),
             Content::Psalm(content) => self.psalm(content),
             Content::ResponsivePrayer(content) => self.responsive_prayer(content),

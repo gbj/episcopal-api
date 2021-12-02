@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Common Prayer</title>
+  </head>
+  <style>
+    form {
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      max-width: 400px;
+    }
+
+    fieldset {
+      display: flex;
+      flex-direction: column;
+      border: none;
+    }
+
+    button {
+      margin: auto;
+    }
+  </style>
+  <body>
+    <form action="/pray">
+      <fieldset>
+        <label for="date">Date</label>
+        <input id="date" name="date" type="date">
+      </fieldset>
+      <fieldset>
+        <label for="liturgy">Liturgy</label>
+        <select id="liturgy" name="liturgy">
+          <option value="morning-prayer">Morning Prayer</option>
+          <option value="noonday-prayer">Noonday Prayer</option>
+          <option value="evening-prayer">Evening Prayer</option>
+          <option value="compline">Compline</option>
+        </select>
+      </fieldset>
+      <button type="submit">Pray</button>
+    </form>
+    <script src="/assets/index.js"></script>
+  </body>
+</html>

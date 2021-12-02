@@ -98,6 +98,22 @@ pub trait Library {
                     }
                 }
                 // Collection types
+                Content::Liturgy(liturgy) => Some(Document {
+                    content: Content::Liturgy(Liturgy {
+                        body: Series::from(
+                            liturgy
+                                .body
+                                .iter()
+                                .filter_map(|doc| {
+                                    Self::compile(doc.clone(), calendar, day, observed, prefs)
+                                })
+                                .collect::<Vec<_>>(),
+                        ),
+                        evening: liturgy.evening,
+                        preferences: liturgy.preferences,
+                    }),
+                    ..document
+                }),
                 Content::Series(sub) => Some(Document {
                     content: Content::Series(Series::from(
                         sub.iter()

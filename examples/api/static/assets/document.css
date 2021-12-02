@@ -24,25 +24,25 @@
   font-family: "Sabon";
   font-weight: normal;
   font-style: normal;
-  src: url("/static/fonts/Sabon_Roman.ttf");
+  src: url("/assets/fonts/Sabon_Roman.ttf");
 }
 @font-face {
   font-family: "Sabon";
   font-weight: normal;
   font-style: italic;
-  src: url("/static/fonts/Sabon_Italic.ttf");
+  src: url("/assets/fonts/Sabon_Italic.ttf");
 }
 @font-face {
   font-family: "Sabon";
   font-weight: bold;
   font-style: normal;
-  src: url("/static/fonts/Sabon_Bold.ttf");
+  src: url("/assets/fonts/Sabon_Bold.ttf");
 }
 @font-face {
   font-family: "Sabon";
   font-weight: bold;
   font-style: italic;
-  src: url("/static/fonts/Sabon_BoldItalic.ttf");
+  src: url("/assets/fonts/Sabon_BoldItalic.ttf");
 }
 
 /* Utility Classes */
