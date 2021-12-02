@@ -57,13 +57,13 @@ impl Document {
     where
         I: Iterator<Item = Document>,
     {
-        let count = docs.count();
-        if count == 0 {
-            None
-        } else if count == 1 {
-            Some(docs.next().unwrap())
-        } else {
-            Some(Document::from(Choice::from(docs)))
+        match (docs.next(), docs.next()) {
+            (None, None) => None,
+            (None, Some(doc)) => Some(doc),
+            (Some(doc), None) => Some(doc),
+            (Some(a), Some(b)) => Some(Document::from(Choice::from(
+                std::iter::once(a).chain(std::iter::once(b)).chain(docs),
+            ))),
         }
     }
 

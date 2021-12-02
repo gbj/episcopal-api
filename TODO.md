@@ -1,3 +1,7 @@
+- [ ] Lookups by category
+  - [ ] Create type
+  - [ ] Conversion from LDF JSON
+- [ ] Canticle Tables
 - [ ] Document Types
   - [x] `LectionaryReading`
     - [x] Rationalize presence/compiled-ness of `BiblicalReadingIntro` across `LectionaryReading`, `BiblicalCitation`, and `BiblicalReading`

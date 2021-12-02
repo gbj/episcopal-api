@@ -2,10 +2,10 @@ use std::collections::HashMap;
 
 use calendar::{Date, BCP1979_CALENDAR};
 use library::{
-    rite2::{COMPLINE, NOONDAY_PRAYER},
+    rite2::{COMPLINE, MORNING_PRAYER_II, NOONDAY_PRAYER},
     CommonPrayer, Library,
 };
-use liturgy::{Content, Document};
+use liturgy::{Content, Document, GlobalPref, Lectionaries, PreferenceKey, PreferenceValue};
 use rocket::{response::content::Html, serde::json::Json};
 use web::DocumentView;
 
@@ -13,7 +13,8 @@ use crate::error::{APIError, APIErrorResponder};
 
 fn slug_to_doc(slug: &str) -> Option<Document> {
     match slug {
-        "noonday_prayer" => Some(NOONDAY_PRAYER.clone()),
+        "morning-prayer" => Some(MORNING_PRAYER_II.clone()),
+        "noonday-prayer" => Some(NOONDAY_PRAYER.clone()),
         "compline" => Some(COMPLINE.clone()),
         _ => None,
     }
@@ -30,7 +31,9 @@ pub fn doc_to_json(
     let date = Date::from_ymd(year, month, day);
     let day = BCP1979_CALENDAR.liturgical_day(date, evening);
     let document = slug_to_doc(slug);
+
     let prefs = HashMap::new();
+
     let compiled = document
         .and_then(|doc| CommonPrayer::compile(doc, &BCP1979_CALENDAR, &day, &day.observed, &prefs));
 
@@ -54,7 +57,14 @@ pub fn doc_to_html(liturgy: &str, date: &str) -> Result<Html<String>, APIErrorRe
     };
 
     let day = BCP1979_CALENDAR.liturgical_day(date, evening);
-    let prefs = HashMap::new();
+
+    // Default prefs
+    let mut prefs = HashMap::new();
+    prefs.insert(
+        PreferenceKey::from(GlobalPref::PsalmCycle),
+        PreferenceValue::Lectionary(Lectionaries::BCP1979DailyOfficePsalms),
+    );
+
     let compiled = CommonPrayer::compile(document, &BCP1979_CALENDAR, &day, &day.observed, &prefs);
 
     let label = compiled

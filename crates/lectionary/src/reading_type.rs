@@ -34,3 +34,23 @@ pub enum ReadingType {
     VigilPsalm8,
     VigilPsalm9,
 }
+
+impl ReadingType {
+    pub fn is_psalm(&self) -> bool {
+        matches!(
+            self,
+            ReadingType::Psalm
+                | ReadingType::MorningPsalm
+                | ReadingType::EveningPsalm
+                | ReadingType::VigilPsalm1
+                | ReadingType::VigilPsalm2
+                | ReadingType::VigilPsalm3
+                | ReadingType::VigilPsalm4
+                | ReadingType::VigilPsalm5
+                | ReadingType::VigilPsalm6
+                | ReadingType::VigilPsalm7
+                | ReadingType::VigilPsalm8
+                | ReadingType::VigilPsalm9
+        )
+    }
+}

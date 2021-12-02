@@ -1,5 +1,5 @@
 use calendar::{Calendar, LiturgicalDay, LiturgicalDayId};
-use lectionary::Lectionary;
+use lectionary::{Lectionary, ReadingType};
 use liturgy::*;
 use psalter::{bcp1979::BCP1979_PSALTER, Psalter};
 
@@ -29,7 +29,9 @@ pub trait Library {
         observed: &LiturgicalDayId,
         prefs: &impl ClientPreferences,
     ) -> Option<Document> {
-        let include = document.include(calendar, day, prefs);
+        let include = document.include(calendar, day, prefs)
+            && document.display != Show::TemplateOnly
+            && document.display != Show::Hidden;
         if !include {
             None
         } else {
@@ -56,14 +58,26 @@ pub trait Library {
                     let mut docs = lectionary
                         .reading_by_type(observed, day, lectionary_reading.reading_type)
                         .map(|reading| {
-                            let intro = lectionary_reading.intro.as_ref().map(|intro| {
-                                BiblicalReadingIntro::from(intro.compile(&reading.citation))
-                            });
-                            Document::from(BiblicalCitation {
-                                citation: reading.citation,
-                                intro,
-                            })
+                            if lectionary_reading.reading_type.is_psalm() {
+                                Self::compile(
+                                    Document::from(PsalmCitation::from(reading.citation)),
+                                    calendar,
+                                    day,
+                                    observed,
+                                    prefs,
+                                )
+                                .unwrap()
+                            } else {
+                                let intro = lectionary_reading.intro.as_ref().map(|intro| {
+                                    BiblicalReadingIntro::from(intro.compile(&reading.citation))
+                                });
+                                Document::from(BiblicalCitation {
+                                    citation: reading.citation,
+                                    intro,
+                                })
+                            }
                         });
+
                     Document::choice_or_document(&mut docs)
                 }
 
