@@ -17,13 +17,8 @@
   - [ ] Rotate/randomize
   - [ ] In-depth compiler tests to prevent future breakage
 - [ ] Rendering
-  - `Choice`
-    - [ ] HTML rendering
-    - [ ] Client-side/server-side logic for switching
-  - [ ] Update `Choice` labels based on these types
-    - `SubLiturgy`
+  - `SubLiturgy`
     - [ ] Compiler
-    - [ ] HTML rendering
 - [ ] `BibleReference` to `String`
   - [ ] and TODO in `crates/psalter/lib.rs`
 - [ ] Compiler
