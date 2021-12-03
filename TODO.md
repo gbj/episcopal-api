@@ -15,11 +15,12 @@
       - [ ] Look up actual reading content (some kind of injected `ReadingService`?)
 - [ ] Tool to export LDF to Rust format
   - [x] Add compile_hidden support
-  - [ ] Responses in old "Prayer" type
+  - [x] Responses in old "Prayer" type
 - [ ] CSS for rendering
 - [ ] Liturgies
   - [x] Compline
   - [ ] Morning Prayer
+    - [ ] rotate `Choice`s for things like prayers for mission and daily collects?
   - [ ] Evening Prayer
   - [ ] Build preferences/choices into liturgies
   - [ ] Add many more source citations
