@@ -2,6 +2,7 @@
   - [ ] Tests (in conditions)
 - [ ] Canticle Tables
   - [ ] Compile
+  - [ ] Port canticle tables over from JSOn
   - [ ] Actually look up canticles (cf. Psalter)
   - [ ] Tests
 - [ ] Lookups by category
