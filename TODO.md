@@ -1,25 +1,14 @@
 - [x] Preferences
+- [ ] Canticle Tables
 - [ ] Lookups by category
   - [ ] Create type
   - [ ] Conversion from LDF JSON
-- [ ] Canticle Tables
-- [ ] Document Types
-  - [x] `LectionaryReading`
-    - [x] Rationalize presence/compiled-ness of `BiblicalReadingIntro` across `LectionaryReading`, `BiblicalCitation`, and `BiblicalReading`
-    - [x] Add intro to `BiblicalCitation`
-    - [ ] Compile `LectionaryReading` and `BiblicalCitation` (library/lib.rs lines 24 ff.)
-      - [x] Load `Lectionary` from prefs
-      - [x] Lookup readings for day from that lectionary
-      - [x] Translate them into `BiblicalCitation`s and/or `BiblicalReading`s
-      - [ ] Test this lectionary lookup
-      - [ ] Look up actual reading content (some kind of injected `ReadingService`?)
-- [ ] Tool to export LDF to Rust format
-  - [x] Add compile_hidden support
-  - [x] Responses in old "Prayer" type
+- [ ] Type `BiblicalCitation` for client-side/async loading
 - [ ] CSS for rendering
 - [ ] Liturgies
   - [x] Compline
   - [ ] Morning Prayer
+    - [ ] Clean up internal TODO items
     - [ ] rotate `Choice`s for things like prayers for mission and daily collects?
   - [ ] Evening Prayer
   - [ ] Build preferences/choices into liturgies
