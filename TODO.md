@@ -17,6 +17,7 @@
   - [ ] Rotate/randomize
   - [ ] In-depth compiler tests to prevent future breakage
 - [ ] Rendering
+  - All lookups (`SubLiturgy`, `Category`, `CanticleTableEntry`, etc.) can be drawn as info boxes
   - `SubLiturgy`
     - [ ] Compiler
 - [ ] `BibleReference` to `String`
