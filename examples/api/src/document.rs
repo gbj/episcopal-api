@@ -1,14 +1,11 @@
 use std::collections::HashMap;
 
 use calendar::{Date, BCP1979_CALENDAR};
-use lectionary::ReadingType;
 use library::{
     rite2::{COMPLINE, MORNING_PRAYER_II, NOONDAY_PRAYER},
     CommonPrayer, Library,
 };
-use liturgy::{
-    Content, Document, GlobalPref, Lectionaries, LiturgyPreferences, PreferenceKey, PreferenceValue,
-};
+use liturgy::{Content, Document, LiturgyPreferences};
 use rocket::{response::content::Html, serde::json::Json};
 use web::DocumentView;
 
