@@ -3,12 +3,14 @@ use crate::rite2::{
     APOSTLES_CREED, GLORIA_PATRI, LORDS_PRAYER_CONTEMPORARY_AND_TRADITIONAL, WORD_OF_THE_LORD,
 };
 use calendar::Weekday;
+use canticle_table::CanticleNumber;
 use lectionary::ReadingType;
 use liturgy::{
-    Antiphon, BiblicalReadingIntroTemplate, Choice, Condition, DisplayFormat, Document, GlobalPref,
-    Heading, HeadingLevel, Lectionaries, LectionaryReading, LectionaryTable, Liturgy,
-    LiturgyPreference, LiturgyPreferenceOption, Preces, PreferenceKey, PreferenceValue,
-    ReadingTypeTable, Reference, ResponsivePrayer, Rubric, Sentence, Series, Show, Text, Version,
+    Antiphon, BiblicalReadingIntroTemplate, CanticleTableChoice, CanticleTableEntry,
+    CanticleTables, Choice, Condition, DisplayFormat, Document, GlobalPref, Heading, HeadingLevel,
+    Lectionaries, LectionaryReading, LectionaryTableChoice, Liturgy, LiturgyPreference,
+    LiturgyPreferenceOption, Preces, PreferenceKey, PreferenceValue, ReadingTypeTable, Reference,
+    ResponsivePrayer, Rubric, Sentence, Series, Show, Text, Version,
 };
 
 lazy_static! {
@@ -76,7 +78,7 @@ lazy_static! {
           Document::from(Heading::from((HeadingLevel::Heading3, "The Psalm or Psalms Appointed"))).display(Show::TemplateOnly),
           Document::from(LectionaryReading {
             reading_type: ReadingTypeTable::Selected(ReadingType::MorningPsalm),
-            lectionary: LectionaryTable::Preference(PreferenceKey::from(GlobalPref::PsalmCycle)),
+            lectionary: LectionaryTableChoice::Preference(PreferenceKey::from(GlobalPref::PsalmCycle)),
             intro: None,
           }),
           Document::from(Rubric::from("At the end of the Psalms is sung or said")).condition(NOT_INSERT_GLORIA.clone()),
@@ -100,21 +102,30 @@ lazy_static! {
           // First Lesson
           Document::from(LectionaryReading {
             reading_type: ReadingTypeTable::Preference(PreferenceKey::from(GlobalPref::ReadingA)),
-            lectionary: LectionaryTable::Preference(PreferenceKey::from(GlobalPref::Lectionary)),
+            lectionary: LectionaryTableChoice::Preference(PreferenceKey::from(GlobalPref::Lectionary)),
             intro: Some(BiblicalReadingIntroTemplate::from(Text::from("A Reading from ${longName}."))),
           }).label("The First Lesson"),
           Document::from(WORD_OF_THE_LORD.clone()),
-          // TODO Canticle 1
+
+          // Canticle
+          Document::from(CanticleTableEntry {
+            nth: CanticleNumber::One,
+            table: CanticleTableChoice::Preference(PreferenceKey::from(GlobalPref::CanticleTable))
+          }),
 
           // Second Lesson
           Document::from(Series::from([
             Document::from(LectionaryReading {
               reading_type: ReadingTypeTable::Preference(PreferenceKey::from(GlobalPref::ReadingB)),
-              lectionary: LectionaryTable::Preference(PreferenceKey::from(GlobalPref::Lectionary)),
+              lectionary: LectionaryTableChoice::Preference(PreferenceKey::from(GlobalPref::Lectionary)),
               intro: Some(BiblicalReadingIntroTemplate::from(Text::from("A Reading from ${longName}."))),
             }).label("The Second Lesson"),
             Document::from(WORD_OF_THE_LORD.clone()),
-            // TODO Canticle 2
+            // Canticle
+            Document::from(CanticleTableEntry {
+              nth: CanticleNumber::Two,
+              table: CanticleTableChoice::Preference(PreferenceKey::from(GlobalPref::CanticleTable))
+            }),
           ])).condition(  // include lesson and response unless the reading preference is set to "—"
             Condition::Not(Box::new(
               Condition::Preference(
@@ -127,7 +138,7 @@ lazy_static! {
           Document::from(Series::from([
             Document::from(LectionaryReading {
               reading_type: ReadingTypeTable::Preference(PreferenceKey::from(GlobalPref::ReadingC)),
-              lectionary: LectionaryTable::Preference(PreferenceKey::from(GlobalPref::Lectionary)),
+              lectionary: LectionaryTableChoice::Preference(PreferenceKey::from(GlobalPref::Lectionary)),
               intro: Some(BiblicalReadingIntroTemplate::from(Text::from("A Reading from ${longName}."))),
             }).label("The Third Lesson"),
             Document::from(WORD_OF_THE_LORD.clone()),
@@ -291,7 +302,7 @@ lazy_static! {
             LiturgyPreferenceOption::from(("RCL (Track 1)", PreferenceValue::from(Lectionaries::RCLTrack1))),
             LiturgyPreferenceOption::from(("RCL (Track 2)", PreferenceValue::from(Lectionaries::RCLTrack2)))
           ]
-        )).default_value(PreferenceValue::from(ReadingType::FirstReading)).category("Lectionaries"),
+        )).default_value(PreferenceValue::from(ReadingType::FirstReading)).category("Lectionaries and Cycles"),
 
         LiturgyPreference::from((
           PreferenceKey::from(GlobalPref::PsalmCycle),
@@ -301,7 +312,17 @@ lazy_static! {
             LiturgyPreferenceOption::from(("RCL (Track 1)", PreferenceValue::from(Lectionaries::RCLTrack1))),
             LiturgyPreferenceOption::from(("RCL (Track 2)", PreferenceValue::from(Lectionaries::RCLTrack2)))
           ]
-        )).default_value(PreferenceValue::from(ReadingType::FirstReading)).category("Lectionaries"),
+        )).default_value(PreferenceValue::from(ReadingType::FirstReading)).category("Lectionaries and Cycles"),
+
+        LiturgyPreference::from((
+          PreferenceKey::from(GlobalPref::PsalmCycle),
+          "Canticle Table",
+          [
+            LiturgyPreferenceOption::from(("Book of Common Prayer (1979)", PreferenceValue::from(CanticleTables::BCP1979RiteII))),
+            LiturgyPreferenceOption::from(("Enriching Our Worship 1", PreferenceValue::from(CanticleTables::EOW))),
+            LiturgyPreferenceOption::from(("Te Deum/Benedictus", PreferenceValue::from(CanticleTables::Classical))),
+          ]
+        )).default_value(PreferenceValue::from(ReadingType::FirstReading)).category("Lectionaries and Cycles"),
 
         // Readings
         LiturgyPreference::from((

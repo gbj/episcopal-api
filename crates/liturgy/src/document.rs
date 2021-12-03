@@ -5,10 +5,10 @@ use language::Language;
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    Antiphon, BiblicalCitation, BiblicalReading, Canticle, Choice, ClientPreferences, Condition,
-    DocumentError, GloriaPatri, Heading, LectionaryReading, Litany, Liturgy, LiturgyPreferences,
-    Parallel, Preces, Psalm, PsalmCitation, Reference, ResponsivePrayer, Rubric, Sentence, Series,
-    Show, Status, SubLiturgy, Text, Version,
+    Antiphon, BiblicalCitation, BiblicalReading, Canticle, CanticleTableEntry, Choice,
+    ClientPreferences, Condition, DocumentError, GloriaPatri, Heading, LectionaryReading, Litany,
+    Liturgy, LiturgyPreferences, Parallel, Preces, Psalm, PsalmCitation, Reference,
+    ResponsivePrayer, Rubric, Sentence, Series, Show, Status, SubLiturgy, Text, Version,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -161,6 +161,8 @@ pub enum Content {
     BiblicalReading(BiblicalReading),
     /// A Canticle (i.e., a psalm-like text not found in the Book of Psalms, and used liturgically)
     Canticle(Canticle),
+    /// An entry that can be looked up from a [CanticleTable](canticle_table::CanticleTable).
+    CanticleTableEntry(CanticleTableEntry),
     /// The Gloria Patri is formatted such that it is broken into four lines rather than two if necessary
     GloriaPatri(GloriaPatri),
     /// A title, subtitle, label, or other heading
@@ -242,6 +244,12 @@ impl From<BiblicalReading> for Document {
 impl From<Canticle> for Document {
     fn from(content: Canticle) -> Self {
         Self::from(Content::Canticle(content))
+    }
+}
+
+impl From<CanticleTableEntry> for Document {
+    fn from(content: CanticleTableEntry) -> Self {
+        Self::from(Content::CanticleTableEntry(content))
     }
 }
 

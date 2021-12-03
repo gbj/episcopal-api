@@ -55,11 +55,13 @@ pub trait Library {
                 // Lectionaries
                 Content::LectionaryReading(lectionary_reading) => {
                     let chosen_lectionary = match &lectionary_reading.lectionary {
-                        LectionaryTable::Preference(key) => match preference_value_for_key(key) {
-                            Some(PreferenceValue::Lectionary(lectionary)) => *lectionary,
-                            _ => Lectionaries::default(),
-                        },
-                        LectionaryTable::Selected(lectionary) => *lectionary,
+                        LectionaryTableChoice::Preference(key) => {
+                            match preference_value_for_key(key) {
+                                Some(PreferenceValue::Lectionary(lectionary)) => *lectionary,
+                                _ => Lectionaries::default(),
+                            }
+                        }
+                        LectionaryTableChoice::Selected(lectionary) => *lectionary,
                     };
 
                     let reading_type = match &lectionary_reading.reading_type {

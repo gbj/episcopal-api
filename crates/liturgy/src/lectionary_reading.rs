@@ -10,7 +10,7 @@ use crate::PreferenceKey;
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct LectionaryReading {
     pub reading_type: ReadingTypeTable,
-    pub lectionary: LectionaryTable,
+    pub lectionary: LectionaryTableChoice,
     pub intro: Option<BiblicalReadingIntroTemplate>,
 }
 
@@ -23,8 +23,8 @@ pub enum ReadingTypeTable {
 }
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
-pub enum LectionaryTable {
-    /// Dynamically the lectionary selected in the specified preference
+pub enum LectionaryTableChoice {
+    /// Dynamically loads the lectionary selected in the specified preference
     Preference(PreferenceKey),
     /// Statically uses the chosen lectionary
     Selected(Lectionaries),

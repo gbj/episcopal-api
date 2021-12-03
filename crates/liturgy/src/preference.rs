@@ -18,6 +18,7 @@ pub enum GlobalPref {
     PsalterVersion,
     Lectionary,
     PsalmCycle,
+    CanticleTable,
     ReadingA,
     ReadingB,
     ReadingC,
@@ -44,6 +45,7 @@ impl From<GlobalPref> for PreferenceKey {
 pub enum PreferenceValue {
     Version(Version),
     Lectionary(Lectionaries),
+    CanticleTable(CanticleTables),
     ReadingType(ReadingType),
     Local(String),
 }
@@ -57,6 +59,12 @@ impl From<Version> for PreferenceValue {
 impl From<Lectionaries> for PreferenceValue {
     fn from(lectionary: Lectionaries) -> Self {
         Self::Lectionary(lectionary)
+    }
+}
+
+impl From<CanticleTables> for PreferenceValue {
+    fn from(table: CanticleTables) -> Self {
+        Self::CanticleTable(table)
     }
 }
 
@@ -112,5 +120,19 @@ pub enum Lectionaries {
 impl Default for Lectionaries {
     fn default() -> Self {
         Self::BCP1979DailyOffice
+    }
+}
+
+#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+pub enum CanticleTables {
+    BCP1979RiteI,
+    BCP1979RiteII,
+    EOW,
+    Classical,
+}
+
+impl Default for CanticleTables {
+    fn default() -> Self {
+        Self::BCP1979RiteII
     }
 }

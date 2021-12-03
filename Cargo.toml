@@ -2,6 +2,7 @@
 [workspace]
 members = [
   "crates/calendar",
+  "crates/canticle-table",
   "crates/export/web",
   "crates/export/web-component",
   "crates/language",

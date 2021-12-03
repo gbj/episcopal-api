@@ -94,6 +94,7 @@ impl Application<Msg> for DocumentView {
             Content::BiblicalCitation(content) => self.biblical_citation(content),
             Content::BiblicalReading(content) => self.biblical_reading(content),
             Content::Canticle(content) => self.canticle(content),
+            Content::CanticleTableEntry(content) => self.canticle_table_entry(content),
             Content::Empty => self.empty(),
             Content::GloriaPatri(content) => self.gloria_patri(content),
             Content::Heading(content) => self.heading(content),
@@ -277,6 +278,17 @@ impl DocumentView {
         };
 
         (Some(header), main)
+    }
+
+    fn canticle_table_entry(
+        &self,
+        entry: &CanticleTableEntry,
+    ) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let main = node! {
+            <main class="canticle-table-entry">{text("TODO")}</main>
+        };
+
+        (None, main)
     }
 
     fn choice(&self, choice: &Choice) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {

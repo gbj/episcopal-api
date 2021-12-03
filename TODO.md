@@ -1,5 +1,9 @@
 - [x] Preferences
+  - [ ] Tests (in conditions)
 - [ ] Canticle Tables
+  - [ ] Compile
+  - [ ] Actually look up canticles (cf. Psalter)
+  - [ ] Tests
 - [ ] Lookups by category
   - [ ] Create type
   - [ ] Conversion from LDF JSON
