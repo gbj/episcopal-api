@@ -85,18 +85,18 @@ impl Default for PreferenceValue {
 }
 
 pub trait ClientPreferences {
-    fn value(&self, key: &PreferenceKey) -> PreferenceValue;
+    fn value(&self, key: &PreferenceKey) -> Option<&PreferenceValue>;
 }
 
 impl ClientPreferences for [(PreferenceKey, PreferenceValue); 0] {
-    fn value(&self, _key: &PreferenceKey) -> PreferenceValue {
-        PreferenceValue::default()
+    fn value(&self, _key: &PreferenceKey) -> Option<&PreferenceValue> {
+        None
     }
 }
 
 impl ClientPreferences for HashMap<PreferenceKey, PreferenceValue> {
-    fn value(&self, key: &PreferenceKey) -> PreferenceValue {
-        self.get(key).cloned().unwrap_or_default()
+    fn value(&self, key: &PreferenceKey) -> Option<&PreferenceValue> {
+        self.get(key)
     }
 }
 

@@ -6,9 +6,9 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     Antiphon, BiblicalCitation, BiblicalReading, Canticle, Choice, ClientPreferences, Condition,
-    GloriaPatri, Heading, LectionaryReading, Litany, Liturgy, Parallel, Preces, Psalm,
-    PsalmCitation, Reference, ResponsivePrayer, Rubric, Sentence, Series, Show, Status, SubLiturgy,
-    Text, Version,
+    DocumentError, GloriaPatri, Heading, LectionaryReading, Litany, Liturgy, LiturgyPreferences,
+    Parallel, Preces, Psalm, PsalmCitation, Reference, ResponsivePrayer, Rubric, Sentence, Series,
+    Show, Status, SubLiturgy, Text, Version,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -45,10 +45,11 @@ impl Document {
         calendar: &Calendar,
         day: &LiturgicalDay,
         prefs: &impl ClientPreferences,
+        original_prefs: &LiturgyPreferences,
     ) -> bool {
         match &self.condition {
             None => true,
-            Some(condition) => condition.include(calendar, day, prefs),
+            Some(condition) => condition.include(calendar, day, prefs, original_prefs),
         }
     }
 
@@ -72,13 +73,13 @@ impl Document {
     where
         I: Iterator<Item = Document>,
     {
-        let count = docs.count();
-        if count == 0 {
-            None
-        } else if count == 1 {
-            Some(docs.next().unwrap())
-        } else {
-            Some(Document::from(Series::from(docs)))
+        match (docs.next(), docs.next()) {
+            (None, None) => None,
+            (None, Some(doc)) => Some(doc),
+            (Some(doc), None) => Some(doc),
+            (Some(a), Some(b)) => Some(Document::from(Series::from(
+                std::iter::once(a).chain(std::iter::once(b)).chain(docs),
+            ))),
         }
     }
 
@@ -87,13 +88,13 @@ impl Document {
     where
         I: Iterator<Item = Document>,
     {
-        let count = docs.count();
-        if count == 0 {
-            None
-        } else if count == 1 {
-            Some(docs.next().unwrap())
-        } else {
-            Some(Document::from(Parallel::from(docs)))
+        match (docs.next(), docs.next()) {
+            (None, None) => None,
+            (None, Some(doc)) => Some(doc),
+            (Some(doc), None) => Some(doc),
+            (Some(a), Some(b)) => Some(Document::from(Parallel::from(
+                std::iter::once(a).chain(std::iter::once(b)).chain(docs),
+            ))),
         }
     }
 
@@ -149,6 +150,8 @@ pub enum Content {
     /// # Content Variants
     /// A document with no contents
     Empty,
+    /// An error that comes up while compiling a liturgy.
+    Error(DocumentError),
     /// A brief passage or verse, usually extracted from a psalm.
     Antiphon(Antiphon),
     /// A reference to a passage of the Bible, which will be inserted as a
@@ -245,6 +248,12 @@ impl From<Canticle> for Document {
 impl From<Choice> for Document {
     fn from(content: Choice) -> Self {
         Self::from(Content::Choice(content))
+    }
+}
+
+impl From<DocumentError> for Document {
+    fn from(content: DocumentError) -> Self {
+        Self::from(Content::Error(content))
     }
 }
 

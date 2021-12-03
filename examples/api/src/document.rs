@@ -1,11 +1,14 @@
 use std::collections::HashMap;
 
 use calendar::{Date, BCP1979_CALENDAR};
+use lectionary::ReadingType;
 use library::{
     rite2::{COMPLINE, MORNING_PRAYER_II, NOONDAY_PRAYER},
     CommonPrayer, Library,
 };
-use liturgy::{Content, Document, GlobalPref, Lectionaries, PreferenceKey, PreferenceValue};
+use liturgy::{
+    Content, Document, GlobalPref, Lectionaries, LiturgyPreferences, PreferenceKey, PreferenceValue,
+};
 use rocket::{response::content::Html, serde::json::Json};
 use web::DocumentView;
 
@@ -32,10 +35,24 @@ pub fn doc_to_json(
     let day = BCP1979_CALENDAR.liturgical_day(date, evening);
     let document = slug_to_doc(slug);
 
-    let prefs = HashMap::new();
+    let compiled = document.and_then(|doc| {
+        let prefs = HashMap::new();
 
-    let compiled = document
-        .and_then(|doc| CommonPrayer::compile(doc, &BCP1979_CALENDAR, &day, &day.observed, &prefs));
+        let liturgy_prefs = if let Content::Liturgy(liturgy) = &doc.content {
+            liturgy.preferences.clone()
+        } else {
+            LiturgyPreferences::default()
+        };
+
+        CommonPrayer::compile(
+            doc,
+            &BCP1979_CALENDAR,
+            &day,
+            &day.observed,
+            &prefs,
+            &liturgy_prefs,
+        )
+    });
 
     Json(compiled)
 }
@@ -59,13 +76,22 @@ pub fn doc_to_html(liturgy: &str, date: &str) -> Result<Html<String>, APIErrorRe
     let day = BCP1979_CALENDAR.liturgical_day(date, evening);
 
     // Default prefs
-    let mut prefs = HashMap::new();
-    prefs.insert(
-        PreferenceKey::from(GlobalPref::PsalmCycle),
-        PreferenceValue::Lectionary(Lectionaries::BCP1979DailyOfficePsalms),
-    );
+    let prefs = HashMap::new();
 
-    let compiled = CommonPrayer::compile(document, &BCP1979_CALENDAR, &day, &day.observed, &prefs);
+    let liturgy_prefs = if let Content::Liturgy(liturgy) = &document.content {
+        liturgy.preferences.clone()
+    } else {
+        LiturgyPreferences::default()
+    };
+
+    let compiled = CommonPrayer::compile(
+        document,
+        &BCP1979_CALENDAR,
+        &day,
+        &day.observed,
+        &prefs,
+        &liturgy_prefs,
+    );
 
     let label = compiled
         .as_ref()

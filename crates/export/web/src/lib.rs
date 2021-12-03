@@ -90,6 +90,7 @@ impl Application<Msg> for DocumentView {
             .map(|reference| self.reference(&reference));
 
         let (header, content) = match &self.document.content {
+            Content::Error(error) => self.error(error),
             Content::BiblicalCitation(content) => self.biblical_citation(content),
             Content::BiblicalReading(content) => self.biblical_reading(content),
             Content::Canticle(content) => self.canticle(content),
@@ -171,16 +172,28 @@ impl DocumentView {
     }
 
     // Content Types
+    fn error(&self, error: &DocumentError) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        (
+            None,
+            node! {
+                <article class="document error">
+                    <pre>{text(error)}</pre>
+                </article>
+            },
+        )
+    }
 
     fn biblical_citation(
         &self,
         biblical_citation: &BiblicalCitation,
     ) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
+        let header = Some(vec![node! {
+            <h4 class="citation">{text(biblical_citation)}</h4>
+        }]);
         (
-            None,
+            header,
             node! {
                 <article class="document biblical-citation">
-                    <h3>{text(biblical_citation)}</h3>
                 </article>
             },
         )

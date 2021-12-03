@@ -1,3 +1,4 @@
+- [x] Preferences
 - [ ] Lookups by category
   - [ ] Create type
   - [ ] Conversion from LDF JSON

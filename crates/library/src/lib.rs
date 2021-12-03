@@ -28,8 +28,15 @@ pub trait Library {
         day: &LiturgicalDay,
         observed: &LiturgicalDayId,
         prefs: &impl ClientPreferences,
+        liturgy_prefs: &LiturgyPreferences,
     ) -> Option<Document> {
-        let include = document.include(calendar, day, prefs)
+        let preference_value_for_key = |key: &PreferenceKey| {
+            prefs
+                .value(key)
+                .or_else(|| liturgy_prefs.default_value_for_key(key))
+        };
+
+        let include = document.include(calendar, day, prefs, liturgy_prefs)
             && document.display != Show::TemplateOnly
             && document.display != Show::Hidden;
         if !include {
@@ -48,37 +55,64 @@ pub trait Library {
                 // Lectionaries
                 Content::LectionaryReading(lectionary_reading) => {
                     let chosen_lectionary = match &lectionary_reading.lectionary {
-                        LectionaryTable::Preference(key) => match prefs.value(key) {
-                            PreferenceValue::Lectionary(lectionary) => lectionary,
+                        LectionaryTable::Preference(key) => match preference_value_for_key(key) {
+                            Some(PreferenceValue::Lectionary(lectionary)) => *lectionary,
                             _ => Lectionaries::default(),
                         },
                         LectionaryTable::Selected(lectionary) => *lectionary,
                     };
-                    let lectionary = Self::lectionary(chosen_lectionary);
-                    let mut docs = lectionary
-                        .reading_by_type(observed, day, lectionary_reading.reading_type)
-                        .map(|reading| {
-                            if lectionary_reading.reading_type.is_psalm() {
-                                Self::compile(
-                                    Document::from(PsalmCitation::from(reading.citation)),
-                                    calendar,
-                                    day,
-                                    observed,
-                                    prefs,
-                                )
-                                .unwrap()
-                            } else {
-                                let intro = lectionary_reading.intro.as_ref().map(|intro| {
-                                    BiblicalReadingIntro::from(intro.compile(&reading.citation))
-                                });
-                                Document::from(BiblicalCitation {
-                                    citation: reading.citation,
-                                    intro,
-                                })
-                            }
-                        });
 
-                    Document::choice_or_document(&mut docs)
+                    let reading_type = match &lectionary_reading.reading_type {
+                        ReadingTypeTable::Preference(key) => match preference_value_for_key(key) {
+                            Some(PreferenceValue::ReadingType(reading_type)) => Some(*reading_type),
+                            _ => None,
+                        },
+                        ReadingTypeTable::Selected(reading_type) => Some(*reading_type),
+                    };
+
+                    let lectionary = Self::lectionary(chosen_lectionary);
+                    if let Some(reading_type) = reading_type {
+                        let mut docs = lectionary.reading_by_type(observed, day, reading_type).map(
+                            |reading| {
+                                if reading_type.is_psalm() {
+                                    Self::compile(
+                                        Document::from(PsalmCitation::from(reading.citation)),
+                                        calendar,
+                                        day,
+                                        observed,
+                                        prefs,
+                                        liturgy_prefs,
+                                    )
+                                    .unwrap()
+                                } else {
+                                    let intro = lectionary_reading.intro.as_ref().map(|intro| {
+                                        BiblicalReadingIntro::from(intro.compile(&reading.citation))
+                                    });
+                                    Document {
+                                        content: Content::BiblicalCitation(BiblicalCitation {
+                                            citation: reading.citation,
+                                            intro,
+                                        }),
+                                        ..document.clone()
+                                    }
+                                }
+                            },
+                        );
+
+                        // MorningPsalm and EveningPsalm are the only ones that include multiple of the same reading type in sequence
+                        if matches!(
+                            reading_type,
+                            ReadingType::MorningPsalm | ReadingType::EveningPsalm
+                        ) {
+                            Document::series_or_document(&mut docs)
+                        } else {
+                            Document::choice_or_document(&mut docs)
+                        }
+                    } else {
+                        Some(Document::from(DocumentError::from(
+                            "An invalid reading type preference was selected.",
+                        )))
+                    }
                 }
 
                 // Headings
@@ -95,12 +129,13 @@ pub trait Library {
 
                 // Lookup types
                 Content::PsalmCitation(citation) => {
-                    let psalter_pref =
-                        match prefs.value(&PreferenceKey::from(GlobalPref::PsalterVersion)) {
-                            PreferenceValue::Version(v) => Some(v),
-                            _ => None,
-                        }
-                        .unwrap_or_default();
+                    let psalter_pref = match preference_value_for_key(&PreferenceKey::from(
+                        GlobalPref::PsalterVersion,
+                    )) {
+                        Some(PreferenceValue::Version(v)) => Some(*v),
+                        _ => None,
+                    }
+                    .unwrap_or_default();
                     let psalter = Self::psalter(psalter_pref);
                     let psalms: Vec<Psalm> = psalter.psalms_by_citation(citation.as_str());
                     if psalms.is_empty() {
@@ -119,12 +154,19 @@ pub trait Library {
                                 .body
                                 .iter()
                                 .filter_map(|doc| {
-                                    Self::compile(doc.clone(), calendar, day, observed, prefs)
+                                    Self::compile(
+                                        doc.clone(),
+                                        calendar,
+                                        day,
+                                        observed,
+                                        prefs,
+                                        liturgy_prefs,
+                                    )
                                 })
                                 .collect::<Vec<_>>(),
                         ),
                         evening: liturgy.evening,
-                        preferences: liturgy.preferences,
+                        preferences: liturgy.preferences.clone(),
                     }),
                     ..document
                 }),
@@ -132,7 +174,14 @@ pub trait Library {
                     content: Content::Series(Series::from(
                         sub.iter()
                             .filter_map(|doc| {
-                                Self::compile(doc.clone(), calendar, day, observed, prefs)
+                                Self::compile(
+                                    doc.clone(),
+                                    calendar,
+                                    day,
+                                    observed,
+                                    prefs,
+                                    liturgy_prefs,
+                                )
                             })
                             .collect::<Vec<_>>(),
                     )),
@@ -142,7 +191,14 @@ pub trait Library {
                     content: Content::Parallel(Parallel::from(
                         sub.iter()
                             .filter_map(|doc| {
-                                Self::compile(doc.clone(), calendar, day, observed, prefs)
+                                Self::compile(
+                                    doc.clone(),
+                                    calendar,
+                                    day,
+                                    observed,
+                                    prefs,
+                                    liturgy_prefs,
+                                )
                             })
                             .collect::<Vec<_>>(),
                     )),
@@ -160,7 +216,14 @@ pub trait Library {
                                 .options
                                 .iter()
                                 .filter_map(|doc| {
-                                    Self::compile(doc.clone(), calendar, day, observed, prefs)
+                                    Self::compile(
+                                        doc.clone(),
+                                        calendar,
+                                        day,
+                                        observed,
+                                        prefs,
+                                        liturgy_prefs,
+                                    )
                                 })
                                 .collect(),
                             selected: index_of_prev_selection.unwrap_or(0),

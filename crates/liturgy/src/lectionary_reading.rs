@@ -9,14 +9,22 @@ use crate::PreferenceKey;
 /// The [Library](library::Library) will compile this into a [BiblicalReading](crate::BiblicalReading).
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct LectionaryReading {
-    pub reading_type: ReadingType,
+    pub reading_type: ReadingTypeTable,
     pub lectionary: LectionaryTable,
     pub intro: Option<BiblicalReadingIntroTemplate>,
 }
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+pub enum ReadingTypeTable {
+    /// Dynamically the lectionary selected in the specified preference
+    Preference(PreferenceKey),
+    /// Statically uses the chosen lectionary
+    Selected(ReadingType),
+}
+
+#[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub enum LectionaryTable {
-    /// Dynamically the lectionary selected in the preference [GlobalPref::Lectionary](crate::GlobalPref)
+    /// Dynamically the lectionary selected in the specified preference
     Preference(PreferenceKey),
     /// Statically uses the chosen lectionary
     Selected(Lectionaries),
@@ -30,6 +38,12 @@ pub struct BiblicalReadingIntroTemplate(Box<Document>);
 impl From<Document> for BiblicalReadingIntroTemplate {
     fn from(document: Document) -> Self {
         Self(Box::new(document))
+    }
+}
+
+impl From<Text> for BiblicalReadingIntroTemplate {
+    fn from(content: Text) -> Self {
+        Self::from(Document::from(content))
     }
 }
 

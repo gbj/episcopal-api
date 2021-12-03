@@ -6,6 +6,7 @@
   --font-family: "Sabon", Garamond, serif;
   --page-padding: 1rem;
   --rubric-size: 0.9rem;
+  --rubric-color: #ea0000;
 
   /* Settings */
   --response-weight: bold;
@@ -123,11 +124,22 @@ a.reference {
   font-size: var(--rubric-size);
 }
 
+.document > header .citation {
+  font-weight: normal;
+  font-style: italic;
+  font-size: 1rem;
+}
+
 /** Document Content Types */
 
 /* Margin after each document in a series */
 .series > .document {
   margin-bottom: 1rem;
+}
+
+/* Error */
+.document.error {
+  color: var(--rubric-color);
 }
 
 /* Heading */
@@ -146,7 +158,7 @@ a.reference {
 
 /* Rubric */
 .rubric {
-  color: #ea0000;
+  color: var(--rubric-color);
   font-style: italic;
   font-size: var(--rubric-size);
 }

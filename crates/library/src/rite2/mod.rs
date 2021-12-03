@@ -1,7 +1,5 @@
-mod gloria_patri;
-mod lords_prayer;
+pub mod fragments;
 mod office;
 
-pub use gloria_patri::*;
-pub use lords_prayer::*;
+pub use fragments::*;
 pub use office::*;
