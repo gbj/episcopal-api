@@ -517,11 +517,26 @@ impl DocumentView {
     ) -> (Option<Vec<Node<Msg>>>, Node<Msg>) {
         let main = node! {
             <main class="responsive-prayer">
-            {for line in responsive_prayer.iter() {
-                node! {
-                    <p>{text(line)}</p>
-                }
-            }}
+                <p>
+                    {for (n, line) in responsive_prayer.iter().enumerate() {
+                        if n % 2 == 1 {
+                            node! {
+                                <span>
+                                    <strong class="response">{text(line)}</strong>
+                                    <br/>
+                                </span>
+                            }
+                        } else {
+                            node! {
+                                <span>
+                                    {text(line)}
+                                    <br/>
+                                </span>
+                            }
+                        }
+
+                    }}
+                </p>
             </main>
         };
 
