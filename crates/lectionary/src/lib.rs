@@ -6,7 +6,7 @@ pub use lectionaries::*;
 pub use reading::Reading;
 pub use reading_type::ReadingType;
 
-use calendar::{LiturgicalDay, LiturgicalDayId, Year, YearType};
+use calendar::{DailyOfficeYear, LiturgicalDay, LiturgicalDayId, Year, YearType};
 
 /// Represents a given lectionary cycle of readings, e.g., the Revised Common Lectionary
 /// or the 1979 Book of Common Prayer Daily Office Lectionary.
@@ -56,7 +56,22 @@ impl Lectionary {
         day: &LiturgicalDay,
         reading_type: ReadingType,
     ) -> impl Iterator<Item = Reading> {
-        self.readings_by_day(observed, day)
+        let mut reading_type = reading_type;
+        let mut day = day.clone();
+
+        if ReadingType::FirstReadingAlternateYear == reading_type {
+            reading_type = ReadingType::FirstReading;
+            let alternate_year = match day.daily_office_year {
+                DailyOfficeYear::One => DailyOfficeYear::Two,
+                DailyOfficeYear::Two => DailyOfficeYear::One,
+            };
+            day = LiturgicalDay {
+                daily_office_year: alternate_year,
+                ..day.clone()
+            };
+        }
+
+        self.readings_by_day(observed, &day)
             .filter(move |reading| reading.reading_type == reading_type)
     }
 }
