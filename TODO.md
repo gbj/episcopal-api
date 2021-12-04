@@ -2,7 +2,10 @@
   - [ ] Tests (in conditions)
 - [ ] Canticle Tables
   - [ ] Compile
-  - [ ] Port canticle tables over from JSOn
+    - [ ] Fallbacks
+    - [ ] Traditional language
+  - [x] Port canticle tables over from JSON
+    - [ ] "Classical" tables for Rite I + Rite II
   - [ ] Actually look up canticles (cf. Psalter)
   - [ ] Tests
 - [ ] Lookups by category

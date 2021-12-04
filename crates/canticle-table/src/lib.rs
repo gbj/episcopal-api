@@ -1,11 +1,25 @@
 use calendar::{Calendar, LiturgicalDay, Rank, Season, Weekday};
 use serde::{Deserialize, Serialize};
 
+#[macro_use]
+extern crate lazy_static;
+
+pub mod bcp1979;
+pub mod eow;
 mod id;
 pub use id::*;
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct CanticleTable(Vec<CanticleTableEntry>);
+
+impl<T> From<T> for CanticleTable
+where
+    T: IntoIterator<Item = CanticleTableEntry>,
+{
+    fn from(entries: T) -> Self {
+        Self(entries.into_iter().collect())
+    }
+}
 
 impl CanticleTable {
     pub fn find(
@@ -74,14 +88,17 @@ impl CanticleTable {
     }
 }
 
-/// An explanatory sentence or direction for the liturgy
+/// A single entry in a table of suggested canticles, listing which canticle should
+/// be used for the first or second canticle in the morning or evening in a given season.
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct CanticleTableEntry {
     canticle: CanticleId,
     evening: bool,
     nth: CanticleNumber,
     feast_day: bool,
+    /// If `None`, can be used on any weekday.
     weekday: Option<Weekday>,
+    /// If `None`, can be used in any season.
     season: Option<Season>,
 }
 

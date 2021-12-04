@@ -1,4 +1,5 @@
 use calendar::{Calendar, LiturgicalDay, LiturgicalDayId};
+use canticle_table::CanticleTable;
 use lectionary::{Lectionary, ReadingType};
 use liturgy::*;
 use psalter::{bcp1979::BCP1979_PSALTER, Psalter};
@@ -22,6 +23,8 @@ pub trait Library {
 
     fn lectionary(lectionary: Lectionaries) -> &'static Lectionary;
 
+    fn canticle_table(table: CanticleTables) -> &'static CanticleTable;
+
     fn compile(
         document: Document,
         calendar: &Calendar,
@@ -43,15 +46,6 @@ pub trait Library {
             None
         } else {
             match &document.content {
-                // TODO LectionaryReading
-                // 1) look up reading from lectionary
-                // 2) compile intro
-                // 3) look up Biblical text
-                // TODO BiblicalCitation
-                // 1) compile intro
-                // 2) look up Biblical text
-                // Insert day/date into heading if necessary
-
                 // Lectionaries
                 Content::LectionaryReading(lectionary_reading) => {
                     let chosen_lectionary = match &lectionary_reading.lectionary {
@@ -117,7 +111,30 @@ pub trait Library {
                     }
                 }
 
+                // Canticle Tables
+                Content::CanticleTableEntry(entry) => {
+                    let chosen_table = match &entry.table {
+                        CanticleTableChoice::Preference(key) => {
+                            match preference_value_for_key(key) {
+                                Some(PreferenceValue::CanticleTable(table)) => *table,
+                                _ => CanticleTables::default(),
+                            }
+                        }
+                        CanticleTableChoice::Selected(table) => *table,
+                    };
+
+                    let table = Self::canticle_table(chosen_table);
+
+                    let entries = table.find(calendar, day, entry.nth, None, false);
+
+                    let mut docs = entries
+                        .iter()
+                        .map(|id| Document::from(Text::from(format!("{:#?}", id))));
+                    Document::choice_or_document(&mut docs)
+                }
+
                 // Headings
+                // Insert day/date into heading if necessary
                 Content::Heading(heading) => match heading {
                     // ordinary headings are passed through
                     Heading::Text(_, _) => Some(document),
@@ -254,6 +271,17 @@ impl Library for CommonPrayer {
             Lectionaries::BCP1979ThirtyDayPsalms => &lectionary::BCP1979_30_DAY_PSALTER,
             Lectionaries::RCLTrack1 => &lectionary::RCL_TRACK_1,
             Lectionaries::RCLTrack2 => &lectionary::RCL_TRACK_2,
+        }
+    }
+
+    fn canticle_table(table: CanticleTables) -> &'static CanticleTable {
+        match table {
+            CanticleTables::BCP1979RiteI => &canticle_table::bcp1979::BCP1979_CANTICLE_TABLE_RITE_I,
+            CanticleTables::BCP1979RiteII => {
+                &canticle_table::bcp1979::BCP1979_CANTICLE_TABLE_RITE_II
+            }
+            CanticleTables::EOW => &canticle_table::eow::EOW_CANTICLE_TABLE,
+            CanticleTables::Classical => todo!(),
         }
     }
 }
