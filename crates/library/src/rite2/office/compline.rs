@@ -1,5 +1,5 @@
 use crate::conditions::{EASTER_SEASON, NOT_INSERT_GLORIA, NOT_LENT};
-use crate::rite2::{GLORIA_PATRI, LORDS_PRAYER_ABBREV};
+use crate::rite2::{CANTICLE_17, GLORIA_PATRI, LORDS_PRAYER_ABBREV};
 use calendar::Weekday;
 use liturgy::{
     Antiphon, Choice, Condition, DisplayFormat, Document, Heading, HeadingLevel, Liturgy, Preces,
@@ -84,8 +84,7 @@ Document::from(Rubric::from("The service concludes with the Song of Simeon with 
 Document::from(Antiphon::from("Guide us waking, O Lord, and guard us sleeping; that awake we may watch with Christ, and asleep we may rest in peace.")),
 Document::from(Rubric::from("In Easter Season, add")).condition(EASTER_SEASON.clone()),
 Document::from(Antiphon::from("Alleluia, alleluia, alleuia.")).condition(EASTER_SEASON.clone()),
-// TODO Song of Simeon
-// Document::from(Psalm::from(&undefined)),
+CANTICLE_17.clone(),
 Document::from(Rubric::from("All repeat the Antiphon")),
 Document::from(Antiphon::from("Guide us waking, O Lord, and guard us sleeping; that awake we may watch with Christ, and asleep we may rest in peace.")),
 Document::from(Rubric::from("In Easter Season, add")).condition(EASTER_SEASON.clone()),
