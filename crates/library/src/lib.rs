@@ -1,5 +1,5 @@
 use calendar::{Calendar, LiturgicalDay, LiturgicalDayId};
-use canticle_table::CanticleTable;
+use canticle_table::{CanticleId, CanticleTable};
 use lectionary::{Lectionary, ReadingType};
 use liturgy::*;
 use psalter::{bcp1979::BCP1979_PSALTER, Psalter};
@@ -10,6 +10,8 @@ use serde::{Deserialize, Serialize};
 extern crate lazy_static;
 
 pub mod conditions;
+pub mod eow;
+pub mod rite1;
 pub mod rite2;
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -24,6 +26,8 @@ pub trait Library {
     fn lectionary(lectionary: Lectionaries) -> &'static Lectionary;
 
     fn canticle_table(table: CanticleTables) -> &'static CanticleTable;
+
+    fn canticle(canticle: CanticleId, version: Version) -> Option<Document>;
 
     fn compile(
         document: Document,
@@ -127,9 +131,14 @@ pub trait Library {
 
                     let entries = table.find(calendar, day, entry.nth, None, false);
 
-                    let mut docs = entries
-                        .iter()
-                        .map(|id| Document::from(Text::from(format!("{:#?}", id))));
+                    let mut docs = entries.iter().map(|id| {
+                        Self::canticle(*id, document.version).unwrap_or_else(|| {
+                            Document::from(DocumentError::from(format!(
+                                "{:#?} not available in {:#?}",
+                                id, document.version
+                            )))
+                        })
+                    });
                     Document::choice_or_document(&mut docs)
                 }
 
@@ -282,6 +291,57 @@ impl Library for CommonPrayer {
             }
             CanticleTables::EOW => &canticle_table::eow::EOW_CANTICLE_TABLE,
             CanticleTables::Classical => todo!(),
+        }
+    }
+
+    fn canticle(canticle: CanticleId, version: Version) -> Option<Document> {
+        match (canticle, version) {
+            (CanticleId::Canticle1, _) => Some(rite1::CANTICLE_1.clone()),
+            (CanticleId::Canticle2, _) => Some(rite1::CANTICLE_2.clone()),
+            (CanticleId::Canticle3, _) => Some(rite1::CANTICLE_3.clone()),
+            (CanticleId::Canticle4, _) => Some(rite1::CANTICLE_4.clone()),
+            (CanticleId::Canticle5, _) => Some(rite1::CANTICLE_5.clone()),
+            (CanticleId::Canticle6, _) => Some(rite1::CANTICLE_6.clone()),
+            (CanticleId::Canticle7, _) => Some(rite1::CANTICLE_7.clone()),
+            (CanticleId::Canticle8, _) => Some(rite2::CANTICLE_8.clone()),
+            (CanticleId::Canticle9, _) => Some(rite2::CANTICLE_9.clone()),
+            (CanticleId::Canticle10, _) => Some(rite2::CANTICLE_10.clone()),
+            (CanticleId::Canticle11, _) => Some(rite2::CANTICLE_11.clone()),
+            (CanticleId::Canticle12, Version::EOW) => Some(eow::CANTICLE_12_EOW.clone()),
+            (CanticleId::Canticle12, _) => Some(rite2::CANTICLE_12.clone()),
+            (CanticleId::Canticle13, _) => Some(rite2::CANTICLE_13.clone()),
+            (CanticleId::Canticle14, _) => Some(rite2::CANTICLE_14.clone()),
+            (CanticleId::Canticle15, Version::EOW) => Some(eow::CANTICLE_15_EOW.clone()),
+            (CanticleId::Canticle15, _) => Some(rite2::CANTICLE_15.clone()),
+            (CanticleId::Canticle16, Version::EOW) => Some(eow::CANTICLE_16_EOW.clone()),
+            (CanticleId::Canticle16, _) => Some(rite2::CANTICLE_16.clone()),
+            (CanticleId::Canticle17, _) => Some(rite2::CANTICLE_17.clone()),
+            (CanticleId::Canticle18, Version::EOW) => Some(eow::CANTICLE_18_EOW.clone()),
+            (CanticleId::Canticle18, _) => Some(rite2::CANTICLE_18.clone()),
+            (CanticleId::Canticle19, _) => Some(rite2::CANTICLE_19.clone()),
+            (CanticleId::Canticle20, _) => Some(rite2::CANTICLE_20.clone()),
+            (CanticleId::Canticle21, Version::EOW) => Some(eow::CANTICLE_21_EOW.clone()),
+            (CanticleId::Canticle21, _) => Some(rite2::CANTICLE_21.clone()),
+            (CanticleId::CanticleA, _) => Some(eow::CANTICLE_A.clone()),
+            (CanticleId::CanticleB, _) => Some(eow::CANTICLE_B.clone()),
+            (CanticleId::CanticleC, _) => Some(eow::CANTICLE_C.clone()),
+            (CanticleId::CanticleD, _) => Some(eow::CANTICLE_D.clone()),
+            (CanticleId::CanticleE, _) => Some(eow::CANTICLE_E.clone()),
+            (CanticleId::CanticleF, _) => Some(eow::CANTICLE_F.clone()),
+            (CanticleId::CanticleG, _) => Some(eow::CANTICLE_G.clone()),
+            (CanticleId::CanticleH, _) => Some(eow::CANTICLE_H.clone()),
+            (CanticleId::CanticleI, _) => Some(eow::CANTICLE_I.clone()),
+            (CanticleId::CanticleJ, _) => Some(eow::CANTICLE_J.clone()),
+            (CanticleId::CanticleK, _) => Some(eow::CANTICLE_K.clone()),
+            (CanticleId::CanticleL, _) => Some(eow::CANTICLE_L.clone()),
+            (CanticleId::CanticleM, _) => Some(eow::CANTICLE_M.clone()),
+            (CanticleId::CanticleN, _) => Some(eow::CANTICLE_N.clone()),
+            (CanticleId::CanticleO, _) => Some(eow::CANTICLE_O.clone()),
+            (CanticleId::CanticleP, _) => Some(eow::CANTICLE_P.clone()),
+            (CanticleId::CanticleQ, _) => Some(eow::CANTICLE_Q.clone()),
+            (CanticleId::CanticleR, _) => Some(eow::CANTICLE_R.clone()),
+            (CanticleId::CanticleS, _) => Some(eow::CANTICLE_S.clone()),
+            _ => None,
         }
     }
 }

@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use serde::{Deserialize, Serialize};
 
 use crate::{CanticleTables, PreferenceKey, Reference};
@@ -23,14 +25,12 @@ pub enum CanticleTableChoice {
 pub struct Canticle {
     /// Unique identifier for the canticle; may be shared between different versions or translations
     pub number: CanticleId,
-    /// Present when only a subset of verses should be displayed
+    /// Biblical or other citation for the source of the canticle's text
     pub citation: Option<String>,
-    /// Reference to e.g., a BCP page
-    pub reference: Reference,
-    /// Name for the section in the psalm's own language (e.g., "Part I" or "Aleph")
+    /// Name for the canticle in its own language
     pub local_name: String,
-    /// Latin name for the section (e.g., "Beatus vir qui non abiit")
-    pub latin_name: String,
+    /// Latin name for the canticle
+    pub latin_name: Option<String>,
     /// The content of the psalm, by section
     pub sections: Vec<CanticleSection>,
 }
@@ -49,4 +49,17 @@ pub struct CanticleVerse {
     pub a: String,
     /// Text of the second half of the verse, after the asterisk
     pub b: String,
+}
+
+impl<A, B> From<(A, B)> for CanticleVerse
+where
+    A: Display,
+    B: Display,
+{
+    fn from((a, b): (A, B)) -> Self {
+        Self {
+            a: a.to_string(),
+            b: b.to_string(),
+        }
+    }
 }
