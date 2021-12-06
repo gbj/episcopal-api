@@ -5,7 +5,7 @@ lazy_static! {
     pub static ref CANTICLE_4: Document = Document::from(Canticle {
         number: CanticleId::Canticle4,
         citation: Some(String::from("Luke 1: 68-79")),
-        local_name: String::from("Canticle 4: The Song of Zechariah"),
+        local_name: String::from("The Song of Zechariah"),
         latin_name: Some(String::from("Benedictus Dominus Deus")),
         sections: vec![CanticleSection {
             title: None,
@@ -62,6 +62,5 @@ and in the shadow of death, *",
             ]
         }]
     })
-    .version(Version::RiteI)
-    .label("Canticle 4: The Song of Zechariah");
+    .version(Version::RiteI);
 }

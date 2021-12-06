@@ -43,5 +43,5 @@ and all servants give worship there; *",
         }]
     })
     .version(Version::EOW)
-    .label("Canticle O");
+    ;
 }

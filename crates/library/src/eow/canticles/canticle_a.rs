@@ -46,5 +46,5 @@ lazy_static! {
         }]
     })
     .version(Version::EOW)
-    .label("Canticle A");
+    ;
 }

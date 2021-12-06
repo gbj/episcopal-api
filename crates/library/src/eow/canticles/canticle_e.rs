@@ -43,5 +43,5 @@ the wealth of nations like an overflowing stream."
         }]
     })
     .version(Version::EOW)
-    .label("Canticle E");
+    ;
 }

@@ -34,6 +34,5 @@ its dawning as sure as the sunrise."
             ]
         }]
     })
-    .version(Version::EOW)
-    .label("Canticle H");
+    .version(Version::EOW);
 }

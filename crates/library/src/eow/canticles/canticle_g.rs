@@ -34,6 +34,5 @@ lazy_static! {
             ]
         }]
     })
-    .version(Version::EOW)
-    .label("Canticle G");
+    .version(Version::EOW);
 }

@@ -43,6 +43,5 @@ that they may have the right to the tree of life, *",
             ]
         }]
     })
-    .version(Version::EOW)
-    .label("Canticle P");
+    .version(Version::EOW);
 }

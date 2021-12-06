@@ -5,7 +5,7 @@ lazy_static! {
   pub static ref CANTICLE_12_EOW: Document = Document::from(Canticle {
             number: CanticleId::Canticle12,
             citation: Some(String::from("Song of the Three Young Men, 35-65")),
-            local_name: String::from("Canticle 12: A Song of Creation"),
+            local_name: String::from("A Song of Creation"),
             latin_name: Some(String::from("Benedicite, omnia opera Domini")),
             sections: vec![CanticleSection {
               title: None,
@@ -54,5 +54,5 @@ CanticleSection {
 CanticleVerse::from(("In the firmament of his power, glorify the Lord, *", "sing praise and give honor for ever."))
               ]
             }]
-          }).version(Version::EOW).label("Canticle 12: A Song of Creation");
+          }).version(Version::EOW);
           }

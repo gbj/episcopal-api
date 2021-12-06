@@ -44,5 +44,5 @@ for the honor and nobility of all, *",
         }]
     })
     .version(Version::EOW)
-    .label("Canticle S");
+    ;
 }

@@ -5,7 +5,7 @@ lazy_static! {
     pub static ref CANTICLE_12: Document = Document::from(Canticle {
         number: CanticleId::Canticle12,
         citation: Some(String::from("Song of the Three Young Men, 35-65")),
-        local_name: String::from("Canticle 12: A Song of Creation"),
+        local_name: String::from("A Song of Creation"),
         latin_name: Some(String::from("Benedicite, omnia opera Domini")),
         sections: vec![
             CanticleSection {
@@ -124,6 +124,5 @@ and all that grows upon the earth, *",
             }
         ]
     })
-    .version(Version::RiteII)
-    .label("Canticle 12: A Song of Creation");
+    .version(Version::RiteII);
 }

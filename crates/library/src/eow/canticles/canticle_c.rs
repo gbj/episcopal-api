@@ -57,6 +57,5 @@ lazy_static! {
             ]
         }]
     })
-    .version(Version::EOW)
-    .label("Canticle C");
+    .version(Version::EOW);
 }

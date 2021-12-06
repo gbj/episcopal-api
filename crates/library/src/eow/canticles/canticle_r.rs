@@ -44,5 +44,5 @@ Christ is the one whom we love."
         }]
     })
     .version(Version::EOW)
-    .label("Canticle R");
+    ;
 }

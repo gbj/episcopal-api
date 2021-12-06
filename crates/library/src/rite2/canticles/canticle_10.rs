@@ -5,7 +5,7 @@ lazy_static! {
     pub static ref CANTICLE_10: Document = Document::from(Canticle {
         number: CanticleId::Canticle10,
         citation: Some(String::from("Isaiah 55:6-11")),
-        local_name: String::from("Canticle 10: The Second Song of Isaiah"),
+        local_name: String::from("The Second Song of Isaiah"),
         latin_name: Some(String::from("Quaerite Dominum")),
         sections: vec![CanticleSection {
             title: None,
@@ -50,6 +50,5 @@ and my thoughts than your thoughts."
             ]
         }]
     })
-    .version(Version::RiteII)
-    .label("Canticle 10: The Second Song of Isaiah");
+    .version(Version::RiteII);
 }

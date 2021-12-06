@@ -5,7 +5,7 @@ lazy_static! {
     pub static ref CANTICLE_8: Document = Document::from(Canticle {
         number: CanticleId::Canticle8,
         citation: Some(String::from("Exodus 15:1-6, 11-13, 17-18")),
-        local_name: String::from("Canticle 8: The Song of Moses"),
+        local_name: String::from("The Song of Moses"),
         latin_name: Some(String::from("Cantemus Domino")),
         sections: vec![CanticleSection {
             title: None,
@@ -60,6 +60,5 @@ awesome in renown, and worker of wonders?"
             ]
         }]
     })
-    .version(Version::RiteII)
-    .label("Canticle 8: The Song of Moses");
+    .version(Version::RiteII);
 }

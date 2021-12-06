@@ -36,5 +36,5 @@ so that we might live through Jesus Christ."
         }]
     })
     .version(Version::EOW)
-    .label("Canticle N");
+    ;
 }

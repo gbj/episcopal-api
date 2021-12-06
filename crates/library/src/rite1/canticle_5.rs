@@ -5,7 +5,7 @@ lazy_static! {
     pub static ref CANTICLE_5: Document = Document::from(Canticle {
         number: CanticleId::Canticle5,
         citation: Some(String::from("Luke 2:29-32")),
-        local_name: String::from("Canticle 5: The Song of Simeon"),
+        local_name: String::from("The Song of Simeon"),
         latin_name: Some(String::from("Nunc Dimittis")),
         sections: vec![CanticleSection {
             title: None,
@@ -25,6 +25,5 @@ lazy_static! {
             ]
         }]
     })
-    .version(Version::RiteI)
-    .label("Canticle 5: The Song of Simeon");
+    .version(Version::RiteI);
 }

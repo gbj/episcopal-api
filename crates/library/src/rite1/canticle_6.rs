@@ -5,7 +5,7 @@ lazy_static! {
     pub static ref CANTICLE_6: Document = Document::from(Canticle {
         number: CanticleId::Canticle6,
         citation: None,
-        local_name: String::from("Canticle 6: Glory be to God"),
+        local_name: String::from("Glory be to God"),
         latin_name: Some(String::from("Gloria in Excelsis")),
         sections: vec![CanticleSection {
             title: None,
@@ -37,6 +37,5 @@ thou only, O Christ,
             ))]
         }]
     })
-    .version(Version::RiteI)
-    .label("Canticle 6: Glory be to God");
+    .version(Version::RiteI);
 }

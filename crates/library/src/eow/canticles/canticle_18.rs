@@ -5,7 +5,7 @@ lazy_static! {
     pub static ref CANTICLE_18_EOW: Document = Document::from(Canticle {
         number: CanticleId::Canticle18,
         citation: Some(String::from("Revelation 4:11, 5:9-10, 13")),
-        local_name: String::from("Canticle 18: A Song to the Lamb"),
+        local_name: String::from("A Song to the Lamb"),
         latin_name: Some(String::from("Dignus es")),
         sections: vec![CanticleSection {
             title: None,
@@ -37,6 +37,5 @@ lazy_static! {
             ]
         }]
     })
-    .version(Version::EOW)
-    .label("Canticle 18: A Song to the Lamb");
+    .version(Version::EOW);
 }

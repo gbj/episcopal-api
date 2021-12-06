@@ -5,7 +5,7 @@ lazy_static! {
     pub static ref CANTICLE_3: Document = Document::from(Canticle {
         number: CanticleId::Canticle3,
         citation: Some(String::from("Luke 1:46-55")),
-        local_name: String::from("Canticle 3: The Song of Mary"),
+        local_name: String::from("The Song of Mary"),
         latin_name: Some(String::from("Magnificat")),
         sections: vec![CanticleSection {
             title: None,
@@ -47,6 +47,5 @@ Abraham and his seed for ever."
             ]
         }]
     })
-    .version(Version::RiteI)
-    .label("Canticle 3: The Song of Mary");
+    .version(Version::RiteI);
 }

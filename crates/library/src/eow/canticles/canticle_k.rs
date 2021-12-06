@@ -51,5 +51,5 @@ with every spiritual blessing in the heavenly places."
         }]
     })
     .version(Version::EOW)
-    .label("Canticle K");
+    ;
 }

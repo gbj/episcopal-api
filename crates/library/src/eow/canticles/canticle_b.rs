@@ -50,6 +50,5 @@ even while I was very young, *",
             ]
         }]
     })
-    .version(Version::EOW)
-    .label("Canticle B");
+    .version(Version::EOW);
 }

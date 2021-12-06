@@ -42,6 +42,5 @@ all your waves and billows passed over me."
             ]
         }]
     })
-    .version(Version::EOW)
-    .label("Canticle I");
+    .version(Version::EOW);
 }
