@@ -9,7 +9,7 @@ lazy_static! {
                 page: 804
             },
             local_name: String::from("Psalm 147"),
-            latin_name: String::from("Laudate Dominus"),
+            latin_name: String::from("Laudate Dominum"),
             verses: vec![
                 PsalmVerse {
                     number: 1,
