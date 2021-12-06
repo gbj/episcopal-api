@@ -267,18 +267,49 @@ a.reference {
   grid-template-rows: auto;
   grid-template-areas: var(
     --psalm-verse-grid,
-    "number verse verse" "spacing spacing half-verse"
+    "number a a" "spacing spacing b"
   );
   margin: 0;
 }
 
 .psalm > section > main > .verse > .a {
   display: block;
-  grid-area: verse;
+  grid-area: a;
 }
 .psalm > section > main > .verse > .b {
-  grid-area: half-verse;
+  grid-area: b;
 }
+
+/* Canticle */
+h3.canticle-number {
+  margin: 0;
+  padding: 0;
+}
+
+h4.canticle-number {
+  margin: 0;
+  padding: 0;
+}
+
+.canticle > section > main > .verse {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: var(
+    --psalm-verse-grid,
+    "a a" "spacing b"
+  );
+  margin: 0;
+}
+
+.canticle > section > main > .verse > .a {
+  display: block;
+  grid-area: a;
+}
+.canticle > section > main > .verse > .b {
+  grid-area: b;
+}
+
 
 /* Choice */
 .choice-nav {

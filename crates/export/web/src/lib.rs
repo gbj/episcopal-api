@@ -239,7 +239,8 @@ impl DocumentView {
         };
 
         let header = vec![
-            node! { <h3 class="local-name">{text(format!("{}. {}", canticle.number, canticle.local_name))}</h3> },
+            node! { <h3 class="canticle-number">{text(canticle.number)}</h3> },
+            node! { <h4 class="local-name">{text(&canticle.local_name)}</h4> },
             node! { <em class="latin-name">{text(canticle.latin_name.clone().unwrap_or_default())}</em> },
             citation,
         ];
