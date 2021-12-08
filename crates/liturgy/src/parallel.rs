@@ -10,6 +10,10 @@ impl Parallel {
     pub fn iter(&self) -> impl Iterator<Item = &Document> {
         self.0.iter()
     }
+
+    pub fn as_slice(&self) -> &[Document] {
+        &self.0
+    }
 }
 
 impl<T, U> From<T> for Parallel
