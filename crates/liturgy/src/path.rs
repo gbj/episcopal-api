@@ -57,4 +57,41 @@ impl Document {
             }
         }
     }
+
+    pub fn at_path_mut(
+        &mut self,
+        path: impl IntoIterator<Item = usize>,
+    ) -> Result<&mut Document, PathError> {
+        self.path_helper_mut(path.into_iter())
+    }
+
+    fn path_helper_mut(
+        &mut self,
+        mut path: impl Iterator<Item = usize>,
+    ) -> Result<&mut Document, PathError> {
+        let idx = path.next();
+        match idx {
+            // path iterator is exhausted, return this document
+            None => Ok(self),
+            Some(idx) => {
+                let children = match &mut self.content {
+                    Content::Liturgy(doc) => Some(doc.body.as_mut_slice()),
+                    Content::Series(doc) => Some(doc.as_mut_slice()),
+                    Content::Parallel(doc) => Some(doc.as_mut_slice()),
+                    Content::Choice(doc) => Some(doc.options.as_mut_slice()),
+                    _ => None,
+                };
+                match children {
+                    None => Err(PathError::RemainingSegments),
+                    Some(children) => {
+                        let indexed_child = children.get_mut(idx);
+                        match indexed_child {
+                            None => Err(PathError::DoesNotExist),
+                            Some(child) => child.path_helper_mut(path),
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

@@ -14,6 +14,10 @@ impl Series {
     pub fn as_slice(&self) -> &[Document] {
         &self.0
     }
+
+    pub fn as_mut_slice(&mut self) -> &mut [Document] {
+        &mut self.0
+    }
 }
 
 impl<T, U> From<T> for Series
