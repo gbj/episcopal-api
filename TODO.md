@@ -1,3 +1,9 @@
+- [ ] Type `BiblicalCitation` for client-side/async loading
+  - [x] Dehydrate/send/rehydrate document components
+  - [x] Load readings asynchronously
+  - [ ] Smoother interface for loading readings
+  - [ ] Refactor and simplify Sauron component for this
+  - [ ] Add calendars back in -- solve deserialization issue here
 - [x] Preferences
   - [ ] Tests (in conditions)
 - [ ] Canticle Tables
@@ -11,7 +17,6 @@
 - [ ] Lookups by category
   - [ ] Create type
   - [ ] Conversion from LDF JSON
-- [ ] Type `BiblicalCitation` for client-side/async loading
 - [ ] CSS for rendering
 - [ ] Liturgies
   - [x] Compline
