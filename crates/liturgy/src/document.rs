@@ -53,6 +53,23 @@ impl Document {
         }
     }
 
+    /// Transforms a [Document], which can nest sub-documents in a [Liturgy], [Series], [Choice], or [Parallel],
+    /// into a flat iterator of [Document]s
+    pub fn flatten(&self) -> Vec<&Document> {
+        let children = match &self.content {
+            Content::Liturgy(liturgy) => Some(liturgy.body.iter().collect::<Vec<_>>()),
+            Content::Series(series) => Some(series.iter().collect::<Vec<_>>()),
+            Content::Parallel(parallel) => Some(parallel.iter().collect::<Vec<_>>()),
+            Content::Choice(choice) => Some(choice.options.iter().collect::<Vec<_>>()),
+            _ => None,
+        };
+        if let Some(children) = children {
+            children.iter().flat_map(|child| child.flatten()).collect()
+        } else {
+            vec![self]
+        }
+    }
+
     /// Builds a new Document from an iterator of Documents; either a [Choice] (if multiple Documents) or a single Document.
     pub fn choice_or_document<I>(docs: &mut I) -> Option<Document>
     where
