@@ -27,6 +27,7 @@ mod status;
 mod subliturgy;
 mod text;
 mod version;
+mod path;
 
 pub use crate::liturgy::*;
 pub use antiphon::*;
