@@ -7,7 +7,7 @@ use library::{
 };
 use liturgy::{Content, Document, LiturgyPreferences};
 use rocket::{response::content::Html, serde::json::Json};
-use web::DocumentView;
+use web::Viewer;
 
 use crate::error::{APIError, APIErrorResponder};
 
@@ -96,9 +96,11 @@ pub fn doc_to_html(liturgy: &str, date: &str) -> Result<Html<String>, APIErrorRe
         .cloned()
         .unwrap_or_default();
 
-    let html = DocumentView::from(compiled.unwrap_or_default())
-        .mark_as_top_level()
-        .to_html();
+    let serialized_state = serde_json::to_string(&compiled)
+        .map_err(|_| APIError::JsonError)?
+        .replace('\\', "\\\\");
+
+    let html = Viewer::from(compiled.unwrap_or_default()).to_html();
 
     Ok(Html(format!(
         r#"
@@ -108,16 +110,23 @@ pub fn doc_to_html(liturgy: &str, date: &str) -> Result<Html<String>, APIErrorRe
                 <link rel="stylesheet" href="/assets/document.css">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
                 <title>{}</title>
+                <script type="module">
+                    import init, {{ initialize_from_json }} from '/pkg/web.js';
+                    async function start() {{
+                        await init();
+                        const state = `{}`;
+                        initialize_from_json("main", state);
+                    }}
+                    start();
+                </script>
             </head>
             <body>
                 <header><h1>{}</h1></header>
-                <main>
                 {}
-                </main>
                 <script src="/assets/document.js"></script>
             </body>
         </html>
     "#,
-        label, label, html
+        label, serialized_state, label, html
     )))
 }

@@ -1,0 +1,1 @@
+cd ../../crates/export/web && wasm-pack build --debug --target web --out-dir ../../../examples/api/static/pkg & cd ../../.. && cargo run

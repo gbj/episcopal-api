@@ -19,6 +19,8 @@ impl From<APIError> for APIErrorResponder {
 pub enum APIError {
     #[error("not a valid date")]
     DateError(String),
+    #[error("had trouble serializing this document to JSON")]
+    JsonError,
     #[error("couldn't find this liturgy in our database")]
     LiturgyError(String),
 }

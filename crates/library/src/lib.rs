@@ -92,6 +92,7 @@ pub trait Library {
                                         content: Content::BiblicalCitation(BiblicalCitation {
                                             citation: reading.citation,
                                             intro,
+                                            status: BiblicalCitationStatus::Empty,
                                         }),
                                         ..document.clone()
                                     }
