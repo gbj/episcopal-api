@@ -75,7 +75,7 @@ impl Application<Msg> for Viewer {
             Msg::ChildMsg(msg) => {
                 trace!("message from child component: {:#?}", msg);
                 if let DocumentMsg::LoadCitation(path, citation) = msg {
-                    let doc = self.document.at_path(path.clone());
+                    let doc = self.document.at_path_mut(path.clone());
                     if let Ok(doc) = doc {
                         doc.content = Content::Text(liturgy::Text::from("..."));
                     }
@@ -85,7 +85,7 @@ impl Application<Msg> for Viewer {
                 }
             }
             Msg::SetContent(path, content) => {
-                if let Ok(doc) = self.document.at_path(path) {
+                if let Ok(doc) = self.document.at_path_mut(path) {
                     doc.content = content;
                 };
                 None
