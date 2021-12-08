@@ -32,7 +32,7 @@ pub enum LectionaryTableChoice {
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 /// Template for the introduction to a Biblical reading, which needs to be compiled
-/// to replace ${short_name} or ${long_name} with the name of the relevant [Book](reference_parser::Book).
+/// to replace {{short_name}} or {{long_name}} with the name of the relevant [Book](reference_parser::Book).
 pub struct BiblicalReadingIntroTemplate(Box<Document>);
 
 impl From<Document> for BiblicalReadingIntroTemplate {
@@ -48,21 +48,21 @@ impl From<Text> for BiblicalReadingIntroTemplate {
 }
 
 impl BiblicalReadingIntroTemplate {
-    /// Replaces ${short_name} or ${long_name} in the template with the name of the relevant [Book](reference_parser::Book).
+    /// Replaces {{short_name}} or {{long_name}} in the template with the name of the relevant [Book](reference_parser::Book).
     /// ```
     /// # use crate::liturgy::{BiblicalReading, BiblicalReadingIntroTemplate, Document, Preces, Text};
-    /// let intro = BiblicalReadingIntroTemplate::from(Document::from(Text::from("A Reading from ${short_name}.")));
+    /// let intro = BiblicalReadingIntroTemplate::from(Document::from(Text::from("A Reading from {{short_name}}.")));
     /// assert_eq!(
     ///     intro.compile("Ecclus. 1:1-14"),
     ///     Document::from(Text::from("A Reading from Sirach."))
     /// );
-    /// let intro = BiblicalReadingIntroTemplate::from(Document::from(Text::from("A Reading from ${short_name}.")));
+    /// let intro = BiblicalReadingIntroTemplate::from(Document::from(Text::from("A Reading from {{short_name}}.")));
     /// assert_eq!(
     ///     intro.compile("Mark 1:1-14"),
     ///     Document::from(Text::from("A Reading from Mark."))
     /// );
     ///
-    /// let intro = BiblicalReadingIntroTemplate::from(Document::from(Text::from("A Reading from ${long_name}.")));
+    /// let intro = BiblicalReadingIntroTemplate::from(Document::from(Text::from("A Reading from {{long_name}}.")));
     /// assert_eq!(
     ///     intro.compile("Mark 1:1-14"),
     ///     Document::from(Text::from("A Reading from the Gospel According to Mark."))
@@ -71,7 +71,7 @@ impl BiblicalReadingIntroTemplate {
     /// let intro = BiblicalReadingIntroTemplate::from(Document::from(Preces::from([
     ///     (
     ///         "Celebrant",
-    ///         "The Holy Gospel of our Lord Jesus Christ according to ${short_name}.",
+    ///         "The Holy Gospel of our Lord Jesus Christ according to {{short_name}}.",
     ///     ),
     ///     ("People", "Glory to you, Lord Christ."),
     /// ])));
@@ -98,8 +98,8 @@ impl BiblicalReadingIntroTemplate {
         let long_name = book.book_long_name(template.language);
 
         fn replace_names(base: &str, short_name: &str, long_name: &str) -> String {
-            base.replace("${short_name}", short_name)
-                .replace("${long_name}", long_name)
+            base.replace("{{short_name}}", short_name)
+                .replace("{{long_name}}", long_name)
                 // replace internal "The" (i.e., "A Reading from The Gospel" => "A Reading from the Gospel")
                 .replace(" The", " the")
         }
