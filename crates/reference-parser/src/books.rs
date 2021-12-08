@@ -128,6 +128,12 @@ impl From<String> for Book {
     }
 }
 
+impl From<&String> for Book {
+    fn from(book_name: &String) -> Self {
+        Self::from(book_name.as_str())
+    }
+}
+
 impl Book {
     pub fn book_short_name(&self, _language: Language) -> &'static str {
         // TODO other languages

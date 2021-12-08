@@ -9,10 +9,12 @@ pub struct BiblicalReading {
     /// A citation for the book/chapters/verses included.
     pub citation: String,
     /// The text
-    pub text: Vec<(BibleVerse, String)>,
+    pub text: BiblicalReadingText,
     /// Introduction to the reading. The introduction begins as a [BiblicalReadingIntroTemplate](crate::BiblicalReadingIntroTemplate).
     pub intro: Option<BiblicalReadingIntro>,
 }
+
+pub type BiblicalReadingText = Vec<(BibleVerse, String)>;
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct BiblicalReadingIntro(Box<Document>);

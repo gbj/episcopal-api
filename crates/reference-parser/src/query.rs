@@ -1,8 +1,8 @@
 use crate::Book;
 use serde::{Deserialize, Serialize};
 
-type Chapter = u16;
-type Verse = u16;
+pub type Chapter = u16;
+pub type Verse = u16;
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
 /// A possibly-incomplete reference to a Bible book, chapter, or verse
