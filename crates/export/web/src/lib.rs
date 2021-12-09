@@ -1,12 +1,13 @@
 use calendar::{Calendar, BCP1979_CALENDAR};
 use document::{DocumentComponent, DocumentMsg};
 use liturgy::*;
-use log::trace;
+use lookup::{lookup_links, LookupType};
 use sauron::prelude::*;
 use sauron::{node, Application, Cmd, Node};
 
 mod document;
 mod fetch_reading;
+mod lookup;
 
 #[derive(Debug)]
 pub enum Msg {
@@ -19,6 +20,7 @@ pub struct Viewer {
     pub document: Document,
     pub calendar: &'static Calendar,
     pub dynamic: bool,
+    pub lookup_links: fn(&LookupType) -> String,
 }
 
 impl Viewer {
@@ -27,6 +29,7 @@ impl Viewer {
             document: Document::new(),
             calendar: &BCP1979_CALENDAR,
             dynamic: false,
+            lookup_links,
         }
     }
 
@@ -49,6 +52,7 @@ impl From<Document> for Viewer {
             document,
             calendar: &BCP1979_CALENDAR,
             dynamic: false,
+            lookup_links,
         }
     }
 }
@@ -59,6 +63,7 @@ impl From<(Document, &'static Calendar)> for Viewer {
             document,
             calendar,
             dynamic: false,
+            lookup_links,
         }
     }
 }
@@ -128,6 +133,7 @@ impl Application<Msg> for Viewer {
             top_level: true,
             path: vec![],
             dynamic: self.dynamic,
+            lookup_links: self.lookup_links,
         };
         node! { <main>
             {component.view().map_msg(Msg::ChildMsg)}

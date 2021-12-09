@@ -3,10 +3,11 @@ use liturgy::*;
 use sauron::html::attributes::inner_html;
 use sauron::html::text;
 use sauron::*;
-use serde::{Deserialize, Serialize};
 
-//use crate::biblical_citation::{BiblicalCitationComponent, BiblicalCitationMsg};
-use crate::Msg;
+use crate::{
+    lookup::{lookup_links, LookupType},
+    Msg,
+};
 
 pub struct DocumentComponent {
     pub document: Document,
@@ -15,18 +16,6 @@ pub struct DocumentComponent {
     pub top_level: bool,
     pub path: Vec<usize>,
     pub lookup_links: fn(&LookupType) -> String,
-}
-
-#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize)]
-pub enum LookupType {
-    Category,
-    Canticle(CanticleTableEntry),
-    Collect,
-    Lectionary,
-}
-
-fn lookup_links(lookup_type: &LookupType) -> String {
-    todo!()
 }
 
 impl From<Document> for DocumentComponent {
@@ -90,7 +79,6 @@ impl Component<DocumentMsg, Msg> for DocumentComponent {
             Content::Choice(content) => self.choice(content),
             Content::CollectOfTheDay => self.collect_of_the_day(),
             Content::PsalmCitation(content) => self.psalm_citation(content),
-            Content::SubLiturgy(content) => todo!(),
             Content::LectionaryReading(content) => self.lectionary_reading(content),
             Content::Antiphon(content) => self.antiphon(content),
             Content::Litany(content) => self.litany(content),
@@ -279,7 +267,7 @@ impl DocumentComponent {
         &self,
         entry: &CanticleTableEntry,
     ) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
-        let href = (self.lookup_links)(&LookupType::Canticle(*entry));
+        let href = (self.lookup_links)(&LookupType::Canticle(entry.clone()));
         let main = node! {
             <main class="lookup canticle-table-entry">
                 <a href={href}>{text(self.i18n("Table of Suggested Canticles"))}</a>
@@ -479,7 +467,7 @@ impl DocumentComponent {
         &self,
         entry: &LectionaryReading,
     ) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
-        let href = (self.lookup_links)(&LookupType::Lectionary);
+        let href = (self.lookup_links)(&LookupType::Lectionary(entry.clone()));
 
         let main = node! {
             <main class="lookup lectionary">
