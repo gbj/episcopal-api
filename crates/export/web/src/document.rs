@@ -1,6 +1,7 @@
 use calendar::*;
 use liturgy::*;
 use log::{error, trace};
+use sauron::html::attributes::inner_html;
 use sauron::html::text;
 use sauron::*;
 
@@ -212,7 +213,9 @@ impl DocumentComponent {
                     node! {
                         <span class="verse">
                             <sup class="verse-number">{text(verse.verse)}</sup>
-                            {text(verse_text)}
+                            // TODO this has the potential to be insecure if the API is compromised,
+                            // or if we eventually allow user-created documents
+                            <span {inner_html(verse_text)}></span>
                         </span>
                     }
                 }}
