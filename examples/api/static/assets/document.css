@@ -295,10 +295,7 @@ h4.canticle-number {
   display: grid;
   grid-template-columns: 1.5rem 1fr;
   grid-template-rows: auto;
-  grid-template-areas: var(
-    --psalm-verse-grid,
-    "a a" "spacing b"
-  );
+  grid-template-areas: var(--psalm-verse-grid, "a a" "spacing b");
   margin: 0;
 }
 
@@ -309,7 +306,6 @@ h4.canticle-number {
 .canticle > section > main > .verse > .b {
   grid-area: b;
 }
-
 
 /* Choice */
 .choice-nav {
@@ -330,4 +326,9 @@ h4.canticle-number {
   font-style: italic;
   font-size: var(--rubric-size);
   margin-left: 2rem;
+}
+
+/* Biblical Reading */
+.biblical-reading sup.verse-number {
+  margin-right: 0.25rem;
 }
