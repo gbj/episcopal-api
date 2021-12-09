@@ -342,7 +342,6 @@ impl Library for CommonPrayer {
             (CanticleId::CanticleQ, _) => Some(eow::CANTICLE_Q.clone()),
             (CanticleId::CanticleR, _) => Some(eow::CANTICLE_R.clone()),
             (CanticleId::CanticleS, _) => Some(eow::CANTICLE_S.clone()),
-            _ => None,
         }
     }
 }

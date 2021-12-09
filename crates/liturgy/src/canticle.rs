@@ -2,7 +2,7 @@ use std::fmt::Display;
 
 use serde::{Deserialize, Serialize};
 
-use crate::{CanticleTables, PreferenceKey, Reference};
+use crate::{CanticleTables, PreferenceKey};
 use canticle_table::{CanticleId, CanticleNumber};
 
 /// An entry that can be looked up from a [CanticleTable](canticle_table::CanticleTable).
