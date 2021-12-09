@@ -318,6 +318,10 @@ h4.canticle-number {
 .choice li.hidden {
   display: none;
 }
+.choice ol {
+  list-style-type: none;
+  padding: 0;
+}
 
 /* Text */
 .text p {
