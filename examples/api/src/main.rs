@@ -1,6 +1,9 @@
 #[macro_use]
 extern crate rocket;
 
+use std::env;
+use std::path::Path;
+
 use rocket::fairing::{Fairing, Info, Kind};
 use rocket::fs::{relative, FileServer};
 use rocket::http::Header;
@@ -13,6 +16,11 @@ mod psalm;
 
 #[launch]
 fn rocket() -> _ {
+    let static_dir = match env::var_os("STATIC_DIR") {
+        Some(static_dir) => Path::new(&static_dir).join("examples/api/static"),
+        None => Path::new(relative!("static")).join(""),
+    };
+
     rocket::build()
         .attach(CORS)
         .mount("/calendar", routes![calendar::day])
@@ -26,7 +34,7 @@ fn rocket() -> _ {
             ],
         )
         .mount("/pray", routes![document::doc_to_html])
-        .mount("/", FileServer::from(relative!("static")))
+        .mount("/", FileServer::from(static_dir))
 }
 pub struct CORS;
 
