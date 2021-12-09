@@ -1,6 +1,5 @@
 use calendar::*;
 use liturgy::*;
-use log::{error, trace};
 use sauron::html::attributes::inner_html;
 use sauron::html::text;
 use sauron::*;
@@ -10,6 +9,7 @@ use crate::Msg;
 
 pub struct DocumentComponent {
     pub document: Document,
+    pub calendar: &'static Calendar,
     pub top_level: bool,
     pub path: Vec<usize>,
 }
@@ -18,6 +18,7 @@ impl From<Document> for DocumentComponent {
     fn from(document: Document) -> Self {
         Self {
             document,
+            calendar: &BCP1979_CALENDAR,
             top_level: false,
             path: Vec::new(),
         }
@@ -30,13 +31,7 @@ pub enum DocumentMsg {
 }
 
 impl Component<DocumentMsg, Msg> for DocumentComponent {
-    fn update(&mut self, msg: DocumentMsg) -> Effects<DocumentMsg, Msg> {
-        match msg {
-            DocumentMsg::LoadCitation(path, citation) => {
-                trace!("load citation {} at path {:#?}", citation.citation, path);
-            }
-        }
-
+    fn update(&mut self, _msg: DocumentMsg) -> Effects<DocumentMsg, Msg> {
         Effects::none()
     }
 
@@ -287,6 +282,7 @@ impl DocumentComponent {
                     let mut path = self.path.clone();
                     path.push(ii);
                     component.path = path;
+                    component.calendar = self.calendar;
                     component.view()
                 }
             }}
@@ -367,60 +363,59 @@ impl DocumentComponent {
     fn heading_day(&self, day: &Option<LiturgicalDay>) -> Node<DocumentMsg> {
         let observed = day.as_ref().map(|day| day.observed);
         let base_name = match observed {
-        Some(LiturgicalDayId::Feast(feast)) => Some(text("TODO fix calendar problem")) /* self
-            .calendar
-            .feast_name(feast, self.document.language)
-            .map(text) */,
-        Some(LiturgicalDayId::TransferredFeast(feast)) => Some(text("TODO fix calendar problem")) /* self
-            .calendar
-            .feast_name(feast, self.document.language)
-            .map(|name| {
-                node! {
-                    <p>
-                        {text(name)}
-                        <br/>
-                        {text(self.i18n("(Transferred)"))}
-                    </p>
+            Some(LiturgicalDayId::Feast(feast)) => self
+                .calendar
+                .feast_name(feast, self.document.language)
+                .map(text),
+            Some(LiturgicalDayId::TransferredFeast(feast)) => self
+                .calendar
+                .feast_name(feast, self.document.language)
+                .map(|name| {
+                    node! {
+                        <p>
+                            {text(name)}
+                            <br/>
+                            {text(self.i18n("(Transferred)"))}
+                        </p>
+                    }
+                }),
+            _ => {
+                if let Some(day) = day {
+                    self.calendar
+                        .week_name(day.week, self.document.language)
+                        .map(|name| {
+                            if day.weekday == Weekday::Sun {
+                                node! {
+                                    <p>
+                                        {text(name)}
+                                    </p>
+                                }
+                            } else {
+                                node! {
+                                    <p>
+                                        {text(self.i18n(&day.weekday.to_string()))}
+                                        {text(self.i18n(" after "))}
+                                        {text(name.replace("The", "the"))}
+                                    </p>
+                                }
+                            }
+                        })
+                } else {
+                    None
                 }
-            }) */,
-        _ => {
-            if let Some(day) = day {
-                Some(text("TODO fix calendar problem"))
-                /* self.calendar
-                    .week_name(day.week, self.document.language)
-                    .map(|name| {
-                        if day.weekday == Weekday::Sun {
-                            node! {
-                                <p>
-                                    {text(name)}
-                                </p>
-                            }
-                        } else {
-                            node! {
-                                <p>
-                                    {text(self.i18n(&day.weekday.to_string()))}
-                                    {text(self.i18n("after"))}
-                                    {text(name.replace("The", "the"))}
-                                </p>
-                            }
-                        }
-                    }) */
-            } else {
-                None
             }
-        }
-    };
+        };
 
         let proper = observed
-        .and_then(|id| {
-            if let LiturgicalDayId::ProperAndDay(proper, _) = id {
-                Some(proper)
-            } else {
-                None
-            }
-        })
-        .and_then(|proper| Some("TODO fix calendar problem") /* self.calendar.proper_name(proper, self.document.language) */)
-        .map(|name| format!("({})", name));
+            .and_then(|id| {
+                if let LiturgicalDayId::ProperAndDay(proper, _) = id {
+                    Some(proper)
+                } else {
+                    None
+                }
+            })
+            .and_then(|proper| self.calendar.proper_name(proper, self.document.language))
+            .map(|name| format!("({})", name));
 
         node! {
             <h2 class="day">
@@ -606,12 +601,11 @@ impl DocumentComponent {
         let main = node! {
             <section class="series">{
                 for (ii, doc) in series.iter().enumerate() {
-                    // TODO fix calendar problem
-                    //DocumentView::from((doc.clone(), self.calendar)).view()
                     let mut component = DocumentComponent::from(doc.clone());
                     let mut path = self.path.clone();
                     path.push(ii);
                     component.path = path;
+                    component.calendar = self.calendar;
                     component.view()
                 }
             }</section>

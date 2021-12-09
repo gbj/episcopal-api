@@ -1,13 +1,9 @@
-use calendar::{Calendar, Date, LiturgicalDay, LiturgicalDayId, Weekday, BCP1979_CALENDAR};
+use calendar::{Calendar, BCP1979_CALENDAR};
 use document::{DocumentComponent, DocumentMsg};
-//use fetch_reading::BibleReadingFromAPI;
 use liturgy::*;
-use log::trace;
 use sauron::prelude::*;
 use sauron::{node, Application, Cmd, Node};
-use serde::{Deserialize, Serialize};
 
-//mod biblical_citation;
 mod document;
 mod fetch_reading;
 
@@ -18,17 +14,16 @@ pub enum Msg {
     SetContent(Vec<usize>, Content),
 }
 
-#[derive(Debug, Serialize, Deserialize)]
 pub struct Viewer {
     pub document: Document,
-    //pub calendar: &'static Calendar,
+    pub calendar: &'static Calendar,
 }
 
 impl Viewer {
     pub fn new() -> Self {
         Self {
             document: Document::new(),
-            //calendar: &BCP1979_CALENDAR,
+            calendar: &BCP1979_CALENDAR,
         }
     }
 
@@ -49,17 +44,14 @@ impl From<Document> for Viewer {
     fn from(document: Document) -> Self {
         Self {
             document,
-            //calendar: &BCP1979_CALENDAR,
+            calendar: &BCP1979_CALENDAR,
         }
     }
 }
 
 impl From<(Document, &'static Calendar)> for Viewer {
     fn from((document, calendar): (Document, &'static Calendar)) -> Self {
-        Self {
-            document,
-            //calendar,
-        }
+        Self { document, calendar }
     }
 }
 
@@ -74,16 +66,12 @@ impl Application<Msg> for Viewer {
     {
         let cmd = match msg {
             Msg::ChildMsg(msg) => {
-                trace!("message from child component: {:#?}", msg);
-                if let DocumentMsg::LoadCitation(path, citation) = msg {
-                    let doc = self.document.at_path_mut(path.clone());
-                    if let Ok(doc) = doc {
-                        doc.content = Content::Text(liturgy::Text::from("..."));
-                    }
-                    Some(self.fetch_biblical_reading(path, &citation))
-                } else {
-                    None
+                let DocumentMsg::LoadCitation(path, citation) = msg;
+                let doc = self.document.at_path_mut(path.clone());
+                if let Ok(doc) = doc {
+                    doc.content = Content::Text(liturgy::Text::from("..."));
                 }
+                Some(self.fetch_biblical_reading(path, &citation))
             }
             Msg::SetContent(path, content) => {
                 if let Ok(doc) = self.document.at_path_mut(path) {
@@ -102,6 +90,7 @@ impl Application<Msg> for Viewer {
     fn view(&self) -> Node<Msg> {
         let component = DocumentComponent {
             document: self.document.clone(),
+            calendar: self.calendar,
             top_level: true,
             path: vec![],
         };
