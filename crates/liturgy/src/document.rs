@@ -8,7 +8,7 @@ use crate::{
     Antiphon, BiblicalCitation, BiblicalReading, Canticle, CanticleTableEntry, Choice,
     ClientPreferences, Condition, DocumentError, GloriaPatri, Heading, LectionaryReading, Litany,
     Liturgy, LiturgyPreferences, Parallel, Preces, Psalm, PsalmCitation, Reference,
-    ResponsivePrayer, Rubric, Sentence, Series, Show, Status, SubLiturgy, Text, Version,
+    ResponsivePrayer, Rubric, Sentence, Series, Show, Status, Text, Version,
 };
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -215,8 +215,6 @@ pub enum Content {
     CollectOfTheDay,
     /// A reference to a [Psalm](crate::Psalm), which will be inserted by the compilation process.
     PsalmCitation(PsalmCitation),
-    /// Inserts another liturgy, by its identifier
-    SubLiturgy(SubLiturgy),
 }
 
 // Create Document from a Content enum
@@ -357,12 +355,6 @@ impl From<Sentence> for Document {
 impl From<Series> for Document {
     fn from(content: Series) -> Self {
         Self::from(Content::Series(content))
-    }
-}
-
-impl From<SubLiturgy> for Document {
-    fn from(content: SubLiturgy) -> Self {
-        Self::from(Content::SubLiturgy(content))
     }
 }
 
