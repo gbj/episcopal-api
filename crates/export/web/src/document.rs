@@ -26,32 +26,12 @@ impl From<Document> for DocumentComponent {
 
 #[derive(Debug)]
 pub enum DocumentMsg {
-    SetContent(Content),
     LoadCitation(Vec<usize>, BiblicalCitation),
-    CitationLoadSuccess(BiblicalReading),
-    CitationLoadError,
 }
 
 impl Component<DocumentMsg, Msg> for DocumentComponent {
     fn update(&mut self, msg: DocumentMsg) -> Effects<DocumentMsg, Msg> {
         match msg {
-            DocumentMsg::SetContent(content) => {
-                self.document.content = content;
-            }
-            DocumentMsg::CitationLoadSuccess(reading) => {
-                self.document.content = Content::BiblicalReading(reading);
-            }
-            DocumentMsg::CitationLoadError => {
-                if let Content::BiblicalCitation(citation) = &self.document.content {
-                    error!("trouble loading {}", citation.citation);
-                    self.document.content = Content::Error(DocumentError::from(format!(
-                        "There was an error trying to load {}.",
-                        citation.citation
-                    )));
-                } else {
-                    error!("CitationLoadError for a document that's not a BiblicalCitation");
-                }
-            }
             DocumentMsg::LoadCitation(path, citation) => {
                 trace!("load citation {} at path {:#?}", citation.citation, path);
             }

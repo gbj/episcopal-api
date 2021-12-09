@@ -74,15 +74,12 @@ impl Application<Msg> for Viewer {
         let cmd = match msg {
             Msg::ChildMsg(msg) => {
                 trace!("message from child component: {:#?}", msg);
-                if let DocumentMsg::LoadCitation(path, citation) = msg {
-                    let doc = self.document.at_path_mut(path.clone());
-                    if let Ok(doc) = doc {
-                        doc.content = Content::Text(liturgy::Text::from("..."));
-                    }
-                    Some(self.fetch_biblical_reading(path, &citation))
-                } else {
-                    None
+                let DocumentMsg::LoadCitation(path, citation) = msg;
+                let doc = self.document.at_path_mut(path.clone());
+                if let Ok(doc) = doc {
+                    doc.content = Content::Text(liturgy::Text::from("..."));
                 }
+                Some(self.fetch_biblical_reading(path, &citation))
             }
             Msg::SetContent(path, content) => {
                 if let Ok(doc) = self.document.at_path_mut(path) {
