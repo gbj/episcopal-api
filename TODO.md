@@ -1,11 +1,9 @@
-- [ ] Type `BiblicalCitation` for client-side/async loading
-  - [x] Dehydrate/send/rehydrate document components
-  - [x] Load readings asynchronously
-  - [x] Smoother interface for loading readings
-  - [x] Refactor and simplify Sauron component for this
-  - [ ] Add calendars back in -- solve deserialization issue here
 - [ ] Web UI
   - [ ] Choice/whatever else is in document.js (and delete this)
+- [ ] Hosting/CI
+- [ ] Morning Prayer
+  - [ ] Clean up internal TODO items
+  - [ ] rotate `Choice`s for things like prayers for mission and daily collects?
 - [x] Preferences
   - [ ] Tests (in conditions)
 - [ ] Canticle Tables
@@ -19,12 +17,8 @@
 - [ ] Lookups by category
   - [ ] Create type
   - [ ] Conversion from LDF JSON
-- [ ] CSS for rendering
 - [ ] Liturgies
   - [x] Compline
-  - [ ] Morning Prayer
-    - [ ] Clean up internal TODO items
-    - [ ] rotate `Choice`s for things like prayers for mission and daily collects?
   - [ ] Evening Prayer
   - [ ] Build preferences/choices into liturgies
   - [ ] Add many more source citations
