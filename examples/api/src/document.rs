@@ -123,7 +123,6 @@ pub fn doc_to_html(liturgy: &str, date: &str) -> Result<Html<String>, APIErrorRe
             <body>
                 <header><h1>{}</h1></header>
                 {}
-                <script src="/assets/document.js"></script>
             </body>
         </html>
     "#,

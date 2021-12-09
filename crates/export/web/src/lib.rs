@@ -1,6 +1,7 @@
 use calendar::{Calendar, BCP1979_CALENDAR};
 use document::{DocumentComponent, DocumentMsg};
 use liturgy::*;
+use log::trace;
 use sauron::prelude::*;
 use sauron::{node, Application, Cmd, Node};
 
@@ -17,6 +18,7 @@ pub enum Msg {
 pub struct Viewer {
     pub document: Document,
     pub calendar: &'static Calendar,
+    pub dynamic: bool,
 }
 
 impl Viewer {
@@ -24,6 +26,7 @@ impl Viewer {
         Self {
             document: Document::new(),
             calendar: &BCP1979_CALENDAR,
+            dynamic: false,
         }
     }
 
@@ -45,13 +48,18 @@ impl From<Document> for Viewer {
         Self {
             document,
             calendar: &BCP1979_CALENDAR,
+            dynamic: false,
         }
     }
 }
 
 impl From<(Document, &'static Calendar)> for Viewer {
     fn from((document, calendar): (Document, &'static Calendar)) -> Self {
-        Self { document, calendar }
+        Self {
+            document,
+            calendar,
+            dynamic: false,
+        }
     }
 }
 
@@ -65,14 +73,40 @@ impl Application<Msg> for Viewer {
         Self: Sized + 'static,
     {
         let cmd = match msg {
-            Msg::ChildMsg(msg) => {
-                let DocumentMsg::LoadCitation(path, citation) = msg;
-                let doc = self.document.at_path_mut(path.clone());
-                if let Ok(doc) = doc {
-                    doc.content = Content::Text(liturgy::Text::from("..."));
+            Msg::ChildMsg(msg) => match msg {
+                DocumentMsg::LoadCitation(path, citation) => {
+                    let doc = self.document.at_path_mut(path.clone());
+                    if let Ok(doc) = doc {
+                        doc.content = Content::Text(liturgy::Text::from("..."));
+                    }
+                    Some(self.fetch_biblical_reading(path, &citation))
                 }
-                Some(self.fetch_biblical_reading(path, &citation))
-            }
+                DocumentMsg::SelectOption(path, event) => {
+                    let doc = self.document.at_path_mut(path);
+                    if let Ok(doc) = doc {
+                        if let Content::Choice(choice) = &mut doc.content {
+                            let new_index = choice
+                                .options
+                                .iter()
+                                .enumerate()
+                                .find(|(index, doc)| {
+                                    choice.option_label(doc, *index) == event.value
+                                })
+                                .map(|(index, _)| index)
+                                .unwrap_or(0);
+                            choice.selected = new_index;
+
+                            // this below should work -- right now there appears to be an
+                            // issue in Sauron with option values, which I can report
+                            /* let new_index = event.value.parse();
+                            if let Ok(new_index) = new_index {
+                                choice.selected = new_index;
+                            } */
+                        }
+                    }
+                    None
+                }
+            },
             Msg::SetContent(path, content) => {
                 if let Ok(doc) = self.document.at_path_mut(path) {
                     doc.content = content;
@@ -93,8 +127,11 @@ impl Application<Msg> for Viewer {
             calendar: self.calendar,
             top_level: true,
             path: vec![],
+            dynamic: self.dynamic,
         };
-        node! { <main>{component.view().map_msg(Msg::ChildMsg)}</main> }
+        node! { <main>
+            {component.view().map_msg(Msg::ChildMsg)}
+        </main> }
     }
 }
 
@@ -104,11 +141,12 @@ impl Application<Msg> for Viewer {
 pub fn initialize_from_json(query_selector: String, serialized_state: String) {
     console_log::init_with_level(log::Level::Trace).unwrap();
 
-    let app = if let Ok(doc) = serde_json::from_str::<Document>(&serialized_state) {
+    let mut app = if let Ok(doc) = serde_json::from_str::<Document>(&serialized_state) {
         Viewer::from(doc)
     } else {
         Viewer::default()
     };
+    app.dynamic = true;
 
     /* If there's a window (i.e., if this is running in the browser)
      * then mount the app by swapping out the <main> tag */

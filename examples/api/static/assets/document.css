@@ -315,6 +315,9 @@ h4.canticle-number {
   display: block;
   margin-left: auto;
 }
+.choice li.hidden {
+  display: none;
+}
 
 /* Text */
 .text p {

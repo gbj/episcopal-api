@@ -1,7 +1,8 @@
 use calendar::*;
 use liturgy::*;
-use sauron::html::attributes::inner_html;
-use sauron::html::text;
+use log::trace;
+use sauron::html::attributes::{inner_html, value};
+use sauron::html::{option, text};
 use sauron::*;
 
 //use crate::biblical_citation::{BiblicalCitationComponent, BiblicalCitationMsg};
@@ -10,6 +11,7 @@ use crate::Msg;
 pub struct DocumentComponent {
     pub document: Document,
     pub calendar: &'static Calendar,
+    pub dynamic: bool, // whether this is the server side version (dynamic = false) or the client (dynamic = true)
     pub top_level: bool,
     pub path: Vec<usize>,
 }
@@ -19,6 +21,7 @@ impl From<Document> for DocumentComponent {
         Self {
             document,
             calendar: &BCP1979_CALENDAR,
+            dynamic: false,
             top_level: false,
             path: Vec::new(),
         }
@@ -28,6 +31,7 @@ impl From<Document> for DocumentComponent {
 #[derive(Debug)]
 pub enum DocumentMsg {
     LoadCitation(Vec<usize>, BiblicalCitation),
+    SelectOption(Vec<usize>, InputEvent),
 }
 
 impl Component<DocumentMsg, Msg> for DocumentComponent {
@@ -134,6 +138,11 @@ impl DocumentComponent {
         self.document.language.i18n(text)
     }
 
+    fn set_dynamic(mut self, dynamic: bool) -> Self {
+        self.dynamic = dynamic;
+        self
+    }
+
     // Content Types
     fn error(&self, error: &DocumentError) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
         (
@@ -171,7 +180,9 @@ impl DocumentComponent {
     ) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
         let intro = if let Some(intro) = &reading.intro {
             let doc = Document::from(intro.clone());
-            DocumentComponent::from(doc).view()
+            DocumentComponent::from(doc)
+                .set_dynamic(self.dynamic)
+                .view()
         } else {
             text("")
         };
@@ -262,34 +273,53 @@ impl DocumentComponent {
     }
 
     fn choice(&self, choice: &Choice) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
-        let header = node! {
-            <nav class="choice-nav">
-                <select class="choice-menu">
-                    {for (ii, doc) in choice.options.iter().enumerate() {
-                        node! {
-                            <option value={ii}>{text(choice.option_label(doc, ii))}</option>
-                        }
-                    }}
-                </select>
-            </nav>
+        let header = if self.dynamic {
+            let path = self.path.clone();
+            Some(vec![node! {
+                <nav class="choice-nav">
+                    <select
+                        class="choice-menu"
+                        value={choice.selected}
+                        on_change=move |ev| DocumentMsg::SelectOption(path.clone(), ev)
+                    >
+                        {for (ii, doc) in choice.options.iter().enumerate() {
+                            node! {
+                                <option value={ii}>
+                                    {text(choice.option_label(doc, ii))}
+                                </option>
+                            }
+                        }}
+                    </select>
+                </nav>
+            }])
+        } else {
+            None
         };
 
         let main = node! {
             <section class="choice">
-            {for (ii, doc) in choice.options.iter().enumerate() {
-                {
-                    let mut component = DocumentComponent::from(doc.clone());
-                    let mut path = self.path.clone();
-                    path.push(ii);
-                    component.path = path;
-                    component.calendar = self.calendar;
-                    component.view()
-                }
-            }}
+                <ol>
+                {for (ii, doc) in choice.options.iter().enumerate() {
+                    let class = if !self.dynamic || choice.selected == ii { "selected" } else { "hidden" };
+                    node! {
+                        <li class={class}>
+                        {
+                            let mut component = DocumentComponent::from(doc.clone());
+                            let mut path = self.path.clone();
+                            path.push(ii);
+                            component.path = path;
+                            component.calendar = self.calendar;
+                            component.dynamic = self.dynamic;
+                            component.view()
+                        }
+                        </li>
+                    }
+                }}
+                </ol>
             </section>
         };
 
-        (Some(vec![header]), main)
+        (header, main)
     }
 
     fn collect_of_the_day(&self) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
@@ -587,7 +617,7 @@ impl DocumentComponent {
                             {text(&sentence.text)}
                             {citation}
                         </p>
-                        {DocumentComponent::from(*response.clone()).view()}
+                        {DocumentComponent::from(*response.clone()).set_dynamic(self.dynamic).view()}
                     </div>
                 },
             }}
@@ -606,6 +636,7 @@ impl DocumentComponent {
                     path.push(ii);
                     component.path = path;
                     component.calendar = self.calendar;
+                    component.dynamic = self.dynamic;
                     component.view()
                 }
             }</section>

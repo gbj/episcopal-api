@@ -1,5 +1,3 @@
-- [ ] Web UI
-  - [ ] Choice/whatever else is in document.js (and delete this)
 - [ ] Lookups by category
   - [ ] Create type
   - [ ] Conversion from LDF JSON
