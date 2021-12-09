@@ -2,8 +2,10 @@
   - [x] Dehydrate/send/rehydrate document components
   - [x] Load readings asynchronously
   - [x] Smoother interface for loading readings
-  - [ ] Refactor and simplify Sauron component for this
+  - [x] Refactor and simplify Sauron component for this
   - [ ] Add calendars back in -- solve deserialization issue here
+- [ ] Web UI
+  - [ ] Choice/whatever else is in document.js (and delete this)
 - [x] Preferences
   - [ ] Tests (in conditions)
 - [ ] Canticle Tables
