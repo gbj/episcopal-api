@@ -103,7 +103,7 @@ lazy_static! {
           Document::from(LectionaryReading {
             reading_type: ReadingTypeTable::Preference(PreferenceKey::from(GlobalPref::ReadingA)),
             lectionary: LectionaryTableChoice::Preference(PreferenceKey::from(GlobalPref::Lectionary)),
-            intro: Some(BiblicalReadingIntroTemplate::from(Text::from("A Reading from {{longName}}."))),
+            intro: Some(BiblicalReadingIntroTemplate::from(Text::from("A Reading from {{long_name}}."))),
           }).label("The First Lesson"),
           Document::from(WORD_OF_THE_LORD.clone()),
 
@@ -118,7 +118,7 @@ lazy_static! {
             Document::from(LectionaryReading {
               reading_type: ReadingTypeTable::Preference(PreferenceKey::from(GlobalPref::ReadingB)),
               lectionary: LectionaryTableChoice::Preference(PreferenceKey::from(GlobalPref::Lectionary)),
-              intro: Some(BiblicalReadingIntroTemplate::from(Text::from("A Reading from {{longName}}."))),
+              intro: Some(BiblicalReadingIntroTemplate::from(Text::from("A Reading from {{long_name}}."))),
             }).label("The Second Lesson"),
             Document::from(WORD_OF_THE_LORD.clone()),
             // Canticle
