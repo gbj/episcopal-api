@@ -1,7 +1,7 @@
 - [ ] Type `BiblicalCitation` for client-side/async loading
   - [x] Dehydrate/send/rehydrate document components
   - [x] Load readings asynchronously
-  - [ ] Smoother interface for loading readings
+  - [x] Smoother interface for loading readings
   - [ ] Refactor and simplify Sauron component for this
   - [ ] Add calendars back in -- solve deserialization issue here
 - [x] Preferences

@@ -163,8 +163,7 @@ impl DocumentComponent {
         let citation = citation.clone();
 
         let main = node! {
-            <article class="document biblical-citation">
-                <button on_click=move |_| DocumentMsg::LoadCitation(path.clone(), citation.clone())>{text("Click to load.")}</button> // i18n
+            <article class="document biblical-citation" on_mount=move |_| DocumentMsg::LoadCitation(path.clone(), citation.clone())>
             </article>
         };
 
