@@ -166,19 +166,8 @@ impl Choice {
 #[cfg(test)]
 mod tests {
     use crate::*;
+    use canticle_table::CanticleId;
     use reference_parser::{BibleVerse, BibleVersePart, Book};
-
-    /*     #[test]
-    fn names_of_psalms() {
-        use psalter::bcp1979::{PSALM_121, PSALM_126};
-
-        let choice = Choice::from([
-            Document::from(PSALM_121.clone()),
-            Document::from(PSALM_126.clone()),
-        ]);
-        assert_eq!(choice.option_label(&choice.options[0], 0), "Psalm 121");
-        assert_eq!(choice.option_label(&choice.options[1], 1), "Psalm 126");
-    } */
 
     // Canticle label tests
     #[test]
@@ -188,18 +177,16 @@ mod tests {
                 number: CanticleId::Canticle1,
                 citation: None,
                 sections: vec![],
-                reference: Reference::from(47),
                 local_name: String::from("A Song of Creation"),
-                latin_name: String::from("Benedicite, omnia opera Domini"),
+                latin_name: Some(String::from("Benedicite, omnia opera Domini")),
             })
             .version(Version::RiteI),
             Document::from(Canticle {
                 number: CanticleId::Canticle2,
                 citation: None,
                 sections: vec![],
-                reference: Reference::from(49),
                 local_name: String::from("A Song of Praise"),
-                latin_name: String::from("Benedictus es, Domine"),
+                latin_name: Some(String::from("Benedictus es, Domine")),
             })
             .version(Version::RiteI),
         ]);
@@ -220,18 +207,16 @@ mod tests {
                 number: CanticleId::Canticle1,
                 citation: None,
                 sections: vec![],
-                reference: Reference::from(47),
                 local_name: String::from("A Song of Creation"),
-                latin_name: String::from("Benedicite, omnia opera Domini"),
+                latin_name: Some(String::from("Benedicite, omnia opera Domini")),
             })
             .version(Version::RiteI),
             Document::from(Canticle {
                 number: CanticleId::Canticle12,
                 citation: None,
                 sections: vec![],
-                reference: Reference::from(88),
                 local_name: String::from("A Song of Creation"),
-                latin_name: String::from("Benedicite, omnia opera Domini"),
+                latin_name: Some(String::from("Benedicite, omnia opera Domini")),
             })
             .version(Version::RiteII),
         ]);
@@ -246,21 +231,16 @@ mod tests {
                 number: CanticleId::Canticle12,
                 citation: None,
                 sections: vec![],
-                reference: Reference::from(88),
                 local_name: String::from("A Song of Creation"),
-                latin_name: String::from("Benedicite, omnia opera Domini"),
+                latin_name: Some(String::from("Benedicite, omnia opera Domini")),
             })
             .version(Version::RiteII),
             Document::from(Canticle {
                 number: CanticleId::Canticle12,
                 citation: None,
                 sections: vec![],
-                reference: Reference {
-                    source: Source::EOW1,
-                    page: 1234,
-                },
                 local_name: String::from("A Song of Creation"),
-                latin_name: String::from("Benedicite, omnia opera Domini"),
+                latin_name: Some(String::from("Benedicite, omnia opera Domini")),
             })
             .version(Version::EOW),
         ]);
@@ -275,27 +255,24 @@ mod tests {
                 number: CanticleId::Canticle1,
                 citation: None,
                 sections: vec![],
-                reference: Reference::from(47),
                 local_name: String::from("A Song of Creation"),
-                latin_name: String::from("Benedicite, omnia opera Domini"),
+                latin_name: Some(String::from("Benedicite, omnia opera Domini")),
             })
             .version(Version::RiteI),
             Document::from(Canticle {
                 number: CanticleId::Canticle12,
                 citation: None,
                 sections: vec![],
-                reference: Reference::from(88),
                 local_name: String::from("A Song of Creation"),
-                latin_name: String::from("Benedicite, omnia opera Domini"),
+                latin_name: Some(String::from("Benedicite, omnia opera Domini")),
             })
             .version(Version::RiteII),
             Document::from(Canticle {
                 number: CanticleId::Canticle2,
                 citation: None,
                 sections: vec![],
-                reference: Reference::from(49),
                 local_name: String::from("A Song of Praise"),
-                latin_name: String::from("Benedictus es, Domine"),
+                latin_name: Some(String::from("Benedictus es, Domine")),
             })
             .version(Version::RiteI),
         ]);
