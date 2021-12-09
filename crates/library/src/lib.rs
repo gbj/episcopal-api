@@ -71,6 +71,7 @@ pub trait Library {
                     };
 
                     let lectionary = Self::lectionary(chosen_lectionary);
+
                     if let Some(reading_type) = reading_type {
                         let mut docs = lectionary.reading_by_type(observed, day, reading_type).map(
                             |reading| {

@@ -67,6 +67,7 @@ impl Viewer {
                                 })
                                 .collect(),
                         };
+
                         Msg::SetContent(path.clone(), Content::BiblicalReading(reading))
                     }
                     Err(error) => {
