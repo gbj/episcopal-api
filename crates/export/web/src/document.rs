@@ -379,7 +379,6 @@ impl DocumentComponent {
                     <p>
                         {text(name)}
                         <br/>
-                        // TODO i18n
                         {text(self.i18n("(Transferred)"))}
                     </p>
                 }
