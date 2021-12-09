@@ -13,6 +13,7 @@ mod fetch_reading;
 
 #[derive(Debug)]
 pub enum Msg {
+    SetDocument(Document),
     ChildMsg(DocumentMsg),
     SetContent(Vec<usize>, Content),
 }
@@ -74,17 +75,24 @@ impl Application<Msg> for Viewer {
         let cmd = match msg {
             Msg::ChildMsg(msg) => {
                 trace!("message from child component: {:#?}", msg);
-                let DocumentMsg::LoadCitation(path, citation) = msg;
-                let doc = self.document.at_path_mut(path.clone());
-                if let Ok(doc) = doc {
-                    doc.content = Content::Text(liturgy::Text::from("..."));
+                if let DocumentMsg::LoadCitation(path, citation) = msg {
+                    let doc = self.document.at_path_mut(path.clone());
+                    if let Ok(doc) = doc {
+                        doc.content = Content::Text(liturgy::Text::from("..."));
+                    }
+                    Some(self.fetch_biblical_reading(path, &citation))
+                } else {
+                    None
                 }
-                Some(self.fetch_biblical_reading(path, &citation))
             }
             Msg::SetContent(path, content) => {
                 if let Ok(doc) = self.document.at_path_mut(path) {
                     doc.content = content;
                 };
+                None
+            }
+            Msg::SetDocument(document) => {
+                self.document = document;
                 None
             }
         };

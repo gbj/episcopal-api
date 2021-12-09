@@ -1,10 +1,10 @@
 use custom_elements::CustomElement;
 use liturgy::Document;
 use sauron::{prelude::*, web_sys::HtmlElement};
-use web::{DocumentView, Msg};
+use web::{Msg, Viewer};
 
 struct ComponentWrapper {
-    program: Option<Program<DocumentView, Msg>>,
+    program: Option<Program<Viewer, Msg>>,
 }
 
 impl ComponentWrapper {
@@ -15,7 +15,7 @@ impl ComponentWrapper {
 
 impl CustomElement for ComponentWrapper {
     fn inject_children(&mut self, this: &HtmlElement) {
-        let program = Program::append_to_mount(DocumentView::new(), this);
+        let program = Program::append_to_mount(Viewer::new(), this);
         self.program = Some(program);
     }
 
