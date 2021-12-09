@@ -1,9 +1,15 @@
 - [ ] Web UI
   - [ ] Choice/whatever else is in document.js (and delete this)
-- [ ] Hosting/CI
+- [ ] Lookups by category
+  - [ ] Create type
+  - [ ] Conversion from LDF JSON
 - [ ] Morning Prayer
   - [ ] Clean up internal TODO items
   - [ ] rotate `Choice`s for things like prayers for mission and daily collects?
+- [ ] Hosting/CI
+  - [ ] Fix assets locations
+  - [ ] Fix WASM build if necessary
+- [ ] Use Sauron to build additional website pages
 - [x] Preferences
   - [ ] Tests (in conditions)
 - [ ] Canticle Tables
@@ -14,9 +20,6 @@
     - [ ] "Classical" tables for Rite I + Rite II
   - [ ] Actually look up canticles (cf. Psalter)
   - [ ] Tests
-- [ ] Lookups by category
-  - [ ] Create type
-  - [ ] Conversion from LDF JSON
 - [ ] Liturgies
   - [x] Compline
   - [ ] Evening Prayer
