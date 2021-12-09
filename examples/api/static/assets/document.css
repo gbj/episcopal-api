@@ -137,6 +137,17 @@ a.reference {
   margin-bottom: 1rem;
 }
 
+/* Parallels */
+.parallel {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  justify-content: left;
+}
+.parallel > .document {
+  margin-right: 1rem;
+}
+
 /* Error */
 .document.error {
   color: var(--rubric-color);

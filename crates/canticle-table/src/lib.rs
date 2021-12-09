@@ -90,7 +90,7 @@ impl CanticleTable {
 
 /// A single entry in a table of suggested canticles, listing which canticle should
 /// be used for the first or second canticle in the morning or evening in a given season.
-#[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct CanticleTableEntry {
     canticle: CanticleId,
     evening: bool,

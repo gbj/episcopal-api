@@ -1,9 +1,9 @@
 use calendar::*;
 use liturgy::*;
-use log::trace;
-use sauron::html::attributes::{inner_html, value};
-use sauron::html::{option, text};
+use sauron::html::attributes::inner_html;
+use sauron::html::text;
 use sauron::*;
+use serde::{Deserialize, Serialize};
 
 //use crate::biblical_citation::{BiblicalCitationComponent, BiblicalCitationMsg};
 use crate::Msg;
@@ -14,6 +14,19 @@ pub struct DocumentComponent {
     pub dynamic: bool, // whether this is the server side version (dynamic = false) or the client (dynamic = true)
     pub top_level: bool,
     pub path: Vec<usize>,
+    pub lookup_links: fn(&LookupType) -> String,
+}
+
+#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, Deserialize)]
+pub enum LookupType {
+    Category,
+    Canticle(CanticleTableEntry),
+    Collect,
+    Lectionary,
+}
+
+fn lookup_links(lookup_type: &LookupType) -> String {
+    todo!()
 }
 
 impl From<Document> for DocumentComponent {
@@ -24,6 +37,7 @@ impl From<Document> for DocumentComponent {
             dynamic: false,
             top_level: false,
             path: Vec::new(),
+            lookup_links,
         }
     }
 }
@@ -72,12 +86,12 @@ impl Component<DocumentMsg, Msg> for DocumentComponent {
             Content::Sentence(content) => self.sentence(content),
             Content::Text(content) => self.text(content),
             Content::Series(content) => self.series(content),
-            Content::Parallel(content) => (None, text("todo")),
+            Content::Parallel(content) => self.parallel(content),
             Content::Choice(content) => self.choice(content),
             Content::CollectOfTheDay => self.collect_of_the_day(),
             Content::PsalmCitation(content) => self.psalm_citation(content),
-            Content::SubLiturgy(content) => self.sub_liturgy(content),
-            Content::LectionaryReading(content) => (None, text("todo")),
+            Content::SubLiturgy(content) => todo!(),
+            Content::LectionaryReading(content) => self.lectionary_reading(content),
             Content::Antiphon(content) => self.antiphon(content),
             Content::Litany(content) => self.litany(content),
         };
@@ -265,8 +279,11 @@ impl DocumentComponent {
         &self,
         entry: &CanticleTableEntry,
     ) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
+        let href = (self.lookup_links)(&LookupType::Canticle(*entry));
         let main = node! {
-            <main class="canticle-table-entry">{text("TODO")}</main>
+            <main class="lookup canticle-table-entry">
+                <a href={href}>{text(self.i18n("Table of Suggested Canticles"))}</a>
+            </main>
         };
 
         (None, main)
@@ -323,8 +340,11 @@ impl DocumentComponent {
     }
 
     fn collect_of_the_day(&self) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
+        let href = (self.lookup_links)(&LookupType::Collect);
         let main = node! {
-            <article class="document empty">{text("TODO")}</article>
+            <main class="lookup collect-of-the-day">
+                <a href={href}>{text(self.i18n("The Collect of the Day"))}</a>
+            </main>
         };
 
         (None, main)
@@ -453,6 +473,21 @@ impl DocumentComponent {
                 {text(proper.unwrap_or_default())}
             </h2>
         }
+    }
+
+    fn lectionary_reading(
+        &self,
+        entry: &LectionaryReading,
+    ) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
+        let href = (self.lookup_links)(&LookupType::Lectionary);
+
+        let main = node! {
+            <main class="lookup lectionary">
+                <a href={href}>{text(self.i18n("Lectionary Readings"))}</a>
+            </main>
+        };
+
+        (None, main)
     }
 
     fn litany(&self, litany: &Litany) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
@@ -644,14 +679,20 @@ impl DocumentComponent {
         (None, main)
     }
 
-    fn sub_liturgy(
-        &self,
-        sub_liturgy: &SubLiturgy,
-    ) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
+    fn parallel(&self, parallel: &Parallel) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
         let main = node! {
-            <main class="sub_liturgy">{text("TODO")}</main>
+            <section class="parallel">{
+                for (ii, doc) in parallel.iter().enumerate() {
+                    let mut component = DocumentComponent::from(doc.clone());
+                    let mut path = self.path.clone();
+                    path.push(ii);
+                    component.path = path;
+                    component.calendar = self.calendar;
+                    component.dynamic = self.dynamic;
+                    component.view()
+                }
+            }</section>
         };
-
         (None, main)
     }
 

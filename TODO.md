@@ -1,3 +1,4 @@
+- [x] HTML rendering of lookup types
 - [ ] Lookups by category
   - [ ] Create type
   - [ ] Conversion from LDF JSON
