@@ -5,13 +5,7 @@ use crate::rite2::{
 use calendar::Weekday;
 use canticle_table::CanticleNumber;
 use lectionary::ReadingType;
-use liturgy::{
-    Antiphon, BiblicalReadingIntroTemplate, CanticleTableChoice, CanticleTableEntry,
-    CanticleTables, Choice, Condition, Content, DisplayFormat, Document, GlobalPref, Heading,
-    HeadingLevel, Lectionaries, LectionaryReading, LectionaryTableChoice, Liturgy,
-    LiturgyPreference, LiturgyPreferenceOption, Preces, PreferenceKey, PreferenceValue,
-    ReadingTypeTable, Reference, ResponsivePrayer, Rubric, Sentence, Series, Show, Text, Version,
-};
+use liturgy::*;
 
 lazy_static! {
     pub static ref MORNING_PRAYER_II: Document = Document::from(
@@ -23,8 +17,7 @@ lazy_static! {
           // Fore-Office -- optionally omitted with "omitForeOffice" preference
           Document::from(Series::from([
             Document::from(Rubric::from("The Officiant begins the service with one or more of these sentences of Scripture, or with the versicle “Lord, open our lips.”")).display(Show::TemplateOnly),
-            // TODO lookup by category
-            Document::from(Sentence::from("").citation("")).version(Version::RiteII),
+            Document::from(Category::from("Opening Sentences")),
             Document::from(Rubric::from("The following Confession of Sin may then be said; or the Office may continue at once with “Lord, open our lips.”")),
             Document::from(Heading::from((HeadingLevel::Heading3, "Confession of Sin"))),
             Document::from(Rubric::from("The Officiant says to the people")),
@@ -57,8 +50,7 @@ lazy_static! {
           Document::from(Rubric::from("may be added.")).display(Show::TemplateOnly),
           Document::from(Rubric::from("One of the following Antiphons may be sung or said with the Invitatory Psalm")).display(Show::TemplateOnly),
 
-          // TODO: lookup by category
-          Document::from(Antiphon::from(""))
+          Document::from(Category::from("Seasonal Antiphons"))
             .version(Version::RiteII)
             .display(Show::TemplateOnly),
           Document::from(Rubric::from("Then follows one of the Invitatory Psalms, Venite or Jubilate.")).display(Show::TemplateOnly),
@@ -67,6 +59,7 @@ lazy_static! {
             .display(Show::TemplateOnly),
 
           // TODO: insert invitatories as printed
+          // TODO add antiphons during compilation
           Document::from(Choice::from([
             // TODO Document::from(undefined).version(Version::RiteII).label("Venite").source(Reference::from(82)).condition(/* {"conditions":[{"preference":{"key":"psalmCycle","value":"30day-psalter","is":false}},{"day_of_month":{"neq":"19"}}],"mode":"or"} */),
             // TODO Document::from(undefined).version(Version::RiteII).label("Jubilate").source(Reference::from(82)),
@@ -255,7 +248,7 @@ lazy_static! {
         // Closing Prayers
         Document::from(Rubric::from("Here may be sung a hymn or anthem.\n\nAuthorized intercessions and thanksgivings may follow.")),
 
-        // TODO insert link to authorized prayers & thanksgivings here
+        Document::from(Category::from("Prayers and Thanksgivings")),
 
         Document::from(Rubric::from("Before the close of the Office one or both of the following may be used")),
         Document::from(Text::from("Almighty God, Father of all mercies,\nwe your unworthy servants give you humble thanks\nfor all your goodness and loving-kindness\nto us and to all whom you have made.\nWe bless you for our creation, preservation,\nand all the blessings of this life;\nbut above all for your immeasurable love\nin the redemption of the world by our Lord Jesus Christ;\nfor the means of grace, and for the hope of glory.\n\nAnd, we pray, give us such an awareness of your mercies,\nthat with truly thankful hearts we may show forth your praise,\nnot only with our lips, but in our lives,\nby giving up our selves to your service,\nand by walking before you\nin holiness and righteousness all our days;\nthrough Jesus Christ our Lord,\nto whom, with you and the Holy Spirit,\nbe honor and glory throughout all ages. ")
@@ -283,8 +276,8 @@ lazy_static! {
           .condition(EASTER_SEASON.clone())
           .display(Show::CompiledOnly),
         Document::from(Rubric::from("The Officiant may then conclude with one of the following")),
-        // TODO category lookup on closing sentence
-        Document::from(Sentence::from("").citation("")).version(Version::RiteII),
+
+        Document::from(Category::from("Closing Sentences")),
 
         // Possible location #3 for sermon
         Document::from(Heading::from((HeadingLevel::Heading3, "The Sermon")))

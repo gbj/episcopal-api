@@ -4,7 +4,7 @@
 - [x] Compile date/day info on the server to prevent needing to embed `Calendar` in the client (bundle size)
 - [ ] Lookups by category
   - [x] Create type
-  - [ ] Add to liturgy
+  - [x] Add to liturgy
   - [ ] Compile
   - [ ] Conversion from LDF JSON
 - [ ] Build actual pages for lookups
