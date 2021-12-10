@@ -171,9 +171,9 @@ pub trait Library {
                                 } else {
                                     format!(
                                         "{} {} {}",
-                                        day.weekday,
+                                        document.language.i18n(&day.weekday.to_string()),
                                         document.language.i18n("after"),
-                                        document.language.i18n("the")
+                                        name.replace("The", "the")
                                     )
                                 }
                             }),

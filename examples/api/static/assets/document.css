@@ -167,11 +167,18 @@ a.reference {
 }
 
 .heading > .date,
-.heading > .day {
+.heading.day > * {
   text-align: center;
   font-size: 1rem;
   font-style: italic;
   font-weight: normal;
+}
+
+.heading.day ul,
+.heading.day li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* Rubric */
