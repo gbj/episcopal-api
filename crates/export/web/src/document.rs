@@ -386,14 +386,16 @@ impl DocumentComponent {
     fn heading(&self, heading: &Heading) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
         let main = match heading {
             Heading::Date(date) => node! {
-                <h2 class="date">{text(date)}</h2>
+                <main class="heading">
+                    <h2 class="date">{text(date)}</h2>
+                </main>
             },
             Heading::Day {
                 name,
                 proper,
                 holy_days,
             } => node! {
-                <header class="heading day">
+                <main class="heading day">
                     <h2 class="day-name">{text(name)}</h2>
                     {
                         if let Some(proper) = proper {
@@ -417,15 +419,20 @@ impl DocumentComponent {
                             text("")
                         }
                     }
-                </header>
+                </main>
             },
-            Heading::Text(level, content) => match level {
-                HeadingLevel::Heading1 => node! { <h1>{text(content)}</h1> },
-                HeadingLevel::Heading2 => node! { <h2>{text(content)}</h2> },
-                HeadingLevel::Heading3 => node! { <h3>{text(content)}</h3> },
-                HeadingLevel::Heading4 => node! { <h4>{text(content)}</h4> },
-                HeadingLevel::Heading5 => node! { <h5>{text(content)}</h5> },
-            },
+            Heading::Text(level, content) => {
+                let h = match level {
+                    HeadingLevel::Heading1 => node! { <h1>{text(content)}</h1> },
+                    HeadingLevel::Heading2 => node! { <h2>{text(content)}</h2> },
+                    HeadingLevel::Heading3 => node! { <h3>{text(content)}</h3> },
+                    HeadingLevel::Heading4 => node! { <h4>{text(content)}</h4> },
+                    HeadingLevel::Heading5 => node! { <h5>{text(content)}</h5> },
+                };
+                node! {
+                    <main class="heading">{h}</main>
+                }
+            }
 
             // InsertDay and InsertDate can be ignored
             _ => text(""),
