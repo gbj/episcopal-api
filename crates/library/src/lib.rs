@@ -1,4 +1,4 @@
-use calendar::{Calendar, LiturgicalDay, LiturgicalDayId};
+use calendar::{Calendar, LiturgicalDay, LiturgicalDayId, Weekday};
 use canticle_table::{CanticleId, CanticleTable};
 use lectionary::{Lectionary, ReadingType};
 use liturgy::*;
@@ -146,14 +146,75 @@ pub trait Library {
                 // Headings
                 // Insert day/date into heading if necessary
                 Content::Heading(heading) => match heading {
-                    // ordinary headings are passed through
-                    Heading::Text(_, _) => Some(document),
+                    Heading::InsertDate => Some(Document::from(Heading::Date(
+                        day.date.to_localized_name(document.language),
+                    ))),
 
-                    // Dates are filled in with the date we're compiling for
-                    Heading::Date(_) => Some(Document::from(Heading::Date(Some(day.date)))),
+                    Heading::InsertDay => {
+                        let observed = day.observed;
+                        let name = match observed {
+                            LiturgicalDayId::Feast(feast) => calendar
+                                .feast_name(feast, document.language)
+                                .map(|name| name.to_string()),
+                            LiturgicalDayId::TransferredFeast(feast) => {
+                                calendar.feast_name(feast, document.language).map(|name| {
+                                    format!(
+                                        "{} \n\n({})",
+                                        name,
+                                        document.language.i18n("Transferred")
+                                    )
+                                })
+                            }
+                            _ => calendar.week_name(day.week, document.language).map(|name| {
+                                if day.weekday == Weekday::Sun {
+                                    name.to_string()
+                                } else {
+                                    format!(
+                                        "{} {} {}",
+                                        day.weekday.to_string(),
+                                        document.language.i18n("after"),
+                                        document.language.i18n("the")
+                                    )
+                                }
+                            }),
+                        }
+                        .unwrap_or_default();
 
-                    // Days need to receive the calendar as well, to allow them to look up feast names etc.
-                    Heading::Day(_) => Some(Document::from(Heading::Day(Some(day.clone())))),
+                        let proper = day
+                            .proper
+                            .and_then(|proper| calendar.proper_name(proper, document.language))
+                            .map(String::from);
+
+                        let holy_days = if day.holy_days.is_empty() {
+                            None
+                        } else {
+                            Some(
+                                day.holy_days
+                                    .iter()
+                                    .filter(|s_feast| match &day.observed {
+                                        LiturgicalDayId::Feast(feast) => feast != *s_feast,
+                                        LiturgicalDayId::TransferredFeast(feast) => {
+                                            feast != *s_feast
+                                        }
+                                        _ => true,
+                                    })
+                                    .filter_map(|feast| {
+                                        calendar.feast_name(*feast, document.language)
+                                    })
+                                    .map(|name| name.to_string())
+                                    .collect::<Vec<_>>(),
+                            )
+                        };
+
+                        Some(Document::from(Heading::Day {
+                            name,
+                            proper,
+                            holy_days,
+                        }))
+                    }
+
+                    // ordinary headings and completed days/dates are passed through
+                    _ => Some(document),
                 },
 
                 // Lookup types

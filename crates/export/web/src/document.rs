@@ -1,4 +1,3 @@
-use calendar::*;
 use liturgy::*;
 use sauron::html::attributes::inner_html;
 use sauron::html::text;
@@ -11,7 +10,6 @@ use crate::{
 
 pub struct DocumentComponent {
     pub document: Document,
-    pub calendar: &'static Calendar,
     pub dynamic: bool, // whether this is the server side version (dynamic = false) or the client (dynamic = true)
     pub top_level: bool,
     pub path: Vec<usize>,
@@ -22,7 +20,6 @@ impl From<Document> for DocumentComponent {
     fn from(document: Document) -> Self {
         Self {
             document,
-            calendar: &BCP1979_CALENDAR,
             dynamic: false,
             top_level: false,
             path: Vec::new(),
@@ -313,7 +310,6 @@ impl DocumentComponent {
                             let mut path = self.path.clone();
                             path.push(ii);
                             component.path = path;
-                            component.calendar = self.calendar;
                             component.dynamic = self.dynamic;
                             component.view()
                         }
@@ -370,97 +366,54 @@ impl DocumentComponent {
     }
 
     fn heading(&self, heading: &Heading) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
-        let main = node! {
-            <main class="heading">
-                {match heading {
-                    Heading::Date(date) => self.heading_date(date),
-                    Heading::Day(day) => self.heading_day(day),
-                    Heading::Text(level, content) => match level {
-                        HeadingLevel::Heading1 => node! { <h1>{text(content)}</h1> },
-                        HeadingLevel::Heading2 => node! { <h2>{text(content)}</h2> },
-                        HeadingLevel::Heading3 => node! { <h3>{text(content)}</h3> },
-                        HeadingLevel::Heading4 => node! { <h4>{text(content)}</h4> },
-                        HeadingLevel::Heading5 => node! { <h5>{text(content)}</h5> },
-                    },
-                }}
-            </main>
+        let main = match heading {
+            Heading::Date(date) => node! {
+                <h2 class="date">{text(date)}</h2>
+            },
+            Heading::Day {
+                name,
+                proper,
+                holy_days,
+            } => node! {
+                <header class="heading day">
+                    <h2 class="day-name">{text(name)}</h2>
+                    {
+                        if let Some(proper) = proper {
+                            node! { <h3 class="proper">{text(proper)}</h3> }
+                        } else {
+                            text("")
+                        }
+                    }
+                    {
+                        if let Some(holy_days) = holy_days {
+                            node! {
+                                <ul>
+                                {for holy_day in holy_days {
+                                    node! {
+                                        <li>{text(holy_day)}</li>
+                                    }
+                                }}
+                                </ul>
+                            }
+                        } else {
+                            text("")
+                        }
+                    }
+                </header>
+            },
+            Heading::Text(level, content) => match level {
+                HeadingLevel::Heading1 => node! { <h1>{text(content)}</h1> },
+                HeadingLevel::Heading2 => node! { <h2>{text(content)}</h2> },
+                HeadingLevel::Heading3 => node! { <h3>{text(content)}</h3> },
+                HeadingLevel::Heading4 => node! { <h4>{text(content)}</h4> },
+                HeadingLevel::Heading5 => node! { <h5>{text(content)}</h5> },
+            },
+
+            // InsertDay and InsertDate can be ignored
+            _ => text(""),
         };
 
         (None, main)
-    }
-
-    fn heading_date(&self, date: &Option<Date>) -> Node<DocumentMsg> {
-        match date {
-            Some(date) => node! {
-                <h2 class="date">{text(date.to_localized_name(self.document.language))}</h2>
-            },
-            None => text(""),
-        }
-    }
-
-    fn heading_day(&self, day: &Option<LiturgicalDay>) -> Node<DocumentMsg> {
-        let observed = day.as_ref().map(|day| day.observed);
-        let base_name = match observed {
-            Some(LiturgicalDayId::Feast(feast)) => self
-                .calendar
-                .feast_name(feast, self.document.language)
-                .map(text),
-            Some(LiturgicalDayId::TransferredFeast(feast)) => self
-                .calendar
-                .feast_name(feast, self.document.language)
-                .map(|name| {
-                    node! {
-                        <p>
-                            {text(name)}
-                            <br/>
-                            {text(self.i18n("(Transferred)"))}
-                        </p>
-                    }
-                }),
-            _ => {
-                if let Some(day) = day {
-                    self.calendar
-                        .week_name(day.week, self.document.language)
-                        .map(|name| {
-                            if day.weekday == Weekday::Sun {
-                                node! {
-                                    <p>
-                                        {text(name)}
-                                    </p>
-                                }
-                            } else {
-                                node! {
-                                    <p>
-                                        {text(self.i18n(&day.weekday.to_string()))}
-                                        {text(self.i18n(" after "))}
-                                        {text(name.replace("The", "the"))}
-                                    </p>
-                                }
-                            }
-                        })
-                } else {
-                    None
-                }
-            }
-        };
-
-        let proper = observed
-            .and_then(|id| {
-                if let LiturgicalDayId::ProperAndDay(proper, _) = id {
-                    Some(proper)
-                } else {
-                    None
-                }
-            })
-            .and_then(|proper| self.calendar.proper_name(proper, self.document.language))
-            .map(|name| format!("({})", name));
-
-        node! {
-            <h2 class="day">
-                {base_name.unwrap_or_else(|| text(""))}
-                {text(proper.unwrap_or_default())}
-            </h2>
-        }
     }
 
     fn lectionary_reading(
@@ -658,7 +611,6 @@ impl DocumentComponent {
                     let mut path = self.path.clone();
                     path.push(ii);
                     component.path = path;
-                    component.calendar = self.calendar;
                     component.dynamic = self.dynamic;
                     component.view()
                 }
@@ -675,7 +627,6 @@ impl DocumentComponent {
                     let mut path = self.path.clone();
                     path.push(ii);
                     component.path = path;
-                    component.calendar = self.calendar;
                     component.dynamic = self.dynamic;
                     component.view()
                 }

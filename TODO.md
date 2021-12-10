@@ -1,6 +1,7 @@
 - [x] HTML rendering of lookup types
   - [x] Links function
   - [x] Styling for these blocks
+- [x] Compile date/day info on the server to prevent needing to embed `Calendar` in the client (bundle size)
 - [ ] Lookups by category
   - [ ] Create type
   - [ ] Conversion from LDF JSON

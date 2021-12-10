@@ -12,6 +12,5 @@ console_log = "0.2"
 log = "0.4"
 serde_json = "1.0"
 serde = { version = "1", features = ["derive"] }
-calendar = { path = "../../calendar" }
 liturgy = { path = "../../liturgy" }
 reference-parser = { path = "../../reference-parser" }

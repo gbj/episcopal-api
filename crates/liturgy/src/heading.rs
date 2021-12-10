@@ -1,13 +1,18 @@
 use std::fmt::Display;
 
-use calendar::{Date, LiturgicalDay};
 use serde::{Deserialize, Serialize};
 
 /// A title, subtitle, label, or other heading; can be used to automatically insert date/liturgical day name, or text with a level.
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub enum Heading {
-    Date(Option<Date>),
-    Day(Option<LiturgicalDay>),
+    InsertDate,
+    InsertDay,
+    Date(String),
+    Day {
+        name: String,
+        proper: Option<String>,
+        holy_days: Option<Vec<String>>,
+    },
     Text(HeadingLevel, String),
 }
 
