@@ -1,7 +1,14 @@
 - [x] HTML rendering of lookup types
+  - [x] Links function
+  - [x] Styling for these blocks
 - [ ] Lookups by category
   - [ ] Create type
   - [ ] Conversion from LDF JSON
+- [ ] Build actual pages for lookups
+  - [ ] Lectionary Readings
+  - [ ] Canticle Table
+  - [ ] Category
+  - [ ] Collects of the Day
 - [ ] Morning Prayer
   - [ ] Clean up internal TODO items
   - [ ] rotate `Choice`s for things like prayers for mission and daily collects?

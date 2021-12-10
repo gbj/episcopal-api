@@ -55,12 +55,7 @@ pub fn doc_to_json(
 }
 
 #[get("/?<liturgy>&<date>")]
-pub fn doc_to_html(liturgy: &str, date: &str) -> Result<Html<String>, APIErrorResponder> {
-    let date = chrono::NaiveDate::parse_from_str(date, "%Y-%m-%d")
-        .map_err(|_| APIErrorResponder::from(APIError::DateError(date.to_string())))?;
-
-    let date = Date::from(date);
-
+pub fn doc_to_html(liturgy: &str, date: Option<&str>) -> Result<Html<String>, APIErrorResponder> {
     let document =
         slug_to_doc(liturgy).ok_or_else(|| APIError::LiturgyError(liturgy.to_string()))?;
 
@@ -70,25 +65,34 @@ pub fn doc_to_html(liturgy: &str, date: &str) -> Result<Html<String>, APIErrorRe
         false
     };
 
-    let day = BCP1979_CALENDAR.liturgical_day(date, evening);
+    let compiled = if let Some(date) = date {
+        let date = chrono::NaiveDate::parse_from_str(date, "%Y-%m-%d")
+            .map_err(|_| APIErrorResponder::from(APIError::DateError(date.to_string())))?;
 
-    // Default prefs
-    let prefs = HashMap::new();
+        let date = Date::from(date);
 
-    let liturgy_prefs = if let Content::Liturgy(liturgy) = &document.content {
-        liturgy.preferences.clone()
+        let day = BCP1979_CALENDAR.liturgical_day(date, evening);
+
+        // Default prefs
+        let prefs = HashMap::new();
+
+        let liturgy_prefs = if let Content::Liturgy(liturgy) = &document.content {
+            liturgy.preferences.clone()
+        } else {
+            LiturgyPreferences::default()
+        };
+
+        CommonPrayer::compile(
+            document,
+            &BCP1979_CALENDAR,
+            &day,
+            &day.observed,
+            &prefs,
+            &liturgy_prefs,
+        )
     } else {
-        LiturgyPreferences::default()
+        Some(document)
     };
-
-    let compiled = CommonPrayer::compile(
-        document,
-        &BCP1979_CALENDAR,
-        &day,
-        &day.observed,
-        &prefs,
-        &liturgy_prefs,
-    );
 
     let label = compiled
         .as_ref()

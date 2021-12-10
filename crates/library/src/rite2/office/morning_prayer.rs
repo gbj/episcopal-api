@@ -7,10 +7,10 @@ use canticle_table::CanticleNumber;
 use lectionary::ReadingType;
 use liturgy::{
     Antiphon, BiblicalReadingIntroTemplate, CanticleTableChoice, CanticleTableEntry,
-    CanticleTables, Choice, Condition, DisplayFormat, Document, GlobalPref, Heading, HeadingLevel,
-    Lectionaries, LectionaryReading, LectionaryTableChoice, Liturgy, LiturgyPreference,
-    LiturgyPreferenceOption, Preces, PreferenceKey, PreferenceValue, ReadingTypeTable, Reference,
-    ResponsivePrayer, Rubric, Sentence, Series, Show, Text, Version,
+    CanticleTables, Choice, Condition, Content, DisplayFormat, Document, GlobalPref, Heading,
+    HeadingLevel, Lectionaries, LectionaryReading, LectionaryTableChoice, Liturgy,
+    LiturgyPreference, LiturgyPreferenceOption, Preces, PreferenceKey, PreferenceValue,
+    ReadingTypeTable, Reference, ResponsivePrayer, Rubric, Sentence, Series, Show, Text, Version,
 };
 
 lazy_static! {
@@ -93,25 +93,33 @@ lazy_static! {
           Document::from(WORD_OF_THE_LORD.clone()).display(Show::TemplateOnly),
           Document::from(Rubric::from("Or the Reader may say")).display(Show::TemplateOnly),
           Document::from(Text::from("Here ends the Lesson (Reading).")).display(Show::TemplateOnly),
-          // TODO a link to the daily readings page, TemplateOnly
-          // {           "compile_hidden": true,           "lookup": {             "type": "lectionary"           }         }
+          // A link to the daily readings page, TemplateOnly
+          Document::from(LectionaryReading {
+            reading_type: ReadingTypeTable::Preference(PreferenceKey::from(GlobalPref::ReadingA)),
+            lectionary: LectionaryTableChoice::Preference(PreferenceKey::from(GlobalPref::Lectionary)),
+            intro: Some(BiblicalReadingIntroTemplate::from(Text::from("A Reading from {{long_name}}."))),
+          }).display(Show::TemplateOnly),
           Document::from(Rubric::from("Silence may be kept after each Reading. One of the Canticles is sung or said after each Reading. If three Lessons are used, the Lesson from the Gospel is read after the second Canticle.")).display(Show::TemplateOnly),
-          // TODO a link to the canticle table, TemplateOnly
-          // {           "compile_hidden": true,           "lookup": {             "type": "canticle"           }         }
+          // A link to the canticle table, TemplateOnly
+          Document::from(CanticleTableEntry {
+            nth: CanticleNumber::One,
+            table: CanticleTableChoice::Preference(PreferenceKey::from(GlobalPref::CanticleTable))
+          }).display(Show::TemplateOnly),
+
 
           // First Lesson
           Document::from(LectionaryReading {
             reading_type: ReadingTypeTable::Preference(PreferenceKey::from(GlobalPref::ReadingA)),
             lectionary: LectionaryTableChoice::Preference(PreferenceKey::from(GlobalPref::Lectionary)),
             intro: Some(BiblicalReadingIntroTemplate::from(Text::from("A Reading from {{long_name}}."))),
-          }).label("The First Lesson"),
-          Document::from(WORD_OF_THE_LORD.clone()),
+          }).label("The First Lesson").display(Show::CompiledOnly),
+          Document::from(WORD_OF_THE_LORD.clone()).display(Show::CompiledOnly),
 
           // Canticle
           Document::from(CanticleTableEntry {
             nth: CanticleNumber::One,
             table: CanticleTableChoice::Preference(PreferenceKey::from(GlobalPref::CanticleTable))
-          }),
+          }).display(Show::CompiledOnly),
 
           // Second Lesson
           Document::from(Series::from([
@@ -119,7 +127,7 @@ lazy_static! {
               reading_type: ReadingTypeTable::Preference(PreferenceKey::from(GlobalPref::ReadingB)),
               lectionary: LectionaryTableChoice::Preference(PreferenceKey::from(GlobalPref::Lectionary)),
               intro: Some(BiblicalReadingIntroTemplate::from(Text::from("A Reading from {{long_name}}."))),
-            }).label("The Second Lesson"),
+            }).label("The Second Lesson").display(Show::CompiledOnly),
             Document::from(WORD_OF_THE_LORD.clone()),
             // Canticle
             Document::from(CanticleTableEntry {
@@ -132,7 +140,8 @@ lazy_static! {
                 PreferenceKey::from(GlobalPref::ReadingB),
                 PreferenceValue::from(ReadingType::Empty))
               )
-            )),
+            ))
+            .display(Show::CompiledOnly),
 
           // Third Lesson
           Document::from(Series::from([
@@ -148,7 +157,8 @@ lazy_static! {
                 PreferenceKey::from(GlobalPref::ReadingC),
                 PreferenceValue::from(ReadingType::Empty))
               )
-            )),
+            ))
+            .display(Show::CompiledOnly),
 
         // Possible location #1 for sermon
         Document::from(Heading::from((HeadingLevel::Heading3, "The Sermon")))
@@ -201,9 +211,9 @@ lazy_static! {
           ])).label("B")
         ])),
         Document::from(Rubric::from("The Officiant then says one or more of the following Collects")),
-        // TODO collect of the day
-        Document::from(Text::from("[text]")
-.response("Amen.")).version(Version::RiteII).label("The Collect of the Day"),
+
+        Document::from(Content::CollectOfTheDay),
+
         Document::from(Text::from("O God, you make us glad with the weekly remembrance of the glorious resurrection of your Son our Lord: Give us this day such blessing through our worship of you, that the week to come may be spent in your favor; through Jesus Christ our Lord.")
           .response("Amen."))
           .label("A Collect for Sundays")
@@ -244,6 +254,7 @@ lazy_static! {
 
         // Closing Prayers
         Document::from(Rubric::from("Here may be sung a hymn or anthem.\n\nAuthorized intercessions and thanksgivings may follow.")),
+
         // TODO insert link to authorized prayers & thanksgivings here
 
         Document::from(Rubric::from("Before the close of the Office one or both of the following may be used")),

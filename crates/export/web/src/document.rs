@@ -328,7 +328,7 @@ impl DocumentComponent {
     }
 
     fn collect_of_the_day(&self) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
-        let href = (self.lookup_links)(&LookupType::Collect);
+        let href = (self.lookup_links)(&LookupType::Collect(self.document.version));
         let main = node! {
             <main class="lookup collect-of-the-day">
                 <a href={href}>{text(self.i18n("The Collect of the Day"))}</a>
@@ -467,7 +467,7 @@ impl DocumentComponent {
         &self,
         entry: &LectionaryReading,
     ) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
-        let href = (self.lookup_links)(&LookupType::Lectionary(entry.clone()));
+        let href = (self.lookup_links)(&LookupType::Lectionary(entry.lectionary.clone()));
 
         let main = node! {
             <main class="lookup lectionary">
