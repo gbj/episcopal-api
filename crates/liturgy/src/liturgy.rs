@@ -1,6 +1,5 @@
 use std::fmt::Display;
 
-use calendar::{Date, LiturgicalDay};
 use serde::{Deserialize, Serialize};
 
 use crate::{PreferenceKey, PreferenceValue, Reference, Series};
