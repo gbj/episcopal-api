@@ -4,12 +4,7 @@ use calendar::{Calendar, LiturgicalDay};
 use language::Language;
 use serde::{Deserialize, Serialize};
 
-use crate::{
-    Antiphon, BiblicalCitation, BiblicalReading, Canticle, CanticleTableEntry, Choice,
-    ClientPreferences, Condition, DocumentError, GloriaPatri, Heading, LectionaryReading, Litany,
-    Liturgy, LiturgyPreferences, Parallel, Preces, Psalm, PsalmCitation, Reference,
-    ResponsivePrayer, Rubric, Sentence, Series, Show, Status, Text, Version,
-};
+use crate::*;
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Document {
@@ -164,6 +159,18 @@ impl Default for Document {
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub enum Content {
+    /// # Structural Variants
+    /// A set of multiple [Document]s, organized one after the other
+    Series(Series),
+    /// A set of multiple [Document]s, displayed as parallel options (e.g., in multiple languages or versions)
+    Parallel(Parallel),
+    /// A set of multiple [Document]s, which are mutually-exclusive choices
+    Choice(Choice),
+    /// # Lookup Fields
+    /// Inserts all documents filed under this category in the library.
+    Category(Category),
+    /// Inserts the Collect of the Day
+    CollectOfTheDay,
     /// # Content Variants
     /// A document with no contents
     Empty,
@@ -195,6 +202,8 @@ pub enum Content {
     Preces(Preces),
     /// A psalm.
     Psalm(Psalm),
+    /// A reference to a [Psalm](crate::Psalm), which will be inserted by the compilation process.
+    PsalmCitation(PsalmCitation),
     /// A simple responsive prayer in which the leader and participants alternate.
     ResponsivePrayer(ResponsivePrayer),
     /// An explanatory sentence or direction for the liturgy
@@ -203,18 +212,6 @@ pub enum Content {
     Sentence(Sentence),
     /// Text, without any additional styling or semantics
     Text(Text),
-    /// # Structural Variants
-    /// A set of multiple [Document]s, organized one after the other
-    Series(Series),
-    /// A set of multiple [Document]s, displayed as parallel options (e.g., in multiple languages or versions)
-    Parallel(Parallel),
-    /// A set of multiple [Document]s, which are mutually-exclusive choices
-    Choice(Choice),
-    /// # Lookup Fields
-    /// Inserts the Collect of the Day
-    CollectOfTheDay,
-    /// A reference to a [Psalm](crate::Psalm), which will be inserted by the compilation process.
-    PsalmCitation(PsalmCitation),
 }
 
 // Create Document from a Content enum
@@ -259,6 +256,12 @@ impl From<BiblicalReading> for Document {
 impl From<Canticle> for Document {
     fn from(content: Canticle) -> Self {
         Self::from(Content::Canticle(content))
+    }
+}
+
+impl From<Category> for Document {
+    fn from(content: Category) -> Self {
+        Self::from(Content::Category(content))
     }
 }
 
