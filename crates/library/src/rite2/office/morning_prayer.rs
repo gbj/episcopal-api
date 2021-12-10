@@ -17,8 +17,8 @@ lazy_static! {
     pub static ref MORNING_PRAYER_II: Document = Document::from(
       Liturgy::from(Series::from([
           Document::from(Heading::from((HeadingLevel::Heading1, "Daily Morning Prayer: Rite Two"))),
-          Document::from(Heading::Date(None)),
-          Document::from(Heading::Day(None)),
+          Document::from(Heading::InsertDate),
+          Document::from(Heading::InsertDay),
 
           // Fore-Office -- optionally omitted with "omitForeOffice" preference
           Document::from(Series::from([
@@ -212,7 +212,7 @@ lazy_static! {
         ])),
         Document::from(Rubric::from("The Officiant then says one or more of the following Collects")),
 
-        Document::from(Content::CollectOfTheDay),
+        Document::from(Content::CollectOfTheDay { allow_multiple: true }),
 
         Document::from(Text::from("O God, you make us glad with the weekly remembrance of the glorious resurrection of your Son our Lord: Give us this day such blessing through our worship of you, that the week to come may be spent in your favor; through Jesus Christ our Lord.")
           .response("Amen."))

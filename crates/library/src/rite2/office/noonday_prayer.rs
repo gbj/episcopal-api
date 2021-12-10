@@ -23,8 +23,8 @@ lazy_static! {
                             PreferenceValue::from("before")
                         )
                     ))),
-                Document::from(Heading::Date(None)),
-                Document::from(Heading::Day(None)),
+                Document::from(Heading::InsertDate),
+                Document::from(Heading::InsertDay),
 
                 // Opening of Noonday Prayer proper
                 Document::from(Preces::from([
@@ -89,7 +89,7 @@ lazy_static! {
                     Text::from("Almighty Savior, who at noonday called your servant Saint Paul to be an apostle to the Gentiles: We pray you to illumine the world with the radiance of your glory, that all nations may come and worship you; for you live and reign for ever and ever.")
                         .response("Amen.")
                 ),
-                Document::from(Content::CollectOfTheDay),
+                Document::from(Content::CollectOfTheDay { allow_multiple: true }),
 
                 // Closing
                 Document::from(Rubric::from("Free intercessions may be offered.")),

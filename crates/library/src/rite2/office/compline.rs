@@ -9,8 +9,8 @@ use liturgy::{
 lazy_static! {
     pub static ref COMPLINE: Document = Document::from(Liturgy::from(Series::from([
       Document::from(Heading::from((HeadingLevel::Heading1, "An Order for Compline"))),
-      Document::from(Heading::Date(None)),
-      Document::from(Heading::Day(None)),
+      Document::from(Heading::InsertDate),
+      Document::from(Heading::InsertDay),
       Document::from(Rubric::from("The Officiant begins")),
       Document::from(Text::from("The Lord Almighty grant us a peaceful night and a perfect end.").response("Amen")).source(Reference::from(127)),
       Document::from(Preces::from([
