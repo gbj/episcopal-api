@@ -170,7 +170,7 @@ pub enum Content {
     /// Inserts all documents filed under this category in the library.
     Category(Category),
     /// Inserts the Collect of the Day
-    CollectOfTheDay,
+    CollectOfTheDay { allow_multiple: bool },
     /// # Content Variants
     /// A document with no contents
     Empty,

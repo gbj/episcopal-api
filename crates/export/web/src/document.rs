@@ -74,11 +74,12 @@ impl Component<DocumentMsg, Msg> for DocumentComponent {
             Content::Series(content) => self.series(content),
             Content::Parallel(content) => self.parallel(content),
             Content::Choice(content) => self.choice(content),
-            Content::CollectOfTheDay => self.collect_of_the_day(),
+            Content::CollectOfTheDay { allow_multiple } => self.collect_of_the_day(*allow_multiple),
             Content::PsalmCitation(content) => self.psalm_citation(content),
             Content::LectionaryReading(content) => self.lectionary_reading(content),
             Content::Antiphon(content) => self.antiphon(content),
             Content::Litany(content) => self.litany(content),
+            Content::Category(content) => self.category(content),
         };
 
         let header = match (label, source, header) {
@@ -274,6 +275,20 @@ impl DocumentComponent {
         (None, main)
     }
 
+    fn category(&self, category: &Category) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
+        let href = (self.lookup_links)(&LookupType::Category(
+            self.document.version,
+            category.name.clone(),
+        ));
+        let main = node! {
+            <main class="lookup category">
+                <a href={href}>{text(&category.name)}</a>
+            </main>
+        };
+
+        (None, main)
+    }
+
     fn choice(&self, choice: &Choice) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
         let header = if self.dynamic {
             let path = self.path.clone();
@@ -323,7 +338,10 @@ impl DocumentComponent {
         (header, main)
     }
 
-    fn collect_of_the_day(&self) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
+    fn collect_of_the_day(
+        &self,
+        _allow_multiple: bool,
+    ) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
         let href = (self.lookup_links)(&LookupType::Collect(self.document.version));
         let main = node! {
             <main class="lookup collect-of-the-day">
