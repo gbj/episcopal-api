@@ -293,7 +293,7 @@ lazy_static! {
             LiturgyPreferenceOption::from(Version::ESV),
             LiturgyPreferenceOption::from(Version::KJV)
           ]
-        )).default_value(PreferenceValue::from(ReadingType::FirstReading)).category("Translations"),
+        )).category("Translations"),
 
         // Lectionaries
         LiturgyPreference::from((
@@ -305,7 +305,7 @@ lazy_static! {
             LiturgyPreferenceOption::from(("RCL (Track 1)", PreferenceValue::from(Lectionaries::RCLTrack1))),
             LiturgyPreferenceOption::from(("RCL (Track 2)", PreferenceValue::from(Lectionaries::RCLTrack2)))
           ]
-        )).default_value(PreferenceValue::from(ReadingType::FirstReading)).category("Lectionaries and Cycles"),
+        )).category("Lectionaries and Cycles"),
 
         LiturgyPreference::from((
           PreferenceKey::from(GlobalPref::PsalmCycle),
@@ -315,7 +315,7 @@ lazy_static! {
             LiturgyPreferenceOption::from(("RCL (Track 1)", PreferenceValue::from(Lectionaries::RCLTrack1))),
             LiturgyPreferenceOption::from(("RCL (Track 2)", PreferenceValue::from(Lectionaries::RCLTrack2)))
           ]
-        )).default_value(PreferenceValue::from(ReadingType::FirstReading)).category("Lectionaries and Cycles"),
+        )).category("Lectionaries and Cycles"),
 
         LiturgyPreference::from((
           PreferenceKey::from(GlobalPref::PsalmCycle),
@@ -325,7 +325,7 @@ lazy_static! {
             LiturgyPreferenceOption::from(("Enriching Our Worship 1", PreferenceValue::from(CanticleTables::EOW))),
             LiturgyPreferenceOption::from(("Te Deum/Benedictus", PreferenceValue::from(CanticleTables::Classical))),
           ]
-        )).default_value(PreferenceValue::from(ReadingType::FirstReading)).category("Lectionaries and Cycles"),
+        )).category("Lectionaries and Cycles"),
 
         // Readings
         LiturgyPreference::from((
