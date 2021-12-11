@@ -6,7 +6,9 @@
   - [x] Create type
   - [x] Add to liturgy
   - [x] Compile
-    - [ ] Rotation (and option to show all options, either as choice or as series)
+    - [ ] Rotation
+    - [ ] UI option to show all options (if `Choice` has been rotated)
+      - [ ] Fix setting `select` value
   - [x] Conversion from LDF JSON
 - [ ] Build actual pages for lookups
   - [ ] Lectionary Readings

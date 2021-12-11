@@ -2,12 +2,14 @@ use itertools::Itertools;
 use serde::{Deserialize, Serialize};
 
 use crate::{Content, Document};
+use calendar::Date;
 
 /// Multiple [Document](crate::Document)s that are displayed one at a time, with a menu to choose between them.
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Choice {
     pub options: Vec<Document>,
     pub selected: usize,
+    pub rotated: bool,
 }
 
 impl<T> From<T> for Choice
@@ -18,11 +20,20 @@ where
         Self {
             selected: 0,
             options: options.into_iter().collect(),
+            rotated: false,
         }
     }
 }
 
 impl Choice {
+    /// Sets the `selected` item on the `Choice` in a way that rotates by day deterministically
+    /// based on the date; i.e., the same date will lead to the same selection.
+    pub fn rotate(&mut self, date: &Date) {
+        self.rotated = true;
+        let nth_day: usize = date.day_in_year().into();
+        self.selected = nth_day % self.options.len();
+    }
+
     /// Generates an appropriate label to differentiate this option from all the others
     /// ```
     /// # use crate::liturgy::{Document, Choice};

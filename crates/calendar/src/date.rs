@@ -1,6 +1,6 @@
 use std::{convert::TryInto, ops::Sub};
 
-use chrono::Datelike;
+use chrono::{Datelike, NaiveDate};
 use language::Language;
 use serde::{Deserialize, Deserializer, Serialize};
 
@@ -76,6 +76,12 @@ impl Date {
     pub fn subtract_days(&self, days: impl Into<i64>) -> Self {
         let naive_date = self.naive_date - chrono::Duration::days(days.into());
         Self { naive_date }
+    }
+
+    pub fn day_in_year(&self) -> u16 {
+        let first_day_of_year = NaiveDate::from_ymd(self.year().into(), 1, 1);
+        let difference = self.naive_date - first_day_of_year;
+        difference.num_days().try_into().unwrap_or(0)
     }
 
     /// Calculates the [Date](Date) of the Sunday before the given date.

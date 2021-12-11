@@ -56,11 +56,16 @@ pub trait Library {
                 Content::Category(category) => {
                     let category_docs = Self::category(category.name, document.version);
 
-                    let category_docs =
-                        Document::choice_or_document(&mut category_docs.into_iter());
-                    category_docs.and_then(|docs| {
-                        Self::compile(docs, calendar, day, observed, prefs, liturgy_prefs)
-                    })
+                    Document::choice_or_document(&mut category_docs.into_iter())
+                        .and_then(|docs| {
+                            Self::compile(docs, calendar, day, observed, prefs, liturgy_prefs)
+                        })
+                        .map(|mut doc| {
+                            if let Content::Choice(ref mut choice) = doc.content {
+                                choice.rotate(&day.date);
+                            }
+                            doc
+                        })
                 }
 
                 // Lectionaries
@@ -331,6 +336,7 @@ pub trait Library {
                                 })
                                 .collect(),
                             selected: index_of_prev_selection.unwrap_or(0),
+                            rotated: sub.rotated,
                         }),
                         ..document
                     })
