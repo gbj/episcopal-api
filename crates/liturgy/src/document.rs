@@ -265,6 +265,12 @@ impl From<Category> for Document {
     }
 }
 
+impl From<Categories> for Document {
+    fn from(category: Categories) -> Self {
+        Self::from(Category::from(category))
+    }
+}
+
 impl From<CanticleTableEntry> for Document {
     fn from(content: CanticleTableEntry) -> Self {
         Self::from(Content::CanticleTableEntry(content))

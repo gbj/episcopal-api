@@ -29,6 +29,8 @@ pub trait Library {
 
     fn canticle(canticle: CanticleId, version: Version) -> Option<Document>;
 
+    fn category(category: Categories, version: Version) -> Vec<Document>;
+
     fn compile(
         document: Document,
         calendar: &Calendar,
@@ -50,6 +52,19 @@ pub trait Library {
             None
         } else {
             match &document.content {
+                // Category Lookup
+                Content::Category(category) => {
+                    let category_docs = Self::category(category.name, document.version);
+                    println!("\n\ncategory_docs = {:#?}", category_docs);
+
+                    let category_docs =
+                        Document::choice_or_document(&mut category_docs.into_iter());
+                    println!("\n\ncategory_docs = {:#?}", category_docs);
+                    category_docs.and_then(|docs| {
+                        Self::compile(docs, calendar, day, observed, prefs, liturgy_prefs)
+                    })
+                }
+
                 // Lectionaries
                 Content::LectionaryReading(lectionary_reading) => {
                     let chosen_lectionary = match &lectionary_reading.lectionary {
@@ -403,6 +418,15 @@ impl Library for CommonPrayer {
             (CanticleId::CanticleQ, _) => Some(eow::CANTICLE_Q.clone()),
             (CanticleId::CanticleR, _) => Some(eow::CANTICLE_R.clone()),
             (CanticleId::CanticleS, _) => Some(eow::CANTICLE_S.clone()),
+        }
+    }
+
+    fn category(category: Categories, version: Version) -> Vec<Document> {
+        match (category, version) {
+            (Categories::OpeningSentences, Version::RiteII | Version::BCP1979) => {
+                rite2::office::OPENING_SENTENCES.clone()
+            }
+            _ => Vec::new(),
         }
     }
 }

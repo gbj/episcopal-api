@@ -1,5 +1,5 @@
 use calendar::{
-    Calendar, Date, LiturgicalDay, LiturgicalDayId, LiturgicalWeek, Rank, Season, Weekday,
+    Calendar, Date, Feast, LiturgicalDay, LiturgicalDayId, LiturgicalWeek, Rank, Season, Weekday,
 };
 use serde::{Deserialize, Serialize};
 
@@ -21,6 +21,19 @@ pub enum Condition {
     /// assert_eq!(condition.include(&BCP1979_CALENDAR, &good_friday, &prefs, &liturgy_prefs), false);
     /// ```
     Day(LiturgicalDayId),
+    /// Included if the given [Feast](crate::Feast) is observed on this day.
+    /// ```
+    /// # use crate::liturgy::{Condition, PreferenceKey, PreferenceValue, LiturgyPreferences};
+    /// # use calendar::{Date, LiturgicalDayId, Feast, BCP1979_CALENDAR};
+    /// # let prefs : [(PreferenceKey, PreferenceValue); 0] = [];
+    /// # let liturgy_prefs = LiturgyPreferences::default();
+    /// let good_friday = BCP1979_CALENDAR.liturgical_day(Date::from_ymd(2022, 4, 15), false);
+    /// let condition = Condition::Feast(Feast::GoodFriday);
+    /// assert_eq!(condition.include(&BCP1979_CALENDAR, &good_friday, &prefs, &liturgy_prefs), true);
+    /// let condition = Condition::Feast(Feast::Mary);
+    /// assert_eq!(condition.include(&BCP1979_CALENDAR, &good_friday, &prefs, &liturgy_prefs), false);
+    /// ```
+    Feast(Feast),
     /// Included if the given day falls in this [Season](calendar::Season).
     /// ```
     /// # use crate::liturgy::{Condition, PreferenceKey, PreferenceValue, LiturgyPreferences};
@@ -66,6 +79,19 @@ pub enum Condition {
     /// assert_eq!(condition.include(&BCP1979_CALENDAR, &good_friday, &prefs, &liturgy_prefs), false);
     /// ```
     Weekday(Weekday),
+    /// Included if the service takes place in the evening.
+    /// ```
+    /// # use crate::liturgy::{Condition, PreferenceKey, PreferenceValue, LiturgyPreferences};
+    /// # use calendar::{Date, LiturgicalDayId, Feast, Weekday, BCP1979_CALENDAR};
+    /// # let prefs : [(PreferenceKey, PreferenceValue); 0] = [];
+    /// # let liturgy_prefs = LiturgyPreferences::default();
+    /// let morning = BCP1979_CALENDAR.liturgical_day(Date::from_ymd(2022, 12, 10), false);
+    /// let condition = Condition::Evening;
+    /// assert_eq!(condition.include(&BCP1979_CALENDAR, &morning, &prefs, &liturgy_prefs), false);
+    /// let evening = BCP1979_CALENDAR.liturgical_day(Date::from_ymd(2022, 12, 10), true);
+    /// assert_eq!(condition.include(&BCP1979_CALENDAR, &evening, &prefs, &liturgy_prefs), true);
+    /// ```
+    Evening,
     /// Included if the day has a rank >= the [Rank](calendar::Rank) given.
     /// ```
     /// # use crate::liturgy::{Condition, PreferenceKey, PreferenceValue, LiturgyPreferences};
@@ -294,6 +320,11 @@ impl Condition {
     ) -> bool {
         match self {
             Condition::Day(id) => day.observed == *id,
+            Condition::Feast(feast) => match &day.observed {
+                LiturgicalDayId::TransferredFeast(s_feast) => s_feast == feast,
+                LiturgicalDayId::Feast(s_feast) => s_feast == feast,
+                _ => false,
+            },
             Condition::Season(season) => {
                 calendar.season(day) == *season || calendar.base_season(day) == *season
             }
@@ -347,6 +378,7 @@ impl Condition {
                         .any(|cond| cond.include(calendar, day, prefs, liturgy_prefs))
                 }
             }
+            Condition::Evening => day.evening,
         }
     }
 }

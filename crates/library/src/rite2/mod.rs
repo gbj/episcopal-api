@@ -1,6 +1,6 @@
 mod canticles;
-pub mod fragments;
-mod office;
+mod fragments;
+pub mod office;
 
 pub use canticles::*;
 pub use fragments::*;

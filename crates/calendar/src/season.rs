@@ -15,6 +15,7 @@ pub enum Season {
     OrdinaryTime,
     Ember,
     National,
+    Thanksgiving,
     Rogation,
     Mary,
 }

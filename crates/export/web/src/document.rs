@@ -276,13 +276,14 @@ impl DocumentComponent {
     }
 
     fn category(&self, category: &Category) -> (Option<Vec<Node<DocumentMsg>>>, Node<DocumentMsg>) {
+        let name = category.name.localized_name(self.document.language);
         let href = (self.lookup_links)(&LookupType::Category(
             self.document.version,
-            category.name.clone(),
+            name.to_string(),
         ));
         let main = node! {
             <main class="lookup category">
-                <a href={href}>{text(&category.name)}</a>
+                <a href={href}>{text(name)}</a>
             </main>
         };
 

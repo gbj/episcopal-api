@@ -5,8 +5,9 @@
 - [ ] Lookups by category
   - [x] Create type
   - [x] Add to liturgy
-  - [ ] Compile
-  - [ ] Conversion from LDF JSON
+  - [x] Compile
+    - [ ] Rotation (and option to show all options, either as choice or as series)
+  - [x] Conversion from LDF JSON
 - [ ] Build actual pages for lookups
   - [ ] Lectionary Readings
   - [ ] Canticle Table

@@ -16,8 +16,8 @@ lazy_static! {
 
           // Fore-Office -- optionally omitted with "omitForeOffice" preference
           Document::from(Series::from([
-            Document::from(Rubric::from("The Officiant begins the service with one or more of these sentences of Scripture, or with the versicle “Lord, open our lips.”")).display(Show::TemplateOnly),
-            Document::from(Category::from("Opening Sentences")),
+            Document::from(Rubric::from("The Officiant begins the service with one or more of these sentences of Scripture, or with the versicle “Lord, open our lips.”")),
+            Document::from(Categories::OpeningSentences),
             Document::from(Rubric::from("The following Confession of Sin may then be said; or the Office may continue at once with “Lord, open our lips.”")),
             Document::from(Heading::from((HeadingLevel::Heading3, "Confession of Sin"))),
             Document::from(Rubric::from("The Officiant says to the people")),
@@ -50,7 +50,7 @@ lazy_static! {
           Document::from(Rubric::from("may be added.")).display(Show::TemplateOnly),
           Document::from(Rubric::from("One of the following Antiphons may be sung or said with the Invitatory Psalm")).display(Show::TemplateOnly),
 
-          Document::from(Category::from("Seasonal Antiphons"))
+          Document::from(Categories::InvitatoryAntiphons)
             .version(Version::RiteII)
             .display(Show::TemplateOnly),
           Document::from(Rubric::from("Then follows one of the Invitatory Psalms, Venite or Jubilate.")).display(Show::TemplateOnly),
@@ -81,7 +81,6 @@ lazy_static! {
           Document::from(Heading::from((HeadingLevel::Heading2, "The Lessons"))),
           Document::from(Rubric::from("One or two lessons, as appointed, are read, the Reader first saying")).display(Show::TemplateOnly),
           Document::from(Text::from("A Reading (Lesson) from _______________.")).display(Show::TemplateOnly),
-          Document::from(Rubric::from("A citation giving chapter and verse may be added.")).display(Show::TemplateOnly),
           Document::from(Rubric::from("After each Lesson the Reader may say")).display(Show::TemplateOnly),
           Document::from(WORD_OF_THE_LORD.clone()).display(Show::TemplateOnly),
           Document::from(Rubric::from("Or the Reader may say")).display(Show::TemplateOnly),
@@ -248,7 +247,7 @@ lazy_static! {
         // Closing Prayers
         Document::from(Rubric::from("Here may be sung a hymn or anthem.\n\nAuthorized intercessions and thanksgivings may follow.")),
 
-        Document::from(Category::from("Prayers and Thanksgivings")),
+        Document::from(Categories::PrayersAndThanksgivings),
 
         Document::from(Rubric::from("Before the close of the Office one or both of the following may be used")),
         Document::from(Text::from("Almighty God, Father of all mercies,\nwe your unworthy servants give you humble thanks\nfor all your goodness and loving-kindness\nto us and to all whom you have made.\nWe bless you for our creation, preservation,\nand all the blessings of this life;\nbut above all for your immeasurable love\nin the redemption of the world by our Lord Jesus Christ;\nfor the means of grace, and for the hope of glory.\n\nAnd, we pray, give us such an awareness of your mercies,\nthat with truly thankful hearts we may show forth your praise,\nnot only with our lips, but in our lives,\nby giving up our selves to your service,\nand by walking before you\nin holiness and righteousness all our days;\nthrough Jesus Christ our Lord,\nto whom, with you and the Holy Spirit,\nbe honor and glory throughout all ages. ")
@@ -277,7 +276,7 @@ lazy_static! {
           .display(Show::CompiledOnly),
         Document::from(Rubric::from("The Officiant may then conclude with one of the following")),
 
-        Document::from(Category::from("Closing Sentences")),
+        Document::from(Categories::ClosingSentences),
 
         // Possible location #3 for sermon
         Document::from(Heading::from((HeadingLevel::Heading3, "The Sermon")))
