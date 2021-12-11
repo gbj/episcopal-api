@@ -18,7 +18,7 @@ lazy_static! {
           ("People", "The maker of heaven and earth.")
       ])),
       Document::from(Rubric::from("The Officiant may then say")),
-Document::from(Text::from("Let us confess our sins to God.")),
+Document::from("Let us confess our sins to God."),
 Document::from(Rubric::from("Silence may be kept.")),
 Document::from(Rubric::from("Officiant and People")),
 Document::from(Text::from("Almighty God, our heavenly Father:\nWe have sinned against you,\nthrough our own fault,\nin thought, and word, and deed,\nand in what we have left undone.\nFor the sake of your Son our Lord Jesus Christ,\nforgive us all our offenses;\nand grant that we may serve you\nin newness of life,\nto the glory of your Name.").response("Amen").display_format(DisplayFormat::Unison)),
@@ -32,7 +32,7 @@ Document::from(Preces::from([
 Document::from(Rubric::from("Officiant and People")),
 Document::from(GLORIA_PATRI.clone()),
         Document::from(Rubric::from("Except in Lent, add")).condition(NOT_LENT.clone()),
-        Document::from(Text::from("Alleluia.")).condition(NOT_LENT.clone()),
+        Document::from("Alleluia.").condition(NOT_LENT.clone()),
 Document::from(Rubric::from("\nOne or more of the following Psalms are sung or said. Other suitable selections may be substituted.")),
 Document::from(PsalmCitation::from("Psalm 4")),
                 Document::from(PsalmCitation::from("Psalm 31:1-5")),

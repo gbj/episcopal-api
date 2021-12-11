@@ -34,7 +34,7 @@ lazy_static! {
                 Document::from(Rubric::from("Officiant and People")),
                 Document::from(GLORIA_PATRI.clone().display_format(DisplayFormat::Unison)),
                 Document::from(Rubric::from("Except in Lent, add")).condition(NOT_LENT.clone()),
-                Document::from(Text::from("Alleluia.")).condition(NOT_LENT.clone()),
+                Document::from("Alleluia.").condition(NOT_LENT.clone()),
 
                 // Psalms
                 Document::from(Rubric::from("One or more of the following Psalms is sung or said. Other suitable selections include Psalms 19,67, one or more sections of Psalm 119, or a selection from Psalms 120 through 133.")),
