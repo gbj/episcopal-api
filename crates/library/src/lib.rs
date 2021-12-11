@@ -55,11 +55,9 @@ pub trait Library {
                 // Category Lookup
                 Content::Category(category) => {
                     let category_docs = Self::category(category.name, document.version);
-                    println!("\n\ncategory_docs = {:#?}", category_docs);
 
                     let category_docs =
                         Document::choice_or_document(&mut category_docs.into_iter());
-                    println!("\n\ncategory_docs = {:#?}", category_docs);
                     category_docs.and_then(|docs| {
                         Self::compile(docs, calendar, day, observed, prefs, liturgy_prefs)
                     })
@@ -69,6 +67,7 @@ pub trait Library {
                 Content::LectionaryReading(lectionary_reading) => {
                     let chosen_lectionary = match &lectionary_reading.lectionary {
                         LectionaryTableChoice::Preference(key) => {
+                            let pref = preference_value_for_key(key);
                             match preference_value_for_key(key) {
                                 Some(PreferenceValue::Lectionary(lectionary)) => *lectionary,
                                 _ => Lectionaries::default(),
@@ -423,8 +422,14 @@ impl Library for CommonPrayer {
 
     fn category(category: Categories, version: Version) -> Vec<Document> {
         match (category, version) {
-            (Categories::OpeningSentences, Version::RiteII | Version::BCP1979) => {
+            (Categories::OpeningSentences, Version::RiteII) => {
                 rite2::office::OPENING_SENTENCES.clone()
+            }
+            (Categories::InvitatoryAntiphons, Version::RiteII) => {
+                rite2::office::INVITATORY_ANTIPHONS.clone()
+            }
+            (Categories::ClosingSentences, Version::RiteII) => {
+                rite2::office::CLOSING_SENTENCES.clone()
             }
             _ => Vec::new(),
         }
