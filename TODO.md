@@ -1,5 +1,5 @@
 - [ ] Alternative web/HTML setup (Perseus/Sycamore)
-  - [ ] Build compiling based on date
+  - [x] Build compiling based on date
   - [ ] Build preferences
   - [ ] Build static category pages
   - [ ] Use these components for the HTML export

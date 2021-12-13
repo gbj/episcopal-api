@@ -16,6 +16,8 @@ chrono = "0.4"
 lazy_static = "1.0"
 fluent-bundle = "0.15"
 reqwasm = "0.3"
+url = "2.2"
+calendar = { path = "../../crates/calendar" }
 library = { path = "../../crates/library" }
 liturgy = { path = "../../crates/liturgy" }
 reference-parser = { path = "../../crates/reference-parser" }
