@@ -11,6 +11,10 @@ impl Series {
         self.0.iter()
     }
 
+    pub fn into_vec(self) -> Vec<Document> {
+        self.0
+    }
+
     pub fn as_slice(&self) -> &[Document] {
         &self.0
     }

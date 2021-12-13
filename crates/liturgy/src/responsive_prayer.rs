@@ -9,6 +9,10 @@ impl ResponsivePrayer {
     pub fn iter(&self) -> impl Iterator<Item = &String> {
         self.0.iter()
     }
+
+    pub fn into_vec(self) -> Vec<String> {
+        self.0
+    }
 }
 
 impl<T, A> From<T> for ResponsivePrayer

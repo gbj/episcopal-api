@@ -10,6 +10,10 @@ impl Preces {
     pub fn iter(&self) -> impl Iterator<Item = &(String, String)> {
         self.0.iter()
     }
+
+    pub fn into_vec(self) -> Vec<(String, String)> {
+        self.0
+    }
 }
 
 impl<T, A, B> From<T> for Preces

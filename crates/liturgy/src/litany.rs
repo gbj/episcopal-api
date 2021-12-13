@@ -5,12 +5,16 @@ use std::fmt::Display;
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Litany {
     pub response: String,
-    lines: Vec<String>,
+    pub lines: Vec<String>,
 }
 
 impl Litany {
     pub fn iter(&self) -> impl Iterator<Item = &String> {
         self.lines.iter()
+    }
+
+    pub fn into_vec(self) -> Vec<String> {
+        self.lines
     }
 }
 

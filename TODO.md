@@ -1,15 +1,9 @@
-- [x] HTML rendering of lookup types
-  - [x] Links function
-  - [x] Styling for these blocks
-- [x] Compile date/day info on the server to prevent needing to embed `Calendar` in the client (bundle size)
-- [ ] Lookups by category
-  - [x] Create type
-  - [x] Add to liturgy
-  - [x] Compile
-    - [ ] Rotation
-    - [ ] UI option to show all options (if `Choice` has been rotated)
-      - [ ] Fix setting `select` value
-  - [x] Conversion from LDF JSON
+- [ ] Alternative web/HTML setup (Perseus/Sycamore)
+  - [ ] Build compiling based on date
+  - [ ] Build preferences
+  - [ ] Build static category pages
+  - [ ] Use these components for the HTML export
+  
 - [ ] Build actual pages for lookups
   - [ ] Lectionary Readings
   - [ ] Canticle Table

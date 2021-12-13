@@ -1,0 +1,26 @@
+[package]
+name = "website"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+perseus = { version = "0.3.0-beta.22",  features = [ "translator-fluent" ]}
+sycamore = { version = "0.7", features = ["futures"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+web-sys = { version = "0.3", features = ["Event", "EventTarget", "HtmlSelectElement", "Window"]}
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+chrono = "0.4"
+lazy_static = "1.0"
+fluent-bundle = "0.15"
+reqwasm = "0.3"
+library = { path = "../../crates/library" }
+liturgy = { path = "../../crates/liturgy" }
+reference-parser = { path = "../../crates/reference-parser" }
+
+[profile.release.package]
+fluent-bundle = {opt-level = 0}
+
+[profile.dev.package]
+fluent-bundle = {opt-level = 0}
