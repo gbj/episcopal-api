@@ -1,7 +1,8 @@
 #[macro_use]
 extern crate lazy_static;
 
-use perseus::{define_app, ErrorPages};
+use perseus::{define_app, ErrorPages, Plugins};
+use perseus_size_opt::{perseus_size_opt, SizeOpts};
 use sycamore::view;
 
 mod table_of_contents;
@@ -21,5 +22,6 @@ define_app! {
     locales: {
         default: "en-US",
         other: ["es-ES"]
-    }
+    },
+    plugins: Plugins::new().plugin(perseus_size_opt, SizeOpts::default())
 }
