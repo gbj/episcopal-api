@@ -1,1 +1,2 @@
-web: ROCKET_PORT=$PORT ROCKET_ADDRESS=0.0.0.0 ROCKET_KEEP_ALIVE=0 STATIC_DIR=. ./target/release/api
+web: cd examples/website && PORT=$PORT HOST=0.0.0.0 perseus serve
+release: cargo install perseus-cli --version 0.3.0-beta.22

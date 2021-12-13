@@ -3,7 +3,9 @@
   - [ ] Build preferences
   - [ ] Build static category pages
   - [ ] Use these components for the HTML export
-  
+  - [ ] Heroku deployment
+    - [ ] edit Procfile
+    - [ ] install perseus CLI
 - [ ] Build actual pages for lookups
   - [ ] Lectionary Readings
   - [ ] Canticle Table
