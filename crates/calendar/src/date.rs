@@ -3,6 +3,13 @@ use std::{convert::TryInto, ops::Sub};
 use chrono::{Datelike, NaiveDate};
 use language::Language;
 use serde::{Deserialize, Deserializer, Serialize};
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+pub enum Error {
+    #[error("could not parse Date from string")]
+    Parse,
+}
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Date {
@@ -33,6 +40,12 @@ impl Date {
     pub fn from_ymd(year: u16, month: u8, day: u8) -> Date {
         let naive_date = chrono::NaiveDate::from_ymd(year.into(), month.into(), day.into());
         Self { naive_date }
+    }
+
+    /// Creates Date from a year, month, and day.
+    pub fn parse_from_str(s: &str, fmt: &str) -> Result<Date, Error> {
+        let naive_date = chrono::NaiveDate::parse_from_str(s, fmt).map_err(|_| Error::Parse)?;
+        Ok(Self { naive_date })
     }
 
     pub fn year(&self) -> u16 {

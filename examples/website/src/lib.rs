@@ -12,6 +12,7 @@ mod utils;
 define_app! {
     templates: [
         crate::templates::index::get_template::<G>(),
+        crate::templates::daily_readings::get_template::<G>(),
         crate::templates::document::get_template::<G>()
     ],
     error_pages: ErrorPages::new(|url, status, err, _| {

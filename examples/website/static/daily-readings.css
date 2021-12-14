@@ -1,0 +1,13 @@
+main {
+  display: block;
+  margin: auto;
+  max-width: calc(100vw - calc(2 * 1rem));
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+h1 {
+  text-align: center;
+}

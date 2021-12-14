@@ -20,3 +20,5 @@ loading = Loading...
 
 biblical_citation_error = Something went wrong while loading { $citation }.
 biblical_citation_try_again = Try Again.
+
+daily_readings = Daily Readings

@@ -1,0 +1,62 @@
+/* CSS variables determining appearance */
+:root {
+  --background: #fefefe;
+  --border-color: #e0e0e0;
+  --font-family: "Sabon", Garamond, serif;
+  --page-padding: 1rem;
+  --rubric-size: 0.9rem;
+  --rubric-color: #ea0000;
+
+  /* Settings */
+  --response-weight: bold;
+  --response-style: normal;
+
+  --psalm-number-display: inline-block;
+}
+
+/* Font Definitions */
+@font-face {
+  font-family: "Sabon";
+  font-weight: normal;
+  font-style: normal;
+  src: url("/.perseus/static/fonts/Sabon_Roman.ttf");
+}
+@font-face {
+  font-family: "Sabon";
+  font-weight: normal;
+  font-style: italic;
+  src: url("/.perseus/static/fonts/Sabon_Italic.ttf");
+}
+@font-face {
+  font-family: "Sabon";
+  font-weight: bold;
+  font-style: normal;
+  src: url("/.perseus/static/fonts/Sabon_Bold.ttf");
+}
+@font-face {
+  font-family: "Sabon";
+  font-weight: bold;
+  font-style: italic;
+  src: url("/.perseus/static/fonts/Sabon_BoldItalic.ttf");
+}
+
+/* Styles applying to everything */
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+}
+
+.__perseus_content > main {
+  display: block;
+  margin: auto;
+  max-width: calc(100vw - calc(2 * var(--page-padding)));
+  padding: 0.25rem;
+  width: 30rem;
+}
+
+@media (min-width: 767px) {
+  .__perseus_content > main {
+    width: 35rem;
+  }
+}
