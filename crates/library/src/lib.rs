@@ -72,7 +72,6 @@ pub trait Library {
                 Content::LectionaryReading(lectionary_reading) => {
                     let chosen_lectionary = match &lectionary_reading.lectionary {
                         LectionaryTableChoice::Preference(key) => {
-                            let pref = preference_value_for_key(key);
                             match preference_value_for_key(key) {
                                 Some(PreferenceValue::Lectionary(lectionary)) => *lectionary,
                                 _ => Lectionaries::default(),
