@@ -2,7 +2,7 @@
   - [x] Lectionary Readings (Daily Readings page)
     - [ ] Formatting for liturgical day names
     - [x] Load psalms proper, not just citations (or link to psalter?)
-    - [ ] Load BiblicalCitations
+    - [x] Load BiblicalCitations
   - [ ] Psalter page
   - [ ] Canticle Table
   - [ ] Category
@@ -49,6 +49,7 @@
   - [x] PsalmCitation
     - [ ] Allow multiple psalters based on preferences
   - [ ] Collect of the Day
+    - [ ] Add to Daily Readings page
   - [x] Date/Day
 - [ ] Lectionary tests against JS versions
   - [ ] RCL
