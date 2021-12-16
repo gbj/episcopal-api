@@ -1,12 +1,18 @@
 - [ ] Build actual pages for lookups
   - [x] Lectionary Readings (Daily Readings page)
-    - [ ] Formatting for liturgical day names
+    - [x] Formatting for liturgical day names
+      - [ ] Refactor/consolidate localization of day names in `library` and `rest_api` crates
+      - [ ] Styling for dqy names and holy day name
+      - [ ] Testing for these
     - [x] Load psalms proper, not just citations (or link to psalter?)
     - [x] Load BiblicalCitations
+    - [ ] Choose observance, if applicable
   - [ ] Psalter page
   - [ ] Canticle Table
   - [ ] Category
   - [ ] Collects of the Day
+  - [ ] Calendar
+    - [ ] Saints’ days with bios
 - [ ] Alternative web/HTML setup (Perseus/Sycamore)
   - [x] Build compiling based on date
   - [ ] Build preferences

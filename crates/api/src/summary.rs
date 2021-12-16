@@ -1,4 +1,4 @@
-use calendar::LiturgicalDay;
+use calendar::{Feast, LiturgicalDay};
 use lectionary::Reading;
 use liturgy::Psalm;
 use serde::{Deserialize, Serialize};
@@ -6,6 +6,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Summary {
     pub day: LiturgicalDay,
+    pub localized_day_names: LocalizedDayNames,
     pub daily_office_readings: Readings,
     pub daily_office_psalms: Psalms,
 }
@@ -25,6 +26,7 @@ pub struct Psalms {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct SummaryWithPsalms {
     pub day: LiturgicalDay,
+    pub localized_day_names: LocalizedDayNames,
     pub daily_office_readings: Readings,
     pub daily_office_psalms: PsalmsWithPsalms,
 }
@@ -45,4 +47,11 @@ pub struct ReadingsWithPsalms {
 pub struct PsalmsByTime {
     pub morning: Vec<Psalm>,
     pub evening: Vec<Psalm>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct LocalizedDayNames {
+    pub observed: String,
+    pub alternate: Option<String>,
+    pub holy_days: Vec<(Feast, String)>,
 }

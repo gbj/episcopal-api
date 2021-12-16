@@ -1,5 +1,6 @@
 use api::summary::*;
-use calendar::{Date, BCP1979_CALENDAR};
+use calendar::{Calendar, Date, LiturgicalDay, LiturgicalDayId, Weekday, BCP1979_CALENDAR};
+use language::Language;
 use lectionary::{
     Reading, ReadingType, BCP1979_30_DAY_PSALTER, BCP1979_DAILY_OFFICE_LECTIONARY,
     BCP1979_DAILY_OFFICE_PSALTER,
@@ -40,6 +41,7 @@ pub fn day_with_psalms(year: u16, month: u8, day: u8, evening: bool) -> Json<Sum
 
     let summary_with_psalms = SummaryWithPsalms {
         day: summary.day,
+        localized_day_names: summary.localized_day_names,
         daily_office_readings: summary.daily_office_readings,
         daily_office_psalms: PsalmsWithPsalms {
             thirty_day: PsalmsByTime {
@@ -81,8 +83,65 @@ pub fn day_with_psalms(year: u16, month: u8, day: u8, evening: bool) -> Json<Sum
     Json(summary_with_psalms)
 }
 
+fn localize_day_names(
+    day: &LiturgicalDay,
+    calendar: &Calendar,
+    language: &Language,
+) -> LocalizedDayNames {
+    let observed = localize_day_name(day, &day.observed, calendar, language);
+    let alternate = day
+        .alternate
+        .map(|alternate| localize_day_name(day, &alternate, calendar, language));
+    let holy_days = day
+        .holy_days
+        .iter()
+        .map(|feast| {
+            (
+                *feast,
+                calendar
+                    .feast_name(*feast, *language)
+                    .unwrap_or_default()
+                    .to_string(),
+            )
+        })
+        .collect();
+    LocalizedDayNames {
+        observed,
+        alternate,
+        holy_days,
+    }
+}
+
+fn localize_day_name(
+    day: &LiturgicalDay,
+    id: &LiturgicalDayId,
+    calendar: &Calendar,
+    language: &Language,
+) -> String {
+    match id {
+        LiturgicalDayId::Feast(feast) | LiturgicalDayId::TransferredFeast(feast) => {
+            calendar.feast_name(*feast, *language).map(String::from)
+        }
+        _ => calendar.week_name(day.week, *language).map(|name| {
+            if day.weekday == Weekday::Sun {
+                name.to_string()
+            } else {
+                format!(
+                    "{} {} {}",
+                    language.i18n(&day.weekday.to_string()),
+                    language.i18n("after"),
+                    name.replace("The", "the")
+                )
+            }
+        }),
+    }
+    .unwrap_or_default()
+}
+
 fn summary_from_date(date: Date, evening: bool) -> Summary {
     let day = BCP1979_CALENDAR.liturgical_day(date, evening);
+    // TODO allow calendar/localization
+    let localized_day_names = localize_day_names(&day, &BCP1979_CALENDAR, &Language::En);
     let daily_office_readings = Readings {
         observed: BCP1979_DAILY_OFFICE_LECTIONARY
             .readings_by_day(&day.observed, &day)
@@ -111,6 +170,7 @@ fn summary_from_date(date: Date, evening: bool) -> Summary {
 
     Summary {
         day,
+        localized_day_names,
         daily_office_readings,
         daily_office_psalms,
     }

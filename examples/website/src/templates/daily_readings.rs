@@ -1,5 +1,5 @@
-use calendar::Date;
-use perseus::{t, Html, Template};
+use calendar::{Date, LiturgicalDayId};
+use perseus::{t, Html, RenderFnResultWithCause, Template};
 use reqwasm::http::Request;
 use serde::{Deserialize, Serialize};
 use sycamore::{
@@ -34,9 +34,16 @@ enum Observance {
     Alternate,
 }
 
+#[derive(Serialize, Deserialize)]
+pub struct DailyReadingsPageProps {
+    locale: String,
+}
+
 #[perseus::template(DailyReadingsPage)]
 #[component(DailyReadingsPage<G>)]
-pub fn daily_readings_page() -> View<G> {
+pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
+    let locale = props.locale;
+
     let state = Signal::new(State::Loading);
 
     // Date input
@@ -53,6 +60,53 @@ pub fn daily_readings_page() -> View<G> {
     let alternate_observance = create_memo(cloned!((state) => move || match &*state.get() {
         State::Success(state) => state.day.alternate,
         _ => None
+    }));
+
+    // Localized versions of day names
+    let day_names = create_memo(cloned!((state, locale) => move || match &*state.get() {
+        State::Success(state) => {
+            let is_transferred = matches!(state.day.observed, LiturgicalDayId::TransferredFeast(_));
+            let observed = state.localized_day_names.observed.clone();
+            let alternate = state.localized_day_names.alternate.clone();
+            let holy_days = state.localized_day_names.holy_days.clone();
+            let holy_days = if holy_days.is_empty() {
+                view! {}
+            } else {
+                let holy_days = View::new_fragment(
+                    holy_days.into_iter()
+                        .map(|(feast, name)| {
+                            let href = format!("{}/holy-day/{:#?}", &locale, feast);
+                            view! {
+                                li {
+                                    a(href=(href)) {
+                                        (name)
+                                    }
+                                }
+                            }
+                        }
+                    )
+                    .collect::<Vec<_>>()
+                );
+                view! {
+                    ul(class = "holy-days") {
+                        (holy_days)
+                    }
+                }
+            };
+
+            view! {
+                h2(class = "day-name") {
+                    (observed)
+                    (if is_transferred {
+                        t!("transferred")
+                    } else {
+                        "".into()
+                    })
+                }
+                (holy_days)
+            }
+        },
+        _ => view! {}
     }));
 
     // TODO Load defaults for psalm cycle from stored preferences
@@ -78,7 +132,7 @@ pub fn daily_readings_page() -> View<G> {
     }));
 
     let view = create_memo(
-        cloned!((state, date_str, psalm_cycle, primary_observance, alternate_observance, evening) => move || match (*state.get()).clone() {
+        cloned!((state, date_str, psalm_cycle, primary_observance, alternate_observance, evening, day_names) => move || match (*state.get()).clone() {
             State::Loading => view! {
                 div(class = "loading") {
                     (t!("loading"))
@@ -122,8 +176,8 @@ pub fn daily_readings_page() -> View<G> {
                 );
 
                 let readings = state.daily_office_readings;
-                let primary = *primary_observance.get();
-                let alternate = *alternate_observance.get();
+                let _primary = *primary_observance.get();
+                let _alternate = *alternate_observance.get();
                 let evening = *evening.get();
 
                 let readings = View::new_fragment(
@@ -135,16 +189,11 @@ pub fn daily_readings_page() -> View<G> {
                         .collect()
                     );
 
+                let day_names = &*day_names.get();
+
                 view! {
                     section {
-                        h2 {
-                            (format!("{:#?}", primary))
-                            (if let Some(alternate) = alternate {
-                                format!("{:#?}", alternate)
-                            } else {
-                                "".into()
-                            })
-                        }
+                        (day_names)
                     }
 
                     section(class="psalms") {
@@ -244,6 +293,7 @@ pub fn daily_readings_page() -> View<G> {
 pub fn get_template<G: Html>() -> Template<G> {
     Template::new("daily-readings")
         .template(daily_readings_page)
+        .build_state_fn(get_build_props)
         .head(head)
 }
 
@@ -254,6 +304,14 @@ pub fn head<G: Html>() -> View<G> {
         link(rel = "stylesheet", href = "/.perseus/static/daily-readings.css")
         link(rel = "stylesheet", href = "/.perseus/static/document.css")
     }
+}
+
+#[perseus::autoserde(build_state)]
+pub async fn get_build_props(
+    _path: String,
+    locale: String,
+) -> RenderFnResultWithCause<DailyReadingsPageProps> {
+    Ok(DailyReadingsPageProps { locale })
 }
 
 async fn fetch_data(date: Date, evening: bool) -> Result<SummaryWithPsalms, ()> {
