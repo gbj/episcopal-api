@@ -1,6 +1,7 @@
 
 [workspace]
 members = [
+  "crates/api",
   "crates/calendar",
   "crates/canticle-table",
   "crates/export/web",
@@ -11,6 +12,6 @@ members = [
   "crates/liturgy",
   "crates/psalter",
   "crates/reference-parser",
-  "examples/api",
+  "examples/rest_api",
   "examples/website"
 ]
