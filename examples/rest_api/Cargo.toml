@@ -1,5 +1,5 @@
 [package]
-name = "api"
+name = "rest_api"
 version = "0.1.0"
 edition = "2018"
 
@@ -10,6 +10,7 @@ thiserror = "1.0"
 chrono = "0.4"
 serde_json = "1"
 urlencoding = "2"
+api = { path = "../../crates/api" }
 calendar = { path = "../../crates/calendar" }
 lectionary = { path = "../../crates/lectionary" }
 library = { path = "../../crates/library" }

@@ -23,7 +23,10 @@ fn rocket() -> _ {
 
     rocket::build()
         .attach(CORS)
-        .mount("/calendar", routes![calendar::day])
+        .mount(
+            "/calendar",
+            routes![calendar::day, calendar::day_with_psalms],
+        )
         .mount(
             "/document",
             routes![

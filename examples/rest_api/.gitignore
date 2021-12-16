@@ -1,0 +1,4 @@
+/target
+*.ttf
+/static/pkg
+.perseus/
