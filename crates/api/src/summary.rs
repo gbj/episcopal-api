@@ -1,5 +1,5 @@
 use calendar::LiturgicalDay;
-use lectionary::{Reading, ReadingType};
+use lectionary::Reading;
 use liturgy::Psalm;
 use serde::{Deserialize, Serialize};
 
