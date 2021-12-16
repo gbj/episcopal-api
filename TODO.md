@@ -1,16 +1,19 @@
+- [ ] Build actual pages for lookups
+  - [x] Lectionary Readings (Daily Readings page)
+    - [ ] Formatting for liturgical day names
+    - [x] Load psalms proper, not just citations (or link to psalter?)
+    - [ ] Load BiblicalCitations
+  - [ ] Psalter page
+  - [ ] Canticle Table
+  - [ ] Category
+  - [ ] Collects of the Day
 - [ ] Alternative web/HTML setup (Perseus/Sycamore)
   - [x] Build compiling based on date
   - [ ] Build preferences
   - [ ] Build static category pages
   - [ ] Use these components for the HTML export
   - [ ] Heroku deployment
-    - [ ] edit Procfile
-    - [ ] install perseus CLI
-- [ ] Build actual pages for lookups
-  - [ ] Lectionary Readings
-  - [ ] Canticle Table
-  - [ ] Category
-  - [ ] Collects of the Day
+    - [ ] Custom Perseus buildpack — see https://github.com/emk/heroku-buildpack-rust/blob/master/bin/compile and how it installs Diesel
 - [ ] Morning Prayer
   - [ ] Clean up internal TODO items
   - [ ] rotate `Choice`s for things like prayers for mission and daily collects?
