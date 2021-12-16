@@ -12,14 +12,14 @@ use crate::utils::input::value;
 use crate::utils::time::input_date_now;
 
 use api::summary::*;
-use lectionary::ReadingType;
-use liturgy::Document;
+use liturgy::{BiblicalCitation, Document};
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 enum State {
     Loading,
     Error,
-    Success(SummaryWithPsalms),
+    // Boxed to avoid huge size differential with other types
+    Success(Box<SummaryWithPsalms>),
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -67,7 +67,7 @@ pub fn daily_readings_page() -> View<G> {
           // TODO proper version
           spawn_local_in_scope(cloned!((state, evening) => async move {
             match fetch_data(date, *evening.get()).await {
-                Ok(summary) => state.set(State::Success(summary)),
+                Ok(summary) => state.set(State::Success(Box::new(summary))),
                 Err(_) => {
                     state.set(State::Error)
                 },
@@ -126,6 +126,15 @@ pub fn daily_readings_page() -> View<G> {
                 let alternate = *alternate_observance.get();
                 let evening = *evening.get();
 
+                let readings = View::new_fragment(
+                    // TODO allow choice between observed and alternate
+                    readings.observed.iter()
+                        .map(|reading| view! {
+                            BiblicalCitationComponent(BiblicalCitation::from(reading.citation.clone()))
+                        })
+                        .collect()
+                    );
+
                 view! {
                     section {
                         h2 {
@@ -156,9 +165,7 @@ pub fn daily_readings_page() -> View<G> {
                         h2 {
                             (t!("daily_office_readings"))
                         }
-                        pre {
-                            (serde_json::to_string(&readings).unwrap())
-                        }
+                        (readings)
                     }
                 }
             },
