@@ -1,4 +1,4 @@
-use crate::templates::document::components::*;
+use crate::components::*;
 use liturgy::{BiblicalCitation, BiblicalReading, Document, Version};
 use perseus::{is_server, t};
 use reference_parser::{BibleVerse, BibleVersePart, Book};

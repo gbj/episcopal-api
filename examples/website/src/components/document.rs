@@ -1,11 +1,11 @@
+use super::biblical_citation::*;
 use liturgy::*;
 use perseus::t;
 use sycamore::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys::{Event, HtmlSelectElement};
 
-use crate::templates::document::biblical_citation::*;
-use crate::templates::document::lookup::{lookup_links, LookupType};
+use super::{lookup_links, LookupType};
 
 type HeaderAndMain<G> = (Option<View<G>>, View<G>);
 
@@ -120,10 +120,10 @@ pub fn biblical_reading<G: Html>(reading: BiblicalReading) -> HeaderAndMain<G> {
 }
 
 pub fn canticle<G: Html>(content: Canticle) -> HeaderAndMain<G> {
-    let citation = if let Some(citation) = &content.citation {
+    let citation = if let Some(citation) = content.citation {
         view! {
             h3(class = "citation") {
-              citation
+              (citation)
             }
         }
     } else {
@@ -150,7 +150,7 @@ pub fn canticle<G: Html>(content: Canticle) -> HeaderAndMain<G> {
                     view! {
                       header {
                         h4(class = "canticle-section-title") {
-                          title
+                          (title)
                         }
                       }
                     }
@@ -395,11 +395,11 @@ pub fn heading<G: Html>(heading: Heading) -> HeaderAndMain<G> {
         }
         Heading::Text(level, content) => {
             let h = match level {
-                HeadingLevel::Heading1 => view! { h1 { content } },
-                HeadingLevel::Heading2 => view! { h2 { content } },
-                HeadingLevel::Heading3 => view! { h3 { content } },
-                HeadingLevel::Heading4 => view! { h4 { content } },
-                HeadingLevel::Heading5 => view! { h5 { content } },
+                HeadingLevel::Heading1 => view! { h1 { (content) } },
+                HeadingLevel::Heading2 => view! { h2 { (content) } },
+                HeadingLevel::Heading3 => view! { h3 { (content) } },
+                HeadingLevel::Heading4 => view! { h4 { (content) } },
+                HeadingLevel::Heading5 => view! { h5 { (content) } },
             };
             view! {
                 main(class = "heading") {
@@ -503,6 +503,7 @@ pub fn preces<G: Html>(preces: Preces) -> HeaderAndMain<G> {
 }
 
 pub fn psalm<G: Html>(psalm: Psalm) -> HeaderAndMain<G> {
+    let psalm_number = psalm.number;
     let sections = View::new_fragment(
         psalm
             .filtered_sections()
@@ -523,6 +524,7 @@ pub fn psalm<G: Html>(psalm: Psalm) -> HeaderAndMain<G> {
 
                             view! {
                               p(class = "verse") {
+                                a(id = format!("{}-{}", psalm_number, number))
                                 sup(class = "number") {
                                   (number)
                                 }

@@ -17,10 +17,12 @@ lazy_static = "1.0"
 fluent-bundle = "0.15"
 reqwasm = "0.3"
 url = "2.2"
+api = { path = "../../crates/api" }
 calendar = { path = "../../crates/calendar" }
 library = { path = "../../crates/library" }
 lectionary = { path = "../../crates/lectionary" }
 liturgy = { path = "../../crates/liturgy" }
+psalter = { path = "../../crates/psalter" }
 reference-parser = { path = "../../crates/reference-parser" }
 
 [profile.release.package]

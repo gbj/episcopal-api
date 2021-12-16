@@ -22,3 +22,13 @@ biblical_citation_error = Something went wrong while loading { $citation }.
 biblical_citation_try_again = Try Again.
 
 daily_readings = Daily Readings
+daily_readings_error = Uh-oh! Something went wrong while loading readings for { $date }.
+observed_day = Observed Day
+alternate_day = Alternate Observance
+transferred = Transferred
+psalms = Psalms
+daily_office_readings = Daily Office Readings
+daily_office_psalms = Daily Office Psalms
+thirty_day_psalms = 30-Day Psalm Cycle
+morning = Morning
+evening = Evening

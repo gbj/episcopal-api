@@ -7,11 +7,8 @@ use perseus::{RenderFnResult, RenderFnResultWithCause, Request, Template};
 use serde::{Deserialize, Serialize};
 use sycamore::prelude::*;
 
+use crate::components::*;
 use crate::table_of_contents::LITURGIES;
-mod biblical_citation;
-mod components;
-use components::*;
-mod lookup;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct DocumentPageProps {

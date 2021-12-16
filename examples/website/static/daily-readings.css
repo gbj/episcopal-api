@@ -1,7 +1,7 @@
 main {
   display: block;
   margin: auto;
-  max-width: calc(100vw - calc(2 * 1rem));
+  max-width: calc(100vw - calc(2 * var(--page-padding)));
 }
 
 pre {
@@ -10,4 +10,25 @@ pre {
 
 h1 {
   text-align: center;
+}
+
+.psalms ol {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.psalms ol li {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* Slide between options */
+/* TODO animate these */
+.slider .hidden {
+  display: none;
 }

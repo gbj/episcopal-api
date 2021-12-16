@@ -5,6 +5,7 @@ use perseus::{define_app, ErrorPages, Plugins};
 use perseus_size_opt::{perseus_size_opt, SizeOpts};
 use sycamore::view;
 
+mod components;
 mod table_of_contents;
 mod templates;
 mod utils;
@@ -13,7 +14,8 @@ define_app! {
     templates: [
         crate::templates::index::get_template::<G>(),
         crate::templates::daily_readings::get_template::<G>(),
-        crate::templates::document::get_template::<G>()
+        crate::templates::document::get_template::<G>(),
+        crate::templates::psalm::get_template::<G>()
     ],
     error_pages: ErrorPages::new(|url, status, err, _| {
         view! {
@@ -22,7 +24,7 @@ define_app! {
     }),
     locales: {
         default: "en-US",
-        other: ["es-ES"]
+        other: []
     },
     plugins: Plugins::new().plugin(perseus_size_opt, SizeOpts::default())
 }
