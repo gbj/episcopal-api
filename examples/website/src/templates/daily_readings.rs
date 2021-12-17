@@ -1,5 +1,5 @@
 use calendar::{Date, LiturgicalDayId};
-use perseus::{t, web_log, Html, RenderFnResultWithCause, Template};
+use perseus::{t, Html, RenderFnResultWithCause, Template};
 use reqwasm::http::Request;
 use serde::{Deserialize, Serialize};
 use sycamore::{
@@ -143,15 +143,29 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
         let evening = *evening.get();
         match *date.get() {
             Ok(date) => {
-            state.set(State::Loading);
-            spawn_local_in_scope(cloned!((state, evening) => async move {
-                match fetch_data(date, evening).await {
-                    Ok(summary) => state.set(State::Success(Box::new(summary))),
-                    Err(_) => {
-                        state.set(State::Error)
-                    },
+                // if data is already loaded, don't replace it entirely
+                if !matches!(*state.get(), State::Success(_)) {
+                    state.set(State::Loading);
                 }
-            }))
+                spawn_local_in_scope(cloned!((state, evening) => async move {
+                    match fetch_data(date, evening).await {
+                        Ok(summary) => {
+                            // only set the state if it's actually changed
+                            // this prevents things like reloading Biblical citations if
+                            // there's no difference between morning and evening for a day
+                            if let State::Success(previous_summary) = &*state.get() {
+                                if summary != **previous_summary {
+                                    state.set(State::Success(Box::new(summary)))
+                                }
+                            } else {
+                                state.set(State::Success(Box::new(summary)))
+                            }
+                        },
+                        Err(_) => {
+                            state.set(State::Error)
+                        },
+                    }
+                }))
             },
             Err(_) => state.set(State::Error)
         }
