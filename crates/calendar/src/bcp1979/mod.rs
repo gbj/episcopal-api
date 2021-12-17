@@ -1277,7 +1277,7 @@ pub const BCP1979_FEASTS: [KalendarEntry; 200] = [
     ),
 ];
 
-const BCP1979_FEAST_NAMES : [(Feast, Language, &str); 180] = [
+const BCP1979_FEAST_NAMES : [(Feast, Language, &str); 191] = [
     (Feast::AbsalomJones, Language::En, "Absalom Jones, Priest, 1818"),
     (Feast::AgnesAndCeciliaOfRome, Language::En, "Agnes, Martyr at Rome, 304"),
     (Feast::AidanOfLindisfarne, Language::En, "Aidan, Bishop of Lindisfarne, 651"),
@@ -1457,7 +1457,18 @@ const BCP1979_FEAST_NAMES : [(Feast, Language, &str); 180] = [
     (Feast::WilliamWhite, Language::En, "William White, Bishop of Pennsylvania, 1836"),
     (Feast::WilliamWilberforce, Language::En, "William Wilberforce, 1833"),
     (Feast::Willibrord, Language::En, "Willibrord, Archbishop of Utrecht, Missionary to Frisia, 739"),
-    (Feast::WulfstanOfWorcester, Language::En, "Wulfstan, Bishop of Worcester, 1095")
+    (Feast::WulfstanOfWorcester, Language::En, "Wulfstan, Bishop of Worcester, 1095"),
+    (Feast::December24, Language::En, "December 24"),
+    (Feast::ChristmasEve, Language::En, "Christmas Eve"),
+    (Feast::December29, Language::En, "December 29"),
+    (Feast::December30, Language::En, "December 30"),
+    (Feast::December31, Language::En, "December 31"),
+    (Feast::EveOfHolyName, Language::En, "Eve of Holy Name"),
+    (Feast::January2, Language::En, "January 2"),
+    (Feast::January3, Language::En, "January 3"),
+    (Feast::January4, Language::En, "January 4"),
+    (Feast::January5, Language::En, "January 5"),
+    (Feast::EveOfEpiphany, Language::En, "Eve of Epiphany"),
 ];
 
 const BCP1979_WEEK_NAMES: [(LiturgicalWeek, Language, &str); 59] = [
