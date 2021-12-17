@@ -6,6 +6,7 @@
       - [ ] Testing for these
     - [x] Load psalms proper, not just citations (or link to psalter?)
     - [x] Load BiblicalCitations
+      - [ ] Include paragraphs/spacing
       - [ ] Bugs
           - [ ] Something went wrong while loading Proverbs 8:22-30 (for Feast of St. John) -- also Wisdom 4:7-15
     - [x] Choose observance, if applicable
@@ -23,6 +24,12 @@
   - [ ] Use these components for the HTML export
   - [ ] Heroku deployment
     - [ ] Custom Perseus buildpack — see https://github.com/emk/heroku-buildpack-rust/blob/master/bin/compile and how it installs Diesel
+- Calendar 
+  - [ ] Make sure every feast has a day name
+  - [ ] Filter `holy_days` field so it doesn't include: (note, this is for purposes of display)
+    - the observed day
+    - the alternate day
+    - a red-letter day that was displaced by a Sunday
 - [ ] Morning Prayer
   - [ ] Clean up internal TODO items
   - [ ] rotate `Choice`s for things like prayers for mission and daily collects?
