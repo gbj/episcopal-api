@@ -6,7 +6,9 @@
       - [ ] Testing for these
     - [x] Load psalms proper, not just citations (or link to psalter?)
     - [x] Load BiblicalCitations
-    - [ ] Choose observance, if applicable
+      - [ ] Bugs
+          - [ ] Something went wrong while loading Proverbs 8:22-30 (for Feast of St. John)
+    - [x] Choose observance, if applicable
   - [ ] Psalter page
   - [ ] Canticle Table
   - [ ] Category
