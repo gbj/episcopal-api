@@ -1,5 +1,5 @@
 use calendar::{Date, LiturgicalDayId};
-use perseus::{t, Html, RenderFnResultWithCause, Template};
+use perseus::{t, web_log, Html, RenderFnResultWithCause, Template};
 use reqwasm::http::Request;
 use serde::{Deserialize, Serialize};
 use sycamore::{
@@ -117,9 +117,13 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
                     h2(class = "day-name") {
                         (observance_name)
                         (if is_transferred {
-                            format!(" ({})", t!("transferred"))
+                            view! {
+                                " "
+                                (t!("transferred"))
+                            }
+
                         } else {
-                            "".into()
+                            view! {}
                         })
                     }
                     (holy_days)
@@ -135,20 +139,22 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
     // Let people toggle evening
     let evening = Signal::new(false);
 
-    create_effect(cloned!((state, evening) => move || match *date.get() {
-        Ok(date) => {
-          state.set(State::Loading);
-          // TODO proper version
-          spawn_local_in_scope(cloned!((state, evening) => async move {
-            match fetch_data(date, *evening.get()).await {
-                Ok(summary) => state.set(State::Success(Box::new(summary))),
-                Err(_) => {
-                    state.set(State::Error)
-                },
-            }
-          }))
-        },
-        Err(_) => state.set(State::Error)
+    create_effect(cloned!((state, evening) => move || {
+        let evening = *evening.get();
+        match *date.get() {
+            Ok(date) => {
+            state.set(State::Loading);
+            spawn_local_in_scope(cloned!((state, evening) => async move {
+                match fetch_data(date, evening).await {
+                    Ok(summary) => state.set(State::Success(Box::new(summary))),
+                    Err(_) => {
+                        state.set(State::Error)
+                    },
+                }
+            }))
+            },
+            Err(_) => state.set(State::Error)
+        }
     }));
 
     let view = create_memo(
@@ -256,10 +262,7 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
                 let alternate_check_1 = use_alternate_if_available.clone();
                 let alternate_check_2 = use_alternate_if_available.clone();
                 view! {
-                    fieldset {
-                        label(for = "observed") {
-                            (observed_name)
-                        }
+                    fieldset(class = "toggle") {
                         input(
                             type = "radio",
                             id = "observed",
@@ -268,8 +271,10 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
                             checked = !*alternate_check_1.get(),
                             on:change=cloned!((use_alternate_if_available) => move |ev: web_sys::Event| use_alternate_if_available.set(value(ev) == "alternate"))
                         )
-                        label(for = "alternate") {
-                            (alternate_name)
+                        label(for = "observed") {
+                            (observed_name)
+                            " "
+                            (t!("default"))
                         }
                         input(
                             type = "radio",
@@ -279,6 +284,11 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
                             checked = *alternate_check_2.get(),
                             on:change=cloned!((use_alternate_if_available) => move |ev: web_sys::Event| use_alternate_if_available.set(value(ev) == "alternate"))
                         )
+                        label(for = "alternate", class = "alternate") {
+                            (alternate_name)
+                            " "
+                            (t!("alternate"))
+                        }
                     }
                 }
             }
@@ -289,19 +299,22 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
 
     view! {
         main {
-            input(type="date", bind:value=date_str)
             h1 {
                 (t!("daily_readings"))
+            }
+
+            fieldset(class = "centered stacked") {
+                label(for = "date") {
+                    (t!("readings_for_date"))
+                }
+                input(type="date", id = "date", bind:value=date_str)
             }
 
             // Select observance, if relevant
             (*observance_chooser.get())
 
             // Select morning/evening
-            fieldset {
-                label(for = "morning") {
-                    (t!("morning"))
-                }
+            fieldset(class = "toggle") {
                 input(
                     type = "radio",
                     id = "morning",
@@ -310,8 +323,8 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
                     checked = !*evening_check_1.get(),
                     on:change=cloned!((evening) => move |ev: web_sys::Event| evening.set(value(ev) == "evening"))
                 )
-                label(for = "evening") {
-                    (t!("evening"))
+                label(for = "morning") {
+                    (t!("morning"))
                 }
                 input(
                     type = "radio",
@@ -321,13 +334,13 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
                     checked = *evening_check_2.get(),
                     on:change=cloned!((evening) => move |ev: web_sys::Event| evening.set(value(ev) == "evening"))
                 )
+                label(for = "evening") {
+                    (t!("evening"))
+                }
             }
 
             // Select preferred psalter
-            fieldset {
-                label(for = "30day_psalter") {
-                    (t!("thirty_day_psalms"))
-                }
+            fieldset(class = "toggle") {
                 input(
                     type = "radio",
                     id = "30day_psalter",
@@ -336,8 +349,8 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
                     checked = *cycle_check_1.get() == ChosenPsalmCycle::Thirty,
                     on:change=cloned!((psalm_cycle) => move |_| psalm_cycle.set(ChosenPsalmCycle::Thirty))
                 )
-                label(for = "daily_psalter") {
-                    (t!("daily_office_psalms"))
+                label(for = "30day_psalter") {
+                    (t!("thirty_day_psalms"))
                 }
                 input(
                     type = "radio",
@@ -347,6 +360,9 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
                     checked = *cycle_check_2.get() == ChosenPsalmCycle::Daily,
                     on:change=cloned!((psalm_cycle) => move |_| psalm_cycle.set(ChosenPsalmCycle::Daily))
                 )
+                label(for = "daily_psalter") {
+                    (t!("daily_office_psalms"))
+                }
             }
 
             (*view.get())

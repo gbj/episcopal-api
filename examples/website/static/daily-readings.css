@@ -4,12 +4,17 @@ main {
   max-width: calc(100vw - calc(2 * var(--page-padding)));
 }
 
-pre {
-  white-space: pre-wrap;
-}
-
 h1 {
   text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+h2.day-name {
+  font-style: italic;
+  font-weight: normal;
 }
 
 .psalms ol {

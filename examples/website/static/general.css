@@ -2,6 +2,7 @@
 :root {
   --background: #fefefe;
   --border-color: #e0e0e0;
+  --ui-background: #3030ff;
   --font-family: "Sabon", Garamond, serif;
   --page-padding: 1rem;
   --rubric-size: 0.9rem;
@@ -12,6 +13,15 @@
   --response-style: normal;
 
   --psalm-number-display: inline-block;
+
+  /* Generic UI styles */
+  --ui-border-radius: 0.25rem;
+
+  /* Toggle buttons */
+  --ui-toggle-checked-color: #f0f0f0;
+  --ui-toggle-checked-background: #c63232;
+  --ui-toggle-unchecked-background: #f0f0f0;
+  --ui-toggle-unchecked-background-hover: #f6abab;
 }
 
 /* Font Definitions */
@@ -59,4 +69,91 @@ body {
   .__perseus_content > main {
     width: 35rem;
   }
+}
+
+.centered {
+  display: block;
+  margin: auto;
+}
+
+/* Hide things *only* visually, leaving them accessible to screen readers */
+.screen-reader-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Input Radio Toggles */
+fieldset.toggle {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  border: none;
+  width: fit-content;
+  margin: 0.25rem auto;
+}
+
+fieldset.toggle label {
+  background: var(--ui);
+  text-align: center;
+  padding: 0.5rem 0.25rem;
+  cursor: pointer;
+  border: 1px solid var(--ui-toggle-checked-background);
+}
+
+fieldset.toggle label:first-of-type {
+  border-top-left-radius: var(--ui-border-radius);
+  border-bottom-left-radius: var(--ui-border-radius);
+}
+
+fieldset.toggle label:last-of-type {
+  border-top-right-radius: var(--ui-border-radius);
+  border-bottom-right-radius: var(--ui-border-radius);
+}
+
+fieldset.toggle input + label {
+  transition: border-color 0.15s ease-out, color 0.25s ease-out,
+    background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+fieldset.toggle input:checked + label {
+  background: var(--ui-toggle-checked-background);
+  box-shadow: 0 0 10px rgba(var(--ui-toggle-checked-background), 0.5);
+  color: var(--ui-toggle-checked-color);
+  font-weight: bold;
+}
+
+fieldset.toggle input:not(:checked) + label {
+  background: var(--ui-toggle-unchecked-background);
+}
+
+fieldset.toggle input:not(:checked) + label:hover {
+  background: var(--ui-toggle-unchecked-background-hover);
+}
+
+/* Hide radio buttons *only* visually, leaving them accessible to screen readers */
+fieldset.toggle input[type="radio"] {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Stacked label-input pairs */
+fieldset.stacked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+}
+
+fieldset.stacked label {
+  font-weight: bold;
 }
