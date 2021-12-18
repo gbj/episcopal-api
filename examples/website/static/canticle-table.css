@@ -1,0 +1,12 @@
+table.canticle-table {
+  border-collapse: collapse;
+}
+
+table.canticle-table tr.day > td {
+  border-top: 1rem solid;
+  border-color: var(--background);
+}
+
+table.canticle-table td.day-name {
+  font-weight: bold;
+}

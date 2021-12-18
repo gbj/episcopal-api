@@ -10,9 +10,10 @@
       - [ ] Bugs
           - [ ] Something went wrong while loading Proverbs 8:22-30 (for Feast of St. John) -- also Wisdom 4:7-15
     - [x] Choose observance, if applicable
-  - [ ] Try out builder syntax for better IDE support
-  - [ ] Psalter page
   - [ ] Canticle Table
+    - [x] BCP
+    - [ ] EOW
+  - [ ] Psalter page
   - [ ] Category
   - [ ] Collects of the Day
   - [ ] Calendar

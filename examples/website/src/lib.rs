@@ -13,6 +13,7 @@ mod utils;
 define_app! {
     templates: [
         crate::templates::index::get_template::<G>(),
+        crate::templates::canticle_table::get_template::<G>(),
         crate::templates::daily_readings::get_template::<G>(),
         crate::templates::document::get_template::<G>(),
         crate::templates::psalm::get_template::<G>()

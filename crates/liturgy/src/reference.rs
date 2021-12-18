@@ -11,7 +11,7 @@ impl Reference {
     pub fn as_url(&self) -> String {
         let base_url = match self.source {
             Source::BCP1979 => "https://www.episcopalchurch.org/wp-content/uploads/sites/2/2019/11/bcp_compressed.pdf",
-            Source::EOW1 => todo!(),
+            Source::EOW1 => "https://www.churchpublishing.org/siteassets/pdf/enriching-our-worship-1/enrichingourworship1.pdf",
         };
 
         format!("{}#page={}", base_url, self.page)
