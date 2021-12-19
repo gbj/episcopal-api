@@ -13,6 +13,7 @@ pub mod conditions;
 pub mod eow;
 pub mod rite1;
 pub mod rite2;
+pub mod summary;
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub enum CommonPrayerLiturgies {

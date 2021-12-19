@@ -1,57 +1,27 @@
-use calendar::{Feast, LiturgicalDay};
+use calendar::{Feast, LiturgicalDay, LiturgicalDayId};
 use lectionary::Reading;
 use liturgy::Psalm;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
-pub struct Summary {
+pub struct DailySummary {
+    pub morning: PartialDailySummary,
+    pub evening: PartialDailySummary,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
+pub struct PartialDailySummary {
     pub day: LiturgicalDay,
-    pub localized_day_names: LocalizedDayNames,
-    pub daily_office_readings: Readings,
-    pub daily_office_psalms: Psalms,
+    pub observed: ObservanceSummary,
+    pub alternate: Option<ObservanceSummary>,
+    pub thirty_day_psalms: Vec<Psalm>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
-pub struct Readings {
-    pub observed: Vec<Reading>,
-    pub alternate: Option<Vec<Reading>>,
-}
-
-#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
-pub struct Psalms {
-    pub thirty_day: Vec<Reading>,
-    pub daily_office_lectionary: Readings,
-}
-
-#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
-pub struct SummaryWithPsalms {
-    pub day: LiturgicalDay,
-    pub localized_day_names: LocalizedDayNames,
-    pub daily_office_readings: Readings,
-    pub daily_office_psalms: PsalmsWithPsalms,
-}
-
-#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
-pub struct PsalmsWithPsalms {
-    pub thirty_day: PsalmsByTime,
-    pub daily_office_lectionary: ReadingsWithPsalms,
-}
-
-#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
-pub struct ReadingsWithPsalms {
-    pub observed: PsalmsByTime,
-    pub alternate: Option<PsalmsByTime>,
-}
-
-#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
-pub struct PsalmsByTime {
-    pub morning: Vec<Psalm>,
-    pub evening: Vec<Psalm>,
-}
-
-#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
-pub struct LocalizedDayNames {
-    pub observed: String,
-    pub alternate: Option<String>,
-    pub holy_days: Vec<(Feast, String)>,
+pub struct ObservanceSummary {
+    pub observance: LiturgicalDayId,
+    pub localized_name: String,
+    pub black_letter_days: Vec<(Feast, String)>,
+    pub daily_office_readings: Vec<Reading>,
+    pub daily_office_psalms: Vec<Psalm>,
 }
