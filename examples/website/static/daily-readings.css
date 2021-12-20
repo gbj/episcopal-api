@@ -16,24 +16,3 @@ h2.day-name {
   font-style: italic;
   font-weight: normal;
 }
-
-.psalms ol {
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-}
-
-.psalms ol li {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-
-/* Slide between options */
-/* TODO animate these */
-.slider .hidden {
-  display: none;
-}

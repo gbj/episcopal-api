@@ -10,6 +10,8 @@ mod table_of_contents;
 mod templates;
 mod utils;
 
+pub const API_BASE: &str = "http://127.0.0.1:8000";
+
 define_app! {
     templates: [
         crate::templates::index::get_template::<G>(),

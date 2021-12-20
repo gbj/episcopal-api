@@ -1,25 +1,38 @@
-use calendar::{Date, LiturgicalDayId};
-use perseus::{t, Html, RenderFnResultWithCause, Template};
-use reqwasm::http::Request;
+use std::iter;
+
+use calendar::{Date, Feast};
+use language::Language;
+use lectionary::Reading;
+use library::CommonPrayer;
+use perseus::{is_server, t, web_log, Html, RenderFnResult, RenderFnResultWithCause, Template};
 use serde::{Deserialize, Serialize};
 use sycamore::{
     futures::spawn_local_in_scope,
-    prelude::{cloned, component, create_effect, create_memo, view, Signal, View},
+    generic_node::GenericNode,
+    prelude::{
+        cloned, component, create_effect, create_memo, create_selector, view, ReadSignal, Signal,
+        View,
+    },
 };
+use web_sys::Event;
 
-use crate::components::*;
-use crate::utils::input::value;
-use crate::utils::time::input_date_now;
+use crate::{
+    components::date::date_picker,
+    utils::time::{current_hour, today},
+};
+use crate::{components::*, utils::time};
+use crate::{utils::input::value, API_BASE};
 
 use api::summary::*;
-use liturgy::{BiblicalCitation, Document};
+use liturgy::{BiblicalCitation, Document, Psalm};
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 enum State {
+    Idle,
     Loading,
     Error,
     // Boxed to avoid huge size differential with other types
-    Success(Box<SummaryWithPsalms>),
+    Success(Box<DailySummary>),
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -37,357 +50,16 @@ enum Observance {
 #[derive(Serialize, Deserialize)]
 pub struct DailyReadingsPageProps {
     locale: String,
-}
-
-#[perseus::template(DailyReadingsPage)]
-#[component(DailyReadingsPage<G>)]
-pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
-    let locale = props.locale;
-
-    let state = Signal::new(State::Loading);
-
-    // Date input
-    let date_str = Signal::new(input_date_now());
-    let date = create_memo(
-        cloned!((date_str) => move || Date::parse_from_str(&*date_str.get(), "%Y-%m-%d")),
-    );
-
-    // Choose between primary and alternate observance, if applicable
-    let use_alternate_if_available = Signal::new(false);
-    let use_alternate = create_memo(
-        cloned!((state, use_alternate_if_available) => move || match &*state.get() {
-            State::Success(state) => matches!((state.day.alternate, *use_alternate_if_available.get()), (Some(_), true)),
-            _ => false
-        }),
-    );
-
-    let observance = create_memo(
-        cloned!((state, use_alternate_if_available) => move || match &*state.get() {
-            State::Success(state) => match (state.day.alternate, *use_alternate_if_available.get()) {
-                (Some(alternate), true) => Some(alternate),
-                _ => Some(state.day.observed)
-            },
-            _ => None
-        }),
-    );
-    let observance_name = create_memo(
-        cloned!((state, use_alternate_if_available) => move || match &*state.get() {
-            State::Success(state) => match (state.localized_day_names.alternate.as_ref(), *use_alternate_if_available.get()) {
-                (Some(alternate), true) => Some(alternate.to_owned()),
-                _ => Some(state.localized_day_names.observed.clone())
-            },
-            _ => None
-        }),
-    );
-
-    // Localized versions of day names
-    let day_names = create_memo(
-        cloned!((state, observance, observance_name, locale) => move || match &*state.get() {
-            State::Success(state) => {
-                let is_transferred = matches!(*observance.get(), Some(LiturgicalDayId::TransferredFeast(_)));
-                let observance_name = (*observance_name.get()).as_ref().cloned().unwrap_or_default();
-
-                let holy_days = state.localized_day_names.holy_days.clone();
-                let holy_days = if holy_days.is_empty() {
-                    view! {}
-                } else {
-                    let holy_days = View::new_fragment(
-                        holy_days.into_iter()
-                            .map(|(feast, name)| {
-                                let href = format!("{}/holy-day/{:#?}", &locale, feast);
-                                view! {
-                                    li {
-                                        a(href=(href)) {
-                                            (name)
-                                        }
-                                    }
-                                }
-                            }
-                        )
-                        .collect::<Vec<_>>()
-                    );
-                    view! {
-                        ul(class = "holy-days") {
-                            (holy_days)
-                        }
-                    }
-                };
-
-                view! {
-                    h2(class = "day-name") {
-                        (observance_name)
-                        (if is_transferred {
-                            view! {
-                                " "
-                                (t!("transferred"))
-                            }
-
-                        } else {
-                            view! {}
-                        })
-                    }
-                    (holy_days)
-                }
-            },
-            _ => view! {}
-        }),
-    );
-
-    // TODO Load defaults for psalm cycle from stored preferences
-    let psalm_cycle = Signal::new(ChosenPsalmCycle::Daily);
-
-    // Let people toggle evening
-    let evening = Signal::new(false);
-
-    create_effect(cloned!((state, evening) => move || {
-        let evening = *evening.get();
-        match *date.get() {
-            Ok(date) => {
-                // if data is already loaded, don't replace it entirely
-                if !matches!(*state.get(), State::Success(_)) {
-                    state.set(State::Loading);
-                }
-                spawn_local_in_scope(cloned!((state, evening) => async move {
-                    match fetch_data(date, evening).await {
-                        Ok(summary) => {
-                            // only set the state if it's actually changed
-                            // this prevents things like reloading Biblical citations if
-                            // there's no difference between morning and evening for a day
-                            if let State::Success(previous_summary) = &*state.get() {
-                                if summary != **previous_summary {
-                                    state.set(State::Success(Box::new(summary)))
-                                }
-                            } else {
-                                state.set(State::Success(Box::new(summary)))
-                            }
-                        },
-                        Err(_) => {
-                            state.set(State::Error)
-                        },
-                    }
-                }))
-            },
-            Err(_) => state.set(State::Error)
-        }
-    }));
-
-    let view = create_memo(
-        cloned!((state, date_str, psalm_cycle, use_alternate, evening, day_names) => move || match (*state.get()).clone() {
-            State::Loading => view! {
-                div(class = "loading") {
-                    (t!("loading"))
-                }
-            },
-            State::Error => {
-                let date_str = date_str.clone();
-                view! {
-                    div(class = "error") {
-                        (t!("daily_readings_error", { "date": (*date_str.get()).clone() }))
-                    }
-                }
-            },
-            State::Success(state) => {
-                let use_alternate = *use_alternate.get();
-
-                let psalms = match (*psalm_cycle.get(), use_alternate) {
-                    (ChosenPsalmCycle::Daily, false) => state.daily_office_psalms.daily_office_lectionary.observed,
-                    (ChosenPsalmCycle::Daily, true) => state.daily_office_psalms.daily_office_lectionary.alternate.unwrap_or(state.daily_office_psalms.daily_office_lectionary.observed),
-                    (ChosenPsalmCycle::Thirty, _) => state.daily_office_psalms.thirty_day
-                };
-
-                let morning_psalms = View::new_fragment(
-                    psalms.morning
-                        .iter()
-                        .map(|psalm| view! {
-                            article(class = "document") {
-                                DocumentComponent(Signal::new(Document::from(psalm.clone())).handle())
-                            }
-                        })
-                        .collect()
-                    );
-
-                let evening_psalms = View::new_fragment(
-                    psalms.evening
-                    .iter()
-                    .map(|psalm| view! {
-                        article(class = "document") {
-                            DocumentComponent(Signal::new(Document::from(psalm.clone())).handle())
-                        }
-                    })
-                    .collect()
-                );
-
-                let readings = if use_alternate {
-                    state.daily_office_readings.alternate.unwrap_or(state.daily_office_readings.observed)
-                } else {
-                    state.daily_office_readings.observed
-                };
-                let evening = *evening.get();
-
-                let readings = View::new_fragment(
-                    readings.iter()
-                        .map(|reading| view! {
-                            BiblicalCitationComponent(BiblicalCitation::from(reading.citation.clone()))
-                        })
-                        .collect()
-                    );
-
-                let day_names = &*day_names.get();
-
-                view! {
-                    section {
-                        (day_names)
-                    }
-
-                    section(class="psalms") {
-                        h2 {
-                            (t!("daily_office_psalms"))
-                        }
-                        div(class="slider") {
-                            div(class=(if evening { "hidden" } else { "shown" })) {
-                                (morning_psalms)
-                            }
-                            div(class=(if !evening { "hidden" } else { "shown" })) {
-                                (evening_psalms)
-                            }
-                        }
-                    }
-
-                    section {
-                        h2 {
-                            (t!("daily_office_readings"))
-                        }
-                        (readings)
-                    }
-                }
-            },
-        }),
-    );
-
-    let cycle_check_1 = psalm_cycle.clone();
-    let cycle_check_2 = psalm_cycle.clone();
-    let evening_check_1 = evening.clone();
-    let evening_check_2 = evening.clone();
-
-    let observance_chooser = create_memo(cloned!((state) => move || match (*state.get()).clone() {
-        State::Success(summary) => match summary.localized_day_names.alternate {
-            Some(alternate_name) => {
-                let observed_name = summary.localized_day_names.observed;
-                let alternate_check_1 = use_alternate_if_available.clone();
-                let alternate_check_2 = use_alternate_if_available.clone();
-                view! {
-                    fieldset(class = "toggle") {
-                        input(
-                            type = "radio",
-                            id = "observed",
-                            name = "observance",
-                            value = "observed",
-                            checked = !*alternate_check_1.get(),
-                            on:change=cloned!((use_alternate_if_available) => move |ev: web_sys::Event| use_alternate_if_available.set(value(ev) == "alternate"))
-                        )
-                        label(for = "observed") {
-                            (observed_name)
-                            " "
-                            (t!("default"))
-                        }
-                        input(
-                            type = "radio",
-                            id = "alternate",
-                            name = "observance",
-                            value = "alternate",
-                            checked = *alternate_check_2.get(),
-                            on:change=cloned!((use_alternate_if_available) => move |ev: web_sys::Event| use_alternate_if_available.set(value(ev) == "alternate"))
-                        )
-                        label(for = "alternate", class = "alternate") {
-                            (alternate_name)
-                            " "
-                            (t!("alternate"))
-                        }
-                    }
-                }
-            }
-            _ => view! {},
-        },
-        _ => view! {},
-    }));
-
-    view! {
-        main {
-            h1 {
-                (t!("daily_readings"))
-            }
-
-            fieldset(class = "centered stacked") {
-                label(for = "date") {
-                    (t!("readings_for_date"))
-                }
-                input(type="date", id = "date", bind:value=date_str)
-            }
-
-            // Select observance, if relevant
-            (*observance_chooser.get())
-
-            // Select morning/evening
-            fieldset(class = "toggle") {
-                input(
-                    type = "radio",
-                    id = "morning",
-                    name = "time_of_day",
-                    value = "morning",
-                    checked = !*evening_check_1.get(),
-                    on:change=cloned!((evening) => move |ev: web_sys::Event| evening.set(value(ev) == "evening"))
-                )
-                label(for = "morning") {
-                    (t!("morning"))
-                }
-                input(
-                    type = "radio",
-                    id = "evening",
-                    name = "time_of_day",
-                    value = "evening",
-                    checked = *evening_check_2.get(),
-                    on:change=cloned!((evening) => move |ev: web_sys::Event| evening.set(value(ev) == "evening"))
-                )
-                label(for = "evening") {
-                    (t!("evening"))
-                }
-            }
-
-            // Select preferred psalter
-            fieldset(class = "toggle") {
-                input(
-                    type = "radio",
-                    id = "30day_psalter",
-                    name = "psalm_cycle",
-                    value = "30",
-                    checked = *cycle_check_1.get() == ChosenPsalmCycle::Thirty,
-                    on:change=cloned!((psalm_cycle) => move |_| psalm_cycle.set(ChosenPsalmCycle::Thirty))
-                )
-                label(for = "30day_psalter") {
-                    (t!("thirty_day_psalms"))
-                }
-                input(
-                    type = "radio",
-                    id = "daily_psalter",
-                    name = "psalm_cycle",
-                    value = "daily",
-                    checked = *cycle_check_2.get() == ChosenPsalmCycle::Daily,
-                    on:change=cloned!((psalm_cycle) => move |_| psalm_cycle.set(ChosenPsalmCycle::Daily))
-                )
-                label(for = "daily_psalter") {
-                    (t!("daily_office_psalms"))
-                }
-            }
-
-            (*view.get())
-        }
-    }
+    date: Option<Date>,
+    summary: Option<DailySummary>,
 }
 
 pub fn get_template<G: Html>() -> Template<G> {
     Template::new("daily-readings")
         .template(daily_readings_page)
         .build_state_fn(get_build_props)
+        .build_paths_fn(get_static_paths)
+        .incremental_generation()
         .head(head)
 }
 
@@ -400,27 +72,503 @@ pub fn head<G: Html>() -> View<G> {
     }
 }
 
-#[perseus::autoserde(build_state)]
-pub async fn get_build_props(
-    _path: String,
-    locale: String,
-) -> RenderFnResultWithCause<DailyReadingsPageProps> {
-    Ok(DailyReadingsPageProps { locale })
+// In lieu of dynamic paths like /daily-readings/<date>,
+// valid paths are /daily-readings (which should be rebuilt daily) as well as
+// valid paths are /daily-readings/YYYY-MM-DD for any 10,000 days before/after
+// the present, but these won't all be built
+pub async fn get_static_paths() -> RenderFnResult<Vec<String>> {
+    let starting_date = Date::parse_from_str(&time::input_date_now(), "%Y-%m-%d").unwrap();
+    let generated_paths = (0..=1).map(|offset| {
+        let new_date = starting_date.add_days(offset);
+        format!(
+            "{}-{}-{}",
+            new_date.year(),
+            new_date.month(),
+            new_date.day()
+        )
+    });
+
+    Ok(iter::once(String::default()) // base path ""
+        .chain(generated_paths)
+        .collect())
 }
 
-async fn fetch_data(date: Date, evening: bool) -> Result<SummaryWithPsalms, ()> {
-    let data = Request::get(&format!(
-        "http://127.0.0.1:8000/calendar/day_with_psalms?year={}&month={}&day={}&evening={}",
+#[perseus::autoserde(build_state)]
+pub async fn get_build_props(
+    path: String,
+    locale: String,
+) -> RenderFnResultWithCause<DailyReadingsPageProps> {
+    let language = Language::En; // TODO base on locale
+
+    let date = path
+        .split("daily-readings/")
+        .last()
+        .and_then(|date| Date::parse_from_str(date, "%Y-%m-%d").ok());
+    let summary = date.map(|date| CommonPrayer::summarize_date(&date, language));
+
+    Ok(DailyReadingsPageProps {
+        locale,
+        date,
+        summary,
+    })
+}
+
+#[perseus::template(DailyReadingsPage)]
+#[component(DailyReadingsPage<G>)]
+pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
+    let locale = props.locale;
+
+    // State
+    let state = if let Some(summary) = props.summary {
+        State::Success(Box::new(summary))
+    } else {
+        State::Idle
+    };
+    let state = Signal::new(state);
+
+    // whenever date changes, load a new DailySummary from server, if different from
+    let (date, date_picker) = date_picker(
+        "date",
+        t!("readings_for_date"),
+        props.date.unwrap_or_else(today),
+    );
+    create_effect({
+        let state = state.clone();
+        move || {
+            if let Some(date) = *date.get() {
+                let should_load = match &*state.get() {
+                    State::Idle => true,     // in initial empty state, do loa
+                    State::Loading => false, // if already loading, don't load again
+                    State::Error => false, // if encountered an error, don't try to keep reloading infinitely
+                    State::Success(summary) => (*summary).morning.day.date != date, // if date has changed, reload; if same, don't
+                };
+
+                if should_load {
+                    spawn_local_in_scope({
+                        let state = state.clone();
+                        async move {
+                            state.set(State::Loading);
+                            match fetch_data(date).await {
+                                Ok(summary) => state.set(State::Success(Box::new(summary))),
+                                Err(_) => state.set(State::Error),
+                            }
+                        }
+                    })
+                }
+            }
+        }
+    });
+
+    // UI controls to select which data to show
+    let (summary_data, controls) = controls(state.handle());
+
+    // Rendered set of day name, psalms, and readings
+    let observance_view = observance_view(summary_data, locale);
+
+    view! {
+        h1 {
+            (t!("daily_readings"))
+        }
+
+        (date_picker)
+
+        (controls)
+
+        (observance_view)
+    }
+}
+
+// Represents all the data needed for the view, at the most efficient level of granularity,
+// so that some of these fields can change without all changing
+#[derive(Debug)]
+struct SummaryDataSignals {
+    localized_day_name: ReadSignal<String>,
+    black_letter_days: ReadSignal<Vec<(Feast, String)>>,
+    daily_office_readings: ReadSignal<Vec<Reading>>,
+    psalms: ReadSignal<Vec<Psalm>>,
+}
+
+fn controls<G: GenericNode<EventType = Event>>(
+    state: ReadSignal<State>,
+) -> (SummaryDataSignals, View<G>) {
+    // control to choose Morning/Evening and psalm cycle
+    let (evening, time_of_day_picker) = time_of_day_picker();
+    let (use_30_day_cycle, psalm_cycle_picker) = psalm_cycle_picker();
+
+    // derived data signals
+    let partial_daily_summary = create_memo({
+        let evening = evening.clone();
+        move || {
+            let is_evening = *evening.get();
+            let state = (*state.get()).clone();
+            match (state, is_evening) {
+                (State::Success(summary), true) => Some(summary.evening),
+                (State::Success(summary), false) => Some(summary.morning.clone()),
+                _ => None,
+            }
+        }
+    });
+
+    // control to choose Default/Alternate observance (depends on partial_daily_summary)
+    let (use_alternate, observance_picker) = observance_picker(partial_daily_summary.clone());
+
+    let observance_summary = create_selector({
+        let partial_daily_summary = partial_daily_summary.clone();
+        move || {
+            let partial = (*partial_daily_summary.get()).clone();
+            let use_alternate = *use_alternate.get();
+            match (partial, use_alternate) {
+                // summary not loaded yet => None
+                (None, _) => None,
+                // use_alternate = false => give observed day (always present)
+                (Some(summary), false) => Some(summary.observed),
+                // use_alternate = true => give alternate (if present), otherwise give observed day (always present)
+                (Some(summary), true) => Some(
+                    summary
+                        .alternate
+                        .clone()
+                        .unwrap_or_else(|| summary.observed.clone()),
+                ),
+            }
+        }
+    });
+
+    let localized_day_name = create_selector({
+        let summary = observance_summary.clone();
+        move || {
+            (*summary.get())
+                .as_ref()
+                .map(|summary| summary.localized_name.clone())
+                .unwrap_or_default()
+        }
+    });
+
+    let black_letter_days = create_selector({
+        let summary = observance_summary.clone();
+        move || {
+            (*summary.get())
+                .as_ref()
+                .map(|summary| summary.black_letter_days.clone())
+                .unwrap_or_else(Vec::new)
+        }
+    });
+
+    let daily_office_readings = create_selector({
+        let summary = observance_summary.clone();
+        move || {
+            (*summary.get())
+                .as_ref()
+                .map(|summary| summary.daily_office_readings.clone())
+                .unwrap_or_else(Vec::new)
+        }
+    });
+
+    let thirty_day_psalms = create_selector(move || {
+        (*partial_daily_summary.get())
+            .as_ref()
+            .map(|summary| summary.thirty_day_psalms.clone())
+            .unwrap_or_else(Vec::new)
+    });
+
+    let psalms = create_selector({
+        let summary = observance_summary;
+        move || {
+            let use_30_day_cycle = *use_30_day_cycle.get();
+            (*summary.get())
+                .as_ref()
+                .map(|summary| {
+                    if use_30_day_cycle {
+                        (*thirty_day_psalms.get()).clone()
+                    } else {
+                        summary.daily_office_psalms.clone()
+                    }
+                })
+                .unwrap_or_else(Vec::new)
+        }
+    });
+
+    let data = SummaryDataSignals {
+        localized_day_name,
+        black_letter_days,
+        daily_office_readings,
+        psalms,
+    };
+
+    let view = view! {
+        (time_of_day_picker)
+        (observance_picker)
+        (psalm_cycle_picker)
+    };
+
+    (data, view)
+}
+
+// output ReadSignal value is `false` for morning, `true` for evening
+fn time_of_day_picker<G: GenericNode<EventType = Event>>() -> (ReadSignal<bool>, View<G>) {
+    let is_evening = Signal::new(current_hour() >= 13);
+
+    let evening_check_1 = is_evening.clone();
+    let evening_check_2 = is_evening.clone();
+
+    let view = view! {
+        fieldset(class = "toggle") {
+            input(
+                type = "radio",
+                id = "morning",
+                name = "time_of_day",
+                value = "morning",
+                checked=!(*evening_check_1.get()),
+                on:change=cloned!((is_evening) => move |ev: Event| if value(ev) == "morning" { is_evening.set(false) })
+            )
+            label(for = "morning") {
+                (t!("morning"))
+            }
+            input(
+                type = "radio",
+                id = "evening",
+                name = "time_of_day",
+                value = "evening",
+                checked=*evening_check_2.get(),
+                on:change=cloned!((is_evening) => move |ev: Event| if value(ev) == "evening" { is_evening.set(true) })
+            )
+            label(for = "evening") {
+                (t!("evening"))
+            }
+        }
+    };
+
+    (is_evening.handle(), view)
+}
+
+// output ReadSignal value is `false` for Daily Office lectionary psalms, `true` for 30-day cycle
+fn psalm_cycle_picker<G: GenericNode<EventType = Event>>() -> (ReadSignal<bool>, View<G>) {
+    let use_30_day_psalms = Signal::new(false);
+
+    let check_1 = use_30_day_psalms.clone();
+    let check_2 = use_30_day_psalms.clone();
+
+    let view = view! {
+        fieldset(class = "toggle") {
+            input(
+                type = "radio",
+                id = "daily",
+                name = "psalm_cycle",
+                value = "daily",
+                checked = !*check_1.get(),
+                on:change=cloned!((use_30_day_psalms) => move |ev: Event| use_30_day_psalms.set(value(ev) == "thirty"))
+            )
+            label(for = "daily") {
+                (t!("daily_office_psalms"))
+            }
+            input(
+                type = "radio",
+                id = "thirty",
+                name = "psalm_cycle",
+                value = "thirty",
+                checked = *check_2.get(),
+                on:change=cloned!((use_30_day_psalms) => move |ev: Event| use_30_day_psalms.set(value(ev) == "thirty"))
+            )
+            label(for = "thirty") {
+                (t!("thirty_day_psalms"))
+            }
+        }
+    };
+
+    (use_30_day_psalms.handle(), view)
+}
+
+// output ReadSignal value is `false` by default (= use observed day), `true` if should use alternate observance
+fn observance_picker<G: GenericNode<EventType = Event>>(
+    summary: ReadSignal<Option<PartialDailySummary>>,
+) -> (ReadSignal<bool>, View<G>) {
+    let use_alternate_if_available = Signal::new(false);
+
+    let alternate_check_1 = use_alternate_if_available.clone();
+    let alternate_check_2 = use_alternate_if_available.clone();
+
+    let primary_name = create_selector({
+        let summary = summary.clone();
+        move || {
+            (*summary.get())
+                .as_ref()
+                .map(|summary| summary.observed.localized_name.clone())
+                .unwrap_or_default()
+        }
+    });
+
+    let alternate_name_opt = create_selector({
+        let summary = summary.clone();
+        move || {
+            (*summary.get())
+                .as_ref()
+                .and_then(|summary| summary.alternate.as_ref())
+                .map(|summary| summary.localized_name.clone())
+        }
+    });
+
+    let has_alternate = create_selector({
+        let name = alternate_name_opt.clone();
+        move || (*name.get()).is_some()
+    });
+
+    let alternate_name = create_selector({
+        let summary = summary.clone();
+        move || {
+            (*summary.get())
+                .as_ref()
+                .and_then(|summary| summary.alternate.clone())
+                .map(|alternate| alternate.localized_name)
+                .unwrap_or_default()
+        }
+    });
+
+    let alternate = use_alternate_if_available.clone();
+
+    let view = cloned!((alternate_check_1, alternate_check_2, alternate, primary_name, alternate_name) => view! {
+        (if *has_alternate.get() {
+            let alternate_check_1 = alternate_check_1.clone();
+            let alternate_check_2 = alternate_check_2.clone();
+            let primary_name = primary_name.clone();
+            let alternate_name = alternate_name.clone();
+
+            view! {
+                fieldset(class = "toggle") {
+                    input(
+                        type = "radio",
+                        id = "observed",
+                        name = "observance",
+                        value = "observed",
+                        checked = !(*alternate_check_1.get()),
+                        on:change=cloned!((alternate) => move |ev: Event| alternate.set(value(ev) == "alternate"))
+                    )
+                    label(for = "observed") {
+                        (*primary_name.get())
+                        " "
+                        (t!("default"))
+                    }
+                    input(
+                        type = "radio",
+                        id = "alternate",
+                        name = "observance",
+                        value = "alternate",
+                        checked = *alternate_check_2.get(),
+                        on:change=cloned!((alternate) => move |ev: web_sys::Event| alternate.set(value(ev) == "alternate"))
+                    )
+                    label(for = "alternate") {
+                        (*alternate_name.get())
+                        " "
+                        (t!("alternate"))
+                    }
+                }
+            }
+        } else {
+            view! { }
+        })
+    });
+
+    (use_alternate_if_available.handle(), view)
+}
+
+fn observance_view<G: GenericNode + Html>(data: SummaryDataSignals, locale: String) -> View<G> {
+    let name = data.localized_day_name;
+    let black_letter_days = data.black_letter_days;
+    let daily_office_readings = data.daily_office_readings;
+    let psalms = data.psalms;
+
+    let black_letter_days = create_memo(move || {
+        let days = (*black_letter_days.get()).clone();
+        if days.is_empty() {
+            view! {}
+        } else {
+            let lines = View::new_fragment(
+                days.into_iter()
+                    .map(|(feast, name)| {
+                        let url = format!("/{}/holy-day/{:#?}", locale, feast);
+                        view! {
+                            li {
+                                a(href = (url)) {
+                                    (name)
+                                }
+                            }
+                        }
+                    })
+                    .collect(),
+            );
+            view! {
+                ul {
+                    (lines)
+                }
+            }
+        }
+    });
+
+    let psalms = create_memo(move || {
+        let psalms = (*psalms.get()).clone();
+        View::new_fragment(
+            psalms
+                .iter()
+                .map(|psalm| {
+                    view! {
+                        article(class = "document") {
+                            DocumentComponent(Signal::new(Document::from(psalm.clone())).handle())
+                        }
+                    }
+                })
+                .collect(),
+        )
+    });
+
+    let readings =
+        create_memo(move || {
+            let readings = (*daily_office_readings.get()).clone();
+            View::new_fragment(
+                readings.iter()
+                    .map(|reading| view! {
+                        BiblicalCitationComponent(BiblicalCitation::from(reading.citation.clone()))
+                    })
+                    .collect()
+            )
+        });
+
+    view! {
+        h2(class = "day-name") {
+            (name.get())
+        }
+
+        (*black_letter_days.get())
+
+        section {
+            h2 {
+                (t!("psalms"))
+            }
+            (*psalms.get())
+        }
+
+        section {
+            h2 {
+                (t!("daily_office_readings"))
+            }
+            (*readings.get())
+        }
+    }
+}
+
+// Client-side data fetching from API, for arbitrary dates that are not the ones pre-rendered
+async fn fetch_data(date: Date) -> Result<DailySummary, ()> {
+    let url = format!(
+        "{}/calendar/daily_summary?year={}&month={}&day={}",
+        API_BASE,
         date.year(),
         date.month(),
         date.day(),
-        evening
-    ))
-    .send()
-    .await
-    .map_err(|_| ())?
-    .json::<SummaryWithPsalms>()
-    .await
-    .map_err(|_| ())?;
+    );
+    let data = reqwasm::http::Request::get(&url)
+        .send()
+        .await
+        .map_err(|_| ())?
+        .json::<DailySummary>()
+        .await
+        .map_err(|_| ())?;
+
     Ok(data)
 }

@@ -1,4 +1,5 @@
 mod biblical_citation;
+pub mod date;
 mod document;
 mod lookup;
 

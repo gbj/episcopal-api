@@ -1,3 +1,17 @@
+use calendar::Date;
+
+#[cfg(target_arch = "wasm32")]
+pub fn current_hour() -> u32 {
+    js_sys::Date::new_0().get_hours()
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+pub fn current_hour() -> u32 {
+    use chrono::Timelike;
+
+    chrono::Local::now().hour()
+}
+
 #[cfg(target_arch = "wasm32")]
 pub fn input_date_now() -> String {
     use wasm_bindgen::JsValue;
@@ -8,7 +22,14 @@ pub fn input_date_now() -> String {
 }
 #[cfg(not(target_arch = "wasm32"))]
 pub fn input_date_now() -> String {
-    String::from("")
+    use chrono::Datelike;
+
+    let local = chrono::Local::now();
+    format!("{}-{}-{}", local.year(), local.month(), local.day())
+}
+
+pub fn today() -> Date {
+    Date::parse_from_str(&input_date_now(), "%Y-%m-%d").unwrap()
 }
 
 #[cfg(target_arch = "wasm32")]
