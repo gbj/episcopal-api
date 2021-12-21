@@ -56,8 +56,7 @@ pub fn doc_to_json(
 
 #[get("/?<liturgy>&<date>")]
 pub fn doc_to_html(liturgy: &str, date: Option<&str>) -> Result<Html<String>, APIErrorResponder> {
-    let document =
-        slug_to_doc(liturgy).ok_or_else(|| APIError::LiturgyError(liturgy.to_string()))?;
+    let document = slug_to_doc(liturgy).ok_or_else(|| APIError::Liturgy(liturgy.to_string()))?;
 
     let evening = if let Content::Liturgy(liturgy) = &document.content {
         liturgy.evening
@@ -67,7 +66,7 @@ pub fn doc_to_html(liturgy: &str, date: Option<&str>) -> Result<Html<String>, AP
 
     let compiled = if let Some(date) = date {
         let date = chrono::NaiveDate::parse_from_str(date, "%Y-%m-%d")
-            .map_err(|_| APIErrorResponder::from(APIError::DateError(date.to_string())))?;
+            .map_err(|_| APIErrorResponder::from(APIError::Date(date.to_string())))?;
 
         let date = Date::from(date);
 
@@ -101,7 +100,7 @@ pub fn doc_to_html(liturgy: &str, date: Option<&str>) -> Result<Html<String>, AP
         .unwrap_or_default();
 
     let serialized_state = serde_json::to_string(&compiled)
-        .map_err(|_| APIError::JsonError)?
+        .map_err(|_| APIError::Json)?
         .replace('\\', "\\\\");
 
     let html = Viewer::from(compiled.unwrap_or_default()).to_html();

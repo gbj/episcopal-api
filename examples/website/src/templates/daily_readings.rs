@@ -4,7 +4,7 @@ use calendar::{Date, Feast};
 use language::Language;
 use lectionary::Reading;
 use library::CommonPrayer;
-use perseus::{is_server, t, web_log, Html, RenderFnResult, RenderFnResultWithCause, Template};
+use perseus::{t, Html, RenderFnResult, RenderFnResultWithCause, Template};
 use serde::{Deserialize, Serialize};
 use sycamore::{
     futures::spawn_local_in_scope,
@@ -197,7 +197,6 @@ fn controls<G: GenericNode<EventType = Event>>(
 
     // derived data signals
     let partial_daily_summary = create_memo({
-        let evening = evening.clone();
         move || {
             let is_evening = *evening.get();
             let state = (*state.get()).clone();
@@ -396,23 +395,17 @@ fn observance_picker<G: GenericNode<EventType = Event>>(
         }
     });
 
-    let alternate_name_opt = create_selector({
+    let has_alternate = create_selector({
         let summary = summary.clone();
         move || {
             (*summary.get())
                 .as_ref()
                 .and_then(|summary| summary.alternate.as_ref())
-                .map(|summary| summary.localized_name.clone())
+                .is_some()
         }
     });
 
-    let has_alternate = create_selector({
-        let name = alternate_name_opt.clone();
-        move || (*name.get()).is_some()
-    });
-
     let alternate_name = create_selector({
-        let summary = summary.clone();
         move || {
             (*summary.get())
                 .as_ref()
