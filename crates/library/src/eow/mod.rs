@@ -1,3 +1,3 @@
-mod canticles;
+pub mod canticles;
 
 pub use canticles::*;

@@ -18,7 +18,7 @@
   - [x] Canticle Table
     - [x] BCP
     - [x] EOW
-    - [ ] Canticles themselves
+    - [x] Canticles themselves
   - [ ] Psalter page
   - [ ] Category
   - [ ] Collects of the Day

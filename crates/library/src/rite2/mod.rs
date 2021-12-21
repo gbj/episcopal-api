@@ -1,4 +1,4 @@
-mod canticles;
+pub mod canticles;
 mod fragments;
 pub mod office;
 

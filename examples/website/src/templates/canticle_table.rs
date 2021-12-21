@@ -620,7 +620,7 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("sunday_abbrev"))
               }
               td {
-                (canticle_link("16-eow", "16. The Song of Mary"))
+                (canticle_link("15-eow", "15. The Song of Mary"))
               }
               td {
                 (a_or_b(("17", "The Song of Simeon**"), ("m", "M. A Song of Faith")))
@@ -645,7 +645,7 @@ pub fn canticle_table_page() -> View<G> {
                 (canticle_link("d", "D. A Song of the Wilderness"))
               }
               td {
-                (a_or_b(("16-eow", "16. The Song of Mary"), ("p", "P. A Song of the Spirit")))
+                (a_or_b(("15-eow", "15. The Song of Mary"), ("p", "P. A Song of the Spirit")))
               }
             }
             tr(class = "day") {
@@ -667,7 +667,7 @@ pub fn canticle_table_page() -> View<G> {
                 (canticle_link("j", "J. A Song of Judith"))
               }
               td {
-                (a_or_b(("16-eow", "16. The Song of Mary"), ("s", "S. A Song of Our True Nature")))
+                (a_or_b(("15-eow", "15. The Song of Mary"), ("s", "S. A Song of Our True Nature")))
               }
             }
             tr(class = "day") {
@@ -689,7 +689,7 @@ pub fn canticle_table_page() -> View<G> {
                 (canticle_link("b", "B. A Song of Pilgrimage"))
               }
               td {
-                (a_or_b(("16-eow", "16. The Song of Mary"), ("r", "R. A Song of True Motherhood")))
+                (a_or_b(("15-eow", "15. The Song of Mary"), ("r", "R. A Song of True Motherhood")))
               }
             }
           }
@@ -702,10 +702,10 @@ pub fn canticle_table_page() -> View<G> {
             tr {
               td { }
               td {
-                (canticle_link("16-eow", "16. The Song of Mary"))
+                (canticle_link("15-eow", "15. The Song of Mary"))
               }
               td {
-                (a_or_b(("o", "O> A Song of the Heavenly City**"), ("17", "The Song of Simeon**")))
+                (a_or_b(("o", "O. A Song of the Heavenly City**"), ("17", "The Song of Simeon**")))
               }
             }
           }
@@ -736,7 +736,7 @@ fn a_or_b<G: GenericNode>(
 
 fn canticle_link<G: GenericNode>(number: &'static str, label: &'static str) -> View<G> {
     view! {
-      a(href = format!("/canticle/canticle-{}", number)) {
+      a(href = format!("/document/canticle/{}", number)) {
         (label)
       }
     }
