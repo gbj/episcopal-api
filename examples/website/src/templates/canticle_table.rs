@@ -453,10 +453,10 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("monday_abbrev"))
               }
               td {
-                (canticle_link("9", "9. Ecce, Deus"))
+                (a_or_b(("c", "C. A Song of Hannah"), ("11", "11. The Third Song of Isaiah")))
               }
               td {
-                (canticle_link("19", "19. Magna et mirabilia"))
+                (a_or_b(("l", "L. A Song of Christ’s Humility"), ("q", "Q. A Song of Christ’s Goodness")))
               }
             }
             tr(class = "day") {
@@ -464,10 +464,10 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("tuesday_abbrev"))
               }
               td {
-                (a_or_b(("2", "2."), ("13", "13. Benedictus es")))
+                (a_or_b(("b", "B. A Song of Pilgrimage"), ("13-eow", "13. A Song of Praise")))
               }
               td {
-                (canticle_link("18", "18. Dignus es"))
+                (a_or_b(("m", "M. A Song of Faith"), ("n", "N. A Song of God’s Love")))
               }
             }
             tr(class = "day") {
@@ -475,43 +475,32 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("wednesday_abbrev"))
               }
               td {
-                (canticle_link("11", "11. Surge, illuminare"))
+                (a_or_b(("g", "G. A Song of Ezekiel"), ("h", "H. A Song of Hosea")))
               }
               td {
-                (a_or_b(("4", "4."), ("16", "16. Benedictus Dominus")))
+                (a_or_b(("p", "P. A Song of the Spirit"), ("s", "S. A Song of Our True Nature")))
               }
             }
             tr {
-              td {}
+              td { }
               td {
                 em {
                   (t!("lent")) ": "
                 }
                 br { }
-                (canticle_link("14", "14. Kyrie Pantokrator"))
+                (a_or_b(("i", "I. A Song of Jonah"), ("10", "10. The Second Song of Isaiah")))
               }
-              td {}
+              td { }
             }
             tr(class = "day") {
               td(class = "day-name") {
                 (t!("thursday_abbrev"))
               }
               td {
-                (canticle_link("8", "8. Cantemus Domino"))
+                (a_or_b(("a", "A. A Song of Wishdom"), ("j", "J. A Song of Judith")))
               }
               td {
-                (a_or_b(("6", "6."), ("20", "20. Gloria in excelsis")))
-              }
-            }
-            tr {
-              td { }
-              td { }
-              td {
-                em {
-                  (t!("advent_and_lent")) ": "
-                }
-                br { }
-                (canticle_link("19", "19. Magna et mirabilia"))
+                (a_or_b(("r", "R. A Song of True Motherhood"), ("16", "16. A Song of Zechariah")))
               }
             }
             tr(class = "day") {
@@ -519,10 +508,27 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("friday_abbrev"))
               }
               td {
-                (canticle_link("10", "10. Quaerite Dominums"))
+                (canticle_link("i", "I. A Song of Jonah"))
               }
               td {
-                (canticle_link("18", "18. Dignus es"))
+                (canticle_link("18-eow", "18. Song to the Lamb"))
+              }
+            }
+            tr {
+              td {}
+              td {
+                em {
+                  (t!("christmas")) ":* "
+                }
+                br { }
+                (canticle_link("j", "J. A Song of Judith"))
+              }
+              td {
+                em {
+                  (t!("christmas")) ":* "
+                }
+                br { }
+                (canticle_link("r", "R. A Song of True Motherhood"))
               }
             }
             tr {
@@ -532,7 +538,31 @@ pub fn canticle_table_page() -> View<G> {
                   (t!("lent")) ": "
                 }
                 br { }
-                (canticle_link("14", "14. Kyrie Pantokrator"))
+                (a_or_b(("f", "F. A Song of Lamentation"), ("14", "14. A Song of Penitence")))
+              }
+              td {
+                em {
+                  (t!("lent")) ": "
+                }
+                br { }
+                (canticle_link("s", "S. A Song of Our True Nature"))
+              }
+            }
+            tr {
+              td {}
+              td {
+                em {
+                  (t!("easter")) ":* "
+                }
+                br { }
+                (canticle_link("g", "G. A Song of Ezekiel"))
+              }
+              td {
+                em {
+                  (t!("easter")) ":* "
+                }
+                br { }
+                (canticle_link("k", "K. A Song of Our Adoption"))
               }
             }
             tr(class = "day") {
@@ -540,10 +570,10 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("saturday_abbrev"))
               }
               td {
-                (a_or_b(("1", "1."), ("12", "12. Benedicite")))
+                (a_or_b(("12-eow", "12. A Song of Creation"), ("d", "D. A Song of the Wilderness")))
               }
               td {
-                (canticle_link("19", "19. Magna et mirabilia"))
+                (a_or_b(("o", "O. A Song of the Heavenly City"), ("19", "19. The Song of the Redeemed")))
               }
             }
           }
@@ -556,11 +586,16 @@ pub fn canticle_table_page() -> View<G> {
             tr {
               td { }
               td {
-                (a_or_b(("4", "4."), ("16", "16. Benedictus Dominus")))
+                (a_or_b(("16-eow", "16. A Song of Zechariah"), ("e", "E. A Song of Jerusalem Our Mother")))
               }
               td {
-                (a_or_b(("7", "7."), ("21", "21. Te Deum laudamus")))
+                (a_or_b(("21-eow", "21. We Praise You O GOd"), ("K", "K. A Song of Our Adoption")))
               }
+            }
+          }
+          p {
+            em(class = "rubric") {
+              (t!("canticles_appointed_for_christmas"))
             }
           }
           h3 {
@@ -585,10 +620,10 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("sunday_abbrev"))
               }
               td {
-                (a_or_b(("3", "3."), ("15", "15. Magnificat")))
+                (canticle_link("16-eow", "16. The Song of Mary"))
               }
               td {
-                (a_or_b(("5", "5."), ("17", "17. Nunc dimittis")))
+                (a_or_b(("17", "The Song of Simeon**"), ("m", "M. A Song of Faith")))
               }
             }
             tr(class = "day") {
@@ -596,20 +631,10 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("monday_abbrev"))
               }
               td {
-                (canticle_link("8", "8. Cantemus, Domino"))
+                (canticle_link("a", "A. A Song of Wisdom"))
               }
               td {
-                (a_or_b(("5", "5."), ("17", "17. Nunc dimittis")))
-              }
-            }
-            tr {
-              td {}
-              td {
-                em {
-                  (t!("lent")) ": "
-                }
-                br {}
-                (canticle_link("14", "14. Kyrie Pantrokrator"))
+                (a_or_b(("n", "N. A Song of God’s Love"), ("17", "The Song of Simeon")))
               }
             }
             tr(class = "day") {
@@ -617,10 +642,10 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("tuesday_abbrev"))
               }
               td {
-                (canticle_link("10", "10. Quaerite Dominum"))
+                (canticle_link("d", "D. A Song of the Wilderness"))
               }
               td {
-                (a_or_b(("3", "3."), ("15", "15. Nunc dimittis")))
+                (a_or_b(("16-eow", "16. The Song of Mary"), ("p", "P. A Song of the Spirit")))
               }
             }
             tr(class = "day") {
@@ -628,10 +653,10 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("wednesday_abbrev"))
               }
               td {
-                (a_or_b(("1", "1."), ("12", "12. Benedicite")))
+                (canticle_link("c", "C. The Song of Hannah"))
               }
               td {
-                (a_or_b(("5", "5."), ("17", "17. Nunc dimittis")))
+                (a_or_b(("l", "L. A Song of Christ’s Humility"), ("17", "The Song of Simeon")))
               }
             }
             tr(class = "day") {
@@ -639,10 +664,10 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("thursday_abbrev"))
               }
               td {
-                (canticle_link("11", "11. Surge, illuminare"))
+                (canticle_link("j", "J. A Song of Judith"))
               }
               td {
-                (a_or_b(("3", "3."), ("15", "15. Magnificat")))
+                (a_or_b(("16-eow", "16. The Song of Mary"), ("s", "S. A Song of Our True Nature")))
               }
             }
             tr(class = "day") {
@@ -650,10 +675,10 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("friday_abbrev"))
               }
               td {
-                (a_or_b(("2", "2."), ("13", "13. Benedictus es")))
+                (canticle_link("g", "G. A Song of Ezekiel"))
               }
               td {
-                (a_or_b(("5", "5."), ("17", "17. Nunc dimittis")))
+                (a_or_b(("q", "Q. A Song of Christ’s Goodness"), ("17", "The Song of Simeon")))
               }
             }
             tr(class = "day") {
@@ -661,10 +686,10 @@ pub fn canticle_table_page() -> View<G> {
                 (t!("saturday_abbrev"))
               }
               td {
-                (canticle_link("9", "9. Ecce, Deus"))
+                (canticle_link("b", "B. A Song of Pilgrimage"))
               }
               td {
-                (a_or_b(("3", "3."), ("15", "15. Magnificat")))
+                (a_or_b(("16-eow", "16. The Song of Mary"), ("r", "R. A Song of True Motherhood")))
               }
             }
           }
@@ -677,16 +702,16 @@ pub fn canticle_table_page() -> View<G> {
             tr {
               td { }
               td {
-                (a_or_b(("3", "3."), ("15", "15. Magnificat")))
+                (canticle_link("16-eow", "16. The Song of Mary"))
               }
               td {
-                (a_or_b(("5", "5."), ("17", "17. Nunc dimittis")))
+                (a_or_b(("o", "O> A Song of the Heavenly City**"), ("17", "The Song of Simeon**")))
               }
             }
           }
           p {
             em(class = "rubric") {
-              (t!("magnificat_note"))
+              (t!("magnificat_note_eow"))
             }
           }
         }

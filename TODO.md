@@ -15,9 +15,10 @@
       - [ ] Handle Loading/Error states in new version
       - [X] Evening toggle bug
       - [ ] Refactor toggle-radio functionality
-  - [ ] Canticle Table
+  - [x] Canticle Table
     - [x] BCP
-    - [ ] EOW
+    - [x] EOW
+    - [ ] Canticles themselves
   - [ ] Psalter page
   - [ ] Category
   - [ ] Collects of the Day
