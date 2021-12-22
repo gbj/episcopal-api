@@ -163,18 +163,20 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
     let (summary_data, controls) = controls(state.handle());
 
     // Rendered set of day name, psalms, and readings
-    let observance_view = observance_view(summary_data, locale);
+    let observance_view = observance_view(state.handle(), summary_data, locale);
 
     view! {
-        h1 {
-            (t!("daily_readings"))
+        main {
+            h1 {
+                (t!("daily_readings"))
+            }
+
+            (date_picker)
+
+            (controls)
+
+            (observance_view)
         }
-
-        (date_picker)
-
-        (controls)
-
-        (observance_view)
     }
 }
 
@@ -462,7 +464,11 @@ fn observance_picker<G: GenericNode<EventType = Event>>(
     (use_alternate_if_available.handle(), view)
 }
 
-fn observance_view<G: GenericNode + Html>(data: SummaryDataSignals, locale: String) -> View<G> {
+fn observance_view<G: GenericNode + Html>(
+    state: ReadSignal<State>,
+    data: SummaryDataSignals,
+    locale: String,
+) -> View<G> {
     let name = data.localized_day_name;
     let black_letter_days = data.black_letter_days;
     let daily_office_readings = data.daily_office_readings;
@@ -488,7 +494,7 @@ fn observance_view<G: GenericNode + Html>(data: SummaryDataSignals, locale: Stri
                     .collect(),
             );
             view! {
-                ul {
+                ul(class = "black-letter-days") {
                     (lines)
                 }
             }
@@ -497,52 +503,82 @@ fn observance_view<G: GenericNode + Html>(data: SummaryDataSignals, locale: Stri
 
     let psalms = create_memo(move || {
         let psalms = (*psalms.get()).clone();
-        View::new_fragment(
-            psalms
-                .iter()
-                .map(|psalm| {
-                    view! {
-                        article(class = "document") {
-                            DocumentComponent(Signal::new(Document::from(psalm.clone())).handle())
+
+        if psalms.is_empty() {
+            view! {}
+        } else {
+            let psalms =  View::new_fragment(
+                psalms
+                    .iter()
+                    .map(|psalm| {
+                        view! {
+                            article(class = "document") {
+                                DocumentComponent(Signal::new(Document::from(psalm.clone())).handle())
+                            }
                         }
+                    })
+                    .collect(),
+            );
+            view! {
+                section {
+                    h2 {
+                        (t!("psalms"))
                     }
-                })
-                .collect(),
-        )
+                    (psalms)
+                }
+            }
+        }
     });
 
-    let readings =
-        create_memo(move || {
-            let readings = (*daily_office_readings.get()).clone();
-            View::new_fragment(
+    let readings = create_memo(move || {
+        let readings = (*daily_office_readings.get()).clone();
+
+        if readings.is_empty() {
+            view! {}
+        } else {
+            let readings = View::new_fragment(
                 readings.iter()
                     .map(|reading| view! {
                         BiblicalCitationComponent(BiblicalCitation::from(reading.citation.clone()))
                     })
                     .collect()
-            )
-        });
+            );
+
+            view! {
+                section {
+                    h2 {
+                        (t!("daily_office_readings"))
+                    }
+                    (readings)
+                }
+            }
+        }
+    });
+
+    let status_view = create_memo(move || match *state.get() {
+        State::Loading => view! {
+            p(class = "loading centered") {
+                (t!("loading"))
+            }
+        },
+        State::Error => view! {
+            p(class = "error centered") {
+                (t!("daily_readings_error"))
+            }
+        },
+        _ => view! {},
+    });
 
     view! {
         h2(class = "day-name") {
             (name.get())
         }
 
+        (*status_view.get())
+
         (*black_letter_days.get())
-
-        section {
-            h2 {
-                (t!("psalms"))
-            }
-            (*psalms.get())
-        }
-
-        section {
-            h2 {
-                (t!("daily_office_readings"))
-            }
-            (*readings.get())
-        }
+        (*psalms.get())
+        (*readings.get())
     }
 }
 

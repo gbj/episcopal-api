@@ -7,6 +7,8 @@
   --page-padding: 1rem;
   --rubric-size: 0.9rem;
   --rubric-color: #ea0000;
+  --error-color: rgb(234, 0, 0);
+  --error-color-tint: rgba(234, 0, 0, 0.5);
 
   /* Settings */
   --response-weight: bold;
@@ -74,6 +76,11 @@ body {
 .centered {
   display: block;
   margin: auto;
+  text-align: center;
+}
+
+.error {
+  color: var(--error-color);
 }
 
 /* Hide things *only* visually, leaving them accessible to screen readers */

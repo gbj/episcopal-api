@@ -23,7 +23,7 @@ biblical_citation_try_again = Try Again.
 
 daily_readings = Daily Readings
 readings_for_date = Readings for Date
-daily_readings_error = Uh-oh! Something went wrong while loading readings for { $date }.
+daily_readings_error = Uh-oh! Something went wrong while loading readings.
 default = (Default)
 alternate = (Alternate)
 transferred =  (Transferred)

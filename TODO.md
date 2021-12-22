@@ -2,7 +2,7 @@
   - [x] Lectionary Readings (Daily Readings page)
     - [x] Formatting for liturgical day names
       - [ ] Refactor/consolidate localization of day names in `library` and `rest_api` crates
-      - [ ] Styling for dqy names and holy day name
+      - [x] Styling for dqy names and holy day name
       - [ ] Testing for these
     - [x] Load psalms proper, not just citations (or link to psalter?)
     - [x] Load BiblicalCitations
@@ -12,7 +12,7 @@
     - [x] Choose observance, if applicable
     - [ ] Rebuild to do static generation with distinct paths
     - [x] Refactor the view function for this page
-      - [ ] Handle Loading/Error states in new version
+      - [x] Handle Loading/Error states in new version
       - [X] Evening toggle bug
       - [ ] Refactor toggle-radio functionality
   - [x] Canticle Table
