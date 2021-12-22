@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 use sycamore::prelude::*;
 
 use crate::components::*;
-use crate::table_of_contents::{CANTICLES, LITURGIES};
+use crate::table_of_contents::TABLE_OF_CONTENTS;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct DocumentPageProps {
@@ -42,20 +42,26 @@ pub fn head_fn<G: Html>() -> View<G> {
     }
 }
 
-fn toc_docs() -> Vec<(&'static str, &'static Document)> {
-    let mut docs = Vec::new();
-    docs.append(&mut LITURGIES.clone());
-    docs.append(&mut CANTICLES.clone());
-    docs
+fn toc_docs() -> Vec<(String, String, &'static Document)> {
+    TABLE_OF_CONTENTS
+        .iter()
+        .flat_map(|(category, docs)| {
+            docs.iter()
+                .map(move |(slug, doc)| (category.clone(), slug.clone(), doc))
+        })
+        .collect()
 }
 
 fn path_to_doc(path: &str) -> Option<Document> {
-    let path_slug = path.replace("document/", "");
+    let mut parts = path.split('/');
+    let _ = parts.next(); // /document
+    let category = parts.next().expect("expected a category");
+    let slug = parts.next().expect("expected a slug");
 
     toc_docs()
         .iter()
-        .find(|(s_slug, _)| *s_slug == path_slug)
-        .map(|(_, document)| (*document).clone())
+        .find(|(s_category, s_slug, _)| s_category == category && *s_slug == slug)
+        .map(|(_, _, document)| (*document).clone())
 }
 
 #[perseus::autoserde(build_state)]
@@ -69,12 +75,13 @@ pub async fn get_build_props(
 }
 
 pub async fn get_static_paths() -> RenderFnResult<Vec<String>> {
-    let liturgies = LITURGIES.iter();
-    let canticles = CANTICLES.iter();
-
-    Ok(liturgies
-        .chain(canticles)
-        .map(|(slug, _)| slug.to_string())
+    Ok(TABLE_OF_CONTENTS
+        .iter()
+        .flat_map(|(category, docs)| {
+            docs.iter()
+                .map(move |(slug, _)| (category.clone(), slug.clone()))
+        })
+        .map(|(category, slug)| format!("{category}/{slug}"))
         .collect())
 }
 

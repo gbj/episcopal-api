@@ -18,7 +18,11 @@ pub fn index_page() -> View<G> {
             window()
                 .unwrap()
                 .location()
-                .set_href(&format!("/document/{}?date={}", liturgy.get(), date.get()))
+                .set_href(&format!(
+                    "/document/office/{}?date={}",
+                    liturgy.get(),
+                    date.get()
+                ))
                 .unwrap();
         }
     };
