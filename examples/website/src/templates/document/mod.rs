@@ -18,7 +18,13 @@ pub struct DocumentPageProps {
 #[perseus::template(DocumentPage)]
 #[component(DocumentPage<G>)]
 pub fn document_page(props: DocumentPageProps) -> View<G> {
+    let label = props.document.label.clone().unwrap_or_default();
     view! {
+        header {
+            p(class = "document-label") {
+                (label)
+            }
+        }
         main {
             DocumentComponent(Signal::new(props.document).handle())
         }

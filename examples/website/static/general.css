@@ -59,6 +59,26 @@ body {
   padding: 0;
 }
 
+.__perseus_content > header {
+  text-align: center;
+  /* Floats along the top of the screen */
+  position: sticky;
+  top: 0;
+  background: var(--background);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: middle;
+  padding: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.__perseus_content > header .document-label {
+  font-variant: small-caps;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
 .__perseus_content > main {
   display: block;
   margin: auto;

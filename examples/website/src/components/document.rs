@@ -11,7 +11,17 @@ type HeaderAndMain<G> = (Option<View<G>>, View<G>);
 
 #[component(DocumentComponent<G>)]
 pub fn document_component(doc: ReadSignal<Document>) -> View<G> {
-    let label = create_memo(cloned!((doc) => move || doc.get().label.as_ref().cloned()));
+    let label = create_memo({
+        let doc = doc.clone();
+        move || {
+            let doc = doc.get();
+            if matches!(doc.content, Content::Liturgy(_)) {
+                None
+            } else {
+                doc.label.as_ref().cloned()
+            }
+        }
+    });
 
     let header_and_main = create_memo(move || match doc.get().content.clone() {
         Content::Series(content) => series(content),
