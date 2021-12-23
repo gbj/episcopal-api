@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::Document;
+use crate::{Choice, Document, Series};
 
 /// Multiple [Document](crate::Document)s that are displayed side by side.
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -31,5 +31,17 @@ where
 {
     fn from(items: T) -> Self {
         Self(items.into_iter().map(|item| item.into()).collect())
+    }
+}
+
+impl From<Series> for Parallel {
+    fn from(series: Series) -> Self {
+        Self::from(series.into_vec())
+    }
+}
+
+impl From<Choice> for Parallel {
+    fn from(choice: Choice) -> Self {
+        Self::from(choice.options)
     }
 }

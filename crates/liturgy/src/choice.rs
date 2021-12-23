@@ -1,7 +1,7 @@
 use itertools::Itertools;
 use serde::{Deserialize, Serialize};
 
-use crate::{Content, Document};
+use crate::{Content, Document, Parallel, Series};
 use calendar::Date;
 
 /// Multiple [Document](crate::Document)s that are displayed one at a time, with a menu to choose between them.
@@ -22,6 +22,18 @@ where
             options: options.into_iter().collect(),
             rotated: false,
         }
+    }
+}
+
+impl From<Series> for Choice {
+    fn from(series: Series) -> Self {
+        Self::from(series.into_vec())
+    }
+}
+
+impl From<Parallel> for Choice {
+    fn from(parallel: Parallel) -> Self {
+        Self::from(parallel.into_vec())
     }
 }
 
