@@ -290,76 +290,24 @@ fn controls<G: GenericNode<EventType = Event>>(
 
 // output ReadSignal value is `false` for morning, `true` for evening
 fn time_of_day_picker<G: GenericNode<EventType = Event>>() -> (ReadSignal<bool>, View<G>) {
-    let is_evening = Signal::new(current_hour() >= 13);
-
-    let evening_check_1 = is_evening.clone();
-    let evening_check_2 = is_evening.clone();
-
-    let view = view! {
-        fieldset(class = "toggle") {
-            input(
-                type = "radio",
-                id = "morning",
-                name = "time_of_day",
-                value = "morning",
-                checked=!(*evening_check_1.get()),
-                on:change=cloned!((is_evening) => move |ev: Event| if value(ev) == "morning" { is_evening.set(false) })
-            )
-            label(for = "morning") {
-                (t!("morning"))
-            }
-            input(
-                type = "radio",
-                id = "evening",
-                name = "time_of_day",
-                value = "evening",
-                checked=*evening_check_2.get(),
-                on:change=cloned!((is_evening) => move |ev: Event| if value(ev) == "evening" { is_evening.set(true) })
-            )
-            label(for = "evening") {
-                (t!("evening"))
-            }
-        }
-    };
-
-    (is_evening.handle(), view)
+    let toggle = Toggle::new(
+        "time_of_day".into(),
+        t!("morning"),
+        t!("evening"),
+        current_hour() >= 13,
+    );
+    (toggle.toggled(), toggle.view())
 }
 
 // output ReadSignal value is `false` for Daily Office lectionary psalms, `true` for 30-day cycle
 fn psalm_cycle_picker<G: GenericNode<EventType = Event>>() -> (ReadSignal<bool>, View<G>) {
-    let use_30_day_psalms = Signal::new(false);
-
-    let check_1 = use_30_day_psalms.clone();
-    let check_2 = use_30_day_psalms.clone();
-
-    let view = view! {
-        fieldset(class = "toggle") {
-            input(
-                type = "radio",
-                id = "daily",
-                name = "psalm_cycle",
-                value = "daily",
-                checked = !*check_1.get(),
-                on:change=cloned!((use_30_day_psalms) => move |ev: Event| use_30_day_psalms.set(value(ev) == "thirty"))
-            )
-            label(for = "daily") {
-                (t!("daily_office_psalms"))
-            }
-            input(
-                type = "radio",
-                id = "thirty",
-                name = "psalm_cycle",
-                value = "thirty",
-                checked = *check_2.get(),
-                on:change=cloned!((use_30_day_psalms) => move |ev: Event| use_30_day_psalms.set(value(ev) == "thirty"))
-            )
-            label(for = "thirty") {
-                (t!("thirty_day_psalms"))
-            }
-        }
-    };
-
-    (use_30_day_psalms.handle(), view)
+    let toggle = Toggle::new(
+        "psalm_cycle".into(),
+        t!("daily_office_psalms"),
+        t!("thirty_day_psalms"),
+        false,
+    );
+    (toggle.toggled(), toggle.view())
 }
 
 // output ReadSignal value is `false` by default (= use observed day), `true` if should use alternate observance
@@ -403,6 +351,8 @@ fn observance_picker<G: GenericNode<EventType = Event>>(
 
     let alternate = use_alternate_if_available.clone();
 
+    // TODO this could be set up to use Toggle as well, but the complication of the labels being Signals
+    // would require a change that would make the other toggles more complicated; maybe not worth it
     let view = cloned!((alternate_check_1, alternate_check_2, alternate, primary_name, alternate_name) => view! {
         (if *has_alternate.get() {
             let alternate_check_1 = alternate_check_1.clone();

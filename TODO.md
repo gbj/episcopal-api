@@ -1,20 +1,4 @@
 - [ ] Build actual pages for lookups
-  - [x] Lectionary Readings (Daily Readings page)
-    - [x] Formatting for liturgical day names
-      - [ ] Refactor/consolidate localization of day names in `library` and `rest_api` crates
-      - [x] Styling for dqy names and holy day name
-      - [ ] Testing for these
-    - [x] Load psalms proper, not just citations (or link to psalter?)
-    - [x] Load BiblicalCitations
-      - [ ] Include paragraphs/spacing
-      - [ ] Bugs
-          - [ ] Something went wrong while loading Proverbs 8:22-30 (for Feast of St. John) -- also Wisdom 4:7-15
-    - [x] Choose observance, if applicable
-    - [x] Rebuild to do static generation with distinct paths
-    - [x] Refactor the view function for this page
-      - [x] Handle Loading/Error states in new version
-      - [X] Evening toggle bug
-      - [ ] Refactor toggle-radio functionality
   - [x] Canticle Table
     - [x] BCP
     - [x] EOW
@@ -39,13 +23,14 @@
     - the observed day
     - the alternate day
     - a red-letter day that was displaced by a Sunday
+- [ ] Improvements to BiblicalCitation async loading
+  - [ ] Include paragraphs/spacing
+  - Bugs
+    - [ ] Proverbs 8:22-30 (12/27 St. John)
+    - [ ] Wisdom 4:7-15 (when?)
 - [ ] Morning Prayer
   - [ ] Clean up internal TODO items
   - [ ] rotate `Choice`s for things like prayers for mission and daily collects?
-- [ ] Hosting/CI
-  - [ ] Fix assets locations
-  - [ ] Fix WASM build if necessary
-- [ ] Use Sauron to build additional website pages
 - [x] Preferences
   - [ ] Tests (in conditions)
 - [ ] Canticle Tables
@@ -83,4 +68,3 @@
 - [ ] Sort and prettify various constant arrays
 - [ ] Localization
   - [ ] LiturgicalWeek => color
-
