@@ -1,5 +1,3 @@
-use std::iter;
-
 use calendar::{Date, Feast};
 use language::Language;
 use lectionary::Reading;
@@ -16,11 +14,11 @@ use sycamore::{
 };
 use web_sys::Event;
 
+use crate::components::*;
 use crate::{
     components::date::date_picker,
     utils::time::{current_hour, today},
 };
-use crate::{components::*, utils::time};
 use crate::{utils::input::value, API_BASE};
 
 use api::summary::*;
@@ -72,25 +70,11 @@ pub fn head<G: Html>() -> View<G> {
     }
 }
 
-// In lieu of dynamic paths like /daily-readings/<date>,
-// valid paths are /daily-readings (which should be rebuilt daily) as well as
-// valid paths are /daily-readings/YYYY-MM-DD for any 10,000 days before/after
-// the present, but these won't all be built
+// Incremental generation allows us to dynamically generate a page for *any* date at runtime
+// and then cache it; the only static/build-time path is /daily-readings, which is the one that always
+// loads from the and is not statically generated
 pub async fn get_static_paths() -> RenderFnResult<Vec<String>> {
-    let starting_date = Date::parse_from_str(&time::input_date_now(), "%Y-%m-%d").unwrap();
-    let generated_paths = (0..=1).map(|offset| {
-        let new_date = starting_date.add_days(offset);
-        format!(
-            "{}-{}-{}",
-            new_date.year(),
-            new_date.month(),
-            new_date.day()
-        )
-    });
-
-    Ok(iter::once(String::default()) // base path ""
-        .chain(generated_paths)
-        .collect())
+    Ok(vec!["".into()])
 }
 
 #[perseus::autoserde(build_state)]
