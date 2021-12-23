@@ -20,7 +20,9 @@
     - [x] EOW
     - [x] Canticles themselves
   - [ ] Psalter page
-  - [ ] Category
+  - [x] Category
+    - [ ] Handle different versions (in link, and in page generation)
+    - [ ] Category pages (as distinct from document pages) with labels etc.
   - [ ] Collects of the Day
   - [ ] Calendar
     - [ ] Saints’ days with bios

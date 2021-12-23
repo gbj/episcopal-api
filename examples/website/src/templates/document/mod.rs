@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 use sycamore::prelude::*;
 
 use crate::components::*;
-use crate::table_of_contents::TABLE_OF_CONTENTS;
+use crate::table_of_contents::{PageType, TABLE_OF_CONTENTS};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct DocumentPageProps {
@@ -48,12 +48,13 @@ pub fn head_fn<G: Html>() -> View<G> {
     }
 }
 
-fn toc_docs() -> Vec<(String, String, &'static Document)> {
+fn toc_docs() -> Vec<(String, String, PageType, &'static Document)> {
     TABLE_OF_CONTENTS
         .iter()
         .flat_map(|(category, docs)| {
-            docs.iter()
-                .map(move |(slug, doc)| (category.clone(), slug.clone(), doc))
+            docs.iter().map(move |(slug, page_type, doc)| {
+                (category.clone(), slug.clone(), *page_type, doc)
+            })
         })
         .collect()
 }
@@ -66,8 +67,18 @@ fn path_to_doc(path: &str) -> Option<Document> {
 
     toc_docs()
         .iter()
-        .find(|(s_category, s_slug, _)| s_category == category && *s_slug == slug)
-        .map(|(_, _, document)| (*document).clone())
+        .find(|(s_category, s_slug, _, _)| s_category == category && *s_slug == slug)
+        .map(|(_, _, page_type, document)| {
+            let doc = (*document).clone();
+            match (*page_type, &doc.content) {
+                // if it's a category page, and a choice, then unravel it into a series
+                (PageType::Category, Content::Choice(choice)) => Document {
+                    content: Content::Series(choice.clone().into()),
+                    ..doc
+                },
+                _ => doc,
+            }
+        })
 }
 
 #[perseus::autoserde(build_state)]
@@ -85,7 +96,7 @@ pub async fn get_static_paths() -> RenderFnResult<Vec<String>> {
         .iter()
         .flat_map(|(category, docs)| {
             docs.iter()
-                .map(move |(slug, _)| (category.clone(), slug.clone()))
+                .map(move |(slug, _, _)| (category.clone(), slug.clone()))
         })
         .map(|(category, slug)| format!("{category}/{slug}"))
         .collect())

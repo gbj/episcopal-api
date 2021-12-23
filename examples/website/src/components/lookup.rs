@@ -16,7 +16,8 @@ pub fn lookup_links(lookup_type: &LookupType) -> String {
 
     match lookup_type {
         LookupType::Category(version, name) => {
-            format!("/{:#?}/category/{}", version, slugify(name))
+            //format!("/{:#?}/category/{}", version, slugify(name))
+            format!("/document/category/{}", slugify(name))
         }
         LookupType::Canticle(_) => "/canticle-table".to_string(),
         LookupType::Collect(version) => format!("/{:#?}/collects", version),
