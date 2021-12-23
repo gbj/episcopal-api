@@ -10,7 +10,7 @@
       - [ ] Bugs
           - [ ] Something went wrong while loading Proverbs 8:22-30 (for Feast of St. John) -- also Wisdom 4:7-15
     - [x] Choose observance, if applicable
-    - [ ] Rebuild to do static generation with distinct paths
+    - [x] Rebuild to do static generation with distinct paths
     - [x] Refactor the view function for this page
       - [x] Handle Loading/Error states in new version
       - [X] Evening toggle bug
