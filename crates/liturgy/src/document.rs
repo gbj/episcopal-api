@@ -155,6 +155,26 @@ impl Document {
         self.version_label = Some(version_label.to_string());
         self
     }
+
+    /// Whether any of the document's fields, or its content, contains the given text
+    pub fn contains(&self, text: &str) -> bool {
+        let label_contains = self
+            .label
+            .as_ref()
+            .map(|label| label.contains(text))
+            .unwrap_or(false);
+        let version_label_contains = self
+            .version_label
+            .as_ref()
+            .map(|label| label.contains(text))
+            .unwrap_or(false);
+        let source_contains = self
+            .source
+            .map(|reference| reference.page.to_string() == text)
+            .unwrap_or(false);
+        let content_contains = self.content.contains(text);
+        label_contains || version_label_contains || source_contains || content_contains
+    }
 }
 
 impl Default for Document {
@@ -218,6 +238,69 @@ pub enum Content {
     Sentence(Sentence),
     /// Text, without any additional styling or semantics
     Text(Text),
+}
+
+impl Content {
+    /// Whether any of the document's fields, or its content, contains the given text.
+    /// This does deep/recursive search on [Choice](crate::Choice), [Parallel](crate::Parallel),
+    /// [Series](crate::Series), and [Liturgy](crate::Liturgy).
+    pub fn contains(&self, text: &str) -> bool {
+        match self {
+            Content::Series(docs) => docs.iter().any(|doc| doc.contains(text)),
+            Content::Parallel(docs) => docs.iter().any(|doc| doc.contains(text)),
+            Content::Choice(docs) => docs.options.iter().any(|doc| doc.contains(text)),
+            Content::Category(_) => false,
+            Content::CollectOfTheDay { allow_multiple: _ } => false,
+            Content::Empty => false,
+            Content::Error(_) => false,
+            Content::Antiphon(antiphon) => antiphon.to_string().contains(text),
+            Content::BiblicalCitation(_) => false,
+            Content::BiblicalReading(reading) => {
+                reading.text.iter().any(|(_, verse)| verse.contains(text))
+            }
+            Content::Canticle(canticle) => {
+                // if any canticle metadata includes it
+                canticle.number.to_string().contains(text) || 
+                canticle.local_name.contains(text) ||
+                canticle.latin_name.as_ref().map(|name| name.contains(text)).unwrap_or(false) ||
+                canticle.citation.as_ref().map(|name| name.contains(text)).unwrap_or(false) ||
+                // if any section title or text contains it
+                canticle.sections.iter().any(|section| {
+                    // if section title exists and contains it
+                    section
+                        .title
+                        .as_ref()
+                        .map(|title| title.contains(text))
+                        .unwrap_or(false)
+                        // if any verses contain it
+                        || section
+                            .verses
+                            .iter()
+                            .any(|verse| verse.a.contains(text) || verse.b.contains(text))
+                })
+            }
+            Content::CanticleTableEntry(_) => false,
+            Content::GloriaPatri(gloria) => gloria.text.0.contains(text) || gloria.text.1.contains(text) || gloria.text.2.contains(text) || gloria.text.3.contains(text),
+            Content::Heading(heading) => match heading {
+                Heading::Date(s) => s.contains(text),
+                Heading::Day { name, proper, holy_days } => name.contains(text) || proper.as_ref().map(|name| name.contains(text)).unwrap_or(false) || holy_days.as_ref().map(|days| days.iter().any(|day| day.contains(text))).unwrap_or(false),
+                Heading::Text(_, s) => s.contains(text),
+                _ => false,
+            },
+            Content::LectionaryReading(_) => false,
+            Content::Litany(litany) => litany.response.contains(text) || litany.iter().any(|line| line.contains(text)),
+            Content::Liturgy(liturgy) => liturgy.body.iter().any(|doc| doc.contains(text)),
+            Content::Preces(preces) => preces.iter().any(|(a, b)| a.contains(text) || b.contains(text)),
+            Content::Psalm(psalm) => {
+                psalm.number.to_string().contains(text) || psalm.citation.as_ref().map(|citation| citation.contains(text)).unwrap_or(false) || psalm.sections.iter().any(|section| section.verses.iter().any(|verse| verse.number.to_string().contains(text) || verse.a.contains(text) || verse.b.contains(text)))
+            },
+            Content::PsalmCitation(_) => false,
+            Content::ResponsivePrayer(lines) => lines.iter().any(|line| line.contains(text)),
+            Content::Rubric(rubric) => rubric.to_string().contains(text),
+            Content::Sentence(sentence) => sentence.text.contains(text),
+            Content::Text(t) => t.to_string().contains(text),
+        }
+    }
 }
 
 // Create Document from a Content enum

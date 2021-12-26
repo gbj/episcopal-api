@@ -1,6 +1,6 @@
 use crate::components::*;
 use library::rite2::collects::COLLECTS_CONTEMPORARY;
-use liturgy::{Content, Document, Version};
+use liturgy::{Document, Version};
 use perseus::{t, Html, RenderFnResult, RenderFnResultWithCause, Template};
 use serde::{Deserialize, Serialize};
 use sycamore::prelude::*;
@@ -83,19 +83,7 @@ pub fn collect_page(props: CollectPageProps) -> View<G> {
                 let search = search.clone();
                 let is_included = create_selector({
                     let document = document.clone();
-                    move || {
-                        let label_matches = if let Some(label) = &document.label {
-                            label.contains(&*search.get())
-                        } else {
-                            false
-                        };
-                        let text_matches = if let Content::Text(text) = &document.content {
-                            text.text.contains(&*search.get())
-                        } else {
-                            false
-                        };
-                        label_matches || text_matches
-                    }
+                    move || document.contains(&*search.get())
                 });
                 let class = create_selector(move || if *is_included.get() { "" } else { "hidden" });
                 view! {
@@ -114,7 +102,12 @@ pub fn collect_page(props: CollectPageProps) -> View<G> {
         h1 {
           (title)
         }
-        input(type = "search", bind:value=search)
+        fieldset(class = "stacked search") {
+            label(for = "search") {
+                (t!("search"))
+            }
+            input(id = "search", type = "search", bind:value=search)
+        }
         (collects)
       }
     }

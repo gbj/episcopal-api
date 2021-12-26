@@ -66,3 +66,5 @@ canticles_appointed_for_christmas = * Canticles appointed for Christmas may be u
 collects = Collects
 collects_contemporary = Collects: Contemporary
 collects_traditional = Collects: Traditional
+
+search = Search
