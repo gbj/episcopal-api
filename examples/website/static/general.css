@@ -184,3 +184,7 @@ fieldset.stacked {
 fieldset.stacked label {
   font-weight: bold;
 }
+
+.hidden {
+  display: none;
+}

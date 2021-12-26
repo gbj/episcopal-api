@@ -1,4 +1,6 @@
-use calendar::{Calendar, LiturgicalDay, LiturgicalDayId, Weekday};
+use calendar::{
+    Calendar, Feast, LiturgicalDay, LiturgicalDayId, LiturgicalWeek, Proper, Season, Weekday,
+};
 use canticle_table::{CanticleId, CanticleTable};
 use lectionary::{Lectionary, ReadingType};
 use liturgy::*;
@@ -19,6 +21,14 @@ pub mod summary;
 pub enum CommonPrayerLiturgies {
     NoondayPrayer,
     Compline,
+}
+
+#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+pub enum CollectId {
+    Week(LiturgicalWeek),
+    Proper(Proper),
+    Season(Season),
+    Feast(Feast),
 }
 
 pub trait Library {

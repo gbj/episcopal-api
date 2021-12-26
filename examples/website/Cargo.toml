@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2018"
 
 [dependencies]
-perseus = { version = "0.3",  features = [ "translator-fluent", "hydrate" ]}
+perseus = { version = "0.3",  features = [ "translator-fluent" ]}
 perseus-size-opt = "0.1"
 sycamore = { version = "0.7", features = ["futures"] }
 serde = { version = "1.0", features = ["derive"] }

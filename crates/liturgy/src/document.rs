@@ -130,6 +130,12 @@ impl Document {
         self
     }
 
+    /// Marks the document's source as being a particular page of the 1979 BCP. Shorthand for `.source(Reference::from(page))`
+    pub fn page(mut self, page: u16) -> Self {
+        self.source = Some(Reference::from(page));
+        self
+    }
+
     pub fn source(mut self, source: Reference) -> Self {
         self.source = Some(source);
         self

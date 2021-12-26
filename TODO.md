@@ -3,20 +3,38 @@
     - [x] BCP
     - [x] EOW
     - [x] Canticles themselves
-  - [ ] Psalter page
+  - [ ] Index/TOC page
+    - [ ] Home page
+    - [ ] Nav menu on every page
+  - [ ] Collects of the Day w/ two versions
+    - [ ] Export
+      - [x] Rite II
+      - [ ] Rite I
+    - [ ] Compile in Library compiler
+    - [x] Build page
+      - [ ] Sort (Seasons of the Year, Holy Days, etc. as in prayer book)
+      - [ ] Search function
+        - [ ] Debounce
+        - [ ] Label fofr input
+    - [ ] Links to page
+    - [ ] Order collects by page
+    - [ ] Add page numbers to collects
   - [x] Category
     - [ ] Handle different versions (in link, and in page generation)
     - [ ] Category pages (as distinct from document pages) with labels etc.
-  - [ ] Collects of the Day
   - [ ] Calendar
     - [ ] Saints’ days with bios
+  - [ ] Psalter page
 - [ ] Alternative web/HTML setup (Perseus/Sycamore)
   - [x] Build compiling based on date
   - [ ] Build preferences
   - [ ] Build static category pages
   - [ ] Use these components for the HTML export
-  - [ ] Heroku deployment
-    - [ ] Custom Perseus buildpack — see https://github.com/emk/heroku-buildpack-rust/blob/master/bin/compile and how it installs Diesel
+- [ ] Page titles
+  - [ ] Dynamic based on path for Psalter, Document pages
+  - [ ] Internationalize Common Prayer in them
+- [ ] Heroku deployment
+  - [ ] Custom Perseus buildpack — see https://github.com/emk/heroku-buildpack-rust/blob/master/bin/compile and how it installs Diesel
 - Calendar 
   - [ ] Make sure every feast has a day name
   - [ ] Filter `holy_days` field so it doesn't include: (note, this is for purposes of display)

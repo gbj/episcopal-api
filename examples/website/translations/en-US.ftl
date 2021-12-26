@@ -1,3 +1,5 @@
+common_prayer = Common Prayer
+
 liturgy = Liturgy
 date = Date
 morning_prayer = Morning Prayer
@@ -60,3 +62,7 @@ easter = Easter
 please_note = Please Note
 eow_canticle_table_note = The published edition includes a handful of typographical errors in the table of suggested canticles. This page reflects a version of the text which has been corrected and conformed in capitalization and punctuation to the Book of Common Prayer.
 canticles_appointed_for_christmas = * Canticles appointed for Christmas may be used through the First Sunday after the Epiphany.
+
+collects = Collects
+collects_contemporary = Collects: Contemporary
+collects_traditional = Collects: Traditional

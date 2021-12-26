@@ -1,4 +1,5 @@
 pub mod canticles;
+pub mod collects;
 mod fragments;
 pub mod office;
 

@@ -728,14 +728,45 @@ pub fn series<G: Html>(series: Series) -> HeaderAndMain<G> {
 }
 
 pub fn text<G: Html>(text: Text) -> HeaderAndMain<G> {
+    let class = format!("text {}", display_format_as_class(text.display_format));
+
+    let response = if let Some(response) = text.response {
+        view! { strong(class = "response") { (response) } }
+    } else {
+        view! {}
+    };
+
+    // needs to collect here in order for last element to be checked
+    let paragraphs = text
+        .text
+        .split("\n\n")
+        .map(String::from)
+        .collect::<Vec<_>>();
+    let length = paragraphs.len();
     let paragraphs = View::new_fragment(
-        text.text
-            .split("\n\n")
-            .map(|s| s.to_string())
-            .map(|paragraph| view! { (paragraph) })
+        paragraphs
+            .into_iter()
+            .enumerate()
+            .map(|(idx, text)| {
+                if idx == length - 1 {
+                    view! {
+                      p {
+                        (text)
+                        " "
+                        (response)
+                      }
+                    }
+                } else {
+                    view! {
+                      p {
+                        (text)
+                      }
+                    }
+                }
+            })
             .collect(),
     );
-    let class = format!("text {}", display_format_as_class(text.display_format));
+
     (
         None,
         view! {
