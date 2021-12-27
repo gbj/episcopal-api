@@ -9,13 +9,14 @@
   - [ ] Collects of the Day w/ two versions
     - [ ] Export
       - [x] Rite II
-      - [ ] Rite I
+      - [x] Rite I
+      - [ ] check Rite I against Rite II collects
     - [ ] Compile in Library compiler
     - [x] Build page
       - [ ] Sort (Seasons of the Year, Holy Days, etc. as in prayer book)
-      - [ ] Search function
+      - [x] Search function
         - [ ] Debounce
-        - [ ] Label fofr input
+      - [ ] Remove duplicates
     - [ ] Links to page
     - [ ] Order collects by page
     - [ ] Add page numbers to collects

@@ -1,5 +1,5 @@
 use crate::components::*;
-use library::rite2::collects::COLLECTS_CONTEMPORARY;
+use library::{rite1::collects::COLLECTS_TRADITIONAL, rite2::collects::COLLECTS_CONTEMPORARY};
 use liturgy::{Document, Version};
 use perseus::{t, Html, RenderFnResult, RenderFnResultWithCause, Template};
 use serde::{Deserialize, Serialize};
@@ -31,14 +31,12 @@ pub async fn get_static_props(
     let version = path_to_version(path);
 
     let collects = match version {
-        // TODO add Rite I
-        // Version::RiteI => ,
-        _ => COLLECTS_CONTEMPORARY
-            .iter()
-            .map(|(_, document)| document)
-            .cloned()
-            .collect::<Vec<_>>(),
-    };
+        Version::RiteI => COLLECTS_TRADITIONAL.iter(),
+        _ => COLLECTS_CONTEMPORARY.iter(),
+    }
+    .map(|(_, document)| document)
+    .cloned()
+    .collect::<Vec<_>>();
 
     Ok(CollectPageProps { version, collects })
 }
