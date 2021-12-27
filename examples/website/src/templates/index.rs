@@ -1,3 +1,4 @@
+use liturgy::Version;
 use perseus::{t, Html, Template};
 use sycamore::prelude::{component, view, Signal, View};
 use web_sys::window;
@@ -9,6 +10,7 @@ use crate::utils::time::{current_preferred_liturgy, input_date_now, DEFAULT_OFFI
 pub fn index_page() -> View<G> {
     let date = Signal::new(input_date_now());
     let liturgy = Signal::new(current_preferred_liturgy(&DEFAULT_OFFICE_TIMES).to_string());
+    let version = Signal::new(Version::RiteII); // TODO let user choose once Rite I liturgies are added
 
     let on_form_submit = {
         let liturgy = liturgy.clone();
@@ -19,8 +21,9 @@ pub fn index_page() -> View<G> {
                 .unwrap()
                 .location()
                 .set_href(&format!(
-                    "/document/office/{}?date={}",
+                    "/document/office/{}/{:#?}/?date={}",
                     liturgy.get(),
+                    version.get(),
                     date.get()
                 ))
                 .unwrap();

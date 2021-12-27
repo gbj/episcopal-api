@@ -17,7 +17,7 @@
       - [x] Search function
         - [ ] Debounce
       - [ ] Remove duplicates
-    - [ ] Links to page
+    - [x] Links to page
     - [ ] Order collects by page
     - [ ] Add page numbers to collects
   - [x] Category

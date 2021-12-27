@@ -1,8 +1,9 @@
 use std::collections::HashMap;
+use std::convert::TryFrom;
 
 use calendar::{Date, BCP1979_CALENDAR};
 use library::{CommonPrayer, Library};
-use liturgy::{Content, Document, LiturgyPreferences};
+use liturgy::{Content, Document, LiturgyPreferences, Version};
 use perseus::{GenericErrorWithCause, RenderFnResult, RenderFnResultWithCause, Request, Template};
 use serde::{Deserialize, Serialize};
 use sycamore::prelude::*;
@@ -64,6 +65,9 @@ fn path_to_doc(path: &str) -> Option<Document> {
     let _ = parts.next(); // /document
     let category = parts.next().expect("expected a category");
     let slug = parts.next().expect("expected a slug");
+    let version: Option<Version> = parts
+        .next()
+        .map(|version| Version::try_from(version).expect("could not parse version from path"));
 
     toc_docs()
         .iter()
@@ -96,9 +100,9 @@ pub async fn get_static_paths() -> RenderFnResult<Vec<String>> {
         .iter()
         .flat_map(|(category, docs)| {
             docs.iter()
-                .map(move |(slug, _, _)| (category.clone(), slug.clone()))
+                .map(move |(slug, _, doc)| (category.clone(), slug.clone(), doc.version))
         })
-        .map(|(category, slug)| format!("{category}/{slug}"))
+        .map(|(category, slug, version)| format!("{category}/{slug}/{:#?}", version))
         .collect())
 }
 

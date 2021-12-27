@@ -1,4 +1,4 @@
-use std::fmt::Display;
+use std::{convert::TryFrom, fmt::Display};
 
 use serde::{Deserialize, Serialize};
 
@@ -45,5 +45,26 @@ impl Display for Version {
 impl Default for Version {
     fn default() -> Self {
         Self::BCP1979
+    }
+}
+
+impl TryFrom<&str> for Version {
+    type Error = ();
+
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        match value {
+            "1979" => Ok(Self::BCP1979),
+            "RiteI" => Ok(Self::RiteI),
+            "Rite I" => Ok(Self::RiteI),
+            "RiteII" => Ok(Self::RiteII),
+            "Rite II" => Ok(Self::RiteII),
+            "EOW" => Ok(Self::EOW),
+            "Expansive" => Ok(Self::Expansive),
+            "NRSV" => Ok(Self::NRSV),
+            "ESV" => Ok(Self::ESV),
+            "KJV" => Ok(Self::KJV),
+            "CEB" => Ok(Self::CEB),
+            _ => Err(()),
+        }
     }
 }
