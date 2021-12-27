@@ -4,9 +4,7 @@ use std::convert::TryFrom;
 use calendar::{Date, BCP1979_CALENDAR};
 use library::{CommonPrayer, Library};
 use liturgy::{Content, Document, LiturgyPreferences, Version};
-use perseus::{
-    t, GenericErrorWithCause, RenderFnResult, RenderFnResultWithCause, Request, Template,
-};
+use perseus::{GenericErrorWithCause, RenderFnResult, RenderFnResultWithCause, Request, Template};
 use serde::{Deserialize, Serialize};
 use sycamore::prelude::*;
 
