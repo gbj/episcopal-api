@@ -21,8 +21,9 @@
     - [ ] Order collects by page
     - [ ] Add page numbers to collects
   - [x] Category
-    - [ ] Handle different versions (in link, and in page generation)
-    - [ ] Category pages (as distinct from document pages) with labels etc.
+    - [x] Handle different versions (in link, and in page generation)
+    - [x] Category pages (as distinct from document pages) with labels etc.
+    - [ ] Group documents by label
   - [ ] Calendar
     - [ ] Saints’ days with bios
   - [ ] Psalter page

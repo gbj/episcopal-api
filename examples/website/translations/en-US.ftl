@@ -68,3 +68,7 @@ collects_contemporary = Collects: Contemporary
 collects_traditional = Collects: Traditional
 
 search = Search
+
+opening-sentences = Opening Sentences
+closing-sentences = Closing Sentences
+invitatory-antiphons = Invitatory Antiphons

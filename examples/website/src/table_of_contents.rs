@@ -10,10 +10,10 @@ macro_rules! hash_map {
     }}
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum PageType {
     Document,
-    Category,
+    Category(&'static str),
 }
 
 lazy_static! {
@@ -71,9 +71,9 @@ lazy_static! {
             ("s".into(), PageType::Document, library::eow::canticles::CANTICLE_S.clone()),
         ],
         "category".into() => vec![
-            ("opening-sentences".into(), PageType::Category, Document::from(Series::from(library::rite2::OPENING_SENTENCES.clone()))),
-            ("invitatory-antiphons".into(), PageType::Category, Document::from(Series::from(library::rite2::INVITATORY_ANTIPHONS.clone()))),
-            ("closing-sentences".into(), PageType::Category, Document::from(Series::from(library::rite2::OPENING_SENTENCES.clone()))),
+            ("opening-sentences".into(), PageType::Category("Opening Sentences"), Document::from(Series::from(library::rite2::OPENING_SENTENCES.clone()))),
+            ("invitatory-antiphons".into(), PageType::Category("Invitatory Antiphons"), Document::from(Series::from(library::rite2::INVITATORY_ANTIPHONS.clone()))),
+            ("closing-sentences".into(), PageType::Category("Closing Sentences"), Document::from(Series::from(library::rite2::OPENING_SENTENCES.clone()))),
         ]
     };
 }

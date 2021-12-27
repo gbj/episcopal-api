@@ -4,7 +4,9 @@ use std::convert::TryFrom;
 use calendar::{Date, BCP1979_CALENDAR};
 use library::{CommonPrayer, Library};
 use liturgy::{Content, Document, LiturgyPreferences, Version};
-use perseus::{GenericErrorWithCause, RenderFnResult, RenderFnResultWithCause, Request, Template};
+use perseus::{
+    t, GenericErrorWithCause, RenderFnResult, RenderFnResultWithCause, Request, Template,
+};
 use serde::{Deserialize, Serialize};
 use sycamore::prelude::*;
 
@@ -54,7 +56,7 @@ fn toc_docs() -> Vec<(String, String, PageType, &'static Document)> {
         .iter()
         .flat_map(|(category, docs)| {
             docs.iter().map(move |(slug, page_type, doc)| {
-                (category.clone(), slug.clone(), *page_type, doc)
+                (category.clone(), slug.clone(), page_type.clone(), doc)
             })
         })
         .collect()
@@ -74,10 +76,17 @@ fn path_to_doc(path: &str) -> Option<Document> {
         .find(|(s_category, s_slug, _, _)| s_category == category && *s_slug == slug)
         .map(|(_, _, page_type, document)| {
             let doc = (*document).clone();
-            match (*page_type, &doc.content) {
+            match (page_type, &doc.content) {
                 // if it's a category page, and a choice, then unravel it into a series
-                (PageType::Category, Content::Choice(choice)) => Document {
+                (PageType::Category(label), Content::Choice(choice)) => Document {
                     content: Content::Series(choice.clone().into()),
+                    label: Some(label.to_string()),
+                    ..doc
+                },
+                // for all other category pages, just add the category as a label
+                // this looks up the translation using the slug as a key
+                (PageType::Category(label), _) => Document {
+                    label: Some(label.to_string()),
                     ..doc
                 },
                 _ => doc,
