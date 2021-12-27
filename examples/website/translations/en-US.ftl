@@ -1,4 +1,10 @@
 common_prayer = Common Prayer
+open_menu = Open Navigation Menu
+home = Home
+calendar = Calendar
+daily_readings = Daily Readings
+daily_office = Daily Office
+
 
 liturgy = Liturgy
 date = Date
@@ -23,7 +29,6 @@ loading = Loading...
 biblical_citation_error = Something went wrong while loading { $citation }.
 biblical_citation_try_again = Try Again.
 
-daily_readings = Daily Readings
 readings_for_date = Readings for Date
 daily_readings_error = Uh-oh! Something went wrong while loading readings.
 default = (Default)

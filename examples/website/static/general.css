@@ -2,6 +2,8 @@
 :root {
   --background: #fefefe;
   --border-color: #e0e0e0;
+  --overlay-shadow-color: #d0d0d0;
+  --color: #101010;
   --ui-background: #3030ff;
   --font-family: "Sabon", Garamond, serif;
   --page-padding: 1rem;
@@ -10,7 +12,12 @@
   --error-color: rgb(234, 0, 0);
   --error-color-tint: rgba(234, 0, 0, 0.5);
 
-  /* Settings */
+  /* Navigation menu settings */
+  --nav-button-height: 1.5rem;
+  --menu-border-color: #f0f0f0;
+  --nav-link-hover: #f0f0f0;
+
+  /* Display Settings */
   --response-weight: bold;
   --response-style: normal;
 
@@ -54,6 +61,8 @@
 
 /* Styles applying to everything */
 body {
+  color: var(--color);
+  background-color: var(--background);
   font-family: var(--font-family);
   margin: 0;
   padding: 0;
@@ -67,10 +76,9 @@ body {
   background: var(--background);
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: middle;
+  justify-content: space-around;
   padding: 0.5rem;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--menu-border-color);
 }
 
 .__perseus_content > header .document-label {
@@ -187,4 +195,145 @@ fieldset.stacked label {
 
 .hidden {
   display: none;
+}
+
+/* Nav Menu */
+#main-menu {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#main-menu input {
+  /* hide it */
+  opacity: 0;
+  /* place above both hamburgers and menu itself */
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  margin: 0;
+  z-index: 5;
+  height: var(--nav-button-height);
+  width: var(--nav-button-height);
+  cursor: pointer;
+}
+
+#main-menu .hamburger {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  height: var(--nav-button-height);
+  width: var(--nav-button-height);
+}
+
+#main-menu input:not(:checked) ~ .hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  transition: 0.25s ease;
+}
+
+#main-menu span {
+  display: block;
+  width: var(--nav-button-height);
+  height: 0.1rem;
+  position: relative;
+  background: var(--color);
+  border-radius: 0.25rem;
+  z-index: 3;
+  transition: transform 0.25s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.25s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.25s ease;
+}
+
+#main-menu input:checked ~ .hamburger span {
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: var(--color);
+  transition: 0.25s ease;
+}
+
+#main-menu input:checked ~ .hamburger {
+  margin-top: 0.5rem;
+}
+
+/* Hidden middle line */
+#main-menu input:checked ~ .hamburger span:nth-last-child(3) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/* Reversed final line */
+#main-menu input:checked ~ .hamburger span:nth-last-child(2) {
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/* Slide menu in */
+#main-menu #nav-menu {
+  background: var(--background);
+  border-right: 1px solid var(--menu-border-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  padding-top: 0.5rem;
+  height: 100vh;
+  width: 100vw;
+  max-width: 400px;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+  z-index: 2;
+}
+
+#main-menu input:checked ~ #nav-menu {
+  box-shadow: 0 0 100px #606060;
+  transform: none;
+}
+
+#main-menu .overlay {
+  opacity: 0;
+  z-index: -1;
+}
+
+#main-menu input:checked ~ .overlay {
+  width: 100%;
+  opacity: 0.25;
+  background: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  transition: opacity 0.25s ease;
+}
+
+#main-menu #nav-menu li h1 {
+  font-size: 1.5rem;
+}
+
+#main-menu #nav-menu li h1 a {
+  padding: 0;
+}
+
+#main-menu #nav-menu li {
+  align-items: center;
+  border-bottom: 1px solid var(--menu-border-color);
+  display: flex;
+  height: 2rem;
+  justify-content: center;
+  text-align: center;
+}
+
+#main-menu #nav-menu li:not(:first-of-type):hover {
+  background: var(--nav-link-hover);
+}
+
+#main-menu a {
+  color: var(--color);
+  text-decoration: none;
+  padding: 0.5rem;
+  width: 100%;
 }

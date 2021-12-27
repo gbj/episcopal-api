@@ -15,6 +15,7 @@ use crate::table_of_contents::{PageType, TABLE_OF_CONTENTS};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct DocumentPageProps {
+    locale: String,
     document: Document,
 }
 
@@ -22,8 +23,10 @@ pub struct DocumentPageProps {
 #[component(DocumentPage<G>)]
 pub fn document_page(props: DocumentPageProps) -> View<G> {
     let label = props.document.label.clone().unwrap_or_default();
+    let locale = props.locale;
     view! {
         header {
+            (cloned!((locale) => menu_component(locale)))
             p(class = "document-label") {
                 (label)
             }
@@ -97,11 +100,11 @@ fn path_to_doc(path: &str) -> Option<Document> {
 #[perseus::autoserde(build_state)]
 pub async fn get_build_props(
     path: String,
-    _locale: String,
+    locale: String,
 ) -> RenderFnResultWithCause<DocumentPageProps> {
     let document = path_to_doc(&path)
         .unwrap_or_else(|| panic!("(get_build_props) could not find liturgy for {}", path));
-    Ok(DocumentPageProps { document })
+    Ok(DocumentPageProps { locale, document })
 }
 
 pub async fn get_static_paths() -> RenderFnResult<Vec<String>> {
@@ -118,7 +121,7 @@ pub async fn get_static_paths() -> RenderFnResult<Vec<String>> {
 #[perseus::autoserde(request_state)]
 pub async fn get_request_state(
     path: String,
-    _locale: String,
+    locale: String,
     req: Request,
 ) -> RenderFnResultWithCause<DocumentPageProps> {
     let document = path_to_doc(&path);
@@ -174,7 +177,7 @@ pub async fn get_request_state(
             })?;
         }
 
-        Ok(DocumentPageProps { document })
+        Ok(DocumentPageProps { locale, document })
     } else {
         Err(GenericErrorWithCause {
             error: format!("(get_request_state) document not found at {}", path).into(),
