@@ -63,8 +63,9 @@ pub fn get_template<G: Html>() -> Template<G> {
 
 #[perseus::head]
 pub fn head<G: Html>() -> View<G> {
+    let title = format!("{} – {}", t!("daily_readings"), t!("common_prayer"));
     view! {
-        title { "Daily Readings - Common Prayer" }
+        title { (title) }
         link(rel = "stylesheet", href = "/.perseus/static/daily-readings.css")
         link(rel = "stylesheet", href = "/.perseus/static/document.css")
     }

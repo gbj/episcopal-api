@@ -24,8 +24,9 @@ pub async fn get_build_props(
 
 #[perseus::head]
 pub fn head<G: Html>() -> View<G> {
+    let title = format!("{} – {}", t!("daily_office"), t!("common_prayer"));
     view! {
-        title { (t!("daily_office")) " – " (t!("common_prayer")) }
+        title { (title) }
     }
 }
 

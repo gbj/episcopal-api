@@ -61,6 +61,6 @@ pub fn get_template<G: Html>() -> Template<G> {
 #[perseus::head]
 pub fn head<G: Html>() -> View<G> {
     view! {
-        title { "Common Prayer" }
+        title { (t!("common_prayer")) }
     }
 }
