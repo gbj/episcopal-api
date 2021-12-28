@@ -81,7 +81,7 @@ body {
   border-bottom: 1px solid var(--menu-border-color);
 }
 
-.__perseus_content > header .document-label {
+.__perseus_content > header .page-title {
   font-variant: small-caps;
   font-size: 1.25rem;
   margin: 0;

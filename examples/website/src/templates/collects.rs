@@ -15,6 +15,7 @@ pub fn get_template<G: Html>() -> Template<G> {
 }
 #[derive(Serialize, Deserialize)]
 pub struct CollectPageProps {
+    locale: String,
     version: Version,
     collects: Vec<Document>,
 }
@@ -26,7 +27,7 @@ pub async fn get_static_paths() -> RenderFnResult<Vec<String>> {
 #[perseus::autoserde(build_state)]
 pub async fn get_static_props(
     path: String,
-    _locale: String,
+    locale: String,
 ) -> RenderFnResultWithCause<CollectPageProps> {
     let version = path_to_version(path);
 
@@ -38,7 +39,11 @@ pub async fn get_static_props(
     .cloned()
     .collect::<Vec<_>>();
 
-    Ok(CollectPageProps { version, collects })
+    Ok(CollectPageProps {
+        locale,
+        version,
+        collects,
+    })
 }
 
 #[perseus::head]
@@ -95,7 +100,15 @@ pub fn collect_page(props: CollectPageProps) -> View<G> {
 
     let title = page_title(props.version);
 
+    let locale = props.locale;
+
     view! {
+      header {
+        (cloned!((locale) => menu_component(locale)))
+        p(class = "page-title") {
+            (title)
+        }
+      }
       main {
         h1 {
           (title)

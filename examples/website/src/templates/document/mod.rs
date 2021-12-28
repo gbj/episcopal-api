@@ -25,7 +25,7 @@ pub fn document_page(props: DocumentPageProps) -> View<G> {
     view! {
         header {
             (cloned!((locale) => menu_component(locale)))
-            p(class = "document-label") {
+            p(class = "page-title") {
                 (label)
             }
         }

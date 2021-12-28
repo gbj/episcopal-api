@@ -147,9 +147,15 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
     let (summary_data, controls) = controls(state.handle());
 
     // Rendered set of day name, psalms, and readings
-    let observance_view = observance_view(state.handle(), summary_data, locale);
+    let observance_view = observance_view(state.handle(), summary_data, locale.clone());
 
     view! {
+        header {
+            (cloned!((locale) => menu_component(locale)))
+            p(class = "page-title") {
+                (t!("daily_readings"))
+            }
+        }
         main {
             h1 {
                 (t!("daily_readings"))

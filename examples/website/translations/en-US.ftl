@@ -13,6 +13,7 @@ noonday_prayer = Noonday Prayer
 evening_prayer = Evening Prayer
 compline = Compline
 pray = Pray
+psalter = Psalter
 
 canticle_table = Table of Suggested Canticles
 collect_of_the_day = The Collect of the Day
@@ -35,6 +36,7 @@ default = (Default)
 alternate = (Alternate)
 transferred =  (Transferred)
 psalms = Psalms
+psalm = Psalm { $number }
 daily_office_readings = Daily Office Readings
 daily_office_psalms = Daily Office Psalms
 thirty_day_psalms = 30-Day Psalm Cycle

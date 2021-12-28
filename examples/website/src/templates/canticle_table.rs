@@ -1,16 +1,50 @@
 use liturgy::{Reference, Source};
-use perseus::{t, Html, Template};
-use sycamore::{
-    generic_node::GenericNode,
-    prelude::{component, view, View},
-};
+use perseus::{t, Html, RenderFnResultWithCause, Template};
+use serde::{Deserialize, Serialize};
+use sycamore::{generic_node::GenericNode, prelude::*};
 
-use crate::components::reference;
+use crate::components::{menu_component, reference};
+
+pub fn get_template<G: Html>() -> Template<G> {
+    Template::new("canticle-table")
+        .template(canticle_table_page)
+        .build_state_fn(get_build_props)
+        .head(head)
+}
+
+#[perseus::head]
+pub fn head<G: Html>() -> View<G> {
+    view! {
+        title { (t!("daily_office")) " – " (t!("common_prayer")) }
+        link(rel = "stylesheet", href = "/.perseus/static/canticle-table.css")
+        link(rel = "stylesheet", href = "/.perseus/static/document.css")
+    }
+}
+
+#[derive(Serialize, Deserialize)]
+struct CanticleTablePageProps {
+    locale: String,
+}
+
+#[perseus::autoserde(build_state)]
+pub async fn get_build_props(
+    _path: String,
+    locale: String,
+) -> RenderFnResultWithCause<CanticleTablePageProps> {
+    Ok(CanticleTablePageProps { locale })
+}
 
 #[perseus::template(CanticleTablePage)]
 #[component(CanticleTablePage<G>)]
-pub fn canticle_table_page() -> View<G> {
+pub fn canticle_table_page(props: CanticleTablePageProps) -> View<G> {
+    let locale = props.locale;
     view! {
+      header {
+        (cloned!((locale) => menu_component(locale)))
+        p(class = "page-title") {
+            (t!("canticle_table"))
+        }
+      }
       main {
         h1 {
           (t!("canticle_table"))
@@ -447,7 +481,6 @@ pub fn canticle_table_page() -> View<G> {
                 (canticle_link("m", "M. A Song of Faith"))
               }
             }
-            // START HERE
             tr(class = "day") {
               td(class = "day-name") {
                 (t!("monday_abbrev"))
@@ -739,20 +772,5 @@ fn canticle_link<G: GenericNode>(number: &'static str, label: &'static str) -> V
       a(href = format!("/document/canticle/{}", number)) {
         (label)
       }
-    }
-}
-
-pub fn get_template<G: Html>() -> Template<G> {
-    Template::new("canticle-table")
-        .template(canticle_table_page)
-        .head(head)
-}
-
-#[perseus::head]
-pub fn head<G: Html>() -> View<G> {
-    view! {
-        title { "Table of Suggested Canticles – Common Prayer" }
-        link(rel = "stylesheet", href = "/.perseus/static/canticle-table.css")
-        link(rel = "stylesheet", href = "/.perseus/static/document.css")
     }
 }

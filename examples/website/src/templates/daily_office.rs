@@ -25,7 +25,7 @@ pub async fn get_build_props(
 #[perseus::head]
 pub fn head<G: Html>() -> View<G> {
     view! {
-        title { "Common Prayer" }
+        title { (t!("daily_office")) " – " (t!("common_prayer")) }
     }
 }
 
@@ -64,7 +64,7 @@ pub fn daily_office_page(props: DailyOfficePageProps) -> View<G> {
     view! {
       header {
         (cloned!((locale) => menu_component(locale)))
-        p(class = "document-label") {
+        p(class = "page-title") {
             (t!("daily_office"))
         }
       }

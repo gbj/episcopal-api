@@ -1,23 +1,45 @@
-use liturgy::Document;
+use liturgy::{Content, Document};
 use perseus::{
-    ErrorCause, GenericErrorWithCause, Html, RenderFnResult, RenderFnResultWithCause, Template,
+    t, ErrorCause, GenericErrorWithCause, Html, RenderFnResult, RenderFnResultWithCause, Template,
 };
 use psalter::bcp1979::BCP1979_PSALTER;
 use serde::{Deserialize, Serialize};
-use sycamore::prelude::{component, view, Signal, View};
+use sycamore::prelude::*;
 
 use crate::components::*;
 
 #[derive(Serialize, Deserialize)]
 pub struct PsalterPageProps {
+    locale: String,
     psalm: Document,
+}
+
+fn page_title(props: &PsalterPageProps) -> String {
+    let number = match &props.psalm.content {
+        Content::Psalm(psalm) => Some(psalm.number.to_string()),
+        _ => None,
+    };
+    number
+        .map(|n| t!("psalm", { "number": n }))
+        .unwrap_or_else(|| t!("psalter"))
 }
 
 #[perseus::template(PsalterPage)]
 #[component(PsalterPage<G>)]
 pub fn psalter_page(props: PsalterPageProps) -> View<G> {
+    let title = page_title(&props);
+    let locale = props.locale;
+
     view! {
-      DocumentComponent(Signal::new(props.psalm).handle())
+        header {
+            (cloned!((locale) => menu_component(locale)))
+            p(class = "page-title") {
+                (title)
+            }
+        }
+        main {
+            DocumentComponent(Signal::new(props.psalm).handle())
+        }
     }
 }
 
@@ -30,9 +52,11 @@ pub fn get_template<G: Html>() -> Template<G> {
 }
 
 #[perseus::head]
-pub fn head<G: Html>() -> View<G> {
+pub fn head<G: Html>(props: PsalterPageProps) -> View<G> {
+    let title = page_title(&props);
+
     view! {
-        title { "Psalter – Common Prayer" }
+        title { (title) " – " (t!("common_prayer")) }
         link(rel = "stylesheet", href="/.perseus/static/document.css")
     }
 }
@@ -40,7 +64,7 @@ pub fn head<G: Html>() -> View<G> {
 #[perseus::autoserde(build_state)]
 pub async fn get_static_props(
     path: String,
-    _locale: String,
+    locale: String,
 ) -> RenderFnResultWithCause<PsalterPageProps> {
     let not_found_err = || GenericErrorWithCause {
         error: "psalm not found".into(),
@@ -56,7 +80,7 @@ pub async fn get_static_props(
         .psalm_by_number(psalm_number)
         .map(|psalm| Document::from(psalm.clone()))
         .ok_or_else(not_found_err)?;
-    Ok(PsalterPageProps { psalm })
+    Ok(PsalterPageProps { locale, psalm })
 }
 
 pub async fn get_static_paths() -> RenderFnResult<Vec<String>> {
