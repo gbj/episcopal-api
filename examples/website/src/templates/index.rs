@@ -130,8 +130,10 @@ pub fn index_page(props: IndexPageProps) -> View<G> {
               }
               li {
                 (t!("pastoral_offices"))
-                li {
-                  (make_link("document/marriage", "marriage", true))
+                ul {
+                  li {
+                    (make_link("document/marriage", "marriage", true))
+                  }
                 }
               }
               li {
