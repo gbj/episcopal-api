@@ -1,1 +1,1 @@
-web: PORT=$PORT HOST=0.0.0.0 ./examples/website/dist/pkg/server
+web: PORT=$PORT HOST=0.0.0.0 examples/website/dist/pkg/server
