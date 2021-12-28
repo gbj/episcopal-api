@@ -1,7 +1,7 @@
 use crate::components::*;
 use library::{rite1::collects::COLLECTS_TRADITIONAL, rite2::collects::COLLECTS_CONTEMPORARY};
 use liturgy::{Document, Version};
-use perseus::{t, Html, RenderFnResult, RenderFnResultWithCause, Template};
+use perseus::{is_server, t, Html, RenderFnResult, RenderFnResultWithCause, Template};
 use serde::{Deserialize, Serialize};
 use sycamore::prelude::*;
 
@@ -77,6 +77,18 @@ fn page_title(version: Version) -> String {
 #[perseus::template(CollectPage)]
 #[component(CollectPage<G>)]
 pub fn collect_page(props: CollectPageProps) -> View<G> {
+    let wasm_loaded = Signal::new(!is_server!());
+    let search_placeholder = create_selector({
+        let wasm_loaded = wasm_loaded.clone();
+        move || {
+            if *wasm_loaded.get() {
+                "".into()
+            } else {
+                t!("loading")
+            }
+        }
+    });
+
     let search = Signal::new(String::default());
     let collects = View::new_fragment(
         props
@@ -117,7 +129,13 @@ pub fn collect_page(props: CollectPageProps) -> View<G> {
             label(for = "search") {
                 (t!("search"))
             }
-            input(id = "search", type = "search", bind:value=search)
+            input(
+                id = "search",
+                type = "search",
+                bind:value=search,
+                disabled = !(*wasm_loaded.get()),
+                placeholder = *search_placeholder.get()
+            )
         }
         (collects)
       }
