@@ -1,1 +1,1 @@
-web: cd examples/website && PORT=$PORT HOST=0.0.0.0 perseus serve --release
+web: PORT=$PORT HOST=0.0.0.0 examples/website/dist/pkg/server
