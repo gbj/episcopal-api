@@ -5,7 +5,7 @@
     - [x] Canticles themselves
   - [ ] Index/TOC page
     - [ ] Home page
-    - [ ] Nav menu on every page
+    - [x] Nav menu on every page
   - [ ] Collects of the Day w/ two versions
     - [ ] Export
       - [x] Rite II

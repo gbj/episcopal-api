@@ -86,6 +86,11 @@ body {
   font-variant: small-caps;
   font-size: 1.25rem;
   margin: 0;
+  /* Overflows into ellipsis */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: calc(100vw - 6rem);
 }
 
 .__perseus_content > main {
