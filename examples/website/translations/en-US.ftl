@@ -5,6 +5,7 @@ calendar = Calendar
 daily_readings = Daily Readings
 daily_office = Daily Office
 
+calendar_full = The Calendar of the Church Year
 
 liturgy = Liturgy
 date = Date
@@ -12,8 +13,24 @@ morning_prayer = Morning Prayer
 noonday_prayer = Noonday Prayer
 evening_prayer = Evening Prayer
 compline = Compline
+great_litany = Great Litany
 pray = Pray
 psalter = Psalter
+traditional = Traditional
+contemporary = Contemporary
+rite_i = Rite I
+rite_ii = Rite II
+
+proper_liturgies = Proper Liturgies for Special Days
+holy_baptism = Holy Baptism
+holy_eucharist = Holy Eucharist
+pastoral_offices = Pastoral Offices
+marriage = Marriage
+episcopal_services = Episcopal Services
+psalter_full = The Psalter, or Psalms of David
+prayers_and_thanksgivings = Prayers and Thanksgivings
+catechism = An Outline of the Faith, or Catechism
+historical_documents = Historical Documents of the Church
 
 canticle_table = Table of Suggested Canticles
 collect_of_the_day = The Collect of the Day
@@ -44,6 +61,7 @@ morning = Morning
 evening = Evening
 
 bcp_1979 = Book of Common Prayer (1979)
+lff_2018 = Lesser Feasts & Fasts (2018)
 eow_1 = Enriching Our Worship
 canticles_mp = Suggested Canticles at Morning Prayer
 canticles_ep = Suggested Canticles at Evening Prayer

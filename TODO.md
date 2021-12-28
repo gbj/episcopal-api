@@ -4,8 +4,10 @@
     - [x] EOW
     - [x] Canticles themselves
   - [ ] Index/TOC page
-    - [ ] Home page
+    - [x] Home page
+      - [ ] finish TOC
     - [x] Nav menu on every page
+  - [ ] Calendar pages
   - [ ] Collects of the Day w/ two versions
     - [ ] Export
       - [x] Rite II

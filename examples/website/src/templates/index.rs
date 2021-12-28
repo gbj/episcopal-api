@@ -1,66 +1,134 @@
-use liturgy::Version;
-use perseus::{t, Html, Template};
-use sycamore::prelude::{component, view, Signal, View};
-use web_sys::window;
+use crate::components::menu_component;
+use perseus::{t, Html, RenderFnResultWithCause, Template};
+use serde::{Deserialize, Serialize};
+use sycamore::context::*;
+use sycamore::prelude::*;
 
-use crate::utils::time::{current_preferred_liturgy, input_date_now, DEFAULT_OFFICE_TIMES};
-
-#[perseus::template(IndexPage)]
-#[component(IndexPage<G>)]
-pub fn index_page() -> View<G> {
-    let date = Signal::new(input_date_now());
-    let liturgy = Signal::new(current_preferred_liturgy(&DEFAULT_OFFICE_TIMES).to_string());
-    let version = Signal::new(Version::RiteII); // TODO let user choose once Rite I liturgies are added
-
-    let on_form_submit = {
-        let liturgy = liturgy.clone();
-        let date = date.clone();
-        move |ev: web_sys::Event| {
-            ev.prevent_default();
-            window()
-                .unwrap()
-                .location()
-                .set_href(&format!(
-                    "/document/office/{}/{:#?}/?date={}",
-                    liturgy.get(),
-                    version.get(),
-                    date.get()
-                ))
-                .unwrap();
-        }
-    };
-
-    view! {
-      form(on:submit=on_form_submit) {
-        fieldset {
-          label(for = "date") { (t!("date")) }
-          input(id = "date", name = "date", type = "date", value = (date.get()))
-        }
-        fieldset {
-          label(for = "liturgy") { (t!("liturgy")) }
-          select(
-            id = "liturgy",
-            name = "liturgy",
-            bind:value=liturgy
-          ) {
-            option(value="morning-prayer") { (t!("morning_prayer")) }
-            option(value="noonday-prayer") { (t!("noonday_prayer")) }
-            option(value="evening-prayer") { (t!("evening_prayer")) }
-            option(value="compline") { (t!("compline")) }
-          }
-        }
-        button(type = "submit") { (t!("pray")) }
-      }
-    }
+#[derive(Serialize, Deserialize)]
+struct IndexPageProps {
+    locale: String,
 }
 
 pub fn get_template<G: Html>() -> Template<G> {
-    Template::new("index").template(index_page).head(head)
+    Template::new("index")
+        .template(index_page)
+        .head(head)
+        .build_state_fn(get_build_props)
 }
 
 #[perseus::head]
 pub fn head<G: Html>() -> View<G> {
     view! {
         title { (t!("common_prayer")) }
+    }
+}
+
+#[perseus::autoserde(build_state)]
+pub async fn get_build_props(
+    _path: String,
+    locale: String,
+) -> RenderFnResultWithCause<IndexPageProps> {
+    Ok(IndexPageProps { locale })
+}
+
+#[derive(Clone)]
+struct LocaleContext(String);
+
+#[perseus::template(IndexPage)]
+#[component(IndexPage<G>)]
+pub fn index_page(props: IndexPageProps) -> View<G> {
+    let locale = props.locale;
+    let value = LocaleContext(locale.clone());
+
+    view! {
+      ContextProvider(ContextProviderProps {
+        value,
+        children: || view! {
+          header {
+              (cloned!((locale) => menu_component(locale)))
+              p(class = "page-title") {
+                  (t!("common_prayer"))
+              }
+          }
+          main {
+            ul(class = "toc-menu") {
+              li {
+                (t!("calendar_full"))
+                ul {
+                  li {
+                    (make_link("calendar/bcp", "bcp_1979"))
+                  }
+                  li {
+                    (make_link("calendar/lff", "lff_2018"))
+                  }
+                  li {
+                    (make_link("daily-readings", "daily_readings"))
+                  }
+                }
+              }
+              li {
+                (make_link("daily-office", "daily_office"))
+                ul {
+                  li {
+                    (t!("morning_prayer"))
+                    ul {
+                      li {
+                        (make_link("document/office/morning-prayer/RiteI", "rite_i"))
+                      }
+                      li {
+                        (make_link("document/office/morning-prayer/RiteII", "rite_ii"))
+                      }
+                    }
+                  }
+                  li {
+                    (make_link("document/office/noonday-prayer/RiteII", "noonday_prayer"))
+                  }
+                  li {
+                    (t!("evening_prayer"))
+                    ul {
+                      li {
+                        (make_link("document/office/evening-prayer/RiteI", "rite_i"))
+                      }
+                      li {
+                        (make_link("document/office/evening-prayer/RiteII", "rite_ii"))
+                      }
+                    }
+                  }
+                  li {
+                    (make_link("document/office/compline/RiteII", "compline"))
+                  }
+                  li {
+                    (make_link("canticle-table", "canticle_table"))
+                  }
+                }
+              }
+              li {
+                (make_link("document/litany", "great_litany"))
+              }
+              li {
+                (make_link("collects", "collects"))
+                ul {
+                  li {
+                    (make_link("collects/RiteI", "traditional"))
+                  }
+                  li {
+                    (make_link("collects/RiteII", "contemporary"))
+                  }
+                }
+              }
+            }
+          }
+        }
+      })
+    }
+}
+
+fn make_link<G: GenericNode>(path: &'static str, label_i18n_slug: &'static str) -> View<G> {
+    let locale = use_context::<LocaleContext>();
+
+    view! {
+      a(href = (format!("/{}/{}", locale.0, path))) {
+        (t!(label_i18n_slug))
+      }
     }
 }
