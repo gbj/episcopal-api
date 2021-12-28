@@ -79,6 +79,7 @@ body {
   justify-content: space-around;
   padding: 0.5rem;
   border-bottom: 1px solid var(--menu-border-color);
+  min-height: 1.5rem;
 }
 
 .__perseus_content > header .page-title {
