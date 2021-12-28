@@ -21,6 +21,8 @@ contemporary = Contemporary
 rite_i = Rite I
 rite_ii = Rite II
 
+table_of_contents = Table of Contents
+work_in_progress = (Work in Progress)
 proper_liturgies = Proper Liturgies for Special Days
 holy_baptism = Holy Baptism
 holy_eucharist = Holy Eucharist
@@ -29,7 +31,7 @@ marriage = Marriage
 episcopal_services = Episcopal Services
 psalter_full = The Psalter, or Psalms of David
 prayers_and_thanksgivings = Prayers and Thanksgivings
-catechism = An Outline of the Faith, or Catechism
+catechism_full = An Outline of the Faith, or Catechism
 historical_documents = Historical Documents of the Church
 
 canticle_table = Table of Suggested Canticles

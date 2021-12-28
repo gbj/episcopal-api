@@ -1,3 +1,4 @@
+- [ ] Disable dynamic elements (like search etc.) until they actually work
 - [ ] Build actual pages for lookups
   - [x] Canticle Table
     - [x] BCP
@@ -5,7 +6,6 @@
     - [x] Canticles themselves
   - [ ] Index/TOC page
     - [x] Home page
-      - [ ] finish TOC
     - [x] Nav menu on every page
   - [ ] Calendar pages
   - [ ] Collects of the Day w/ two versions
@@ -26,9 +26,11 @@
     - [x] Handle different versions (in link, and in page generation)
     - [x] Category pages (as distinct from document pages) with labels etc.
     - [ ] Group documents by label
+  - [ ] Summary pages for each category of document
   - [ ] Calendar
     - [ ] Saints’ days with bios
   - [ ] Psalter page
+  - [ ] About page
 - [ ] Alternative web/HTML setup (Perseus/Sycamore)
   - [x] Build compiling based on date
   - [ ] Build preferences
