@@ -4,7 +4,9 @@ use std::convert::TryFrom;
 use calendar::{Date, BCP1979_CALENDAR};
 use library::{CommonPrayer, Library};
 use liturgy::{Content, Document, LiturgyPreferences, Version};
-use perseus::{GenericErrorWithCause, RenderFnResult, RenderFnResultWithCause, Request, Template};
+use perseus::{
+    t, GenericErrorWithCause, RenderFnResult, RenderFnResultWithCause, Request, Template,
+};
 use serde::{Deserialize, Serialize};
 use sycamore::prelude::*;
 
@@ -45,9 +47,14 @@ pub fn get_template<G: Html>() -> Template<G> {
 }
 
 #[perseus::head]
-pub fn head_fn<G: Html>() -> View<G> {
+pub fn head_fn<G: Html>(props: DocumentPageProps) -> View<G> {
+    let title = match &props.document.label {
+        Some(label) => format!("{} – {}", label, t!("common_prayer")),
+        None => t!("common_prayer"),
+    };
+
     view! {
-        title { "" }
+        title { (title) }
         link(rel = "stylesheet", href="/.perseus/static/document.css")
     }
 }
