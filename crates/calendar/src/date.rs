@@ -5,6 +5,8 @@ use language::Language;
 use serde::{Deserialize, Deserializer, Serialize};
 use thiserror::Error;
 
+use crate::Weekday;
+
 #[derive(Error, Debug)]
 pub enum Error {
     #[error("could not parse Date from string")]
@@ -64,7 +66,7 @@ impl Date {
     }
 
     pub fn weekday(&self) -> Weekday {
-        self.naive_date.weekday()
+        self.naive_date.weekday().into()
     }
 
     pub fn nth_instance_in_month(&self) -> u8 {
@@ -150,7 +152,6 @@ impl Display for Date {
     }
 }
 
-pub type Weekday = chrono::Weekday;
 pub type Duration = chrono::Duration;
 
 impl From<chrono::NaiveDate> for Date {

@@ -16,10 +16,11 @@ mod rank;
 mod sanctoral;
 mod season;
 mod transferred_feast;
+mod weekday;
 mod year;
 pub use self::calendar::Calendar;
 pub use bcp1979::BCP1979_CALENDAR;
-pub use date::{Date, Weekday};
+pub use date::Date;
 pub use feasts::{Feast, Time};
 pub use holy_day::{HolyDay, HolyDayId};
 pub use liturgical_color::Color;
@@ -29,6 +30,7 @@ pub use propers::Proper;
 pub use rank::Rank;
 pub use sanctoral::Sanctoral;
 pub use season::Season;
+pub use weekday::Weekday;
 pub use year::{DailyOfficeYear, RCLYear, Year, YearType};
 
 /// Calculates the date of Easter as a [Date](Date) in any given year.
