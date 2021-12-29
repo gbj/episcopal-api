@@ -1,16 +1,9 @@
 - [ ] Build actual pages for lookups
-  - [x] Canticle Table
-    - [x] BCP
-    - [x] EOW
-    - [x] Canticles themselves
-  - [ ] Index/TOC page
-    - [x] Home page
-    - [x] Nav menu on every page
   - [ ] Calendar pages
     - [x] BCP generation
-    - [ ] LFF generation
-    - [ ] Layout with months
-    - [ ] Holy Day bios
+    - [x] LFF generation
+    - [x] Layout with months
+    - [ ] Holy Day pages w/ bios (and maybe propers)
   - [ ] Collects of the Day w/ two versions
     - [ ] Export
       - [x] Rite II

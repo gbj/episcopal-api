@@ -21,7 +21,7 @@ pub const BCP1979_CALENDAR: Calendar = Calendar {
     proper_names: &BCP1979_PROPER_NAMES,
 };
 
-const BCP1979_WEEKS: [(Cycle, u8, LiturgicalWeek); 59] = [
+pub(crate) const BCP1979_WEEKS: [(Cycle, u8, LiturgicalWeek); 59] = [
     (Cycle::Advent, 0, LiturgicalWeek::LastPentecost),
     (Cycle::Advent, 1, LiturgicalWeek::Advent1),
     (Cycle::Advent, 2, LiturgicalWeek::Advent2),
@@ -83,7 +83,7 @@ const BCP1979_WEEKS: [(Cycle, u8, LiturgicalWeek); 59] = [
     (Cycle::Easter, 41, LiturgicalWeek::Pentecost27),
 ];
 
-const BCP1979_WEEK_SEASONS: [(LiturgicalWeek, Season); 31] = [
+pub(crate) const BCP1979_WEEK_SEASONS: [(LiturgicalWeek, Season); 31] = [
     (LiturgicalWeek::Advent1, Season::Advent),
     (LiturgicalWeek::Advent2, Season::Advent),
     (LiturgicalWeek::Advent3, Season::Advent),
@@ -119,7 +119,7 @@ const BCP1979_WEEK_SEASONS: [(LiturgicalWeek, Season); 31] = [
     // This will (nominally, but not relevantly) reduce search times since this is O(n)
 ];
 
-const BCP1979_HOLY_DAY_SEASONS: [(Feast, Season); 35] = [
+pub(crate) const BCP1979_HOLY_DAY_SEASONS: [(Feast, Season); 35] = [
     (Feast::ChristmasDay, Season::Christmas),
     (Feast::December29, Season::Christmas),
     (Feast::December30, Season::Christmas),
@@ -157,7 +157,7 @@ const BCP1979_HOLY_DAY_SEASONS: [(Feast, Season); 35] = [
     (Feast::AshWednesday, Season::Lent),
 ];
 
-const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 86] = [
+pub(crate) const BCP1979_HOLY_DAY_RANKS: [(Feast, Rank); 86] = [
     (Feast::EveOfAllSaints, Rank::PrincipalFeast),
     (Feast::AllSaintsDay, Rank::PrincipalFeast),
     (Feast::ChristmasDay, Rank::PrincipalFeast),
@@ -1277,7 +1277,7 @@ pub const BCP1979_FEASTS: [KalendarEntry; 200] = [
     ),
 ];
 
-const BCP1979_FEAST_NAMES : [(Feast, Language, &str); 191] = [
+pub(crate) const BCP1979_FEAST_NAMES : [(Feast, Language, &str); 191] = [
     (Feast::AbsalomJones, Language::En, "Absalom Jones, Priest, 1818"),
     (Feast::AgnesAndCeciliaOfRome, Language::En, "Agnes, Martyr at Rome, 304"),
     (Feast::AidanOfLindisfarne, Language::En, "Aidan, Bishop of Lindisfarne, 651"),
@@ -1471,7 +1471,7 @@ const BCP1979_FEAST_NAMES : [(Feast, Language, &str); 191] = [
     (Feast::EveOfEpiphany, Language::En, "Eve of Epiphany"),
 ];
 
-const BCP1979_WEEK_NAMES: [(LiturgicalWeek, Language, &str); 59] = [
+pub(crate) const BCP1979_WEEK_NAMES: [(LiturgicalWeek, Language, &str); 59] = [
     (
         LiturgicalWeek::Pentecost10,
         Language::En,
@@ -1749,7 +1749,7 @@ const BCP1979_WEEK_NAMES: [(LiturgicalWeek, Language, &str); 59] = [
     ),
 ];
 
-const BCP1979_PROPER_NAMES: [(Proper, Language, &str); 29] = [
+pub(crate) const BCP1979_PROPER_NAMES: [(Proper, Language, &str); 29] = [
     (Proper::Proper1, Language::En, "Proper 1"),
     (Proper::Proper2, Language::En, "Proper 2"),
     (Proper::Proper3, Language::En, "Proper 3"),

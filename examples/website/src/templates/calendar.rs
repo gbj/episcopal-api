@@ -1,7 +1,7 @@
 use crate::components::{menu_component, Toggle};
 use calendar::{
-    feasts::KalendarEntry, lff2018::LFF2018_FEASTS, Calendar, Feast, HolyDayId, Rank, Time,
-    BCP1979_CALENDAR,
+    feasts::KalendarEntry, Calendar, Feast, HolyDayId, Rank, Time, BCP1979_CALENDAR,
+    LFF2018_CALENDAR,
 };
 use language::Language;
 use perseus::{t, Html, RenderFnResult, RenderFnResultWithCause, Template};
@@ -97,7 +97,11 @@ pub async fn get_static_props(
         &BCP1979_CALENDAR,
         BCP1979_CALENDAR.holy_days.iter().cloned(),
     );
-    let lff2018 = summarize_calendar(language, &BCP1979_CALENDAR, LFF2018_FEASTS.iter().cloned());
+    let lff2018 = summarize_calendar(
+        language,
+        &LFF2018_CALENDAR,
+        LFF2018_CALENDAR.holy_days.iter().cloned(),
+    );
 
     Ok(CalendarPageProps {
         locale,
