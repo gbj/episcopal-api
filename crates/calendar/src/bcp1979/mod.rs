@@ -828,7 +828,7 @@ pub const BCP1979_FEASTS: [KalendarEntry; 200] = [
         None,
     ),
     (
-        HolyDayId::Date(6, 19),
+        HolyDayId::Date(1, 19),
         Feast::WulfstanOfWorcester,
         Time::AllDay,
         None,
