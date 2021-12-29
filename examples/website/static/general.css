@@ -248,7 +248,8 @@ fieldset.stacked label {
   background: var(--color);
   border-radius: 0.25rem;
   z-index: 3;
-  transition: transform 0.25s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.25s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.25s ease;
+  transition: transform 0.25s cubic-bezier(0.77, 0.2, 0.05, 1),
+    background 0.25s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.25s ease;
 }
 
 #main-menu input:checked ~ .hamburger span {
@@ -289,7 +290,7 @@ fieldset.stacked label {
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   transform: translateX(-100%);
-  transition: transform 0.25s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+  transition: transform 0.25s cubic-bezier(0.77, 0.2, 0.05, 1);
   z-index: 2;
 }
 
@@ -303,7 +304,7 @@ fieldset.stacked label {
   z-index: -1;
 }
 
-#main-menu input:checked ~ .overlay {
+#main-menu input:checked ~ label .overlay {
   width: 100%;
   opacity: 0.25;
   background: black;

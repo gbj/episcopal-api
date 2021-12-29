@@ -12,8 +12,11 @@ pub fn menu_component<G: GenericNode>(locale: String) -> View<G> {
       nav(id = "main-menu", role = "navigation") {
         // Checkbox
         input(id = "nav-menu-toggle-checkbox", type = "checkbox")
-        label(for = "nav-menu-toggle-checkbox", class = "screen-reader-only") {
-          (t!("open_menu"))
+        label(for = "nav-menu-toggle-checkbox",) {
+          span(class = "screen-reader-only") { (t!("open_menu")) }
+
+          // Overlay in label so that if it's clicked, it will close
+          div(class = "overlay") { }
         }
 
         // Elements for hamburger lines
@@ -47,8 +50,6 @@ pub fn menu_component<G: GenericNode>(locale: String) -> View<G> {
             }
           }
         }
-
-        div(class = "overlay") { }
       }
     }
 }
