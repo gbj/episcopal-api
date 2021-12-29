@@ -35,16 +35,14 @@
     - [ ] Saints’ days with bios
   - [ ] Psalter page
   - [ ] About page
+- [ ] Local preferences for...
+  - [ ] Choices on Daily Readings page
+  - [ ] Choice on Calendar page
 - [ ] Alternative web/HTML setup (Perseus/Sycamore)
   - [x] Build compiling based on date
   - [ ] Build preferences
   - [ ] Build static category pages
   - [ ] Use these components for the HTML export
-- [ ] Page titles
-  - [ ] Dynamic based on path for Psalter, Document pages
-  - [ ] Internationalize Common Prayer in them
-- [ ] Heroku deployment
-  - [ ] Custom Perseus buildpack — see https://github.com/emk/heroku-buildpack-rust/blob/master/bin/compile and how it installs Diesel
 - Calendar 
   - [ ] Make sure every feast has a day name
   - [ ] Filter `holy_days` field so it doesn't include: (note, this is for purposes of display)
