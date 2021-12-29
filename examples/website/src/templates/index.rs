@@ -59,10 +59,10 @@ pub fn index_page(props: IndexPageProps) -> View<G> {
                 (t!("calendar_full"))
                 ul {
                   li {
-                    (make_link("calendar/bcp", "bcp_1979", true))
+                    (make_link("calendar/bcp1979", "bcp_1979", false))
                   }
                   li {
-                    (make_link("calendar/lff", "lff_2018", true))
+                    (make_link("calendar/lff2018", "lff_2018", false))
                   }
                   li {
                     (make_link("daily-readings", "daily_readings", false))
