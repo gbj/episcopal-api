@@ -38,7 +38,7 @@ pub struct CalendarPageProps {
 }
 
 #[perseus::head]
-pub fn head<G: Html>(props: CalendarPageProps) -> View<G> {
+pub fn head<G: Html>(_props: CalendarPageProps) -> View<G> {
     let title = t!("calendar");
     let cp = t!("common_prayer");
     let title = format!("{title} – {cp}");
