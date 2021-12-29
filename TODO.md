@@ -1,4 +1,3 @@
-- [ ] Disable dynamic elements (like search etc.) until they actually work
 - [ ] Build actual pages for lookups
   - [x] Canticle Table
     - [x] BCP
