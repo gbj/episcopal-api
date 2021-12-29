@@ -8,6 +8,10 @@
     - [x] Home page
     - [x] Nav menu on every page
   - [ ] Calendar pages
+    - [x] BCP generation
+    - [ ] LFF generation
+    - [ ] Layout with months
+    - [ ] Holy Day bios
   - [ ] Collects of the Day w/ two versions
     - [ ] Export
       - [x] Rite II

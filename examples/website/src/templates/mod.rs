@@ -1,3 +1,4 @@
+pub mod calendar;
 pub mod canticle_table;
 pub mod collects;
 pub mod daily_office;

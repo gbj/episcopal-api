@@ -15,6 +15,7 @@ pub const API_BASE: &str = "http://127.0.0.1:8000";
 define_app! {
     templates: [
         crate::templates::index::get_template::<G>(),
+        crate::templates::calendar::get_template::<G>(),
         crate::templates::canticle_table::get_template::<G>(),
         crate::templates::collects::get_template::<G>(),
         crate::templates::daily_office::get_template::<G>(),
