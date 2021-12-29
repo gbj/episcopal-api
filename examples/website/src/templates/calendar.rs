@@ -1,22 +1,28 @@
+use crate::components::{menu_component, Toggle};
 use calendar::{
-    feasts::KalendarEntry, lff2018::LFF2018_FEASTS, Calendar, Date, Feast, HolyDayId, Rank,
+    feasts::KalendarEntry, lff2018::LFF2018_FEASTS, Calendar, Feast, HolyDayId, Rank, Time,
     BCP1979_CALENDAR,
 };
 use language::Language;
-use perseus::{t, Html, RenderFnResultWithCause, Template};
+use perseus::{t, Html, RenderFnResult, RenderFnResultWithCause, Template};
 use serde::{Deserialize, Serialize};
 use sycamore::prelude::*;
 
 pub fn get_template<G: Html>() -> Template<G> {
     Template::new("calendar")
         .template(calendar_page)
+        .build_paths_fn(get_static_paths)
         .build_state_fn(get_static_props)
         .incremental_generation()
         .head(head)
 }
 
+pub async fn get_static_paths() -> RenderFnResult<Vec<String>> {
+    Ok(vec!["".into(), "bcp1979".into(), "lff2018".into()])
+}
+
 #[derive(Copy, Clone, Debug, Hash, PartialEq, Eq, Serialize, Deserialize)]
-enum DefaultCalendar {
+enum CalendarChoice {
     BCP1979,
     LFF2018,
 }
@@ -26,7 +32,7 @@ type CalendarListing = Vec<(HolyDayId, Feast, String)>;
 #[derive(Serialize, Deserialize)]
 pub struct CalendarPageProps {
     locale: String,
-    default_calendar: DefaultCalendar,
+    default_calendar: CalendarChoice,
     bcp1979: CalendarListing,
     lff2018: CalendarListing,
 }
@@ -49,10 +55,14 @@ fn summarize_calendar(
     holy_days: impl Iterator<Item = KalendarEntry>,
 ) -> CalendarListing {
     holy_days
-        .filter_map(|(id, feast, _, _)| {
+        .filter_map(|(id, feast, time, _)| {
             if matches!(id, HolyDayId::Date(_, _)) {
                 let rank = calendar.feast_day_rank(&feast);
-                if rank >= Rank::OptionalObservance {
+                // include black-letter and red-letter days, but not weird Daily Office lectionary days like December 29
+                // and don't include the Eve of ___ days
+                if (rank == Rank::OptionalObservance || rank >= Rank::HolyDay)
+                    && time != Time::EveningOnly
+                {
                     let name = calendar.feast_name(feast, language);
                     Some((id, feast, name.map(String::from).unwrap_or_default()))
                 } else {
@@ -78,9 +88,9 @@ pub async fn get_static_props(
     };
 
     let default_calendar = if path.ends_with("lff2018") {
-        DefaultCalendar::LFF2018
+        CalendarChoice::LFF2018
     } else {
-        DefaultCalendar::BCP1979
+        CalendarChoice::BCP1979
     };
     let bcp1979 = summarize_calendar(
         language,
@@ -116,55 +126,110 @@ const MONTHS: [(&str, u8, u8); 12] = [
 #[component(CalendarPage<G>)]
 pub fn calendar_page(props: CalendarPageProps) -> View<G> {
     let locale = props.locale;
-    let bcp1979 = props.bcp1979;
-    let days = View::new_fragment(
+    let bcp = calendar_view(&locale, &props.bcp1979);
+    let lff = calendar_view(&locale, &props.lff2018);
+
+    let use_lff_toggle = Toggle::new(
+        "calendar_choice".into(),
+        t!("bcp_1979"),
+        t!("lff_2018"),
+        props.default_calendar == CalendarChoice::LFF2018,
+    );
+    let lff_selected = use_lff_toggle.toggled();
+    let toggle_view = use_lff_toggle.view();
+
+    let bcp_class = create_selector({
+        let lff_selected = lff_selected.clone();
+        move || {
+            if !*lff_selected.get() {
+                "calendar-listing"
+            } else {
+                "calendar-listing hidden"
+            }
+        }
+    });
+
+    let lff_class = create_selector({
+        move || {
+            if *lff_selected.get() {
+                "calendar-listing"
+            } else {
+                "calendar-listing hidden"
+            }
+        }
+    });
+
+    view! {
+      header {
+        (cloned!((locale) => menu_component(locale)))
+        p(class = "page-title") {
+            (t!("daily_office"))
+        }
+      }
+      main {
+        section(class = "calendar-choice-toggle") {
+          (toggle_view)
+        }
+        section(class = (*bcp_class.get())) {
+          (bcp)
+        }
+        section(class = (*lff_class.get())) {
+          (lff)
+        }
+      }
+    }
+}
+
+fn calendar_view<G: GenericNode>(locale: &str, listing: &CalendarListing) -> View<G> {
+    View::new_fragment(
         MONTHS
             .iter()
             .map(move |(name, month, days)| {
                 // TODO yuck
-                let bcp = bcp1979.clone();
-                (1..=*days).map(move |day_of_month| {
-                    let feast = bcp
-                        .iter()
-                        .find(|(id, _, _)| *id == HolyDayId::Date(*month, day_of_month))
-                        .map(|(_, feast, name)| (feast, name));
-                    (
-                        month,
-                        day_of_month,
-                        feast.map(|(feast, name)| (*feast, name.clone())),
-                    )
-                })
-            })
-            .flatten()
-            .map({
-                move |(month, day, feast)| {
-                    let mmdd = format!("{}/{}", month, day);
-                    let link = feast
-                        .map(|(feast, name)| {
-                            let link = format!("/{}/holy-days/{:#?}", locale, feast);
+                let bcp = listing.clone();
+
+                let rows = View::new_fragment(
+                    (1..=*days)
+                        .map(|day_of_month| {
+                            let feast = bcp
+                                .iter()
+                                .find(|(id, _, _)| *id == HolyDayId::Date(*month, day_of_month))
+                                .map(|(_, feast, name)| (feast, name.clone()));
+                            let link = feast
+                                .and_then(|(feast, name)| {
+                                    serde_json::to_string(&feast).ok().map(|feast| {
+                                        let link = format!(
+                                            "/{}/holy-day/{}",
+                                            locale,
+                                            feast.replace('"', "")
+                                        );
+                                        view! {
+                                          a(href = link) {
+                                            (name)
+                                          }
+                                        }
+                                    })
+                                })
+                                .unwrap_or_else(|| view! {});
                             view! {
-                              a(href = link) {
-                                (name)
+                              tr {
+                                td { (day_of_month) }
+                                td { (link) }
                               }
                             }
                         })
-                        .unwrap_or_else(|| view! {});
-                    view! {
-                      tr {
-                        td { (mmdd) }
-                        td { (link) }
-                      }
-                    }
+                        .collect(),
+                );
+
+                view! {
+                  h2 {
+                    (name)
+                  }
+                  table(id = (month)) {
+                    (rows)
+                  }
                 }
             })
             .collect(),
-    );
-    view! {
-      header {
-
-      }
-      main {
-        (days)
-      }
-    }
+    )
 }
