@@ -49,6 +49,10 @@
     - the observed day
     - the alternate day
     - a red-letter day that was displaced by a Sunday
+- [ ] Heroku deployment
+  - [ ] API endpoint
+    - [ ] eject and serve from Perseus Warp server?
+    - [ ] separate endpoints for dev/prod 
 - [ ] Improvements to BiblicalCitation async loading
   - [ ] Include paragraphs/spacing
   - Bugs
