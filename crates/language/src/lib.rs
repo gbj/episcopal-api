@@ -34,4 +34,22 @@ impl Language {
         }
         .to_string()
     }
+
+    pub fn month_name(&self, month: u8) -> &'static str {
+        match (self, month) {
+            (Language::En, 1) => "January",
+            (Language::En, 2) => "February",
+            (Language::En, 3) => "March",
+            (Language::En, 4) => "April",
+            (Language::En, 5) => "May",
+            (Language::En, 6) => "June",
+            (Language::En, 7) => "July",
+            (Language::En, 8) => "August",
+            (Language::En, 9) => "September",
+            (Language::En, 10) => "October",
+            (Language::En, 11) => "November",
+            (Language::En, 12) => "December",
+            _ => todo!(),
+        }
+    }
 }

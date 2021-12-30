@@ -20,8 +20,13 @@
   - [ ] Summary pages for each category of document
   - [ ] Calendar
     - [ ] LFF propers for holy days
-      - [ ] Convert lectionary
+      - [x] Convert lectionary
       - [ ] Add to /holy-day pages
+      - [ ] Add missing doubled sets (marked with *or*, like All Saints’ Day)
+      - [ ] Add to summary page
+      - [ ] Sort the list
+      - [ ] Add page numbers within LFF
+      - [ ] Add "Preface of _____"
     - [ ] Add collects to holy-day pages
   - [ ] Psalter page
   - [ ] About page

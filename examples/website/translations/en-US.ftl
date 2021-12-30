@@ -99,3 +99,5 @@ search = Search
 opening-sentences = Opening Sentences
 closing-sentences = Closing Sentences
 invitatory-antiphons = Invitatory Antiphons
+
+lessons_and_psalm = Lessons and Psalm
