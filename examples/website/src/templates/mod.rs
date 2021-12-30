@@ -4,5 +4,6 @@ pub mod collects;
 pub mod daily_office;
 pub mod daily_readings;
 pub mod document;
+pub mod holy_day;
 pub mod index;
 pub mod psalm;

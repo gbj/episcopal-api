@@ -1,9 +1,4 @@
 - [ ] Build actual pages for lookups
-  - [ ] Calendar pages
-    - [x] BCP generation
-    - [x] LFF generation
-    - [x] Layout with months
-    - [ ] Holy Day pages w/ bios (and maybe propers)
   - [ ] Collects of the Day w/ two versions
     - [ ] Export
       - [x] Rite II
@@ -24,7 +19,10 @@
     - [ ] Group documents by label
   - [ ] Summary pages for each category of document
   - [ ] Calendar
-    - [ ] Saints’ days with bios
+    - [ ] LFF propers for holy days
+      - [ ] Convert lectionary
+      - [ ] Add to /holy-day pages
+    - [ ] Add collects to holy-day pages
   - [ ] Psalter page
   - [ ] About page
 - [ ] Local preferences for...

@@ -20,6 +20,7 @@ define_app! {
         crate::templates::collects::get_template::<G>(),
         crate::templates::daily_office::get_template::<G>(),
         crate::templates::daily_readings::get_template::<G>(),
+        crate::templates::holy_day::get_template::<G>(),
         crate::templates::document::get_template::<G>(),
         crate::templates::psalm::get_template::<G>()
     ],

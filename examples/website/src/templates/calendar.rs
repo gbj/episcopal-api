@@ -1,4 +1,7 @@
-use crate::components::{menu_component, Toggle};
+use crate::{
+    components::{menu_component, Toggle},
+    utils::language::locale_to_language,
+};
 use calendar::{
     feasts::KalendarEntry, Calendar, Feast, HolyDayId, Rank, Time, BCP1979_CALENDAR,
     LFF2018_CALENDAR,
@@ -80,12 +83,7 @@ pub async fn get_static_props(
     path: String,
     locale: String,
 ) -> RenderFnResultWithCause<CalendarPageProps> {
-    let language = match locale.as_str() {
-        "en-US" => Language::En,
-        "es-ES" => Language::Es,
-        "fr-FR" => Language::Fr,
-        _ => Language::En,
-    };
+    let language = locale_to_language(&locale);
 
     let default_calendar = if path.ends_with("lff2018") {
         CalendarChoice::LFF2018
