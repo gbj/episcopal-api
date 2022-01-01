@@ -1,15 +1,16 @@
 use crate::{
-    components::{menu_component, Toggle},
-    utils::language::locale_to_language,
+    components::{date::date_picker, menu_component, Toggle},
+    utils::{dom::*, language::locale_to_language, time::today},
 };
 use calendar::{
-    feasts::KalendarEntry, Calendar, Feast, HolyDayId, Rank, Time, BCP1979_CALENDAR,
+    feasts::KalendarEntry, Calendar, Date, Feast, HolyDayId, Rank, Time, BCP1979_CALENDAR,
     LFF2018_CALENDAR,
 };
 use language::Language;
 use perseus::{t, Html, RenderFnResult, RenderFnResultWithCause, Template};
 use serde::{Deserialize, Serialize};
 use sycamore::prelude::*;
+use wasm_bindgen::UnwrapThrowExt;
 
 pub fn get_template<G: Html>() -> Template<G> {
     Template::new("calendar")
@@ -109,27 +110,29 @@ pub async fn get_static_props(
     })
 }
 
-const MONTHS: [(&str, u8, u8); 12] = [
-    ("January", 1, 31),
-    ("February", 2, 28),
-    ("March", 3, 31),
-    ("April", 4, 30),
-    ("May", 5, 31),
-    ("June", 6, 30),
-    ("July", 7, 31),
-    ("August", 8, 31),
-    ("September", 9, 30),
-    ("October", 10, 31),
-    ("November", 11, 30),
-    ("December", 12, 31),
+const MONTHS: [(u8, u8); 12] = [
+    (1, 31),
+    (2, 28),
+    (3, 31),
+    (4, 30),
+    (5, 31),
+    (6, 30),
+    (7, 31),
+    (8, 31),
+    (9, 30),
+    (10, 31),
+    (11, 30),
+    (12, 31),
 ];
 
 #[perseus::template(CalendarPage)]
 #[component(CalendarPage<G>)]
 pub fn calendar_page(props: CalendarPageProps) -> View<G> {
     let locale = props.locale;
-    let bcp = calendar_view(&locale, &props.bcp1979);
-    let lff = calendar_view(&locale, &props.lff2018);
+
+    // Render BCP and LFF calendars and choose between them
+    let bcp = calendar_view(CalendarChoice::BCP1979, &locale, &props.bcp1979);
+    let lff = calendar_view(CalendarChoice::LFF2018, &locale, &props.lff2018);
 
     let use_lff_toggle = Toggle::new(
         "calendar_choice".into(),
@@ -152,6 +155,7 @@ pub fn calendar_page(props: CalendarPageProps) -> View<G> {
     });
 
     let lff_class = create_selector({
+        let lff_selected = lff_selected.clone();
         move || {
             if *lff_selected.get() {
                 "calendar-listing"
@@ -161,17 +165,51 @@ pub fn calendar_page(props: CalendarPageProps) -> View<G> {
         }
     });
 
+    // Scroll to the current day on loading
+    let initial_date = location_hash()
+        .and_then(|hash| {
+            let year = today().year();
+            Date::parse_from_str(&format!("{}-{}", year, hash), "%Y-%m-%d").ok()
+        })
+        .unwrap_or_else(today);
+    let (date, date_picker) = date_picker("date", t!("date"), initial_date);
+    let current_day = create_memo(move || {
+        let date = (*date.get()).unwrap_or_else(today);
+        format!("{}-{}", date.month(), date.day())
+    });
+    create_effect(move || {
+        let mmdd = &*current_day.get();
+        if !mmdd.is_empty() {
+            let choice = if *lff_selected.get() {
+                CalendarChoice::LFF2018
+            } else {
+                CalendarChoice::BCP1979
+            };
+            let root_id = root_id(choice);
+            let el = get_element_by_id(&format!("{}-{}", root_id, *current_day.get()));
+            if let Some(el) = el {
+                // scroll into view, with some padding at the top for comfort
+                let y = el.get_bounding_client_rect().y();
+                window()
+                    .unwrap_throw()
+                    .scroll_to_with_x_and_y(0.0, y - 75.0);
+            }
+        }
+    });
+
+    // Main view
     view! {
       header {
         (cloned!((locale) => menu_component(locale)))
         p(class = "page-title") {
-            (t!("daily_office"))
+            (t!("calendar"))
         }
       }
       main {
         section(class = "calendar-choice-toggle") {
           (toggle_view)
         }
+        (date_picker)
         section(class = (*bcp_class.get())) {
           (bcp)
         }
@@ -182,11 +220,26 @@ pub fn calendar_page(props: CalendarPageProps) -> View<G> {
     }
 }
 
-fn calendar_view<G: GenericNode>(locale: &str, listing: &CalendarListing) -> View<G> {
+fn root_id(calendar: CalendarChoice) -> &'static str {
+    match calendar {
+        CalendarChoice::BCP1979 => "bcp",
+        CalendarChoice::LFF2018 => "lff",
+    }
+}
+
+fn calendar_view<G: GenericNode>(
+    calendar: CalendarChoice,
+    locale: &str,
+    listing: &CalendarListing,
+) -> View<G> {
+    let language = locale_to_language(locale);
+    let root_id = root_id(calendar);
+
     View::new_fragment(
         MONTHS
             .iter()
-            .map(move |(name, month, days)| {
+            .map(move |(month, days)| {
+                let name = language.month_name(*month);
                 // TODO yuck
                 let bcp = listing.clone();
 
@@ -213,8 +266,9 @@ fn calendar_view<G: GenericNode>(locale: &str, listing: &CalendarListing) -> Vie
                                     })
                                 })
                                 .unwrap_or_else(|| view! {});
+                            let id = format!("{}-{}-{}", root_id, month, day_of_month);
                             view! {
-                              tr {
+                              tr(id = id) {
                                 td { (day_of_month) }
                                 td { (link) }
                               }
@@ -223,11 +277,13 @@ fn calendar_view<G: GenericNode>(locale: &str, listing: &CalendarListing) -> Vie
                         .collect(),
                 );
 
+                let id = format!("{}-{}", root_id, month);
+
                 view! {
                   h2 {
                     (name)
                   }
-                  table(id = (month)) {
+                  table(id = id) {
                     (rows)
                   }
                 }
