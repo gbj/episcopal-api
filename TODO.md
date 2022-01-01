@@ -21,7 +21,7 @@
   - [ ] Calendar
     - [ ] LFF propers for holy days
       - [x] Convert lectionary
-      - [ ] Add to /holy-day pages
+      - [x] Add to /holy-day pages
       - [ ] Add missing doubled sets (marked with *or*, like All Saints’ Day)
       - [ ] Add to summary page
       - [ ] Sort the list
