@@ -68,6 +68,10 @@ body {
   padding: 0;
 }
 
+input {
+  font-size: max(1rem, 16px);
+}
+
 .__perseus_content > header {
   text-align: center;
   /* Floats along the top of the screen */
