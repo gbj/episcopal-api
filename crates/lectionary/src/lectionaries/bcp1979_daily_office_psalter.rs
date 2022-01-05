@@ -629,7 +629,7 @@ pub const BCP1979_DAILY_OFFICE_PSALTER: Lectionary = Lectionary {
             LiturgicalDayId::Feast(Feast::January4),
             Year::Any,
             ReadingType::EveningPsalm,
-            "Psalm 89",
+            "Psalm 89:1-29",
         ),
         (
             LiturgicalDayId::Feast(Feast::January5),
