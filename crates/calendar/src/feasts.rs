@@ -359,6 +359,16 @@ pub enum Feast {
 }
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
+pub enum CommonOfSaints {
+    Martyr,
+    Missionary,
+    Pastor,
+    Theologian,
+    Monastic,
+    Saint,
+}
+
+#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
 pub enum Time {
     AllDay,
     MorningOnly,

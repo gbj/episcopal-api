@@ -1,5 +1,6 @@
 use calendar::{
-    Calendar, Feast, LiturgicalDay, LiturgicalDayId, LiturgicalWeek, Proper, Season, Weekday,
+    feasts::CommonOfSaints, Calendar, Feast, LiturgicalDay, LiturgicalDayId, LiturgicalWeek,
+    Proper, Season, Weekday,
 };
 use canticle_table::{CanticleId, CanticleTable};
 use lectionary::{Lectionary, ReadingType};
@@ -29,6 +30,7 @@ pub enum CollectId {
     Proper(Proper),
     Season(Season),
     Feast(Feast),
+    CommonOfSaints(CommonOfSaints),
 }
 
 pub trait Library {
