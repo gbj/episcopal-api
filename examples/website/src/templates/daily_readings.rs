@@ -122,7 +122,7 @@ pub fn daily_readings_page(props: DailyReadingsPageProps) -> View<G> {
         move || {
             if let Some(date) = *date.get() {
                 let should_load = match &*state.get() {
-                    State::Idle => true,     // in initial empty state, do loa
+                    State::Idle => true,     // in initial empty state, do load
                     State::Loading => false, // if already loading, don't load again
                     State::Error => false, // if encountered an error, don't try to keep reloading infinitely
                     State::Success(summary) => (*summary).morning.day.date != date, // if date has changed, reload; if same, don't
