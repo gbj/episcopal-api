@@ -144,6 +144,10 @@ impl Date {
         };
         format!("{} {}, {}", month, self.day(), self.year())
     }
+
+    pub fn to_padded_string(&self) -> String {
+        format!("{}-{:02}-{:02}", self.year(), self.month(), self.day())
+    }
 }
 
 impl Display for Date {
