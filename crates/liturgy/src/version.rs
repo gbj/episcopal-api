@@ -17,6 +17,8 @@ pub enum Version {
     Expansive,
     /// The New Revised Standard Version of the Bible
     NRSV,
+    /// The New Revised Standard Version (Anglicized Edition)
+    NRSVAE,
     /// The English Standard Version of the Bible
     ESV,
     /// The Authorized Version (“King James Version”) of the Bible
@@ -34,6 +36,7 @@ impl Display for Version {
             Version::EOW => "EOW",
             Version::Expansive => "Expansive",
             Version::NRSV => "NRSV",
+            Version::NRSVAE => "NRSVAE",
             Version::ESV => "ESV",
             Version::KJV => "KJV",
             Version::CEB => "CEB",
