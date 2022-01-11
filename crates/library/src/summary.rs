@@ -101,6 +101,16 @@ fn summarize_observance(
 
     let daily_office_readings = BCP1979_DAILY_OFFICE_LECTIONARY
         .readings_by_day(observance, day)
+        // for Holy Days, only list morning readings in morning & evening readings in evening
+        .filter(|reading| {
+            !matches!(
+                (reading.reading_type, day.evening),
+                (ReadingType::Morning1, true)
+                    | (ReadingType::Morning2, true)
+                    | (ReadingType::Evening1, false)
+                    | (ReadingType::Evening2, false)
+            )
+        })
         .collect();
 
     let daily_office_psalms = psalms_filtered_by_time(

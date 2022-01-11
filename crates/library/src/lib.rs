@@ -14,6 +14,7 @@ extern crate lazy_static;
 
 pub mod conditions;
 pub mod eow;
+pub mod lff2018;
 pub mod rite1;
 pub mod rite2;
 pub mod summary;

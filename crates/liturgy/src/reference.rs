@@ -12,6 +12,7 @@ impl Reference {
         let base_url = match self.source {
             Source::BCP1979 => "https://www.episcopalchurch.org/wp-content/uploads/sites/2/2019/11/bcp_compressed.pdf",
             Source::EOW1 => "https://www.churchpublishing.org/siteassets/pdf/enriching-our-worship-1/enrichingourworship1.pdf",
+            Source::LFF2018 => "https://www.episcopalcommonprayer.org/uploads/1/2/9/8/129843103/lesser_feasts_and_fasts_2018_final_pages.pdf"
         };
 
         format!("{}#page={}", base_url, self.page)
@@ -37,6 +38,7 @@ impl From<u16> for Reference {
 pub enum Source {
     BCP1979,
     EOW1,
+    LFF2018,
 }
 
 impl Display for Source {
@@ -44,6 +46,7 @@ impl Display for Source {
         let name = match self {
             Source::BCP1979 => "BCP",
             Source::EOW1 => "EOW 1",
+            &Self::LFF2018 => "LFF 2018",
         };
         write!(f, "{}", name)
     }

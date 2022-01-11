@@ -3,7 +3,12 @@
     - [ ] Export
       - [x] Rite II
       - [x] Rite I
+      - [ ] Rite II collect page #s
       - [ ] check Rite I against Rite II collects
+      - [ ] Compare LFF Rite 1 and Rite 2
+      - [ ] Sort LFF collects by date order
+      - [ ] Sanity check on LFF collect names
+      - [ ] LFF collect page #s
     - [ ] Compile in Library compiler
     - [x] Build page
       - [ ] Sort (Seasons of the Year, Holy Days, etc. as in prayer book)
