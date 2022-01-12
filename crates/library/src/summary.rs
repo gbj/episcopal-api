@@ -60,7 +60,7 @@ fn psalms_filtered_by_time(
     observance: &LiturgicalDayId,
     day: &LiturgicalDay,
 ) -> Vec<Psalm> {
-    psalm_cycle
+    let mut psalms = psalm_cycle
         .readings_by_day(observance, day)
         .filter(|reading| {
             (day.evening && reading.reading_type == ReadingType::EveningPsalm)
@@ -68,7 +68,18 @@ fn psalms_filtered_by_time(
         })
         .map(|reading| psalter.psalms_by_citation(&reading.citation))
         .flatten()
-        .collect::<Vec<_>>()
+        .collect::<Vec<_>>();
+    // sort by the number and first verse of each psalm
+    psalms.sort_by_key(|psalm| {
+        (
+            psalm.number,
+            psalm
+                .sections
+                .get(0)
+                .and_then(|section| section.verses.get(0).map(|verse| verse.number)),
+        )
+    });
+    psalms
 }
 
 fn summarize_observance(
