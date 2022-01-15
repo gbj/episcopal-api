@@ -17,6 +17,7 @@ pub struct Document {
     pub version: Version,
     pub version_label: Option<String>,
     pub content: Content,
+    pub is_compiled: bool
 }
 
 impl Document {
@@ -31,6 +32,7 @@ impl Document {
             version: Version::RiteII,
             version_label: None,
             content: Content::Empty,
+            is_compiled: false
         }
     }
 

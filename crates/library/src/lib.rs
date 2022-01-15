@@ -46,13 +46,15 @@ pub trait Library {
     fn category(category: Categories, version: Version) -> Vec<Document>;
 
     fn compile(
-        document: Document,
+        mut document: Document,
         calendar: &Calendar,
         day: &LiturgicalDay,
         observed: &LiturgicalDayId,
         prefs: &impl ClientPreferences,
         liturgy_prefs: &LiturgyPreferences,
     ) -> Option<Document> {
+        document.is_compiled = true;
+
         let preference_value_for_key = |key: &PreferenceKey| {
             prefs
                 .value(key)
