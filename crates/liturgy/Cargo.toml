@@ -15,3 +15,4 @@ thiserror = "1"
 
 [dev-dependencies]
 psalter = { path = "../psalter" }
+library = { path = "../library" }

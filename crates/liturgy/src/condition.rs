@@ -381,4 +381,19 @@ impl Condition {
             Condition::Evening => day.evening,
         }
     }
+
+    /// Whether a condition varies based on date
+    pub fn is_date_condition(&self) -> bool {
+        match self {
+            Condition::Preference(_, _) => false,
+            Condition::Not(cond) => cond.is_date_condition(),
+            Condition::And(a, b) | Condition::Or(a, b) => {
+                a.is_date_condition() || b.is_date_condition()
+            }
+            Condition::Any(conds) | Condition::All(conds) | Condition::None(conds) => {
+                conds.iter().any(|cond| cond.is_date_condition())
+            }
+            _ => true,
+        }
+    }
 }

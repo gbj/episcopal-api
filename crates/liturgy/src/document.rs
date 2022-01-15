@@ -112,6 +112,30 @@ impl Document {
         }
     }
 
+    /// Whether the content of the document changes at all depending on the [LiturgicalDay](calendar::LiturgicalDay)
+    /// ```
+    /// # use crate::liturgy::{Document, Text, Series, Condition};
+    /// use library::conditions::NOT_LENT;
+    /// assert!(NOT_LENT.is_date_condition());
+    /// let doc = Document::from(Text::from("Alleluia.")).condition(NOT_LENT.clone());
+    /// assert!(doc.has_date_condition());
+    /// let series = Document::from(Series::from(vec![Document::from(Text::from("Alleluia.")).condition(NOT_LENT.clone())]));
+    /// assert!(series.has_date_condition());
+    /// assert!(library::rite2::office::COMPLINE.has_date_condition());
+    /// ```
+    pub fn has_date_condition(&self) -> bool {
+        let has_own_date_condition = self.condition.as_ref().map(|condition| condition.is_date_condition()).unwrap_or(false);
+        let has_child_date_condition = match &self.content {
+            Content::Series(series) => series.iter().any(|doc| doc.has_date_condition()),
+            Content::Parallel(parallel) => parallel.iter().any(|doc| doc.has_date_condition()),
+            Content::Choice(choice) => choice.options.iter().any(|doc| doc.has_date_condition()),
+            Content::Liturgy(liturgy) => liturgy.body.iter().any(|doc| doc.has_date_condition()),
+            Content::CollectOfTheDay { allow_multiple: _ } => true,
+            _ => false
+        };
+        has_own_date_condition || has_child_date_condition
+    }
+
     pub fn content(mut self, content: Content) -> Self {
         self.content = content;
         self
