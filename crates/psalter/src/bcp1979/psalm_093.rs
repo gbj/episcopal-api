@@ -9,13 +9,13 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 722
               },
-              local_name: String::from("Psalm 93"),
+              local_name: String::from(""),
               latin_name: String::from("Dominus regnavit"),
               verses: vec![
                 PsalmVerse {
                       number: 1,
                       a: String::from("The LORD is King;\nhe has put on splendid apparel; *"),
-                      b: String::from("the LORD has put on his apparel\n and girded himself with strength.")
+                      b: String::from("the LORD has put on his apparel\nand girded himself with strength.")
                   },
                 PsalmVerse {
                       number: 2,
@@ -40,7 +40,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 6,
                       a: String::from("Your testimonies are very sure, *"),
-                      b: String::from("and holiness adorns your house, O LORD,\n for ever and for evermore.")
+                      b: String::from("and holiness adorns your house, O LORD,\nfor ever and for evermore.")
                   },
               ]
             }

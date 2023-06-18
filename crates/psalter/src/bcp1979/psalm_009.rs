@@ -8,7 +8,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 593
             },
-            local_name: String::from("Psalm 9"),
+            local_name: String::from(""),
             latin_name: String::from("Confitebor tibi"),
             verses: vec![
               PsalmVerse {
@@ -74,7 +74,7 @@ lazy_static! {
   PsalmVerse {
         number: 13,
         a: String::from("Have pity on me, O LORD; *"),
-        b: String::from("see the misery I suffer from those who hate me,\n O you who lift me up from the gate of death;")
+        b: String::from("see the misery I suffer from those who hate me,\nO you who lift me up from the gate of death;")
     },
   PsalmVerse {
         number: 14,

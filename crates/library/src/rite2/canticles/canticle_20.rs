@@ -4,9 +4,11 @@ use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Version};
 lazy_static! {
     pub static ref CANTICLE_20: Document = Document::from(Canticle {
         number: CanticleId::Canticle20,
+        changeable: None,
         citation: None,
-        local_name: String::from("Gloria in excelsis"),
+        local_name: String::from("Glory to God"),
         latin_name: Some(String::from("Gloria in excelsis")),
+        rubric: None,
         sections: vec![CanticleSection {
             title: None,
             verses: vec![
@@ -42,7 +44,9 @@ with the Holy Spirit,
 in the glory of God the Father. Amen."
                 ))
             ]
-        }]
+        }],
+        gloria_patri: None,
     })
-    .version(Version::RiteII);
+    .version(Version::RiteII)
+    .page(94);
 }

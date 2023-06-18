@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 753
               },
-              local_name: String::from("Psalm 110"),
+              local_name: String::from(""),
               latin_name: String::from("Dixit Dominus"),
               verses: vec![
                 PsalmVerse {
@@ -25,7 +25,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 3,
                       a: String::from("Princely state has been yours from the day of your birth; *"),
-                      b: String::from("in the beauty of holiness have I begotten you,\n like dew from the womb of the morning.”")
+                      b: String::from("in the beauty of holiness have I begotten you,\nlike dew from the womb of the morning.”")
                   },
                 PsalmVerse {
                       number: 4,

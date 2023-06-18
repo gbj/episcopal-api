@@ -9,13 +9,13 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 673
               },
-              local_name: String::from("Psalm 66"),
+              local_name: String::from(""),
               latin_name: String::from("Jubilate Deo"),
               verses: vec![
                 PsalmVerse {
                       number: 1,
                       a: String::from("Be joyful in God, all you lands; *"),
-                      b: String::from("sing the glory of his Name;\n sing the glory of his praise.")
+                      b: String::from("sing the glory of his Name;\nsing the glory of his praise.")
                   },
                 PsalmVerse {
                       number: 2,
@@ -70,7 +70,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 12,
                       a: String::from("I will enter your house with burnt-offerings\nand will pay you my vows, *"),
-                      b: String::from("which I promised with my lips\n and spoke with my mouth when I was in trouble.")
+                      b: String::from("which I promised with my lips\nand spoke with my mouth when I was in trouble.")
                   },
                 PsalmVerse {
                       number: 13,

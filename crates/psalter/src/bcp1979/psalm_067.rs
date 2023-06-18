@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 675
               },
-              local_name: String::from("Psalm 67"),
+              local_name: String::from(""),
               latin_name: String::from("Deus misereatur"),
               verses: vec![
                 PsalmVerse {
@@ -30,7 +30,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 4,
                       a: String::from("Let the nations be glad and sing for joy, *"),
-                      b: String::from("for you judge the peoples with equity\n and guide all the nations upon earth.")
+                      b: String::from("for you judge the peoples with equity\nand guide all the nations upon earth.")
                   },
                 PsalmVerse {
                       number: 5,

@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 720
               },
-              local_name: String::from("Psalm 92"),
+              local_name: String::from(""),
               latin_name: String::from("Bonum est confiteri"),
               verses: vec![
                 PsalmVerse {
@@ -40,7 +40,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 6,
                       a: String::from("The dullard does not know,\nnor does the fool understand, *"),
-                      b: String::from("that though the wicked grow like weeds,\n and all the workers of iniquity flourish,")
+                      b: String::from("that though the wicked grow like weeds,\nand all the workers of iniquity flourish,")
                   },
                 PsalmVerse {
                       number: 7,

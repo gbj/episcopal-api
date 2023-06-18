@@ -10,13 +10,13 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 728
               },
-              local_name: String::from("Psalm 99"),
+              local_name: String::from(""),
               latin_name: String::from("Dominus regnavit"),
               verses: vec![
                             PsalmVerse {
                       number: 1,
                       a: String::from("The LORD is King;\nlet the people tremble; *"),
-                      b: String::from("he is enthroned upon the cherubim;\n let the earth shake.")
+                      b: String::from("he is enthroned upon the cherubim;\nlet the earth shake.")
                   },
                 PsalmVerse {
                       number: 2,
@@ -51,7 +51,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 8,
                       a: String::from("“O LORD our God, you answered them indeed; *"),
-                      b: String::from("you were a God who forgave them,\n yet punished them for their evil deeds.”")
+                      b: String::from("you were a God who forgave them,\nyet punished them for their evil deeds.”")
                   },
                 PsalmVerse {
                       number: 9,

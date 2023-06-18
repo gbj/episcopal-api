@@ -8,7 +8,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 807
             },
-            local_name: String::from("Psalm 149"),
+            local_name: String::from(""),
             latin_name: String::from("Cantate Domino"),
             verses: vec![
                 PsalmVerse {
@@ -54,7 +54,7 @@ lazy_static! {
                 PsalmVerse {
                     number: 9,
                     a: String::from("To inflict on them the judgment decreed; *"),
-                    b: String::from("this is glory for all his faithful people.\n Hallelujah!")
+                    b: String::from("this is glory for all his faithful people.\nHallelujah!")
                 },
             ]
         }]

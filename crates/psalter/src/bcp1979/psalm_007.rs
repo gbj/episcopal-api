@@ -8,7 +8,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 590
             },
-            local_name: String::from("Psalm 7"),
+            local_name: String::from(""),
             latin_name: String::from("Domine, Deus meus"),
             verses: vec![
               PsalmVerse {
@@ -34,7 +34,7 @@ lazy_static! {
   PsalmVerse {
         number: 5,
         a: String::from("Then let my enemy pursue and overtake me, *"),
-        b: String::from("trample my life into the ground,\n and lay my honor in the dust.")
+        b: String::from("trample my life into the ground,\nand lay my honor in the dust.")
     },
   PsalmVerse {
         number: 6,

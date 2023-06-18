@@ -15,9 +15,15 @@ pub struct Psalm {
 }
 
 impl Psalm {
+    #[must_use]
+    pub fn citation(mut self, citation: impl std::fmt::Display) -> Self {
+        self.citation = Some(citation.to_string());
+        self
+    }
+
     /// Returns only the verses and sections of a psalm that are included in its citation.
     /// ```
-    /// # use psalter::bcp1979::{PSALM_1, PSALM_119};
+    /// # use psalter::bcp1979::*;
     /// # use reference_parser::BibleReference;
     /// // simple filtering within a single-section psalm
     /// let mut psalm_1 = PSALM_1.clone();
@@ -32,7 +38,14 @@ impl Psalm {
     /// assert_eq!(psalm_119.filtered_sections()[0].verses.len(), 8);
     /// assert_eq!(psalm_119.filtered_sections()[0].local_name, "Qoph");
     /// assert_eq!(psalm_119.filtered_sections()[0].verses[0].a, "I call with my whole heart; *");
+    ///
+    /// // filtering with comma
+    /// let mut psalm_116 = PSALM_116.clone();
+    /// psalm_116.citation = Some(String::from("Psalm 116:1, 10-17"));
+    /// assert_eq!(psalm_116.filtered_sections().len(), 1);
+    /// assert_eq!(psalm_116.filtered_sections()[0].verses.len(), 9);
     /// ```
+    #[cfg(any(feature = "browser", feature = "server"))]
     pub fn filtered_sections(&self) -> Vec<PsalmSection> {
         let citation = self.citation.as_ref().map(BibleReference::from);
         if let Some(citation) = citation {
@@ -85,6 +98,33 @@ impl Psalm {
         } else {
             self.sections.clone()
         }
+    }
+
+    #[cfg(any(feature = "browser", feature = "server"))]
+    pub fn as_text(&self) -> String {
+        let filtered = self.filtered_sections();
+        filtered
+            .iter()
+            .flat_map(|section| section.verses.iter())
+            .flat_map(|verse| [&verse.a, &verse.b])
+            .cloned()
+            .intersperse_with(|| String::from("\n"))
+            .collect()
+    }
+
+    #[cfg(any(feature = "browser", feature = "server"))]
+    pub fn as_metadata_text(&self) -> String {
+        let filtered = self.filtered_sections();
+        self.citation
+            .as_ref()
+            .into_iter()
+            .chain(
+                filtered
+                    .iter()
+                    .flat_map(|section| [&section.local_name, &section.latin_name]),
+            )
+            .cloned()
+            .collect()
     }
 }
 

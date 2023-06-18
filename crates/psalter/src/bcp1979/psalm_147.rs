@@ -8,7 +8,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 804
             },
-            local_name: String::from("Psalm 147"),
+            local_name: String::from(""),
             latin_name: String::from("Laudate Dominum"),
             verses: vec![
                 PsalmVerse {
@@ -114,7 +114,7 @@ lazy_static! {
                 PsalmVerse {
                     number: 21,
                     a: String::from("He has not done so to any other nation; *"),
-                    b: String::from("to them he has not revealed his judgments.\n Hallelujah!")
+                    b: String::from("to them he has not revealed his judgments.\nHallelujah!")
                 },
             ]
         }]

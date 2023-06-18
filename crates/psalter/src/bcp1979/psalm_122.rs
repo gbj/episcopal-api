@@ -8,7 +8,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 779
             },
-            local_name: String::from("Psalm 122"),
+            local_name: String::from(""),
             latin_name: String::from("Laetatus sum"),
             verses: vec![
                 PsalmVerse {
@@ -29,7 +29,7 @@ lazy_static! {
                 PsalmVerse {
                     number: 4,
                     a: String::from("To which the tribes go up,\nthe tribes of the LORD, *"),
-                    b: String::from("the assembly of Israel,\n to praise the Name of the LORD.")
+                    b: String::from("the assembly of Israel,\nto praise the Name of the LORD.")
                 },
                 PsalmVerse {
                     number: 5,

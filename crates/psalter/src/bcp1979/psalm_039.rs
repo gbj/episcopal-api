@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 638
               },
-              local_name: String::from("Psalm 39"),
+              local_name: String::from(""),
               latin_name: String::from("Dixi, Custodiam"),
               verses: vec![
                 PsalmVerse {
@@ -25,7 +25,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 3,
                       a: String::from("So I held my tongue and said nothing; *"),
-                      b: String::from("I refrained from rash words;\n but my pain became unbearable.")
+                      b: String::from("I refrained from rash words;\nbut my pain became unbearable.")
                   },
                 PsalmVerse {
                       number: 4,

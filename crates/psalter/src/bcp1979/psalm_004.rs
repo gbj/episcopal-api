@@ -8,18 +8,18 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 587
             },
-            local_name: String::from("Psalm 4"),
+            local_name: String::from(""),
             latin_name: String::from("Cum invocarem"),
             verses: vec![
               PsalmVerse {
         number: 1,
         a: String::from("Answer me when I call, O God, defender of my cause; *"),
-        b: String::from("you set me free when I am hard-pressed;\n have mercy on me and hear my prayer.")
+        b: String::from("you set me free when I am hard-pressed;\nhave mercy on me and hear my prayer.")
     },
   PsalmVerse {
         number: 2,
         a: String::from("“You mortals, how long will you dishonor my glory; *"),
-        b: String::from("how long will you worship dumb idols\n and run after false gods?”")
+        b: String::from("how long will you worship dumb idols\nand run after false gods?”")
     },
   PsalmVerse {
         number: 3,

@@ -1,8 +1,10 @@
+use language::Language;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fmt::Display;
+use strum_macros::{AsRefStr, Display, EnumIter, EnumString, IntoStaticStr};
 
-use crate::Version;
+use crate::{Version, SlugPath};
 use lectionary::ReadingType;
 
 /// An explanatory sentence or direction for the liturgy
@@ -12,18 +14,39 @@ pub enum PreferenceKey {
     Local(String),
 }
 
-#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(
+    Copy,
+    Clone,
+    Debug,
+    Hash,
+    Eq,
+    PartialEq,
+    Serialize,
+    Deserialize,
+    AsRefStr,
+    EnumIter,
+    EnumString,
+    IntoStaticStr,
+)]
 pub enum GlobalPref {
+    Language,
+    Calendar,
+    Version,
     BibleVersion,
     PsalterVersion,
     Lectionary,
     PsalmCycle,
     CanticleTable,
+    OmitForeOffice,
     ReadingA,
     ReadingB,
     ReadingC,
+    CanticleOne,
+    CanticleTwo,
+    UseBlackLetterCollects,
     /// Whether to insert the Gloria Patri after each psalm in the Daily Office, or only at the end of the psalms
     InsertGloria,
+    GloriaPatriTraditional,
 }
 
 impl<T> From<T> for PreferenceKey
@@ -41,13 +64,24 @@ impl From<GlobalPref> for PreferenceKey {
     }
 }
 
-#[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(
+    Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize, EnumIter, EnumString, IntoStaticStr,
+)]
 pub enum PreferenceValue {
+    Language(Language),
     Version(Version),
     Lectionary(Lectionaries),
     CanticleTable(CanticleTables),
+    Canticle(SlugPath),
     ReadingType(ReadingType),
     Local(String),
+    Bool(bool),
+}
+
+impl From<Language> for PreferenceValue {
+    fn from(language: Language) -> Self {
+        Self::Language(language)
+    }
 }
 
 impl From<Version> for PreferenceValue {
@@ -74,15 +108,9 @@ impl From<ReadingType> for PreferenceValue {
     }
 }
 
-impl From<String> for PreferenceValue {
-    fn from(value: String) -> Self {
-        Self::Local(value)
-    }
-}
-
-impl From<&str> for PreferenceValue {
-    fn from(value: &str) -> Self {
-        Self::Local(value.to_string())
+impl From<bool> for PreferenceValue {
+    fn from(value: bool) -> Self {
+        Self::Bool(value)
     }
 }
 
@@ -108,7 +136,20 @@ impl ClientPreferences for HashMap<PreferenceKey, PreferenceValue> {
     }
 }
 
-#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(
+    Copy,
+    Clone,
+    Debug,
+    Hash,
+    Eq,
+    PartialEq,
+    Serialize,
+    Deserialize,
+    EnumIter,
+    EnumString,
+    IntoStaticStr,
+    Display,
+)]
 pub enum Lectionaries {
     BCP1979DailyOffice,
     BCP1979DailyOfficePsalms,
@@ -123,7 +164,20 @@ impl Default for Lectionaries {
     }
 }
 
-#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(
+    Copy,
+    Clone,
+    Debug,
+    Hash,
+    Eq,
+    PartialEq,
+    Serialize,
+    Deserialize,
+    EnumIter,
+    EnumString,
+    IntoStaticStr,
+    Display,
+)]
 pub enum CanticleTables {
     BCP1979RiteI,
     BCP1979RiteII,

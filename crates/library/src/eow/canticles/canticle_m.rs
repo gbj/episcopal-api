@@ -1,12 +1,15 @@
 use canticle_table::CanticleId;
-use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Version};
+use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Reference, Source, Version};
 
 lazy_static! {
     pub static ref CANTICLE_M: Document = Document::from(Canticle {
         number: CanticleId::CanticleM,
+        changeable: None,
         citation: Some(String::from("1 Peter 1:3-4,18-21")),
-        local_name: String::from("Canticle M"),
+        local_name: String::from("A Song of Faith"),
         latin_name: None,
+        rubric: None,
+        gloria_patri: None,
         sections: vec![CanticleSection {
             title: None,
             verses: vec![
@@ -34,5 +37,8 @@ lazy_static! {
         }]
     })
     .version(Version::EOW)
-    ;
+    .source(Reference {
+        source: Source::EOW1,
+        page: 37
+    });
 }

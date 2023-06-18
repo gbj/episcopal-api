@@ -8,13 +8,13 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 596
             },
-            local_name: String::from("Psalm 11"),
+            local_name: String::from(""),
             latin_name: String::from("In Domino confido"),
             verses: vec![
               PsalmVerse {
         number: 1,
         a: String::from("In the LORD have I taken refuge; *"),
-        b: String::from("how then can you say to me,\n “Fly away like a bird to the hilltop;")
+        b: String::from("how then can you say to me,\n“Fly away like a bird to the hilltop;")
     },
   PsalmVerse {
         number: 2,
@@ -29,7 +29,7 @@ lazy_static! {
   PsalmVerse {
         number: 4,
         a: String::from("The LORD is in his holy temple; *"),
-        b: String::from("the LORD’S throne is in heaven.")
+        b: String::from("the LORD’s throne is in heaven.")
     },
   PsalmVerse {
         number: 5,

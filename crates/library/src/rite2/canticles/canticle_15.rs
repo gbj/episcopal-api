@@ -1,12 +1,16 @@
 use canticle_table::CanticleId;
 use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Version};
 
+use crate::rite2::GLORIA_PATRI;
+
 lazy_static! {
     pub static ref CANTICLE_15: Document = Document::from(Canticle {
         number: CanticleId::Canticle15,
+        changeable: None,
         citation: Some(String::from("Luke 1:46-55")),
         local_name: String::from("The Song of Mary"),
         latin_name: Some(String::from("Magnificat")),
+        rubric: None,
         sections: vec![CanticleSection {
             title: None,
             verses: vec![
@@ -45,7 +49,9 @@ and holy is his Name."
                     "to Abraham and his children for ever."
                 ))
             ]
-        }]
+        }],
+        gloria_patri: Some(GLORIA_PATRI.clone()),
     })
-    .version(Version::RiteII);
+    .version(Version::RiteII)
+    .page(91);
 }

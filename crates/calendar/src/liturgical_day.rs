@@ -1,6 +1,6 @@
 use crate::{
     year::{DailyOfficeYear, RCLYear},
-    Date, Feast, LiturgicalWeek, Proper, Weekday,
+    Date, Feast, LiturgicalWeek, Proper, VariousOccasions, Weekday,
 };
 use serde::{Deserialize, Serialize};
 
@@ -16,6 +16,7 @@ pub struct LiturgicalDay {
     pub holy_days: Vec<Feast>,
     pub observed: LiturgicalDayId,
     pub alternate: Option<LiturgicalDayId>,
+    pub alternative_services: Vec<Feast>,
 }
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
@@ -25,4 +26,5 @@ pub enum LiturgicalDayId {
     ProperAndDay(Proper, Weekday),
     TransferredFeast(Feast),
     DayOfMonth(u8),
+    VariousOccasions(VariousOccasions),
 }

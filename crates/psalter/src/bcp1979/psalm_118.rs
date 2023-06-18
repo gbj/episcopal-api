@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 760
               },
-              local_name: String::from("Psalm 118"),
+              local_name: String::from(""),
               latin_name: String::from("Confitemini Domino"),
               verses: vec![
                 PsalmVerse {
@@ -90,7 +90,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 16,
                       a: String::from("“The right hand of the LORD has triumphed! *"),
-                      b: String::from("the right hand of the LORD is exalted!\n the right hand of the LORD has triumphed!”")
+                      b: String::from("the right hand of the LORD is exalted!\nthe right hand of the LORD has triumphed!”")
                   },
                 PsalmVerse {
                       number: 17,
@@ -105,7 +105,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 19,
                       a: String::from("Open for me the gates of righteousness; *"),
-                      b: String::from("I will enter them;\n I will offer thanks to the LORD.")
+                      b: String::from("I will enter them;\nI will offer thanks to the LORD.")
                   },
                 PsalmVerse {
                       number: 20,
@@ -124,7 +124,7 @@ lazy_static! {
                   },
                 PsalmVerse {
                       number: 23,
-                      a: String::from("This is the LORD’S doing, *"),
+                      a: String::from("This is the LORD’s doing, *"),
                       b: String::from("and it is marvelous in our eyes.")
                   },
                 PsalmVerse {

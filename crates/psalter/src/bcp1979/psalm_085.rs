@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 708
               },
-              local_name: String::from("Psalm 85"),
+              local_name: String::from(""),
               latin_name: String::from("Benedixisti, Domine"),
               verses: vec![
                 PsalmVerse {
@@ -50,7 +50,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 8,
                       a: String::from("I will listen to what the LORD God is saying, *"),
-                      b: String::from("for he is speaking peace to his faithful people\n and to those who turn their hearts to him.")
+                      b: String::from("for he is speaking peace to his faithful people\nand to those who turn their hearts to him.")
                   },
                 PsalmVerse {
                       number: 9,

@@ -8,7 +8,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 807
             },
-            local_name: String::from("Psalm 150"),
+            local_name: String::from(""),
             latin_name: String::from("Laudate Domi"),
             verses: vec![
                 PsalmVerse {
@@ -39,7 +39,7 @@ lazy_static! {
                 PsalmVerse {
                     number: 6,
                     a: String::from("Let everything that has breath *"),
-                    b: String::from("praise the Lord.\n Hallelujah!")
+                    b: String::from("praise the Lord.\nHallelujah!")
                 },
             ]
         }]

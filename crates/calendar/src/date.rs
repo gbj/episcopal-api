@@ -8,7 +8,7 @@ use thiserror::Error;
 use crate::Weekday;
 
 #[derive(Error, Debug)]
-pub enum Error {
+pub enum DateError {
     #[error("could not parse Date from string")]
     Parse,
 }
@@ -37,7 +37,19 @@ impl<'de> Deserialize<'de> for Date {
     }
 }
 
+impl std::str::FromStr for Date {
+    type Err = DateError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Date::parse_from_str(s, "%Y-%m-%d")
+    }
+}
+
 impl Date {
+    pub fn as_chrono(&self) -> chrono::NaiveDate {
+        self.naive_date
+    }
+
     /// Creates Date from a year, month, and day.
     pub fn from_ymd(year: u16, month: u8, day: u8) -> Date {
         let naive_date = chrono::NaiveDate::from_ymd(year.into(), month.into(), day.into());
@@ -45,8 +57,8 @@ impl Date {
     }
 
     /// Creates Date from a year, month, and day.
-    pub fn parse_from_str(s: &str, fmt: &str) -> Result<Date, Error> {
-        let naive_date = chrono::NaiveDate::parse_from_str(s, fmt).map_err(|_| Error::Parse)?;
+    pub fn parse_from_str(s: &str, fmt: &str) -> Result<Date, DateError> {
+        let naive_date = chrono::NaiveDate::parse_from_str(s, fmt).map_err(|_| DateError::Parse)?;
         Ok(Self { naive_date })
     }
 
@@ -73,21 +85,25 @@ impl Date {
         (self.day() + 7 - 1) / 7
     }
 
+    #[must_use]
     pub fn add_weeks(&self, weeks: impl Into<i64>) -> Self {
         let naive_date = self.naive_date + chrono::Duration::weeks(weeks.into());
         Self { naive_date }
     }
 
+    #[must_use]
     pub fn subtract_weeks(&self, weeks: impl Into<i64>) -> Self {
         let naive_date = self.naive_date - chrono::Duration::weeks(weeks.into());
         Self { naive_date }
     }
 
+    #[must_use]
     pub fn add_days(&self, days: impl Into<i64>) -> Self {
         let naive_date = self.naive_date + chrono::Duration::days(days.into());
         Self { naive_date }
     }
 
+    #[must_use]
     pub fn subtract_days(&self, days: impl Into<i64>) -> Self {
         let naive_date = self.naive_date - chrono::Duration::days(days.into());
         Self { naive_date }
@@ -118,6 +134,7 @@ impl Date {
     /// assert_eq!(test_4.month(), 10);
     /// assert_eq!(test_4.day(), 3);
     /// ```
+    #[must_use]
     pub fn sunday_before(&self) -> Date {
         let date = self.naive_date;
         let nth_weekday_from_sunday = date.weekday().num_days_from_sunday();
@@ -125,7 +142,15 @@ impl Date {
         naive_date.into()
     }
 
-    pub fn to_localized_name(&self, _language: Language) -> String {
+    pub fn to_localized_name(&self, language: Language) -> String {
+        format!(
+            "{}, {}",
+            self.to_localized_name_without_year(language),
+            self.year()
+        )
+    }
+
+    pub fn to_localized_name_without_year(&self, _language: Language) -> String {
         // TODO i18n
         let month = match self.month() {
             1 => "January",
@@ -142,7 +167,7 @@ impl Date {
             12 => "December",
             _ => "",
         };
-        format!("{} {}, {}", month, self.day(), self.year())
+        format!("{} {}", month, self.day())
     }
 
     pub fn to_padded_string(&self) -> String {

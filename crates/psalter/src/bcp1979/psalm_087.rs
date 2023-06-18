@@ -8,14 +8,14 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 711
             },
-            local_name: String::from("Psalm 87"),
+            local_name: String::from(""),
             latin_name: String::from("Fundamenta ejus"),
             verses: vec![
                 PsalmVerse {
                     number: 1,
                     a: String::from("On the holy mountain stands the city he has founded; *"),
                     b: String::from(
-                        "the LORD loves the gates of Zion\n more than all the dwellings of Jacob."
+                        "the LORD loves the gates of Zion\nmore than all the dwellings of Jacob."
                     )
                 },
                 PsalmVerse {
@@ -27,7 +27,7 @@ lazy_static! {
                     number: 3,
                     a: String::from("I count Egypt and Babylon among those who know me; *"),
                     b: String::from(
-                        "behold Philistia, Tyre, and Ethiopia:\n in Zion were they born."
+                        "behold Philistia, Tyre, and Ethiopia:\nin Zion were they born."
                     )
                 },
                 PsalmVerse {

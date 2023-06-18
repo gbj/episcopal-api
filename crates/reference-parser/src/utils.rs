@@ -1,5 +1,4 @@
 use crate::{query::BibleVersePart, BibleReferenceQuery, BibleReferenceRange, Book};
-use regex::{Match, Regex};
 
 const SINGLE_CHAPTER_BOOKS: [Book; 5] = [
     Book::Obadiah,
@@ -11,6 +10,7 @@ const SINGLE_CHAPTER_BOOKS: [Book; 5] = [
 const POSSIBLE_BRACKET_DELIMITERS: [&str; 7] = ["", ",", ";", "[", "]", "(", ")"];
 const VERSE_CITATION_CHARS: [char; 7] = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
+#[cfg(any(feature = "browser", feature = "regex"))]
 pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
     let mut list: Vec<BibleReferenceRange> = Vec::new();
     let mut prev: Option<BibleReferenceRange> = None;
@@ -30,7 +30,11 @@ pub fn parse_reference(reference: &str) -> Vec<BibleReferenceRange> {
                 bracket_opened = false;
             }
         } else {
-            let current = parse_single_reference(&part, prev, bracket_opened);
+            let current = parse_single_reference(
+                &part,
+                prev.or_else(|| list.last().cloned()),
+                bracket_opened,
+            );
             list.push(current);
             prev = Some(current);
         }
@@ -127,28 +131,45 @@ fn split_str_and_keep_delimiters(text: &str, delimiters: &[char]) -> Vec<String>
     result
 }
 
+#[cfg(any(feature = "browser", feature = "regex"))]
 fn parse_single_reference(
     reference: &str,
     previous: Option<BibleReferenceRange>,
     bracketed: bool,
 ) -> BibleReferenceRange {
-    let mut range_pieces = reference.split('-');
+    let mut range_pieces = reference.split('-').flat_map(|s| s.split('–'));
     let first_half = range_pieces.next();
     let second_half = range_pieces.next();
 
     let start_partial_structure = previous.is_some();
 
     let mut start: BibleReferenceQuery = match first_half {
-        Some(cite) => match query_from_re(
-            cite,
-            Regex::new(
-                r"([0-9 \n\t]*[[[:alpha:]]0-9\.]+[a-zA-Z \n\t]*)[ \n\t]*([0-9]+)?:?([0-9]+)?",
-            )
-            .expect("Regex invalid."),
-            start_partial_structure,
-            None,
-        ) {
-            Some(query) => query,
+        Some(cite) => match query_from_re(cite, false, start_partial_structure, None) {
+            Some(query) => {
+                BibleReferenceQuery {
+                    book: query.book.or_else(|| {
+                        previous.and_then(|prev| {
+                            let prev_end = prev.end.and_then(|end| end.book);
+                            let prev_start = prev.start.book;
+                            prev_end.or(prev_start)
+                        })
+                    }),
+                    chapter: query.chapter.or_else(|| {
+                        // only use previous chapter if previous citation had both chapter and verse
+                        // so this won't, for example, think that Psalm 120, 121 is Psalm 120, Psalm 120:121
+                        previous.and_then(|prev| {
+                            if prev.start.verse.is_some() || bracketed {
+                                let prev_end = prev.end.and_then(|end| end.chapter);
+                                let prev_start = prev.start.chapter;
+                                prev_end.or(prev_start)
+                            } else {
+                                None
+                            }
+                        })
+                    }),
+                    ..query
+                }
+            }
             None => {
                 return BibleReferenceRange {
                     start: BibleReferenceQuery {
@@ -159,7 +180,7 @@ fn parse_single_reference(
                     },
                     end: None,
                     bracketed,
-                }
+                };
             }
         },
         None => {
@@ -172,7 +193,7 @@ fn parse_single_reference(
                 },
                 end: None,
                 bracketed,
-            }
+            };
         }
     };
 
@@ -191,13 +212,7 @@ fn parse_single_reference(
     let augmented_start = fill_out(Some(start), previous_end);
 
     let end = match second_half {
-        Some(cite) => query_from_re(
-            cite,
-            Regex::new(r"([0-9 \t\n]*[[[:alpha:]]0-9\.]+)[ \t\n]*([0-9]+)?:?([0-9]+)?")
-                .expect("Regex invalid."),
-            true,
-            augmented_start,
-        ),
+        Some(cite) => query_from_re(cite, true, true, augmented_start),
         None => None,
     };
 
@@ -211,66 +226,125 @@ fn parse_single_reference(
     }
 }
 
+#[cfg(feature = "regex")]
+fn match_first_half(reference: &str) -> Option<[Option<String>; 4]> {
+    lazy_static::lazy_static! {
+        static ref FIRST_HALF_RE: regex::Regex =
+            regex::Regex::new(r#"([\d\s]*[\w\.]+[a-zA-Z\s]*)\s*(\d+)?:?(\d+)?"#)
+                .expect("could not compile Regex");
+    }
+    // TODO if we compile these statically it's probably faster
+    let captures = FIRST_HALF_RE.captures(reference.trim())?;
+    let mut iter = captures.iter();
+    Some([
+        iter.next().unwrap().map(|m| m.as_str().to_string()),
+        iter.next().unwrap().map(|m| m.as_str().to_string()),
+        iter.next().unwrap().map(|m| m.as_str().to_string()),
+        iter.next().unwrap().map(|m| m.as_str().to_string()),
+    ])
+}
+
+#[cfg(feature = "regex")]
+fn match_second_half(reference: &str) -> Option<[Option<String>; 4]> {
+    lazy_static::lazy_static! {
+        static ref SECOND_HALF_RE: regex::Regex =
+            regex::Regex::new(r"([\d\s]*[\w\.]+)\s*(\d+)?:?(\d+)?")
+                .expect("could not compile Regex");
+    }
+    // TODO if we compile these statically it's probably faster
+    let captures = SECOND_HALF_RE.captures(reference.trim())?;
+    let mut iter = captures.iter();
+    Some([
+        iter.next().unwrap().map(|m| m.as_str().to_string()),
+        iter.next().unwrap().map(|m| m.as_str().to_string()),
+        iter.next().unwrap().map(|m| m.as_str().to_string()),
+        iter.next().unwrap().map(|m| m.as_str().to_string()),
+    ])
+}
+
+#[cfg(all(feature = "browser", not(feature = "regex")))]
+fn match_first_half(reference: &str) -> Option<[Option<String>; 4]> {
+    let re = js_sys::RegExp::new(r#"([\d\s]*[\w\.]+[a-zA-Z\s]*)\s*(\d+)?:?(\d+)?"#, "");
+    let results = re.exec(reference);
+    results.map(|res| {
+        [
+            res.get(0).as_string(),
+            res.get(1).as_string(),
+            res.get(2).as_string(),
+            res.get(3).as_string(),
+        ]
+    })
+}
+
+#[cfg(all(feature = "browser", not(feature = "regex")))]
+fn match_second_half(reference: &str) -> Option<[Option<String>; 4]> {
+    let re = js_sys::RegExp::new(r#"([\d\s]*[\w\.]+)\s*(\d+)?:?(\d+)?"#, "");
+    let results = re.exec(reference);
+    results.map(|res| {
+        [
+            res.get(0).as_string(),
+            res.get(1).as_string(),
+            res.get(2).as_string(),
+            res.get(3).as_string(),
+        ]
+    })
+}
+
+#[cfg(any(feature = "browser", feature = "regex"))]
 fn query_from_re(
     reference: &str,
-    re: Regex,
+    second_half: bool,
     partial_structure: bool,
     template: Option<BibleReferenceQuery>,
 ) -> Option<BibleReferenceQuery> {
-    let captures = match re.captures(reference.trim()) {
-        Some(capture) => capture,
-        None => return None,
-    };
-    let mut iter = captures.iter();
-    let matches = (
-        iter.next().unwrap(),
-        iter.next().unwrap(),
-        iter.next().unwrap(),
-        iter.next().unwrap(),
-    );
-
+    let matches = if second_half {
+        match_second_half(reference)
+    } else {
+        match_first_half(reference)
+    }?;
     let query: Option<BibleReferenceQuery>;
+
     if partial_structure {
         // build query based on matches
         // if only one part of Regex matches, assume it's a verse; if two, it's a chapter-verse; if three, book-chapter-verse
         // this allows a match on e.g., [Matthew 1:4-]3 to read "3" as a verse, not as a book name like "3 John"
         query = match matches {
-            (Some(_), Some(book_name), Some(chapter_str), Some(verse_str)) => {
+            [Some(_), Some(book_name), Some(chapter_str), Some(verse_str)] => {
                 Some(BibleReferenceQuery {
-                    book: Some(Book::from(book_name.as_str())),
-                    chapter: match_to_int(chapter_str).0,
-                    verse: match_to_int(verse_str).0,
-                    verse_part: match_to_int(verse_str).1,
+                    book: Some(Book::from(book_name)),
+                    chapter: match_to_int(&chapter_str).0,
+                    verse: match_to_int(&verse_str).0,
+                    verse_part: match_to_int(&verse_str).1,
                 })
             }
-            (Some(_), Some(chapter_str), None, Some(verse_str)) => Some(BibleReferenceQuery {
+            [Some(_), Some(chapter_str), None, Some(verse_str)] => Some(BibleReferenceQuery {
                 book: None,
-                chapter: match_to_int(chapter_str).0,
-                verse: match_to_int(verse_str).0,
-                verse_part: match_to_int(verse_str).1,
+                chapter: match_to_int(&chapter_str).0,
+                verse: match_to_int(&verse_str).0,
+                verse_part: match_to_int(&verse_str).1,
             }),
-            (Some(_), Some(chapter_str), Some(verse_str), None) => Some(BibleReferenceQuery {
+            [Some(_), Some(chapter_str), Some(verse_str), None] => Some(BibleReferenceQuery {
                 book: None,
-                chapter: match_to_int(chapter_str).0,
-                verse: match_to_int(verse_str).0,
-                verse_part: match_to_int(verse_str).1,
+                chapter: match_to_int(&chapter_str).0,
+                verse: match_to_int(&verse_str).0,
+                verse_part: match_to_int(&verse_str).1,
             }),
-            (Some(_), Some(verse_str), None, None) => Some(BibleReferenceQuery {
+            [Some(_), Some(verse_str), None, None] => Some(BibleReferenceQuery {
                 book: None,
                 chapter: None,
-                verse: match_to_int(verse_str).0,
-                verse_part: match_to_int(verse_str).1,
+                verse: match_to_int(&verse_str).0,
+                verse_part: match_to_int(&verse_str).1,
             }),
             _ => None,
         };
     } else {
-        let book = matches.1.map(|book_name| Book::from(book_name.as_str()));
-        let mut chapter = match matches.2 {
-            Some(num) => match_to_int(num).0,
+        let book = matches[1].as_ref().map(Book::from);
+        let mut chapter = match &matches[2] {
+            Some(num) => match_to_int(&num).0,
             None => None,
         };
-        let mut verse = match matches.3 {
-            Some(num) => match_to_int(num).0,
+        let mut verse = match &matches[3] {
+            Some(num) => match_to_int(&num).0,
             None => None,
         };
 
@@ -320,8 +394,7 @@ fn fill_out(
     final_query
 }
 
-fn match_to_int(input: Match) -> (Option<u16>, BibleVersePart) {
-    let input_str = input.as_str();
+fn match_to_int(input_str: &str) -> (Option<u16>, BibleVersePart) {
     let input_digits_only = input_str.replace(|c| VERSE_CITATION_CHARS.contains(&c), "");
     let verse_number = match str::parse::<u16>(&input_digits_only) {
         Ok(val) => Some(val),

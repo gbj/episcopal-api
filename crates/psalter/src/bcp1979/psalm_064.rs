@@ -8,7 +8,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 671
             },
-            local_name: String::from("Psalm 64"),
+            local_name: String::from(""),
             latin_name: String::from("Exaudi, Deus"),
             verses: vec![
                 PsalmVerse {
@@ -45,7 +45,7 @@ lazy_static! {
                     number: 7,
                     a: String::from("The human mind and heart are a mystery; *"),
                     b: String::from(
-                        "but God will loose an arrow at them,\n and suddenly they will be wounded."
+                        "but God will loose an arrow at them,\nand suddenly they will be wounded."
                     )
                 },
                 PsalmVerse {

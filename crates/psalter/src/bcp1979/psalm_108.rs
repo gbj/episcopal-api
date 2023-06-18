@@ -9,7 +9,7 @@ lazy_static! {
               source: Source::BCP1979,
               page: 749
             },
-            local_name: String::from("Psalm 108"),
+            local_name: String::from(""),
             latin_name: String::from("Paratum cor meum"),
             verses: vec![
                           PsalmVerse {
@@ -45,7 +45,7 @@ lazy_static! {
               PsalmVerse {
                     number: 7,
                     a: String::from("God spoke from his holy place and said, *"),
-                    b: String::from("“I will exult and parcel out Shechem;\n I will divide the valley of Succoth.")
+                    b: String::from("“I will exult and parcel out Shechem;\nI will divide the valley of Succoth.")
                 },
               PsalmVerse {
                     number: 8,

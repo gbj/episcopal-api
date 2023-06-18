@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 781
               },
-              local_name: String::from("Psalm 125"),
+              local_name: String::from(""),
               latin_name: String::from("Qui confidunt"),
               verses: vec![
                 PsalmVerse {
@@ -20,7 +20,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 2,
                       a: String::from("The hills stand about Jerusalem; *"),
-                      b: String::from("so does the LORD stand round about his people,\n from this time forth for evermore.")
+                      b: String::from("so does the LORD stand round about his people,\nfrom this time forth for evermore.")
                   },
                 PsalmVerse {
                       number: 3,

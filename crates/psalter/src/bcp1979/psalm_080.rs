@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 702
               },
-              local_name: String::from("Psalm 80"),
+              local_name: String::from(""),
               latin_name: String::from("Qui regis Israel"),
               verses: vec![
                 PsalmVerse {
@@ -30,7 +30,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 4,
                       a: String::from("O LORD God of hosts, *"),
-                      b: String::from("how long will you be angered\n despite the prayers of your people?")
+                      b: String::from("how long will you be angered\ndespite the prayers of your people?")
                   },
                 PsalmVerse {
                       number: 5,

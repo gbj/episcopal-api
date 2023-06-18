@@ -8,7 +8,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 587
             },
-            local_name: String::from("Psalm 3"),
+            local_name: String::from(""),
             latin_name: String::from("Domine, quid multiplicati"),
             verses: vec![
               PsalmVerse {
@@ -44,7 +44,7 @@ lazy_static! {
   PsalmVerse {
         number: 7,
         a: String::from("Rise up, O LORD; set me free, O my God; *"),
-        b: String::from("surely, you will strike all my enemies across the face,\n you will break the teeth of the wicked.")
+        b: String::from("surely, you will strike all my enemies across the face,\nyou will break the teeth of the wicked.")
     },
   PsalmVerse {
         number: 8,

@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 693
               },
-              local_name: String::from("Psalm 77"),
+              local_name: String::from(""),
               latin_name: String::from("Voce mea ad Dominum"),
               verses: vec![
                 PsalmVerse {
@@ -20,7 +20,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 2,
                       a: String::from("In the day of my trouble I sought the Lord; *"),
-                      b: String::from("my hands were stretched out by night and did not tire;\n I refused to be comforted.")
+                      b: String::from("my hands were stretched out by night and did not tire;\nI refused to be comforted.")
                   },
                 PsalmVerse {
                       number: 3,

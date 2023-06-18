@@ -9,13 +9,13 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 617
               },
-              local_name: String::from("Psalm 27"),
+              local_name: String::from(""),
               latin_name: String::from("Dominus illuminatio"),
               verses: vec![
                 PsalmVerse {
                       number: 1,
                       a: String::from("The LORD is my light and my salvation;\nwhom then shall I fear? *"),
-                      b: String::from("the LORD is the strength of my life;\n of whom then shall I be afraid?")
+                      b: String::from("the LORD is the strength of my life;\nof whom then shall I be afraid?")
                   },
                 PsalmVerse {
                       number: 2,
@@ -45,7 +45,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 7,
                       a: String::from("For in the day of trouble he shall keep me safe in his shelter; *"),
-                      b: String::from("he shall hide me in the secrecy of his dwelling\n and set me high upon a rock.")
+                      b: String::from("he shall hide me in the secrecy of his dwelling\nand set me high upon a rock.")
                   },
                 PsalmVerse {
                       number: 8,
@@ -90,7 +90,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 16,
                       a: String::from("Deliver me not into the hand of my adversaries, *"),
-                      b: String::from("for false witnesses have risen up against me,\n and also those who speak malice.")
+                      b: String::from("for false witnesses have risen up against me,\nand also those who speak malice.")
                   },
                 PsalmVerse {
                       number: 17,
@@ -99,7 +99,7 @@ lazy_static! {
                   },
                 PsalmVerse {
                       number: 18,
-                      a: String::from("O tarry and await the LORD’S pleasure;\nbe strong, and he shall comfort your heart; *"),
+                      a: String::from("O tarry and await the LORD’s pleasure;\nbe strong, and he shall comfort your heart; *"),
                       b: String::from("wait patiently for the LORD.")
                   },
               ]

@@ -4,12 +4,16 @@ use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Version};
 lazy_static! {
     pub static ref CANTICLE_1: Document = Document::from(Canticle {
         number: CanticleId::Canticle1,
+        changeable: None,
         citation: Some(String::from("Song of the Three Young Men, 35-65")),
         local_name: String::from("A Song of Creation"),
         latin_name: Some(String::from("Benedicite, omnia opera Domini")),
+        rubric: Some(String::from(
+            "This Canticle may be shortened by omitting section II or III"
+        )),
         sections: vec![
             CanticleSection {
-                title: None,
+                title: Some(String::from("I\tInvocation")),
                 verses: vec![
                     CanticleVerse::from((
                         "O all ye works of the Lord, bless ye the Lord; *",
@@ -22,7 +26,7 @@ lazy_static! {
                 ]
             },
             CanticleSection {
-                title: None,
+                title: Some(String::from("II\tThe Cosmic Order")),
                 verses: vec![
                     CanticleVerse::from((
                         "O ye heavens, bless ye the Lord; *",
@@ -67,7 +71,7 @@ lazy_static! {
                 ]
             },
             CanticleSection {
-                title: None,
+                title: Some(String::from("III\tThe Earth and its Creatures")),
                 verses: vec![
                     CanticleVerse::from((
                         "O let the earth bless the Lord; *",
@@ -96,7 +100,7 @@ lazy_static! {
                 ]
             },
             CanticleSection {
-                title: None,
+                title: Some(String::from("IV\tThe People of God")),
                 verses: vec![
                     CanticleVerse::from((
                         "O ye people of God, bless ye the Lord; *",
@@ -105,7 +109,12 @@ lazy_static! {
                     CanticleVerse::from((
                         " O ye servants of the Lord, bless ye the Lord; *",
                         "praise him and magnify him for ever."
-                    )),
+                    ))
+                ]
+            },
+            CanticleSection {
+                title: None,
+                verses: vec![
                     CanticleVerse::from((
                         "O ye spirits and souls of the righteous, bless ye the Lord; *",
                         "O ye holy and humble men of heart, bless ye the Lord."
@@ -116,7 +125,9 @@ lazy_static! {
                     ))
                 ]
             }
-        ]
+        ],
+        gloria_patri: None
     })
-    .version(Version::RiteI);
+    .version(Version::RiteI)
+    .page(47);
 }

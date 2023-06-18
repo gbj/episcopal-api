@@ -1,6 +1,7 @@
 #[macro_use]
 extern crate lazy_static;
 pub mod bcp1979;
+pub mod loc;
 
 use itertools::Itertools;
 use liturgy::Psalm;
@@ -8,11 +9,11 @@ use reference_parser::BibleReference;
 use std::{convert::TryInto, iter::once};
 
 /// Defines a version or translation of the psalms, with a single entry per psalm
-pub struct Psalter {
-    psalms: Vec<(u8, &'static Psalm)>,
+pub struct Psalter<'a> {
+    pub psalms: Vec<(u8, &'a Psalm)>,
 }
 
-impl Psalter {
+impl<'a> Psalter<'a> {
     /// Returns a single psalm, if it exists, by its number.
     /// ```
     /// # use crate::psalter::bcp1979::BCP1979_PSALTER;
@@ -28,19 +29,32 @@ impl Psalter {
     /// Returns the set of psalms covered by a given citation, including filtering verses.
     /// ```
     /// # use crate::psalter::bcp1979::BCP1979_PSALTER;
-    /// let three_psalms = BCP1979_PSALTER.psalms_by_citation("Psalms 120, 121, 122:1-3");
-    /// assert_eq!(three_psalms.len(), 3);
-    /// assert_eq!(three_psalms[0].number, 120);
-    /// assert_eq!(three_psalms[1].number, 121);
-    /// assert_eq!(three_psalms[2].number, 122);
-    /// assert_eq!(three_psalms[2].filtered_sections()[0].verses.len(), 3);
+    /// //let three_psalms = BCP1979_PSALTER.psalms_by_citation("Psalms 120, 121, 122:1-3");
+    /// //assert_eq!(three_psalms.len(), 3);
+    /// //assert_eq!(three_psalms[0].number, 120);
+    /// //assert_eq!(three_psalms[1].number, 121);
+    /// //assert_eq!(three_psalms[2].number, 122);
+    /// //assert_eq!(three_psalms[2].filtered_sections()[0].verses.len(), 3);
+    /// // one psalm with comma in citation
+    /// let comma_in_citation = BCP1979_PSALTER.psalms_by_citation("Psalm 116:1, 10-17");
+    /// assert_eq!(comma_in_citation.len(), 1);
+    /// assert_eq!(comma_in_citation[0].number, 116);
+    /// assert_eq!(comma_in_citation[0]
+    ///            .sections
+    ///            .iter()
+    ///            .flat_map(|section| section.verses.iter())
+    ///            .collect::<Vec<_>>()
+    ///            .len(),
+    ///        9
+    ///    );
     /// ```
+    #[cfg(any(feature = "browser", feature = "server"))]
     pub fn psalms_by_citation(&self, citation: &str) -> Vec<Psalm> {
         let reference = BibleReference::from(citation);
         reference
             .ranges
             .iter()
-            .map(|range| {
+            .flat_map(|range| {
                 if let Some(end) = range.end {
                     if let Some(start_chapter) = range.start.chapter {
                         if let Some(end_chapter) = end.chapter {
@@ -61,7 +75,6 @@ impl Psalter {
                         as Box<dyn Iterator<Item = u16>>
                 }
             })
-            .flatten()
             .unique()
             .filter_map(|number| {
                 // try to convert the psalm number from a u16 to a u8

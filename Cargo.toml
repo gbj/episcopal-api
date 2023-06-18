@@ -1,38 +1,42 @@
-
 [package]
 name = "episcopal-api"
 version = "0.1.0"
 authors = [ "Greg Johnston <greg.johnston@gmail.com>" ]
-repository = "https://github.com/gbj/episcopal-api"
+repository = "https://github.com/gbj/commonprayer"
 edition = "2018"
 
 [lib]
 
 [dependencies]
 api = { path = "crates/api" }
+bible = { path = "crates/bible" }
 calendar = { path = "crates/calendar" }
 canticle-table = { path = "crates/canticle-table" }
+docx = { path = "crates/export/docx" }
+hymnal = { path = "crates/hymnal" }
 language = { path = "crates/language" }
+ldf = { path = "crates/export/ldf" }
 lectionary = { path = "crates/lectionary" }
 library = { path = "crates/library" }
 liturgy = { path = "crates/liturgy" }
 psalter = { path = "crates/psalter" }
 reference-parser = { path = "crates/reference-parser" }
 
-
 [workspace]
 members = [
   "crates/api",
   "crates/calendar",
   "crates/canticle-table",
-  "crates/export/web",
+  "crates/export/docx",
+  "crates/export/ldf",
+  "crates/export/to_rust_code",
   "crates/export/web-component",
+  "crates/hymnal",
   "crates/language",
   "crates/lectionary",
   "crates/library",
   "crates/liturgy",
   "crates/psalter",
   "crates/reference-parser",
-  "examples/rest_api",
-  "examples/website"
+  "crates/status"
 ]

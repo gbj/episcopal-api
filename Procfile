@@ -1,1 +1,0 @@
-web: PORT=$PORT HOST=0.0.0.0 ~/examples/website/pkg/server

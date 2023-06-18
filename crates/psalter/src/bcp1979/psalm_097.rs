@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 726
               },
-              local_name: String::from("Psalm 97"),
+              local_name: String::from(""),
               latin_name: String::from("Dominus regnavit"),
               verses: vec![
                 PsalmVerse {
@@ -60,7 +60,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 10,
                       a: String::from("The LORD loves those who hate evil; *"),
-                      b: String::from("he preserves the lives of his saints\n and delivers them from the hand of the wicked.")
+                      b: String::from("he preserves the lives of his saints\nand delivers them from the hand of the wicked.")
                   },
                 PsalmVerse {
                       number: 11,

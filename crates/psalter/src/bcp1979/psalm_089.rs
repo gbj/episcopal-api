@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 713
             },
-            local_name: String::from("Psalm 89: Part I"),
+            local_name: String::from("Part I"),
             latin_name: String::from("Misericordias Domini"),
             verses: vec![
                 PsalmVerse {
@@ -110,13 +110,13 @@ lazy_static! {
             source: Source::BCP1979,
             page: 715
           },
-          local_name: String::from("Psalm 89: Part II"),
+          local_name: String::from("Part II"),
           latin_name: String::from("Tunc locutus es"),
           verses: vec![
                         PsalmVerse {
                   number: 19,
                   a: String::from("You spoke once in vision and said to your faithful people: *"),
-                  b: String::from("“I have set the crown upon a warrior\n and have exalted one chosen out of the people.")
+                  b: String::from("“I have set the crown upon a warrior\nand have exalted one chosen out of the people.")
               },
             PsalmVerse {
                   number: 20,

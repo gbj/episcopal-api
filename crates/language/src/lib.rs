@@ -1,7 +1,10 @@
 use serde::{Deserialize, Serialize};
+use strum_macros::{Display, EnumIter, EnumString};
 
 /// Language that can be assigned to a [Document](liturgy::Document)
-#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(
+    Copy, Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize, Display, EnumIter, EnumString,
+)]
 pub enum Language {
     /// English
     En,
@@ -20,6 +23,10 @@ impl Default for Language {
 }
 
 impl Language {
+    pub fn is_default(&self) -> bool {
+        self == &Self::default()
+    }
+
     // TODO i18n when other languages are added
     pub fn i18n(&self, string: &str) -> String {
         match (self, string) {
@@ -50,6 +57,18 @@ impl Language {
             (Language::En, 11) => "November",
             (Language::En, 12) => "December",
             _ => todo!(),
+        }
+    }
+
+    pub fn from_locale(locale: &str) -> Self {
+        match locale {
+            "en" => Language::En,
+            "en-US" => Language::En,
+            "es" => Language::Es,
+            "es-ES" => Language::Es,
+            "fr" => Language::Fr,
+            "fr-FR" => Language::Fr,
+            _ => Language::En,
         }
     }
 }

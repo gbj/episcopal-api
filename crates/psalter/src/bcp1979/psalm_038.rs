@@ -8,7 +8,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 636
             },
-            local_name: String::from("Psalm 38"),
+            local_name: String::from(""),
             latin_name: String::from("Domine, ne in furore"),
             verses: vec![
               PsalmVerse {
@@ -69,7 +69,7 @@ lazy_static! {
           PsalmVerse {
                 number: 12,
                 a: String::from("Those who seek after my life lay snares for me; *"),
-                b: String::from("those who strive to hurt me speak of my ruin\n and plot treachery all the day long.")
+                b: String::from("those who strive to hurt me speak of my ruin\nand plot treachery all the day long.")
             },
           PsalmVerse {
                 number: 13,

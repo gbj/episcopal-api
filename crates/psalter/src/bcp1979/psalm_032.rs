@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 624
               },
-              local_name: String::from("Psalm 32"),
+              local_name: String::from(""),
               latin_name: String::from("Beati quorum"),
               verses: vec![
                 PsalmVerse {
@@ -60,7 +60,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 10,
                       a: String::from("Do not be like horse or mule, which have no understanding; *"),
-                      b: String::from("who must be fitted with bit and bridle,\n or else they will not stay near you.”")
+                      b: String::from("who must be fitted with bit and bridle,\nor else they will not stay near you.”")
                   },
                 PsalmVerse {
                       number: 11,

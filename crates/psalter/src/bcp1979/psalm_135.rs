@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 788
               },
-              local_name: String::from("Psalm 135"),
+              local_name: String::from(""),
               latin_name: String::from("Laudate nomen"),
               verses: vec![
                 PsalmVerse {
@@ -45,7 +45,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 7,
                       a: String::from("He brings up rain clouds from the ends of the earth; *"),
-                      b: String::from("he sends out lightning with the rain,\n and brings the winds out of his storehouse.")
+                      b: String::from("he sends out lightning with the rain,\nand brings the winds out of his storehouse.")
                   },
                 PsalmVerse {
                       number: 8,
@@ -64,8 +64,8 @@ lazy_static! {
                   },
                 PsalmVerse {
                       number: 11,
-                      a: String::from("Sihon, king of the Amorites,\nand Og, the kingdoms of Bashan, *"),
-                      b: String::from("and all the kings of Canaan.")
+                      a: String::from("Sihon, king of the Amorites,\nand Og, the kings of Bashan, *"),
+                      b: String::from("and all the kingdoms of Canaan.")
                   },
                 PsalmVerse {
                       number: 12,
@@ -115,7 +115,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 21,
                       a: String::from("Blessed be the LORD out of Zion, *"),
-                      b: String::from("who dwells in Jerusalem.\n Hallelujah!")
+                      b: String::from("who dwells in Jerusalem.\nHallelujah!")
                   },
               ]
             }

@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 641
               },
-              local_name: String::from("Psalm 41"),
+              local_name: String::from(""),
               latin_name: String::from("Beatus qui intelligit"),
               verses: vec![
                 PsalmVerse {
@@ -40,7 +40,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 6,
                       a: String::from("Even if they come to see me, they speak empty words; *"),
-                      b: String::from("their heart collects false rumors;\n they go outside and spread them.")
+                      b: String::from("their heart collects false rumors;\nthey go outside and spread them.")
                   },
                 PsalmVerse {
                       number: 7,

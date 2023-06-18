@@ -1,9 +1,25 @@
 use calendar::{
     Feast, LiturgicalDay, LiturgicalDayId, LiturgicalWeek, Proper, RCLYear, Weekday, Year, YearType,
 };
+use serde::{Deserialize, Serialize};
+use strum_macros::{Display, EnumString};
 
 use crate::{Lectionary, Reading, ReadingType, RCL_TRACK_1, RCL_TRACK_2};
 
+#[derive(
+    Copy,
+    Clone,
+    Debug,
+    PartialEq,
+    Eq,
+    Hash,
+    PartialOrd,
+    Ord,
+    Serialize,
+    Deserialize,
+    EnumString,
+    Display,
+)]
 pub enum RCLTrack {
     One,
     Two,
@@ -432,12 +448,6 @@ pub const RCL: Lectionary = Lectionary {
         (
             LiturgicalDayId::Feast(Feast::EasterSunday),
             Year::Any,
-            ReadingType::SecondReading,
-            "Acts 10:34-43",
-        ),
-        (
-            LiturgicalDayId::Feast(Feast::EasterSunday),
-            Year::Any,
             ReadingType::Gospel,
             "John 20:1-18",
         ),
@@ -476,6 +486,12 @@ pub const RCL: Lectionary = Lectionary {
             Year::Rcl(RCLYear::C),
             ReadingType::SecondReading,
             "1 Corinthians 15:19-26",
+        ),
+        (
+            LiturgicalDayId::Feast(Feast::EasterSunday),
+            Year::Any,
+            ReadingType::SecondReading,
+            "Acts 10:34-43",
         ),
         (
             LiturgicalDayId::Feast(Feast::EasterSunday),

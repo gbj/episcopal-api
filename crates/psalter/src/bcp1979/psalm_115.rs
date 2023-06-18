@@ -8,7 +8,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 757
             },
-            local_name: String::from("Psalm 115"),
+            local_name: String::from(""),
             latin_name: String::from("Non nobis, Domine"),
             verses: vec![
                 PsalmVerse {
@@ -74,7 +74,7 @@ lazy_static! {
                     number: 12,
                     a: String::from("The LORD has been mindful of us, and he will bless us; *"),
                     b: String::from(
-                        "he will bless the house of Israel;\n he will bless the house of Aaron;"
+                        "he will bless the house of Israel;\nhe will bless the house of Aaron;"
                     )
                 },
                 PsalmVerse {
@@ -94,7 +94,7 @@ lazy_static! {
                 },
                 PsalmVerse {
                     number: 16,
-                    a: String::from("The heaven of heavens is the LORD’S, *"),
+                    a: String::from("The heaven of heavens is the LORD’s, *"),
                     b: String::from("but he entrusted the earth to its peoples.")
                 },
                 PsalmVerse {
@@ -105,7 +105,7 @@ lazy_static! {
                 PsalmVerse {
                     number: 18,
                     a: String::from("But we will bless the LORD, *"),
-                    b: String::from("from this time forth for evermore.\n Hallelujah!")
+                    b: String::from("from this time forth for evermore.\nHallelujah!")
                 },
             ]
         }]

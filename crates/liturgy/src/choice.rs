@@ -1,7 +1,7 @@
 use itertools::Itertools;
 use serde::{Deserialize, Serialize};
 
-use crate::{Content, Document, Parallel, Series};
+use crate::{Content, Document, Liturgy, Parallel, Series};
 use calendar::Date;
 
 /// Multiple [Document](crate::Document)s that are displayed one at a time, with a menu to choose between them.
@@ -10,6 +10,7 @@ pub struct Choice {
     pub options: Vec<Document>,
     pub selected: usize,
     pub rotated: bool,
+    pub should_rotate: bool,
 }
 
 impl<T> From<T> for Choice
@@ -21,7 +22,27 @@ where
             selected: 0,
             options: options.into_iter().collect(),
             rotated: false,
+            should_rotate: false,
         }
+    }
+}
+
+// Conversions
+impl From<Content> for Choice {
+    fn from(content: Content) -> Self {
+        match content {
+            Content::Choice(c) => c,
+            Content::Liturgy(c) => Self::from(c),
+            Content::Series(c) => Self::from(c),
+            Content::Parallel(c) => Self::from(c),
+            _ => Self::from([Document::from(content)]),
+        }
+    }
+}
+
+impl From<Liturgy> for Choice {
+    fn from(content: Liturgy) -> Self {
+        Self::from(content.body)
     }
 }
 
@@ -44,6 +65,32 @@ impl Choice {
         self.rotated = true;
         let nth_day: usize = date.day_in_year().into();
         self.selected = nth_day % self.options.len();
+    }
+
+    /// Instruct the compiler to rotate
+    #[must_use]
+    pub fn should_rotate(mut self) -> Self {
+        self.should_rotate = true;
+        self
+    }
+
+    /// Set the default selection
+    #[must_use]
+    pub fn selected(mut self, idx: usize) -> Self {
+        self.selected = idx;
+        self
+    }
+
+    pub fn push(&mut self, document: Document) {
+        self.options.push(document)
+    }
+
+    pub fn remove_at_index(&mut self, index: usize) -> Document {
+        self.options.remove(index)
+    }
+
+    pub fn insert_at(&mut self, index: usize, doc: Document) {
+        self.options.insert(index, doc)
     }
 
     /// Generates an appropriate label to differentiate this option from all the others
@@ -94,6 +141,14 @@ impl Choice {
             } else {
                 reading.citation.clone()
             }
+        } else if let Content::BiblicalCitation(reading) = &doc.content {
+            if unique_citations > 1 && unique_versions > 1 {
+                format!("{} ({})", reading.citation, doc.version)
+            } else if unique_versions > 1 {
+                doc.version.to_string()
+            } else {
+                reading.citation.clone()
+            }
         } else if let Content::Sentence(reading) = &doc.content {
             let citation_and_text = if let Some(citation) = &reading.citation {
                 format!("{} (“{}”)", citation, reading.text)
@@ -121,6 +176,8 @@ impl Choice {
             } else {
                 format!("{}. {}", canticle.number, canticle.local_name)
             }
+        } else if let Content::ResponsivePrayer(prayer) = &doc.content {
+            prayer.iter().next().map(String::from).unwrap_or_default()
         } else if unique_labels > 1 && doc.label.is_some() {
             doc.label.clone().unwrap()
         } else if unique_versions > 1 {
@@ -134,6 +191,13 @@ impl Choice {
         } else {
             label
         }
+    }
+
+    pub fn option_labels(&self) -> impl Iterator<Item = String> + '_ {
+        self.options
+            .iter()
+            .enumerate()
+            .map(move |(idx, option)| self.option_label(option, idx))
     }
 
     fn unique_versions(&self) -> usize {
@@ -198,18 +262,24 @@ mod tests {
         let choice = Choice::from([
             Document::from(Canticle {
                 number: CanticleId::Canticle1,
+                changeable: None,
                 citation: None,
                 sections: vec![],
                 local_name: String::from("A Song of Creation"),
                 latin_name: Some(String::from("Benedicite, omnia opera Domini")),
+                rubric: None,
+                gloria_patri: None,
             })
             .version(Version::RiteI),
             Document::from(Canticle {
                 number: CanticleId::Canticle2,
+                changeable: None,
                 citation: None,
                 sections: vec![],
                 local_name: String::from("A Song of Praise"),
                 latin_name: Some(String::from("Benedictus es, Domine")),
+                rubric: None,
+                gloria_patri: None,
             })
             .version(Version::RiteI),
         ]);
@@ -228,18 +298,24 @@ mod tests {
         let choice = Choice::from([
             Document::from(Canticle {
                 number: CanticleId::Canticle1,
+                changeable: None,
                 citation: None,
                 sections: vec![],
                 local_name: String::from("A Song of Creation"),
                 latin_name: Some(String::from("Benedicite, omnia opera Domini")),
+                rubric: None,
+                gloria_patri: None,
             })
             .version(Version::RiteI),
             Document::from(Canticle {
                 number: CanticleId::Canticle12,
+                changeable: None,
                 citation: None,
                 sections: vec![],
                 local_name: String::from("A Song of Creation"),
                 latin_name: Some(String::from("Benedicite, omnia opera Domini")),
+                rubric: None,
+                gloria_patri: None,
             })
             .version(Version::RiteII),
         ]);
@@ -252,18 +328,24 @@ mod tests {
         let choice = Choice::from([
             Document::from(Canticle {
                 number: CanticleId::Canticle12,
+                changeable: None,
                 citation: None,
                 sections: vec![],
                 local_name: String::from("A Song of Creation"),
                 latin_name: Some(String::from("Benedicite, omnia opera Domini")),
+                rubric: None,
+                gloria_patri: None,
             })
             .version(Version::RiteII),
             Document::from(Canticle {
                 number: CanticleId::Canticle12,
+                changeable: None,
                 citation: None,
                 sections: vec![],
                 local_name: String::from("A Song of Creation"),
                 latin_name: Some(String::from("Benedicite, omnia opera Domini")),
+                rubric: None,
+                gloria_patri: None,
             })
             .version(Version::EOW),
         ]);
@@ -276,26 +358,35 @@ mod tests {
         let choice = Choice::from([
             Document::from(Canticle {
                 number: CanticleId::Canticle1,
+                changeable: None,
                 citation: None,
                 sections: vec![],
                 local_name: String::from("A Song of Creation"),
                 latin_name: Some(String::from("Benedicite, omnia opera Domini")),
+                rubric: None,
+                gloria_patri: None,
             })
             .version(Version::RiteI),
             Document::from(Canticle {
                 number: CanticleId::Canticle12,
+                changeable: None,
                 citation: None,
                 sections: vec![],
                 local_name: String::from("A Song of Creation"),
                 latin_name: Some(String::from("Benedicite, omnia opera Domini")),
+                rubric: None,
+                gloria_patri: None,
             })
             .version(Version::RiteII),
             Document::from(Canticle {
                 number: CanticleId::Canticle2,
+                changeable: None,
                 citation: None,
                 sections: vec![],
                 local_name: String::from("A Song of Praise"),
                 latin_name: Some(String::from("Benedictus es, Domine")),
+                rubric: None,
+                gloria_patri: None,
             })
             .version(Version::RiteI),
         ]);

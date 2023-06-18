@@ -1,12 +1,16 @@
 use canticle_table::CanticleId;
 use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Version};
 
+use crate::rite2::GLORIA_PATRI;
+
 lazy_static! {
     pub static ref CANTICLE_11: Document = Document::from(Canticle {
         number: CanticleId::Canticle11,
+        changeable: None,
         citation: Some(String::from("Isaiah 60:1-3, 11a, 14c, 18-19")),
         local_name: String::from("The Third Song of Isaiah"),
         latin_name: Some(String::from("Surge, illuminare")),
+        rubric: None,
         sections: vec![CanticleSection {
             title: None,
             verses: vec![
@@ -51,7 +55,9 @@ lazy_static! {
                     "and your God will be your glory."
                 ))
             ]
-        }]
+        }],
+        gloria_patri: Some(GLORIA_PATRI.clone()),
     })
-    .version(Version::RiteII);
+    .version(Version::RiteII)
+    .page(87);
 }

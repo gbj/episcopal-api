@@ -1,4 +1,4 @@
-use crate::{Content, Document, Lectionaries, Preces, ResponsivePrayer, Text};
+use crate::{Content, Document, GlobalPref, Lectionaries, Preces, ResponsivePrayer, Text};
 use lectionary::ReadingType;
 use reference_parser::{BibleReference, Book};
 use serde::{Deserialize, Serialize};
@@ -7,9 +7,10 @@ use crate::PreferenceKey;
 
 /// A generic reference to a lectionary reading (i.e., “First Reading” from the Daily Office Lectionary).
 /// The [Library](library::Library) will compile this into a [BiblicalReading](crate::BiblicalReading).
-#[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct LectionaryReading {
     pub reading_type: ReadingTypeTable,
+    pub reading_type_overridden_by: Option<ReadingType>,
     pub lectionary: LectionaryTableChoice,
     pub intro: Option<BiblicalReadingIntroTemplate>,
 }
@@ -22,12 +23,24 @@ pub enum ReadingTypeTable {
     Selected(ReadingType),
 }
 
+impl Default for ReadingTypeTable {
+    fn default() -> Self {
+        Self::Selected(ReadingType::FirstReading)
+    }
+}
+
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub enum LectionaryTableChoice {
     /// Dynamically loads the lectionary selected in the specified preference
     Preference(PreferenceKey),
     /// Statically uses the chosen lectionary
     Selected(Lectionaries),
+}
+
+impl Default for LectionaryTableChoice {
+    fn default() -> Self {
+        Self::Preference(PreferenceKey::Global(GlobalPref::Lectionary))
+    }
 }
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
@@ -38,6 +51,12 @@ pub struct BiblicalReadingIntroTemplate(Box<Document>);
 impl From<Document> for BiblicalReadingIntroTemplate {
     fn from(document: Document) -> Self {
         Self(Box::new(document))
+    }
+}
+
+impl From<BiblicalReadingIntroTemplate> for Document {
+    fn from(template: BiblicalReadingIntroTemplate) -> Self {
+        *template.0
     }
 }
 
@@ -86,6 +105,7 @@ impl BiblicalReadingIntroTemplate {
     ///     ]))
     /// );
     /// ```
+    #[cfg(any(feature = "browser", feature = "server"))]
     pub fn compile(&self, citation: &str) -> Document {
         let template = *self.0.clone();
         let citation = BibleReference::from(citation);

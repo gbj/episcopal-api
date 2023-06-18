@@ -4,9 +4,11 @@ use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Version};
 lazy_static! {
     pub static ref CANTICLE_2: Document = Document::from(Canticle {
         number: CanticleId::Canticle2,
+        changeable: None,
         citation: Some(String::from("Song of the Three Young Men, 29-34")),
         local_name: String::from("A Song of Praise"),
         latin_name: Some(String::from("Benedictus es, Domine")),
+        rubric: None,
         sections: vec![CanticleSection {
             title: None,
             verses: vec![
@@ -40,7 +42,9 @@ and dwellest between the Cherubim; *",
                     "praised and exalted above all for ever."
                 ))
             ]
-        }]
+        }],
+        gloria_patri: None
     })
-    .version(Version::RiteI);
+    .version(Version::RiteI)
+    .page(49);
 }

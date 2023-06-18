@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 712
               },
-              local_name: String::from("Psalm 88"),
+              local_name: String::from(""),
               latin_name: String::from("Domine, Deus"),
               verses: vec![
                 PsalmVerse {
@@ -60,7 +60,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 10,
                       a: String::from("My sight has failed me because of trouble; *"),
-                      b: String::from("LORD, I have called upon you daily;\n I have stretched out my hands to you.")
+                      b: String::from("LORD, I have called upon you daily;\nI have stretched out my hands to you.")
                   },
                 PsalmVerse {
                       number: 11,

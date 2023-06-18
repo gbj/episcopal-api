@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 657
               },
-              local_name: String::from("Psalm 52"),
+              local_name: String::from(""),
               latin_name: String::from("Quid gloriaris?"),
               verses: vec![
                 PsalmVerse {
@@ -35,7 +35,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 5,
                       a: String::from("Oh, that God would demolish you utterly, *"),
-                      b: String::from("topple you, and snatch you from your dwelling,\n and root you out of the land of the living!")
+                      b: String::from("topple you, and snatch you from your dwelling,\nand root you out of the land of the living!")
                   },
                 PsalmVerse {
                       number: 6,
@@ -45,7 +45,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 7,
                       a: String::from("“This is the one who did not take God for a refuge, *"),
-                      b: String::from("but trusted in great wealth\n and relied upon wickedness.”")
+                      b: String::from("but trusted in great wealth\nand relied upon wickedness.”")
                   },
                 PsalmVerse {
                       number: 8,

@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 651
               },
-              local_name: String::from("Psalm 48"),
+              local_name: String::from(""),
               latin_name: String::from("Magnus Dominus"),
               verses: vec![
                 PsalmVerse {
@@ -40,7 +40,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 6,
                       a: String::from("Trembling seized them there; *"),
-                      b: String::from("they writhed like a woman in childbirth,\n like ships of the sea when the east wind shatters them.")
+                      b: String::from("they writhed like a woman in childbirth,\nlike ships of the sea when the east wind shatters them.")
                   },
                 PsalmVerse {
                       number: 7,

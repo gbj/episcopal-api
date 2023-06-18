@@ -1,4 +1,7 @@
+use std::str::FromStr;
+
 use serde::{Deserialize, Serialize};
+use strum_macros::{AsRefStr, Display, EnumIter, EnumString, IntoStaticStr};
 
 use crate::holy_day::HolyDayId;
 use crate::lff2018::LFF_BIOS;
@@ -21,7 +24,21 @@ pub fn bio_for_feast(feast: Feast) -> Option<&'static str> {
         .map(|(_, bio)| *bio)
 }
 
-#[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
+#[derive(
+    Copy,
+    Clone,
+    PartialEq,
+    Eq,
+    Hash,
+    Debug,
+    Serialize,
+    Deserialize,
+    EnumString,
+    Display,
+    AsRefStr,
+    IntoStaticStr,
+    EnumIter,
+)]
 pub enum Feast {
     // Special Days
     FridayAfterAscension,
@@ -52,6 +69,8 @@ pub enum Feast {
     AshWednesday,
     EasterSunday,
     LaborDay,
+    EmberDay,
+    RogationDay,
     // Additional RCL selections for special services on select feast days
     ChristmasDayII,
     ChristmasDayIII,
@@ -65,7 +84,7 @@ pub enum Feast {
     AelredOfRievaulx,
     AgathaOfSicily,
     AgnesAndCeciliaOfRome,
-    AgnesTsaoKouYing,
+    AgnesAgathaLucy,
     AidanOfLindisfarne,
     Alban,
     AlcuinOfYork,
@@ -85,7 +104,7 @@ pub enum Feast {
     AthanasiusOfAlexandria,
     AugustineOfCanterbury,
     AugustineOfHippo,
-    BakhitaJosephineMargaretBakhita,
+    Bakhita,
     BasilOfCaesarea,
     Bede,
     BenedictOfNursia,
@@ -95,7 +114,7 @@ pub enum Feast {
     BlandinaAndHerCompanions,
     Boniface,
     BrigidOfKildare,
-    CatherineOfAlexandria,
+    CatherineBarbaraMargaret,
     CatherineOfGenoa,
     CatherineOfSiena,
     ChadOfLichfield,
@@ -113,7 +132,7 @@ pub enum Feast {
     CyprianOfCarthage,
     CyrilAndMethodius,
     CyrilOfJerusalem,
-    Damien,
+    DamienAndMarianne,
     DavidOfWales,
     DavidPendletonOakerhater,
     DietrichBonhoeffer,
@@ -126,7 +145,7 @@ pub enum Feast {
     EdwardBouveriePusey,
     ElisabethCruciger,
     ElizabethAnnSeton,
-    ElizabethCadyStanton,
+    StantonBloomerTruthTubman,
     ElizabethOfHungary,
     EmilyMalboneMorgan,
     Enmegahbowh,
@@ -139,7 +158,7 @@ pub enum Feast {
     FlorenceLiTimOi,
     FlorenceNightingale,
     FrancesPerkins,
-    FrancisDeSales,
+    FrancisDeSalesJaneDeChantal,
     FrancisOfAssisi,
     FrancisXavier,
     FrederickDenisonMaurice,
@@ -163,11 +182,11 @@ pub enum Feast {
     HildegardOfBingen,
     HolyCross,
     HolyInnocents,
-    HughLatimerAndNicholasRidley,
+    LatimerRidleyCranmer,
     HughOfLincoln,
     IgnatiusOfAntioch,
     IgnatiusOfLoyola,
-    IndependenceDayUnitedStates,
+    July4,
     IrenaeusOfLyons,
     IsabelFlorenceHapgood,
     JacksonKemper,
@@ -180,7 +199,7 @@ pub enum Feast {
     JananiLuwum,
     JeremyTaylor,
     Jerome,
-    Joanna,
+    JoannaMarySalome,
     JohannArndtAndJacobBoehme,
     JohannSebasatianBach,
     JohnAndCharlesWesley,
@@ -218,7 +237,7 @@ pub enum Feast {
     MarcellaOfRome,
     MargaretOfCortona,
     MargaretOfScotland,
-    MargaretWard,
+    WardClitherowLine,
     MariaSkobtsova,
     MarinaTheMonk,
     MartinLuther,
@@ -229,7 +248,7 @@ pub enum Feast {
     MaryOfEgypt,
     MaryamOfQidun,
     MechthildOfMagdeburg,
-    MechthildeOfHackebornAndGertrudeTheGreat,
+    MechthildeAndGertude,
     MelaniaTheElder,
     Monica,
     MosesTheBlack,
@@ -241,7 +260,7 @@ pub enum Feast {
     PachomiusOfTabenissi,
     PatrickOfIreland,
     PaulJones,
-    PaulaAndEustochiumOfRome,
+    PaulaAndEustochium,
     PauliMurray,
     PerpetuaAndFelicity,
     PeterWilliamsCassey,
@@ -254,9 +273,9 @@ pub enum Feast {
     PriscillaAndAquila,
     RemigiusOfRheims,
     RichardHooker,
-    RichardMeuxBenson,
+    RichardMeuxBensonAndCharlesGore,
     RichardOfChichester,
-    RichardRolle,
+    RolleHiltonKempe,
     RobertGrosseteste,
     Andrew,
     Barnabas,
@@ -276,7 +295,7 @@ pub enum Feast {
     Stephen,
     Thomas,
     SamuelIsaacJosephScherechewsky,
-    Sarah,
+    SarahTheodoraSyncletica,
     ScholasticaOfNursia,
     SergiusOfRadonezh,
     TabithaDorcasOfJoppa,
@@ -330,7 +349,7 @@ pub enum Feast {
     WilliamWilberforce,
     Willibrord,
     WulfstanOfWorcester,
-    Zenaida,
+    ZenaidaPhilonellaHermione,
     ZitaOfTuscany,
     ChristmasEve,
     December24,
@@ -370,9 +389,42 @@ pub enum CommonOfSaints {
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash, Debug, Serialize, Deserialize)]
 pub enum Time {
-    AllDay,
     MorningOnly,
-    EveningOnly,
+    AllDay,
+    EveningOnly(Option<Feast>),
+}
+
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub enum TimeOfDay {
+    Morning,
+    Evening,
+}
+
+impl std::fmt::Display for TimeOfDay {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            TimeOfDay::Morning => f.write_str("morning"),
+            TimeOfDay::Evening => f.write_str("evening"),
+        }
+    }
+}
+
+impl FromStr for TimeOfDay {
+    type Err = ();
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "morning" => Ok(Self::Morning),
+            "evening" => Ok(Self::Evening),
+            _ => Err(()),
+        }
+    }
+}
+
+impl Default for TimeOfDay {
+    fn default() -> Self {
+        Self::Morning
+    }
 }
 
 /// (month, day, Feast, eve, not observed After this week begins (used for days between Epiphany and Epiphany 1))

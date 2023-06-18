@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 683
               },
-              local_name: String::from("Psalm 71"),
+              local_name: String::from(""),
               latin_name: String::from("In te, Domine, speravi"),
               verses: vec![
                 PsalmVerse {
@@ -100,17 +100,17 @@ lazy_static! {
                 PsalmVerse {
                       number: 18,
                       a: String::from("And now that I am old and gray-headed, O God, do not forsake me, *"),
-                      b: String::from("till I make known your strength to this generation\n and your power to all who are to come.")
+                      b: String::from("till I make known your strength to this generation\nand your power to all who are to come.")
                   },
                 PsalmVerse {
                       number: 19,
                       a: String::from("Your righteousness, O God, reaches to the heavens; *"),
-                      b: String::from("you have done great things;\n who is like you, O God?")
+                      b: String::from("you have done great things;\nwho is like you, O God?")
                   },
                 PsalmVerse {
                       number: 20,
                       a: String::from("You have showed me great troubles and adversities, *"),
-                      b: String::from("but you will restore my life\n and bring me up again from the deep places of the earth.")
+                      b: String::from("but you will restore my life\nand bring me up again from the deep places of the earth.")
                   },
                 PsalmVerse {
                       number: 21,

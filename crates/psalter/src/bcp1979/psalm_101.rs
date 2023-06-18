@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 730
               },
-              local_name: String::from("Psalm 101"),
+              local_name: String::from(""),
               latin_name: String::from("Misericordiam ed judicium"),
               verses: vec![
                 PsalmVerse {
@@ -25,7 +25,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 3,
                       a: String::from("I will set no worthless thing before my eyes; *"),
-                      b: String::from("I hate the doers of evil deeds;\n they shall not remain with me.")
+                      b: String::from("I hate the doers of evil deeds;\nthey shall not remain with me.")
                   },
                 PsalmVerse {
                       number: 4,

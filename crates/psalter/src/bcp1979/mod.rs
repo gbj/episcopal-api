@@ -302,7 +302,7 @@ pub use psalm_150::*;
 use crate::Psalter;
 
 lazy_static! {
-    pub static ref BCP1979_PSALTER: Psalter = Psalter {
+    pub static ref BCP1979_PSALTER: Psalter<'static> = Psalter {
         psalms: vec![
             (1, &psalm_001::PSALM_1),
             (2, &psalm_002::PSALM_2),
@@ -456,4 +456,25 @@ lazy_static! {
             (150, &psalm_150::PSALM_150)
         ]
     };
+}
+
+#[cfg(test)]
+mod tests {
+    use super::BCP1979_PSALTER;
+
+    #[test]
+    fn consecutive_verse_numbers() {
+        for (_, psalm) in &BCP1979_PSALTER.psalms {
+            let mut verse_number = 0;
+            for section in &psalm.sections {
+                for verse in &section.verses {
+                    assert_eq!(
+                        (psalm.number, verse.number),
+                        (psalm.number, verse_number + 1)
+                    );
+                    verse_number = verse.number;
+                }
+            }
+        }
+    }
 }

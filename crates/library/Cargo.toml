@@ -6,11 +6,19 @@ edition = "2018"
 [dependencies]
 serde = { version = "1", features = ["derive"]}
 lazy_static = '1.0'
+itertools = "0.10"
 api = { path = "../api" }
+bible = { path = "../bible" }
+hymnal = { path = "../hymnal" }
 language = { path = "../language" }
 lectionary = { path = "../lectionary" }
 liturgy = { path = "../liturgy" }
+status = { path = "../status" }
 calendar = { path = "../calendar" }
 canticle-table = {path = "../canticle-table" }
 psalter = { path = "../psalter" }
 reference-parser = { path = "../reference-parser" }
+
+[features]
+server = ["liturgy/server", "psalter/server", "reference-parser/regex"]
+browser = ["liturgy/browser", "psalter/browser", "reference-parser/browser"]

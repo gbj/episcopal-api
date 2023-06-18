@@ -9,7 +9,7 @@ lazy_static! {
               source: Source::BCP1979,
               page: 633
             },
-            local_name: String::from("Psalm 37: Part I"),
+            local_name: String::from("Part I"),
             latin_name: String::from("Noli aemulari"),
             verses: vec![
                           PsalmVerse {
@@ -109,7 +109,7 @@ lazy_static! {
               source: Source::BCP1979,
               page: 634
             },
-            local_name: String::from("Psalm 37: Part II"),
+            local_name: String::from("Part II"),
             latin_name: String::from("Novit Dominus"),
             verses: vec![
               PsalmVerse {
@@ -125,7 +125,7 @@ lazy_static! {
               PsalmVerse {
                     number: 21,
                     a: String::from("As for the wicked, they shall perish, *"),
-                    b: String::from("and the enemies of the LORD, like the glory of the meadows, shall vanish;\n they shall vanish like smoke.")
+                    b: String::from("and the enemies of the LORD, like the glory of the meadows, shall vanish;\nthey shall vanish like smoke.")
                 },
               PsalmVerse {
                     number: 22,
@@ -150,7 +150,7 @@ lazy_static! {
               PsalmVerse {
                     number: 26,
                     a: String::from("I have been young and now I am old, *"),
-                    b: String::from("but never have I seen the righteous forsaken,\n or their children begging bread.")
+                    b: String::from("but never have I seen the righteous forsaken,\nor their children begging bread.")
                 },
               PsalmVerse {
                     number: 27,
@@ -200,7 +200,7 @@ lazy_static! {
               PsalmVerse {
                     number: 36,
                     a: String::from("Wait upon the LORD and keep his way; *"),
-                    b: String::from("he will raise you up to possess the land,\n and when the wicked are cut off, you will see it.")
+                    b: String::from("he will raise you up to possess the land,\nand when the wicked are cut off, you will see it.")
                 },
               PsalmVerse {
                     number: 37,
@@ -230,7 +230,7 @@ lazy_static! {
               PsalmVerse {
                     number: 42,
                     a: String::from("The LORD will help them and rescue them; *"),
-                    b: String::from("he will rescue them from the wicked and deliver them,\n because they seek refuge in him.")
+                    b: String::from("he will rescue them from the wicked and deliver them,\nbecause they seek refuge in him.")
                 },
             ]
           }

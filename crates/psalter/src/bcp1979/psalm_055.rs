@@ -9,12 +9,12 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 660
               },
-              local_name: String::from("Psalm 55"),
+              local_name: String::from(""),
               latin_name: String::from("Exaudi, Deus"),
               verses: vec![
                 PsalmVerse {
                       number: 1,
-                      a: String::from("Hear my prayer,O God; *"),
+                      a: String::from("Hear my prayer, O God; *"),
                       b: String::from("do not hide yourself from my petition.")
                   },
                 PsalmVerse {
@@ -75,7 +75,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 13,
                       a: String::from("For had it been an adversary who taunted me,\nthen I could have borne it; *"),
-                      b: String::from("or had it been an enemy who vaunted himself against me,\n then I could have hidden from him.")
+                      b: String::from("or had it been an enemy who vaunted himself against me,\nthen I could have hidden from him.")
                   },
                 PsalmVerse {
                       number: 14,

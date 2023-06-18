@@ -1,12 +1,15 @@
 use canticle_table::CanticleId;
-use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Version};
+use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Reference, Source, Version};
 
 lazy_static! {
     pub static ref CANTICLE_I: Document = Document::from(Canticle {
         number: CanticleId::CanticleI,
+        changeable: None,
         citation: Some(String::from("Jonah 2:2-7,9")),
-        local_name: String::from("Canticle I"),
+        local_name: String::from("A Song of Jonah"),
         latin_name: None,
+        rubric: None,
+        gloria_patri: None,
         sections: vec![CanticleSection {
             title: None,
             verses: vec![
@@ -42,5 +45,9 @@ all your waves and billows passed over me."
             ]
         }]
     })
-    .version(Version::EOW);
+    .version(Version::EOW)
+    .source(Reference {
+        source: Source::EOW1,
+        page: 35
+    });
 }

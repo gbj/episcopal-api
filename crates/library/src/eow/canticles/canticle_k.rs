@@ -1,12 +1,15 @@
 use canticle_table::CanticleId;
-use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Version};
+use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Reference, Source, Version};
 
 lazy_static! {
     pub static ref CANTICLE_K: Document = Document::from(Canticle {
         number: CanticleId::CanticleK,
+        changeable: None,
         citation: Some(String::from("Ephesians 1:3-10")),
-        local_name: String::from("Canticle K"),
+        local_name: String::from("A Song of Our Adoption"),
         latin_name: None,
+        rubric: None,
+        gloria_patri: None,
         sections: vec![CanticleSection {
             title: None,
             verses: vec![
@@ -51,5 +54,8 @@ with every spiritual blessing in the heavenly places."
         }]
     })
     .version(Version::EOW)
-    ;
+    .source(Reference {
+        source: Source::EOW1,
+        page: 36
+    });
 }

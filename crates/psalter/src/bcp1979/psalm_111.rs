@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 754
               },
-              local_name: String::from("Psalm 111"),
+              local_name: String::from(""),
               latin_name: String::from("Confitebor tibi"),
               verses: vec![
                 PsalmVerse {
@@ -60,7 +60,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 10,
                       a: String::from("The fear of the LORD is the beginning of wisdom; *"),
-                      b: String::from("those who act accordingly have a good understanding;\n his praise endures for ever.")
+                      b: String::from("those who act accordingly have a good understanding;\nhis praise endures for ever.")
                   },
               ]
             }

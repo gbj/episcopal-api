@@ -1,12 +1,12 @@
-use std::fmt::Display;
+use std::{fmt::Display, iter};
 
 use serde::{Deserialize, Serialize};
 
-use crate::{PreferenceKey, PreferenceValue, Reference, Series};
+use crate::{Content, Document, PreferenceKey, PreferenceValue, Reference, Series};
 
 /// A liturgical template that can carry a set of possible preferences and
 /// other metadata, as well as sub-documents.
-#[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct Liturgy {
     pub preferences: LiturgyPreferences,
     pub evening: bool,
@@ -14,11 +14,13 @@ pub struct Liturgy {
 }
 
 impl Liturgy {
+    #[must_use]
     pub fn evening(mut self, is_evening_liturgy: bool) -> Self {
         self.evening = is_evening_liturgy;
         self
     }
 
+    #[must_use]
     pub fn preferences<T>(mut self, preferences: T) -> Self
     where
         T: Into<LiturgyPreferences>,
@@ -38,12 +40,40 @@ impl From<Series> for Liturgy {
     }
 }
 
+impl<T, U> From<T> for Liturgy
+where
+    T: IntoIterator<Item = U>,
+    U: Into<Document>,
+{
+    fn from(items: T) -> Self {
+        Self {
+            evening: false,
+            preferences: LiturgyPreferences::default(),
+            body: Series::from(items),
+        }
+    }
+}
+
 /// The set of preferences and decisions that can be set for a given [Liturgy],
 /// including their descriptions and all the possible options for them.
 #[derive(Clone, Default, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct LiturgyPreferences(Vec<LiturgyPreference>);
 
 impl LiturgyPreferences {
+    pub fn iter(&self) -> impl Iterator<Item = &LiturgyPreference> {
+        self.0.iter()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.0.is_empty()
+    }
+
+    // allow this because if we try to actually implement IntoIter, it causes a conflict with the `From` implementation
+    #[allow(clippy::should_implement_trait)]
+    pub fn into_iter(self) -> impl Iterator<Item = LiturgyPreference> {
+        self.0.into_iter()
+    }
+
     pub fn default_value_for_key(&self, key: &PreferenceKey) -> Option<&PreferenceValue> {
         let pref = self.0.iter().find(|pref| pref.key == *key);
         pref.map(|pref| {
@@ -112,6 +142,15 @@ where
 }
 
 impl LiturgyPreference {
+    pub fn choices(&self) -> impl Iterator<Item = &LiturgyPreferenceOption> {
+        iter::once(&self.first_choice).chain(self.choices.iter())
+    }
+
+    pub fn only_one_choice(&self) -> bool {
+        self.choices.is_empty()
+    }
+
+    #[must_use]
     pub fn category<T>(mut self, category: T) -> Self
     where
         T: Display,
@@ -120,11 +159,13 @@ impl LiturgyPreference {
         self
     }
 
+    #[must_use]
     pub fn default_value(mut self, default_value: PreferenceValue) -> Self {
         self.default_value = Some(default_value);
         self
     }
 
+    #[must_use]
     pub fn description<T>(mut self, description: T) -> Self
     where
         T: Display,
@@ -133,6 +174,7 @@ impl LiturgyPreference {
         self
     }
 
+    #[must_use]
     pub fn reference(mut self, reference: Reference) -> Self {
         self.reference = Some(reference);
         self
@@ -149,6 +191,7 @@ pub struct LiturgyPreferenceOption {
 }
 
 impl LiturgyPreferenceOption {
+    #[must_use]
     pub fn fallback_value(mut self, fallback_value: Option<PreferenceValue>) -> Self {
         self.fallback_value = fallback_value;
         self
@@ -177,6 +220,17 @@ where
             label: option.to_string(),
             value: option.into(),
             fallback_value: None,
+        }
+    }
+}
+
+// Conversions
+impl From<Content> for Liturgy {
+    fn from(content: Content) -> Self {
+        match content {
+            Content::Liturgy(c) => c,
+            Content::Series(c) => Self::from(c),
+            _ => Self::from(Series::from(vec![Document::from(content)])),
         }
     }
 }

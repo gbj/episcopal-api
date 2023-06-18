@@ -1,6 +1,8 @@
 use std::{cmp::Reverse, convert::TryInto};
 
+use itertools::Itertools;
 use language::Language;
+use status::Status;
 
 use crate::{
     easter_in_year, feasts::KalendarEntry, holy_day::HolyDayId, liturgical_day::LiturgicalDayId,
@@ -25,18 +27,23 @@ pub struct Calendar {
     pub weeks: &'static [(Cycle, u8, LiturgicalWeek)],
     /// All holy days in the calendar
     pub holy_days: &'static [KalendarEntry],
+    /// A calendar that can be used to look up information for feasts that are not found in this calendar
+    /// (used for e.g., days that appear in the BCP calendar but don't have separate LFF entries)
+    pub holy_days_fallback: Option<&'static Calendar>,
     /// Ranks of holy days in this calendar
     pub holy_day_ranks: &'static [(Feast, Rank)],
-    /// Associations between [Feast]s and [Seasons]s
+    /// Associations between [Feast]s and [Season]s
     pub feast_seasons: &'static [(Feast, Season)],
     /// Associations between [LiturgicalWeek]s and [Season]s
     pub week_seasons: &'static [(LiturgicalWeek, Season)],
     /// Name for each [Feast](crate::Feast), by language
-    pub feast_names: &'static [(Feast, Language, &'static str)],
+    pub feast_names: &'static [(Feast, Language, &'static str, Status)],
     /// Name for each [LiturgicalWeek](crate::LiturgicalWeek), by language
     pub week_names: &'static [(LiturgicalWeek, Language, &'static str)],
     /// Name for each [Proper](crate::Proper), by language
     pub proper_names: &'static [(Proper, Language, &'static str)],
+    /// Alternative services for certain major days
+    pub major_day_alternatives: &'static [(Feast, &'static [Feast])],
 }
 
 impl Calendar {
@@ -50,12 +57,14 @@ impl Calendar {
     /// assert_eq!(thursday_easter_6.weekday, Weekday::Thu);
     /// assert_eq!(thursday_easter_6.daily_office_year, DailyOfficeYear::Two);
     /// assert_eq!(thursday_easter_6.rcl_year, RCLYear::A);
-    /// assert_eq!(thursday_easter_6.holy_days, vec![Feast::AscensionDay]);
+    /// assert_eq!(thursday_easter_6.holy_days, vec![]);
     /// assert_eq!(thursday_easter_6.proper, None);
     /// assert_eq!(thursday_easter_6.observed, LiturgicalDayId::Feast(Feast::AscensionDay));
     /// ```
     pub fn liturgical_day(&self, date: Date, evening: bool) -> LiturgicalDay {
         let mut original = self.liturgical_day_without_transferred_feasts(date, evening);
+
+        // modify if feasts should be transferred
         let transferred = self.transferred_feast(&original);
         if let Some(transferred) = transferred {
             let alternate = std::mem::replace(
@@ -64,6 +73,33 @@ impl Calendar {
             );
             original.alternate = Some(alternate);
         }
+
+        // remove certain feasts from from holy_days
+        // - the actual feast being observed
+        // - the alternate
+        // - black-letter days if it's a Sunday or a holy day
+        let observed = original.observed;
+        let weekday = original.weekday;
+        original.holy_days.retain(|feast| {
+            let feast_rank = self.feast_day_rank(feast);
+            match observed {
+                LiturgicalDayId::Feast(o_feast) => {
+                    o_feast != *feast
+                        && (feast_rank >= Rank::PrecedenceOverWeekday
+                            || feast_rank == Rank::EmberDay)
+                }
+                LiturgicalDayId::TransferredFeast(t_feast) => {
+                    // to be honest it's a little unclear whether a transferred red-letter day should
+                    // cause the original black-letter day to be ignored, or also commemorated
+                    // but we'll drop it, which I think is the most reasonable option
+                    t_feast != *feast
+                        && (feast_rank >= Rank::PrecedenceOverWeekday
+                            || feast_rank == Rank::EmberDay)
+                }
+                _ => weekday != Weekday::Sun,
+            }
+        });
+
         original
     }
 
@@ -77,7 +113,7 @@ impl Calendar {
     /// assert_eq!(thursday_easter_6.weekday, Weekday::Thu);
     /// assert_eq!(thursday_easter_6.daily_office_year, DailyOfficeYear::Two);
     /// assert_eq!(thursday_easter_6.rcl_year, RCLYear::A);
-    /// assert_eq!(thursday_easter_6.holy_days, vec![Feast::AscensionDay]);
+    /// assert_eq!(thursday_easter_6.holy_days, vec![]);
     /// assert_eq!(thursday_easter_6.proper, None);
     /// assert_eq!(thursday_easter_6.observed, LiturgicalDayId::Feast(Feast::AscensionDay));
     /// ```
@@ -89,10 +125,23 @@ impl Calendar {
         let weekday = date.weekday();
         let week = self.liturgical_week(date);
         let proper = self.proper(date, week);
-        let holy_days = self
-            .holy_days(date, week, evening, false)
-            .collect::<Vec<_>>();
+        let holy_days = self.holy_days(date, week, evening, false);
+        let fallback_holy_days = self.holy_days_fallback.map(|fallback| {
+            Calendar::filter_holy_days(date, week, evening, false, fallback.holy_days)
+        });
+        let holy_days = if let Some(fallback) = fallback_holy_days {
+            holy_days.chain(fallback).unique().collect::<Vec<_>>()
+        } else {
+            holy_days.collect::<Vec<_>>()
+        };
         let (observed, alternate) = self.observed_day(week, proper, weekday, &holy_days);
+        let alternative_services = self
+            .major_day_alternatives
+            .iter()
+            .find(|(s_feast, _)| observed == LiturgicalDayId::Feast(*s_feast))
+            .map(|(_, alternatives)| alternatives.to_vec())
+            .unwrap_or_default();
+
         LiturgicalDay {
             date,
             evening,
@@ -104,6 +153,7 @@ impl Calendar {
             proper,
             observed,
             alternate,
+            alternative_services,
         }
     }
 
@@ -187,11 +237,31 @@ impl Calendar {
     }
 
     /// The name of a [Feast](crate::Feast) in a given [Language](language::Language)
-    pub fn feast_name(&self, feast: Feast, language: Language) -> Option<&str> {
-        self.feast_names
-            .iter()
-            .find(|(s_feast, s_language, _)| *s_feast == feast && *s_language == language)
-            .map(|(_, _, name)| *name)
+    pub fn feast_name(&self, feast: Feast, language: Language) -> Option<String> {
+        if let Some(fallback) = self.holy_days_fallback {
+            self.feast_names
+                .iter()
+                .chain(fallback.feast_names.iter())
+                .find(|(s_feast, s_language, _, _)| *s_feast == feast && *s_language == language)
+                .map(|(_, _, name, status)| {
+                    if status == &Status::TrialUse {
+                        format!("[{name}]")
+                    } else {
+                        name.to_string()
+                    }
+                })
+        } else {
+            self.feast_names
+                .iter()
+                .find(|(s_feast, s_language, _, _)| *s_feast == feast && *s_language == language)
+                .map(|(_, _, name, status)| {
+                    if status == &Status::TrialUse {
+                        format!("[{name}]")
+                    } else {
+                        name.to_string()
+                    }
+                })
+        }
     }
 
     /// The name of a [LiturgicalWeek](crate::LiturgicalWeek) in a given [Language](language::Language)
@@ -233,20 +303,66 @@ impl Calendar {
 
     /// The rank of the given feast day in this calendar
     pub fn feast_day_rank(&self, feast: &Feast) -> Rank {
-        self.holy_day_ranks
-            .iter()
-            .find(|(search_feast, _)| search_feast == feast)
-            .map(|(_, rank)| *rank)
-            .unwrap_or(Rank::OptionalObservance)
+        if let Some(fallback) = self.holy_days_fallback {
+            self.holy_day_ranks
+                .iter()
+                .chain(fallback.holy_day_ranks.iter())
+                .find(|(search_feast, _)| search_feast == feast)
+                .map(|(_, rank)| *rank)
+                .unwrap_or(Rank::OptionalObservance)
+        } else {
+            self.holy_day_ranks
+                .iter()
+                .find(|(search_feast, _)| search_feast == feast)
+                .map(|(_, rank)| *rank)
+                .unwrap_or(Rank::OptionalObservance)
+        }
     }
 
     /// Whether the given feast is the "Eve of ___"
     pub fn feast_is_eve(&self, feast: &Feast) -> bool {
-        self.holy_days
+        let in_own_calendar = self
+            .holy_days
             .iter()
             .find(|(_, search_feast, _, _)| search_feast == feast)
-            .map(|(_, _, time, _)| *time == Time::EveningOnly)
-            .unwrap_or(false)
+            .map(|(_, _, time, _)| matches!(*time, Time::EveningOnly(_)));
+        let in_fallback = self
+            .holy_days_fallback
+            .and_then(|fallback| {
+                fallback
+                    .holy_days
+                    .iter()
+                    .find(|(_, search_feast, _, _)| search_feast == feast)
+            })
+            .map(|(_, _, time, _)| matches!(*time, Time::EveningOnly(_)));
+        in_own_calendar.unwrap_or_else(|| in_fallback.unwrap_or(false))
+    }
+
+    /// If the feast is the Eve of ___, returns Some(___); otherwise, None
+    pub fn feast_eve_following_day(&self, feast: &Feast) -> Option<Feast> {
+        let in_own_calendar = self
+            .holy_days
+            .iter()
+            .find(|(_, search_feast, _, _)| search_feast == feast)
+            .and_then(|(_, _, time, _)| match time {
+                Time::EveningOnly(next_day) => next_day.as_ref(),
+                _ => None,
+            });
+        let in_fallback = self.holy_days_fallback.and_then(|fallback| {
+            fallback
+                .holy_days
+                .iter()
+                .find(|(_, search_feast, _, _)| search_feast == feast)
+                .and_then(|(_, _, time, _)| match time {
+                    Time::EveningOnly(next_day) => next_day.as_ref(),
+                    _ => None,
+                })
+        });
+        match (in_own_calendar, in_fallback) {
+            (Some(f), _) => Some(*f),
+            (None, Some(f)) => Some(*f),
+            (None, None) => None,
+        }
     }
 
     pub(crate) fn holy_days(
@@ -256,10 +372,21 @@ impl Calendar {
         evening: bool,
         ignore_evening: bool,
     ) -> impl Iterator<Item = Feast> {
+        Calendar::filter_holy_days(date, week, evening, ignore_evening, self.holy_days)
+    }
+
+    fn filter_holy_days(
+        date: Date,
+        week: LiturgicalWeek,
+        evening: bool,
+        ignore_evening: bool,
+        holy_days: &[KalendarEntry],
+    ) -> impl Iterator<Item = Feast> + '_ {
         let today_month = date.month();
         let today_day = date.day();
         let today_weekday = date.weekday();
-        self.holy_days
+        let today_year = date.year();
+        holy_days
             .iter()
             .filter_map(move |(id, feast, f_time, f_stops_at_sunday)| {
                 let has_stopped = if let Some(stopping_week) = f_stops_at_sunday {
@@ -267,8 +394,8 @@ impl Calendar {
                 } else {
                     false
                 };
-                let time_ok = (*f_time != Time::EveningOnly
-                    || (!ignore_evening && *f_time == Time::EveningOnly && evening))
+                let time_ok = (!matches!(*f_time, Time::EveningOnly(_))
+                    || (!ignore_evening && matches!(*f_time, Time::EveningOnly(_)) && evening))
                     && (*f_time != Time::MorningOnly || !evening);
                 match id {
                     HolyDayId::Date(f_month, f_day) => {
@@ -300,6 +427,31 @@ impl Calendar {
                             None
                         }
                     }
+                    HolyDayId::WeekdayAfterDate {
+                        month,
+                        day,
+                        starting_weekday,
+                        weekday,
+                    } => {
+                        let starting_date = Date::from_ymd(today_year, *month, *day);
+                        let starting_date = if let Some(starting_weekday) = starting_weekday {
+                            if starting_date.weekday() == *starting_weekday {
+                                starting_date.add_days(7)
+                            } else {
+                                starting_date
+                            }
+                        } else {
+                            starting_date
+                        };
+
+                        let distance_in_days = (date - starting_date).num_days();
+
+                        if (0..7).contains(&distance_in_days) && weekday == &date.weekday() {
+                            Some(*feast)
+                        } else {
+                            None
+                        }
+                    }
                 }
             })
     }
@@ -323,7 +475,7 @@ impl Calendar {
                 .filter(|feast| {
                     let rank = self.feast_day_rank(feast);
                     // only include if rank is higher than a black-letter day
-                    rank > Rank::OptionalObservance
+                    rank >= Rank::PrecedenceOverWeekday
                     // if, if today is a Sunday, if rank is above a Sunday
                     // Sundays trump e.g., red-letter saints’ days
                         && (weekday != Weekday::Sun || rank >= Rank::Sunday)
@@ -551,5 +703,24 @@ mod tests {
 
         let day = BCP1979_CALENDAR.liturgical_day(date, true);
         assert_eq!(day.observed, LiturgicalDayId::Feast(Feast::EveOfPentecost));
+    }
+
+    #[test]
+    fn appropriately_handle_ember_days() {
+        let date = Date::from_ymd(2021, 2, 24);
+        let day = BCP1979_CALENDAR.liturgical_day(date, false);
+        assert!(day.holy_days.contains(&Feast::EmberDay));
+
+        let date = Date::from_ymd(2021, 9, 15);
+        let day = BCP1979_CALENDAR.liturgical_day(date, false);
+        assert!(day.holy_days.contains(&Feast::EmberDay));
+
+        let date = Date::from_ymd(2021, 9, 14);
+        let day = BCP1979_CALENDAR.liturgical_day(date, false);
+        assert!(!day.holy_days.contains(&Feast::EmberDay));
+
+        let date = Date::from_ymd(2022, 9, 21);
+        let day = BCP1979_CALENDAR.liturgical_day(date, false);
+        assert!(day.holy_days.contains(&Feast::EmberDay));
     }
 }

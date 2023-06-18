@@ -1,12 +1,15 @@
 use canticle_table::CanticleId;
-use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Version};
+use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Reference, Source, Version};
 
 lazy_static! {
     pub static ref CANTICLE_E: Document = Document::from(Canticle {
         number: CanticleId::CanticleE,
+        changeable: None,
         citation: Some(String::from("Isaiah 66:10-14")),
-        local_name: String::from("Canticle E"),
+        local_name: String::from("A Song of Jerusalem Our Mother"),
         latin_name: None,
+        rubric: None,
+        gloria_patri: None,
         sections: vec![CanticleSection {
             title: None,
             verses: vec![
@@ -43,5 +46,8 @@ the wealth of nations like an overflowing stream."
         }]
     })
     .version(Version::EOW)
-    ;
+    .source(Reference {
+        source: Source::EOW1,
+        page: 32
+    });
 }

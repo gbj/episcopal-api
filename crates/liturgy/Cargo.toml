@@ -6,13 +6,21 @@ edition = "2018"
 [dependencies]
 calendar = { path = "../calendar" }
 canticle-table = {path = "../canticle-table" }
+hymnal = { path = "../hymnal" }
 language = { path = "../language" }
 lectionary = { path = "../lectionary" }
 reference-parser = { path = "../reference-parser" }
 serde = { version = "1.0", features = ["derive"]}
+status = { path = "../status" }
 itertools = "0.10"
 thiserror = "1"
+strum = "0.24"
+strum_macros = "0.24"
 
 [dev-dependencies]
 psalter = { path = "../psalter" }
 library = { path = "../library" }
+
+[features]
+server = ["psalter/server"]
+browser = ["psalter/browser"]

@@ -2,7 +2,7 @@ use std::fmt::Display;
 
 use serde::{Deserialize, Serialize};
 
-use crate::{CanticleTables, PreferenceKey};
+use crate::{CanticleTables, GloriaPatri, PreferenceKey};
 use canticle_table::{CanticleId, CanticleNumber};
 
 /// An entry that can be looked up from a [CanticleTable](canticle_table::CanticleTable).
@@ -25,14 +25,20 @@ pub enum CanticleTableChoice {
 pub struct Canticle {
     /// Unique identifier for the canticle; may be shared between different versions or translations
     pub number: CanticleId,
+    /// If `None`, can’t be changed to another canticle. If `Some`, can be changed (and indicates which canticle it is).
+    pub changeable: Option<CanticleNumber>,
     /// Biblical or other citation for the source of the canticle's text
     pub citation: Option<String>,
     /// Name for the canticle in its own language
     pub local_name: String,
     /// Latin name for the canticle
     pub latin_name: Option<String>,
+    /// An initial, explanatory rubric (used for e.g., Canticle 12)
+    pub rubric: Option<String>,
     /// The content of the psalm, by section
     pub sections: Vec<CanticleSection>,
+    /// The text of the Gloria Patri, to be included (or not) at the end of the canticle
+    pub gloria_patri: Option<GloriaPatri>,
 }
 
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]

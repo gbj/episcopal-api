@@ -1071,12 +1071,6 @@ pub const BCP1979_DAILY_OFFICE_LECTIONARY: Lectionary = Lectionary {
         (
             LiturgicalDayId::Feast(Feast::Joseph),
             Year::Any,
-            ReadingType::SecondReading,
-            "Ephes. 3:14-21",
-        ),
-        (
-            LiturgicalDayId::Feast(Feast::Joseph),
-            Year::Any,
             ReadingType::Morning1,
             "Isa. 63:7-16",
         ),
@@ -1121,12 +1115,6 @@ pub const BCP1979_DAILY_OFFICE_LECTIONARY: Lectionary = Lectionary {
             Year::Any,
             ReadingType::Evening2,
             "Acts 1:1-8",
-        ),
-        (
-            LiturgicalDayId::Feast(Feast::Mark),
-            Year::Any,
-            ReadingType::SecondReading,
-            "2 Tim. 4:1-11",
         ),
         (
             LiturgicalDayId::Feast(Feast::Mark),
@@ -4186,13 +4174,13 @@ pub const BCP1979_DAILY_OFFICE_LECTIONARY: Lectionary = Lectionary {
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Tue),
             Year::DailyOffice(DailyOfficeYear::Two),
             ReadingType::FirstReading,
-            "Rov. 4:1-27",
+            "Prov. 4:1-27",
         ),
         (
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Tue),
             Year::DailyOffice(DailyOfficeYear::Two),
             ReadingType::SecondReading,
-            "1 Joh 4:7-21",
+            "1 John 4:7-21",
         ),
         (
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Epiphany7, Weekday::Tue),
@@ -6339,20 +6327,32 @@ pub const BCP1979_DAILY_OFFICE_LECTIONARY: Lectionary = Lectionary {
         (
             LiturgicalDayId::Feast(Feast::EasterSunday),
             Year::Any,
-            ReadingType::FirstReading,
+            ReadingType::Morning1,
             "Exod. 12:1-14",
         ),
         (
             LiturgicalDayId::Feast(Feast::EasterSunday),
             Year::Any,
-            ReadingType::SecondReading,
+            ReadingType::Morning2,
+            "John 1:1-18",
+        ),
+        (
+            LiturgicalDayId::Feast(Feast::EasterSunday),
+            Year::Any,
+            ReadingType::Evening1,
             "Isa. 51:9-11",
         ),
         (
             LiturgicalDayId::Feast(Feast::EasterSunday),
             Year::Any,
-            ReadingType::Gospel,
-            "John 1:1-18",
+            ReadingType::Evening2,
+            "Luke 24:13-35",
+        ),
+        (
+            LiturgicalDayId::Feast(Feast::EasterSunday),
+            Year::Any,
+            ReadingType::Evening2,
+            "John 20:19-23",
         ),
         (
             LiturgicalDayId::Feast(Feast::MondayInEasterWeek),
@@ -6598,7 +6598,7 @@ pub const BCP1979_DAILY_OFFICE_LECTIONARY: Lectionary = Lectionary {
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Sun),
             Year::DailyOffice(DailyOfficeYear::Two),
             ReadingType::SecondReading,
-            "1 Joh 1:1-7",
+            "1 John 1:1-7",
         ),
         (
             LiturgicalDayId::WeekAndDay(LiturgicalWeek::Easter2, Weekday::Mon),

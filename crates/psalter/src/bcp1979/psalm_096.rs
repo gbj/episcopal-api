@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 725
               },
-              local_name: String::from("Psalm 96"),
+              local_name: String::from(""),
               latin_name: String::from("Cantate Domino"),
               verses: vec![
                 PsalmVerse {
@@ -60,7 +60,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 10,
                       a: String::from("Tell it out among the nations: “The LORD is King! *"),
-                      b: String::from("he has made the world so firm that it cannot be moved;\n he will judge the peoples with equity.”")
+                      b: String::from("he has made the world so firm that it cannot be moved;\nhe will judge the peoples with equity.”")
                   },
                 PsalmVerse {
                       number: 11,

@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 600
               },
-              local_name: String::from("Psalm 17"),
+              local_name: String::from(""),
               latin_name: String::from("Exaudi, Domine"),
               verses: vec![
                 PsalmVerse {
@@ -45,7 +45,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 7,
                       a: String::from("Show me your marvelous loving-kindness, *"),
-                      b: String::from("O Savior of those who take refuge at your right hand\n from those who rise up against them.")
+                      b: String::from("O Savior of those who take refuge at your right hand\nfrom those who rise up against them.")
                   },
                 PsalmVerse {
                       number: 8,
@@ -85,7 +85,7 @@ lazy_static! {
                 PsalmVerse {
                       number: 15,
                       a: String::from("Whose bellies you fill with your treasure, *"),
-                      b: String::from("who are well supplied with children\n and leave their wealth to their little ones.")
+                      b: String::from("who are well supplied with children\nand leave their wealth to their little ones.")
                   },
                 PsalmVerse {
                       number: 16,

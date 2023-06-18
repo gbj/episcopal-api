@@ -1,12 +1,15 @@
 use canticle_table::CanticleId;
-use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Version};
+use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Reference, Source, Version};
 
 lazy_static! {
     pub static ref CANTICLE_P: Document = Document::from(Canticle {
         number: CanticleId::CanticleP,
+        changeable: None,
         citation: Some(String::from("Revelation 22:12-17")),
-        local_name: String::from("Canticle P"),
+        local_name: String::from("A Song of the Spirit"),
         latin_name: None,
+        rubric: None,
+        gloria_patri: None,
         sections: vec![CanticleSection {
             title: None,
             verses: vec![
@@ -43,5 +46,9 @@ that they may have the right to the tree of life, *",
             ]
         }]
     })
-    .version(Version::EOW);
+    .version(Version::EOW)
+    .source(Reference {
+        source: Source::EOW1,
+        page: 38
+    });
 }

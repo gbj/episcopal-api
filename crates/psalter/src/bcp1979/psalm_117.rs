@@ -8,7 +8,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 760
             },
-            local_name: String::from("Psalm 117"),
+            local_name: String::from(""),
             latin_name: String::from("Laudate Dominum"),
             verses: vec![
                 PsalmVerse {
@@ -20,7 +20,7 @@ lazy_static! {
                     number: 2,
                     a: String::from("For his loving-kindness toward us is great, *"),
                     b: String::from(
-                        "and the faithfulness of the LORD endures for ever.\n Hallelujah!"
+                        "and the faithfulness of the LORD endures for ever.\nHallelujah!"
                     )
                 },
             ]

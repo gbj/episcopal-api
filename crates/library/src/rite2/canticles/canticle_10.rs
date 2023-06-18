@@ -1,12 +1,16 @@
 use canticle_table::CanticleId;
 use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Version};
 
+use crate::rite2::GLORIA_PATRI;
+
 lazy_static! {
     pub static ref CANTICLE_10: Document = Document::from(Canticle {
         number: CanticleId::Canticle10,
+        changeable: None,
         citation: Some(String::from("Isaiah 55:6-11")),
         local_name: String::from("The Second Song of Isaiah"),
         latin_name: Some(String::from("Quaerite Dominum")),
+        rubric: None,
         sections: vec![CanticleSection {
             title: None,
             verses: vec![
@@ -48,7 +52,9 @@ and my thoughts than your thoughts."
                     "and prosper in that for which I sent it."
                 ))
             ]
-        }]
+        }],
+        gloria_patri: Some(GLORIA_PATRI.clone()),
     })
-    .version(Version::RiteII);
+    .version(Version::RiteII)
+    .page(86);
 }

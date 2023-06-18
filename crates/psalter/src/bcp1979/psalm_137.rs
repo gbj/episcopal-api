@@ -9,7 +9,7 @@ lazy_static! {
                 source: Source::BCP1979,
                 page: 792
               },
-              local_name: String::from("Psalm 137"),
+              local_name: String::from(""),
               latin_name: String::from("Super flumina"),
               verses: vec![
                 PsalmVerse {
@@ -29,7 +29,7 @@ lazy_static! {
                   },
                 PsalmVerse {
                       number: 4,
-                      a: String::from("How shall we sing the LORD’S song *"),
+                      a: String::from("How shall we sing the LORD’s song *"),
                       b: String::from("upon an alien soil?")
                   },
                 PsalmVerse {
@@ -45,12 +45,12 @@ lazy_static! {
                 PsalmVerse {
                       number: 7,
                       a: String::from("Remember the day of Jerusalem, O LORD,\nagainst the people of Edom, *"),
-                      b: String::from("who said, “Down with it! down with it!\n even to the ground!”")
+                      b: String::from("who said, “Down with it! down with it!\neven to the ground!”")
                   },
                 PsalmVerse {
                       number: 8,
                       a: String::from("O Daughter of Babylon, doomed to destruction, *"),
-                      b: String::from("happy the one who pays you back\n for what you have done to us!")
+                      b: String::from("happy the one who pays you back\nfor what you have done to us!")
                   },
                 PsalmVerse {
                       number: 9,

@@ -1,12 +1,15 @@
 use canticle_table::CanticleId;
-use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Version};
+use liturgy::{Canticle, CanticleSection, CanticleVerse, Document, Reference, Source, Version};
 
 lazy_static! {
     pub static ref CANTICLE_D: Document = Document::from(Canticle {
         number: CanticleId::CanticleD,
+        changeable: None,
         citation: Some(String::from("Isaiah 35:1-7,10")),
-        local_name: String::from("Canticle D"),
+        local_name: String::from("A Song of the Wilderness"),
         latin_name: None,
+        rubric: None,
+        gloria_patri: None,
         sections: vec![CanticleSection {
             title: None,
             verses: vec![
@@ -58,5 +61,8 @@ lazy_static! {
         }]
     })
     .version(Version::EOW)
-    ;
+    .source(Reference {
+        source: Source::EOW1,
+        page: 32
+    });
 }
