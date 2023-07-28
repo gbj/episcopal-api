@@ -7,6 +7,7 @@ use crate::Document;
 #[derive(Clone, Debug, Hash, Eq, PartialEq, Serialize, Deserialize)]
 pub struct BiblicalReading {
     /// A citation for the book/chapters/verses included.
+    #[serde(default)]
     pub citation: String,
     /// The text
     pub text: BiblicalReadingText,
